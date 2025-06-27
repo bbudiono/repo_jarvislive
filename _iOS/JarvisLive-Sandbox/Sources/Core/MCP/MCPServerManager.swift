@@ -75,6 +75,7 @@ final class MCPServerManager: MCPServerManagerProtocol, ObservableObject {
     @Published private(set) var availableTools: [String: MCPCapabilities.MCPTool] = [:]
     @Published private(set) var isInitialized: Bool = false
     @Published private(set) var lastError: Error?
+    var lastErrorPublisher: Published<Error?>.Publisher { $lastError }
     @Published private(set) var activeOperations: Set<String> = []
     
     // MARK: - Computed Properties for Protocol Conformance
