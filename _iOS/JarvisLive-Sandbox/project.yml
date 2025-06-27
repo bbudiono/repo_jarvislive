@@ -30,7 +30,11 @@ targets:
     preBuildScripts:
       - name: "SwiftLint"
         script: |
-          echo "SwiftLint temporarily disabled for Phase 1 recovery - will be re-enabled in Phase 2"
+          if which swiftlint >/dev/null; then
+            swiftlint --config ../.swiftlint.yml
+          else
+            echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+          fi
         inputFiles:
           - $(SRCROOT)/Sources/**/*.swift
         outputFiles:
@@ -69,7 +73,11 @@ targets:
     preBuildScripts:
       - name: "SwiftLint"
         script: |
-          echo "SwiftLint temporarily disabled for Phase 1 recovery - will be re-enabled in Phase 2"
+          if which swiftlint >/dev/null; then
+            swiftlint --config ../.swiftlint.yml
+          else
+            echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+          fi
         inputFiles:
           - $(SRCROOT)/Sources/**/*.swift
         outputFiles:

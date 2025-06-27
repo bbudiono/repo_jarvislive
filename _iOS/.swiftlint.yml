@@ -1,0 +1,290 @@
+# SwiftLint Configuration for Jarvis Live iOS Voice AI Assistant
+# Version: 1.0.0
+# Last Updated: 2025-06-29
+# Purpose: Enforce STYLE_GUIDE.md standards via automated quality gates
+
+# Include all Swift source files
+included:
+  - JarvisLive-Sandbox/Sources/
+  - JarvisLive/Sources/
+  - Tests/
+
+# Exclude generated and third-party files
+excluded:
+  - Carthage/
+  - Pods/
+  - .build/
+  - build/
+  - DerivedData/
+  - "*.generated.swift"
+  - "**/R.generated.swift"
+  - "**/*.pb.swift"
+
+# Disabled rules (allow specific patterns required for voice AI)
+disabled_rules:
+  - file_length # Allow longer files for complex voice processing
+  - type_body_length # Allow complex managers and services
+  - function_body_length # Allow complex voice processing functions
+  - cyclomatic_complexity # Voice command processing inherently complex
+  - nesting # SwiftUI view builders require nesting
+
+# Enable strict rules derived from STYLE_GUIDE.md
+opt_in_rules:
+  - array_init
+  - attributes
+  - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  - comma_inheritance
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
+  - contains_over_first_not_nil
+  - contains_over_range_nil_comparison
+  - discouraged_optional_boolean
+  - empty_count
+  - empty_string
+  - enum_case_associated_values_count
+  - explicit_init
+  - fallthrough
+  - fatal_error_message
+  - file_name_no_space
+  - first_where
+  - flatmap_over_map_reduce
+  - identical_operands
+  - implicit_return
+  - joined_default_parameter
+  - last_where
+  - legacy_multiple
+  - literal_expression_end_indentation
+  - lower_acl_than_parent
+  - modifier_order
+  - multiline_arguments
+  - multiline_function_chains
+  - multiline_literal_brackets
+  - multiline_parameters
+  - multiline_parameters_brackets
+  - nimble_operator
+  - number_separator
+  - object_literal
+  - operator_usage_whitespace
+  - overridden_super_call
+  - override_in_extension
+  - pattern_matching_keywords
+  - prefer_self_type_over_type_of_self
+  - prefer_zero_over_explicit_init
+  - prefixed_toplevel_constant
+  - private_action
+  - private_outlet
+  - prohibited_super_call
+  - quick_discouraged_call
+  - quick_discouraged_focused_test
+  - quick_discouraged_pending_test
+  - reduce_into
+  - redundant_nil_coalescing
+  - redundant_type_annotation
+  - single_test_class
+  - sorted_first_last
+  - sorted_imports
+  - static_operator
+  - strong_iboutlet
+  - switch_case_on_newline
+  - toggle_bool
+  - trailing_closure
+  - unavailable_function
+  - unneeded_parentheses_in_closure_argument
+  - unowned_variable_capture
+  - untyped_error_in_catch
+  - unused_declaration
+  - vertical_parameter_alignment_on_call
+  - vertical_whitespace_closing_braces
+  - vertical_whitespace_opening_braces
+  - xct_specific_matcher
+  - yoda_condition
+
+# STYLE_GUIDE.md Enforcement Rules
+line_length:
+  warning: 120
+  error: 150
+  ignores_urls: true
+  ignores_function_declarations: true
+  ignores_comments: true
+
+identifier_name:
+  min_length:
+    warning: 2
+    error: 1
+  max_length:
+    warning: 50
+    error: 60
+  excluded:
+    - id
+    - ai
+    - ui
+    - mcp
+    - api
+    - url
+    - uri
+    - sdk
+    - ios
+    - app
+    - key
+
+type_name:
+  min_length:
+    warning: 3
+    error: 2
+  max_length:
+    warning: 50
+    error: 60
+  excluded:
+    - AI
+    - MCP
+    - API
+    - URL
+    - URI
+    - SDK
+    - iOS
+    - App
+    - UI
+
+function_parameter_count:
+  warning: 6
+  error: 8
+
+large_tuple:
+  warning: 3
+  error: 4
+
+# STYLE_GUIDE.md: Enforce naming conventions from Section 4.1
+custom_rules:
+  # Enforce PascalCase for classes and structs per STYLE_GUIDE.md
+  class_naming_convention:
+    name: "Class Naming Convention"
+    regex: '^class\s+[a-z]'
+    message: "Classes must use PascalCase naming (STYLE_GUIDE.md Section 4.1)"
+    severity: error
+
+  struct_naming_convention:
+    name: "Struct Naming Convention"
+    regex: '^struct\s+[a-z]'
+    message: "Structs must use PascalCase naming (STYLE_GUIDE.md Section 4.1)"
+    severity: error
+
+  # Enforce camelCase for functions and variables per STYLE_GUIDE.md
+  function_naming_convention:
+    name: "Function Naming Convention"
+    regex: '^func\s+[A-Z]'
+    message: "Functions must use camelCase naming (STYLE_GUIDE.md Section 4.1)"
+    severity: error
+
+  # Enforce -ing or -able suffix for protocols per STYLE_GUIDE.md
+  protocol_naming_convention:
+    name: "Protocol Naming Convention"
+    regex: '^protocol\s+\w+(?<!ing|able|Protocol)\s*[:{\n]'
+    message: "Protocols should end with -ing, -able, or Protocol suffix (STYLE_GUIDE.md Section 4.1)"
+    severity: warning
+
+  # Enforce Manager suffix for manager classes per STYLE_GUIDE.md
+  manager_class_naming:
+    name: "Manager Class Naming"
+    regex: '^class\s+\w+(?<!Manager)\s*:\s*.*Manager'
+    message: "Manager classes should end with 'Manager' suffix (STYLE_GUIDE.md Section 6.1)"
+    severity: error
+
+  # Enforce View suffix for SwiftUI views per STYLE_GUIDE.md
+  swiftui_view_naming:
+    name: "SwiftUI View Naming"
+    regex: '^struct\s+\w+(?<!View)\s*:\s*View'
+    message: "SwiftUI views should end with 'View' suffix (STYLE_GUIDE.md Section 6.1)"
+    severity: error
+
+  # Enforce Model suffix for model classes per STYLE_GUIDE.md
+  model_class_naming:
+    name: "Model Class Naming"
+    regex: '^(class|struct)\s+\w+(?<!Model)\s*:\s*(.*\s+)?.*Model'
+    message: "Model classes should end with 'Model' suffix (STYLE_GUIDE.md Section 6.1)"
+    severity: warning
+
+  # Enforce MARK comments for code organization per STYLE_GUIDE.md Section 4.2
+  missing_mark_properties:
+    name: "Missing MARK: Properties"
+    regex: '^(\s*)(@Published|@State|@Binding|private let|private var|let|var)\s'
+    message: "Properties section should have '// MARK: - Properties' comment (STYLE_GUIDE.md Section 4.2)"
+    severity: warning
+
+  # Enforce glassmorphism theme usage per STYLE_GUIDE.md Section 1.1
+  missing_glassmorphism_theme:
+    name: "Missing Glassmorphism Theme"
+    regex: '\.background\((?!\.ultraThinMaterial|\.thinMaterial|\.regularMaterial)'
+    message: "Use material backgrounds for glassmorphism theme (.ultraThinMaterial/.thinMaterial/.regularMaterial) (STYLE_GUIDE.md Section 1.1)"
+    severity: warning
+
+  # Enforce corner radius standards per STYLE_GUIDE.md Section 1.5
+  non_standard_corner_radius:
+    name: "Non-Standard Corner Radius"
+    regex: '\.cornerRadius\((?![4-9]|1[0-6]|20|24)\d'
+    message: "Use standard corner radius values: 4, 8, 12, 16, 20, 24 (STYLE_GUIDE.md Section 1.5)"
+    severity: warning
+
+  # Enforce spacing system per STYLE_GUIDE.md Section 1.4
+  non_standard_spacing:
+    name: "Non-Standard Spacing"
+    regex: '(?:spacing|padding):\s*(?![4-9]|1[0-6]|24|32|48)\d'
+    message: "Use standard spacing values: 4, 8, 12, 16, 24, 32, 48 (STYLE_GUIDE.md Section 1.4)"
+    severity: warning
+
+  # Enforce typography scale per STYLE_GUIDE.md Section 1.3
+  font_hierarchy_compliance:
+    name: "Font Hierarchy Compliance"
+    regex: '\.font\(\.system\(size:'
+    message: "Use semantic font styles (.largeTitle, .title, .body, etc.) instead of custom sizes (STYLE_GUIDE.md Section 1.3)"
+    severity: warning
+
+  # Enforce error handling documentation per STYLE_GUIDE.md Section 4.3
+  missing_throws_documentation:
+    name: "Missing Throws Documentation"
+    regex: '^\s*func\s+.*throws.*\{[^}]*$'
+    message: "Functions that throw should document error conditions (STYLE_GUIDE.md Section 7.1)"
+    severity: warning
+
+  # Enforce async function error handling per STYLE_GUIDE.md
+  async_without_throws:
+    name: "Async Without Throws"
+    regex: '^\s*func\s+.*async(?!\s+throws)'
+    message: "Async functions should include 'throws' for proper error handling (STYLE_GUIDE.md Section 7.1)"
+    severity: warning
+
+  # Enforce voice processing function naming per STYLE_GUIDE.md
+  voice_function_naming:
+    name: "Voice Function Naming"
+    regex: '^\s*func\s+.*[Vv]oice.*\('
+    message: "Voice processing functions should follow naming convention: processVoiceCommand, classifyVoice, etc. (STYLE_GUIDE.md Section 4.1)"
+    severity: warning
+
+  # Prevent hardcoded API endpoints per STYLE_GUIDE.md Section 6.3
+  hardcoded_api_endpoints:
+    name: "Hardcoded API Endpoints"
+    regex: '"https?://[^"]*"'
+    message: "API endpoints should be configured through constants or environment variables (STYLE_GUIDE.md Section 6.3)"
+    severity: error
+
+  # Enforce color usage per STYLE_GUIDE.md Section 1.2
+  custom_color_usage:
+    name: "Custom Color Usage"
+    regex: 'Color\(red:|Color\(hue:'
+    message: "Use semantic colors (.primary, .blue, .jarvisBlue) instead of custom RGB values (STYLE_GUIDE.md Section 1.2)"
+    severity: warning
+
+  # Enforce button style consistency per STYLE_GUIDE.md Section 2.2
+  button_style_consistency:
+    name: "Button Style Consistency"
+    regex: 'Button\([^)]*\)\s*\{'
+    message: "Use standardized button styles: PrimaryButton, SecondaryButton, GlassButton (STYLE_GUIDE.md Section 2.2)"
+    severity: warning
+
+# Reporter configuration for Xcode integration
+reporter: "xcode"
+
+# Analyzer rules (require 'swiftlint analyze')
+analyzer_rules:
+  - unused_import
