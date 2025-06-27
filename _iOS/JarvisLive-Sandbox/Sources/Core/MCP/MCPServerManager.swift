@@ -25,14 +25,16 @@ import Combine
 
 struct MCPExecutionResult {
     let success: Bool
+    let result: [String: Any]
     let response: String
     let executionTime: TimeInterval
     let serverUsed: String
     let metadata: [String: String]?
     let error: Error?
     
-    init(success: Bool, response: String, executionTime: TimeInterval, serverUsed: String, metadata: [String: String]? = nil, error: Error? = nil) {
+    init(success: Bool, result: [String: Any] = [:], response: String, executionTime: TimeInterval, serverUsed: String, metadata: [String: String]? = nil, error: Error? = nil) {
         self.success = success
+        self.result = result
         self.response = response
         self.executionTime = executionTime
         self.serverUsed = serverUsed

@@ -40,7 +40,7 @@ struct VoiceCommandClassification {
     }
 }
 
-enum CommandIntent: String, CaseIterable {
+enum CommandIntent: String, CaseIterable, Codable {
     case generateDocument = "generate_document"
     case sendEmail = "send_email"
     case scheduleCalendar = "schedule_calendar"

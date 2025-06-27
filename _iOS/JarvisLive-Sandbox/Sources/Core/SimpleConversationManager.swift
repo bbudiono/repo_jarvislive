@@ -48,13 +48,13 @@ struct Conversation: Identifiable, Codable {
 struct SimpleConversationMessage: Identifiable, Codable {
     let id: UUID
     let content: String
-    let role: MessageRole
+    let role: SimpleConversationManager.MessageRole
     let timestamp: Date
     let audioTranscription: String?
     let aiProvider: String?
     let processingTime: Double
 
-    init(content: String, role: MessageRole, audioTranscription: String? = nil, aiProvider: String? = nil, processingTime: Double = 0.0) {
+    init(content: String, role: SimpleConversationManager.MessageRole, audioTranscription: String? = nil, aiProvider: String? = nil, processingTime: Double = 0.0) {
         self.id = UUID()
         self.content = content
         self.role = role
@@ -65,16 +65,16 @@ struct SimpleConversationMessage: Identifiable, Codable {
     }
 }
 
-enum MessageRole: String, CaseIterable, Codable {
-    case user = "user"
-    case assistant = "assistant"
-    case system = "system"
-}
-
 // MARK: - Simple Conversation Manager
 
 @MainActor
 class SimpleConversationManager: ObservableObject {
+    
+    enum MessageRole: String, CaseIterable, Codable {
+        case user = "user"
+        case assistant = "assistant"
+        case system = "system"
+    }
     @Published var conversations: [Conversation] = []
     @Published var currentConversation: Conversation?
     @Published var isLoading = false
@@ -205,7 +205,7 @@ class SimpleConversationManager: ObservableObject {
     func addMessage(
         to conversation: Conversation,
         content: String,
-        role: MessageRole,
+        role: SimpleConversationManager.MessageRole,
         audioTranscription: String? = nil,
         aiProvider: String? = nil,
         processingTime: Double = 0.0

@@ -22,6 +22,7 @@ import Foundation
 import CoreML
 import NaturalLanguage
 import Combine
+import UIKit
 import CoreData
 #if canImport(CreateML) && !targetEnvironment(simulator)
 import CreateML
@@ -30,7 +31,7 @@ import CreateML
 // MARK: - Learning Models
 
 struct VoiceCommandPattern: Codable, Identifiable {
-    let id = UUID()
+    let id: UUID
     let pattern: String
     let intent: CommandIntent
     let frequency: Int
@@ -41,11 +42,25 @@ struct VoiceCommandPattern: Codable, Identifiable {
     let successRate: Double
     let averageExecutionTime: TimeInterval
     let parameters: [String: ParameterPattern]
+    
+    init(pattern: String, intent: CommandIntent, frequency: Int, lastUsed: Date, confidence: Double, userContext: UserContext, variations: [String], successRate: Double, averageExecutionTime: TimeInterval, parameters: [String: ParameterPattern]) {
+        self.id = UUID()
+        self.pattern = pattern
+        self.intent = intent
+        self.frequency = frequency
+        self.lastUsed = lastUsed
+        self.confidence = confidence
+        self.userContext = userContext
+        self.variations = variations
+        self.successRate = successRate
+        self.averageExecutionTime = averageExecutionTime
+        self.parameters = parameters
+    }
 
     struct ParameterPattern: Codable {
         let name: String
-        let commonValues: [String]
-        let valueFrequency: [String: Int]
+        var commonValues: [String]
+        var valueFrequency: [String: Int]
         let averageConfidence: Double
         let smartDefaults: [String]
     }
@@ -63,11 +78,11 @@ struct VoiceCommandPattern: Codable, Identifiable {
 struct UserBehaviorProfile: Codable {
     let userId: String
     let createdAt: Date
-    let lastUpdated: Date
+    var lastUpdated: Date
     let commandPatterns: [VoiceCommandPattern]
-    let preferences: UserPreferences
-    let usageStatistics: UsageStatistics
-    let learningMetrics: LearningMetrics
+    var preferences: UserPreferences
+    var usageStatistics: UsageStatistics
+    var learningMetrics: LearningMetrics
 
     struct UserPreferences: Codable {
         var preferredFormats: [String: Double] // format -> preference score
@@ -357,12 +372,12 @@ final class VoiceCommandLearningManager: ObservableObject {
 
         return suggestions.map { pattern in
             CommandSuggestion(
-                command: pattern.pattern,
-                intent: pattern.intent,
+                suggestion: pattern.pattern,
                 confidence: pattern.confidence,
-                frequency: pattern.frequency,
-                lastUsed: pattern.lastUsed,
-                reasoning: "Based on your usage pattern"
+                reasoning: "Based on usage frequency: \(pattern.frequency)",
+                category: .completion,
+                examples: [pattern.pattern],
+                learnMoreInfo: nil
             )
         }
     }
@@ -677,7 +692,7 @@ final class VoiceCommandLearningManager: ObservableObject {
 
     private func analyzeCommandChains() -> [CommandChain] {
         // Analyze patterns to find common command sequences
-        var chains: [CommandChain] = []
+        let chains: [CommandChain] = []
 
         // Placeholder implementation
         // In reality, this would analyze the temporal sequence of commands

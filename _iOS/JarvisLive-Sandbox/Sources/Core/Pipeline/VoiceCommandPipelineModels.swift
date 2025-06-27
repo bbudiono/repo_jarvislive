@@ -19,40 +19,6 @@
 
 import Foundation
 
-// MARK: - MCP Execution Result
-
-/// Result of MCP command execution
-struct MCPExecutionResult {
-    let success: Bool
-    let result: [String: Any]
-    let response: String
-    let executionTime: TimeInterval
-    let serverUsed: String
-    let error: Error?
-    
-    static func success(result: [String: Any], response: String, executionTime: TimeInterval, serverUsed: String) -> MCPExecutionResult {
-        return MCPExecutionResult(
-            success: true,
-            result: result,
-            response: response,
-            executionTime: executionTime,
-            serverUsed: serverUsed,
-            error: nil
-        )
-    }
-    
-    static func failure(error: Error, executionTime: TimeInterval, serverUsed: String) -> MCPExecutionResult {
-        return MCPExecutionResult(
-            success: false,
-            result: [:],
-            response: "Error: \(error.localizedDescription)",
-            executionTime: executionTime,
-            serverUsed: serverUsed,
-            error: error
-        )
-    }
-}
-
 // MARK: - Pipeline Result Models
 
 /// Complete result of voice command pipeline processing
