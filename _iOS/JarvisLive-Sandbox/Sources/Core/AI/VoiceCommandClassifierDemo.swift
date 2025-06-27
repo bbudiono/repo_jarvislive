@@ -48,7 +48,7 @@ class VoiceCommandClassifierDemo {
 
         for command in sampleCommands {
             guard let classifier = classifier else { continue }
-            let classification = await classifier?.classifyVoiceCommand(command) ?? ClassificationResult.empty
+            let classification = await classifier.classifyVoiceCommand(command)
 
             print("\n🗣️  Command: '\(command)'")
             print("   🎯 Intent: \(classification.intent.displayName)")
@@ -100,7 +100,8 @@ class VoiceCommandClassifierDemo {
         ]
 
         for (command, expectedParams) in parameterizedCommands {
-            let classification = await classifier?.classifyVoiceCommand(command) ?? ClassificationResult.empty
+            guard let classifier = classifier else { continue }
+            let classification = await classifier.classifyVoiceCommand(command)
 
             print("\n🗣️  Command: '\(command)'")
             print("   🎯 Intent: \(classification.intent.displayName)")
@@ -148,7 +149,8 @@ class VoiceCommandClassifierDemo {
         ]
 
         for command in ambiguousCommands {
-            let classification = await classifier?.classifyVoiceCommand(command) ?? ClassificationResult.empty
+            guard let classifier = classifier else { continue }
+            let classification = await classifier.classifyVoiceCommand(command)
 
             print("\n🗣️  Ambiguous Command: '\(command)'")
             print("   🎯 Primary Intent: \(classification.intent.displayName)")
@@ -191,7 +193,8 @@ class VoiceCommandClassifierDemo {
         var totalConfidence: Double = 0.0
 
         for command in testCommands {
-            let classification = await classifier?.classifyVoiceCommand(command) ?? ClassificationResult.empty
+            guard let classifier = classifier else { continue }
+            let classification = await classifier.classifyVoiceCommand(command)
             totalConfidence += classification.confidence
         }
 
@@ -278,7 +281,7 @@ class VoiceCommandClassifierDemo {
         print("Testing adaptive learning with user feedback...")
 
         for (command, isCorrect) in feedbackCommands {
-            let classification = await classifier?.classifyVoiceCommand(command) ?? ClassificationResult.empty
+            let classification = await classifier.classifyVoiceCommand(command)
             print("\n🗣️  Command: '\(command)'")
             print("   🎯 Classified as: \(classification.intent.displayName)")
             print("   📊 Initial Confidence: \(String(format: "%.2f", classification.confidence))")
@@ -288,7 +291,7 @@ class VoiceCommandClassifierDemo {
             print("   💭 Feedback: \(isCorrect ? "Correct ✅" : "Incorrect ❌")")
 
             // Classify again to see adaptation
-            let newClassification = await classifier?.classifyVoiceCommand(command) ?? ClassificationResult.empty
+            let newClassification = await classifier.classifyVoiceCommand(command)
             print("   📈 Updated Confidence: \(String(format: "%.2f", newClassification.confidence))")
 
             let confidenceChange = newClassification.confidence - classification.confidence
@@ -315,7 +318,7 @@ class VoiceCommandClassifierDemo {
         ]
 
         for (command, description) in edgeCases {
-            let classification = await classifier?.classifyVoiceCommand(command) ?? ClassificationResult.empty
+            let classification = await classifier.classifyVoiceCommand(command)
 
             print("\n🧪 Edge Case: \(description)")
             print("   📝 Command: '\(command.prefix(50))\(command.count > 50 ? "..." : "")'")
