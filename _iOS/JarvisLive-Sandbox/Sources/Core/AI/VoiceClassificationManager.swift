@@ -740,10 +740,10 @@ final class VoiceClassificationManager: ObservableObject {
         }
 
         let decoder = JSONDecoder()
-        let response = try decoder.decode(ContextualSuggestionsResponse.self, from: data)
+        let decodedResponse = try decoder.decode(ContextualSuggestionsResponse.self, from: data)
 
         // Convert to ContextualSuggestion objects
-        return response.suggestions.enumerated().map { index, suggestion in
+        return decodedResponse.suggestions.enumerated().map { index, suggestion in
             ContextualSuggestion(
                 suggestion: suggestion,
                 category: "contextual",

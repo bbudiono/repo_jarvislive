@@ -883,10 +883,10 @@ struct CollaborativeConversation: Identifiable, Codable {
     }
     
     enum AccessLevel: String, Codable {
-        case public = "public"
+        case `public` = "public"
         case collaborative = "collaborative"
         case protected = "protected"
-        case private = "private"
+        case `private` = "private"
     }
     
     enum ConversationStatus: String, Codable {
@@ -952,7 +952,7 @@ struct CollaborativeMessage: Identifiable, Codable {
         case all = "all"
         case participants = "participants"
         case moderators = "moderators"
-        case private = "private"
+        case `private` = "private"
     }
 }
 

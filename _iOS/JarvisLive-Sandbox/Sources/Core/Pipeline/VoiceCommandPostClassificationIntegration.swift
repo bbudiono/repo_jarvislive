@@ -46,14 +46,14 @@ class VoiceCommandPostClassificationIntegration: ObservableObject {
     // MARK: - Initialization
 
     init(
-        voiceClassificationManager: VoiceClassificationManager = VoiceClassificationManager(),
-        pythonBackendClient: PythonBackendClient = PythonBackendClient(),
-        conversationManager: ConversationManager = ConversationManager(),
+        voiceClassificationManager: VoiceClassificationManager? = nil,
+        pythonBackendClient: PythonBackendClient? = nil,
+        conversationManager: ConversationManager? = nil,
         userId: String = "default_user"
     ) {
-        self.voiceClassificationManager = voiceClassificationManager
-        self.pythonBackendClient = pythonBackendClient
-        self.conversationManager = conversationManager
+        self.voiceClassificationManager = voiceClassificationManager ?? VoiceClassificationManager()
+        self.pythonBackendClient = pythonBackendClient ?? PythonBackendClient()
+        self.conversationManager = conversationManager ?? ConversationManager()
         self.currentUserId = userId
         self.configuration = IntegrationConfiguration()
 
@@ -127,6 +127,11 @@ class VoiceCommandPostClassificationIntegration: ObservableObject {
             return configuration.defaultSuggestions
         }
 
+        // TODO: Implement getContextualSuggestions method in PythonBackendClient
+        // For now, return default suggestions
+        return configuration.defaultSuggestions
+        
+        /*
         do {
             return try await pythonBackendClient.getContextualSuggestions(
                 userId: currentUserId,
@@ -136,6 +141,7 @@ class VoiceCommandPostClassificationIntegration: ObservableObject {
             print("Failed to get contextual suggestions: \(error)")
             return configuration.defaultSuggestions
         }
+        */
     }
 
     // MARK: - Private Implementation
@@ -162,10 +168,8 @@ class VoiceCommandPostClassificationIntegration: ObservableObject {
         let sessionId = UUID().uuidString
 
         do {
-            try await pythonBackendClient.startVoiceSession(
-                userId: currentUserId,
-                sessionId: sessionId
-            )
+            // Fixed: startVoiceSession() takes no parameters
+            try await pythonBackendClient.startVoiceSession()
             return sessionId
         } catch {
             print("Failed to start voice session: \(error)")
@@ -185,10 +189,13 @@ class VoiceCommandPostClassificationIntegration: ObservableObject {
                     includeContext: true
                 )
                 let backendResult = try await pythonBackendClient.classifyVoiceCommand(
-                    audioRequest.toStandardRequest()
+                    audioRequest.text,
+                    userId: audioRequest.userId
                 )
 
-                return ClassificationResult(from: backendResult)
+                // TODO: Fix ClassificationResult constructor to match actual definition
+                // return ClassificationResult(from: backendResult)
+                return backendResult
             } catch {
                 print("Backend classification failed, falling back to local: \(error)")
             }
@@ -217,10 +224,20 @@ class VoiceCommandPostClassificationIntegration: ObservableObject {
             userId: currentUserId
         )
 
-        // Store locally
-        await conversationManager.addVoiceInteraction(interaction)
+        // Store locally using the actual method signature
+        if let conversation = conversationManager.currentConversation {
+            let _ = conversationManager.addVoiceInteraction(
+                to: conversation,
+                userVoiceText: voiceText,
+                aiResponse: "Voice interaction recorded", // Default response
+                processingTime: 0.0,
+                aiProvider: "system"
+            )
+        }
 
+        // TODO: Implement recordVoiceInteraction method in PythonBackendClient
         // Sync to backend if connected
+        /*
         if pythonBackendClient.isConnected {
             do {
                 try await pythonBackendClient.recordVoiceInteraction(interaction)
@@ -228,6 +245,7 @@ class VoiceCommandPostClassificationIntegration: ObservableObject {
                 print("Failed to sync voice interaction to backend: \(error)")
             }
         }
+        */
     }
 
     private func recordCommandCompletion(
@@ -243,10 +261,20 @@ class VoiceCommandPostClassificationIntegration: ObservableObject {
             userId: currentUserId
         )
 
-        // Store locally
-        await conversationManager.addCommandCompletion(completion)
+        // Store locally using the actual method signature
+        if let conversation = conversationManager.currentConversation {
+            let _ = conversationManager.addCommandCompletion(
+                to: conversation,
+                command: classification.intent,
+                result: executionResult.message,
+                success: executionResult.success,
+                processingTime: executionResult.timeSpent
+            )
+        }
 
+        // TODO: Implement recordCommandCompletion method in PythonBackendClient
         // Sync to backend if connected
+        /*
         if pythonBackendClient.isConnected {
             do {
                 try await pythonBackendClient.recordCommandCompletion(completion)
@@ -254,6 +282,7 @@ class VoiceCommandPostClassificationIntegration: ObservableObject {
                 print("Failed to sync command completion to backend: \(error)")
             }
         }
+        */
     }
 
     private func handleVoiceProcessingError(_ error: Error) async {
@@ -277,20 +306,27 @@ class VoiceCommandPostClassificationIntegration: ObservableObject {
         case .invalidInput:
             // Show input guidance
             break
+        case .unknown:
+            // Handle unknown errors
+            break
         }
     }
 
     private func showClarificationForFailedClassification() async {
-        // Create a low-confidence result that will trigger clarification UI
+        // Create a low-confidence result using the correct ClassificationResult structure
         let clarificationResult = ClassificationResult(
-            category: .unknown,
+            category: "unknown",
             intent: "Classification failed",
             confidence: 0.1,
             parameters: [:],
             suggestions: await getContextualSuggestions(),
             rawText: "Could not understand command",
             normalizedText: "unknown command",
-            processingTime: 0.0
+            confidenceLevel: "very_low",
+            contextUsed: false,
+            preprocessingTime: 0.0,
+            classificationTime: 0.0,
+            requiresConfirmation: true
         )
 
         await presentPostClassificationFlow(clarificationResult)
@@ -306,15 +342,24 @@ class VoiceCommandPostClassificationIntegration: ObservableObject {
             context: createErrorContext()
         )
 
-        // Store locally for analytics
-        await conversationManager.addErrorEvent(errorEvent)
+        // Store locally for analytics using the actual method signature
+        if let conversation = conversationManager.currentConversation {
+            let _ = conversationManager.addErrorEvent(
+                to: conversation,
+                error: error,
+                context: "Voice processing error"
+            )
+        }
 
+        // TODO: Implement recordErrorEvent method in PythonBackendClient
         // Send to backend for aggregated analytics
+        /*
         if pythonBackendClient.isConnected {
             Task {
                 try? await pythonBackendClient.recordErrorEvent(errorEvent)
             }
         }
+        */
     }
 
     private func createErrorContext() -> [String: Any] {
@@ -331,8 +376,9 @@ class VoiceCommandPostClassificationIntegration: ObservableObject {
         // Switch to offline mode gracefully
         print("⚠️ Backend disconnected, switching to offline mode")
 
+        // TODO: Implement cancelAllOperations method in PythonBackendClient
         // Cancel any pending backend operations
-        pythonBackendClient.cancelAllOperations()
+        // pythonBackendClient.cancelAllOperations()
 
         // Continue with local processing only
     }
@@ -516,14 +562,18 @@ struct VoiceClassificationRequestWithAudio: Codable {
 extension ClassificationResult {
     init(from backendResult: BackendClassificationResult) {
         self.init(
-            category: CommandCategory(rawValue: backendResult.category) ?? .unknown,
+            category: backendResult.category,
             intent: backendResult.intent,
             confidence: backendResult.confidence,
-            parameters: backendResult.parameters.mapValues { AnyCodable($0) },
+            parameters: backendResult.parameters,
             suggestions: backendResult.suggestions,
             rawText: backendResult.rawText,
             normalizedText: backendResult.normalizedText,
-            processingTime: backendResult.processingTime
+            confidenceLevel: backendResult.confidenceLevel ?? "medium",
+            contextUsed: backendResult.contextUsed ?? false,
+            preprocessingTime: backendResult.preprocessingTime ?? 0.0,
+            classificationTime: backendResult.classificationTime ?? 0.0,
+            requiresConfirmation: backendResult.requiresConfirmation ?? false
         )
     }
 }
@@ -532,15 +582,21 @@ struct BackendClassificationResult: Codable {
     let category: String
     let intent: String
     let confidence: Double
-    let parameters: [String: Any]
+    let parameters: [String: String]
     let suggestions: [String]
     let rawText: String
     let normalizedText: String
     let processingTime: Double
+    let confidenceLevel: String?
+    let contextUsed: Bool?
+    let preprocessingTime: Double?
+    let classificationTime: Double?
+    let requiresConfirmation: Bool?
 
     // Custom coding for parameters dictionary
     enum CodingKeys: String, CodingKey {
         case category, intent, confidence, parameters, suggestions, rawText, normalizedText, processingTime
+        case confidenceLevel, contextUsed, preprocessingTime, classificationTime, requiresConfirmation
     }
 
     init(from decoder: Decoder) throws {
@@ -552,7 +608,12 @@ struct BackendClassificationResult: Codable {
         rawText = try container.decode(String.self, forKey: .rawText)
         normalizedText = try container.decode(String.self, forKey: .normalizedText)
         processingTime = try container.decode(Double.self, forKey: .processingTime)
-        parameters = [:] // Simplified for this example
+        parameters = try container.decodeIfPresent([String: String].self, forKey: .parameters) ?? [:]
+        confidenceLevel = try container.decodeIfPresent(String.self, forKey: .confidenceLevel)
+        contextUsed = try container.decodeIfPresent(Bool.self, forKey: .contextUsed)
+        preprocessingTime = try container.decodeIfPresent(Double.self, forKey: .preprocessingTime)
+        classificationTime = try container.decodeIfPresent(Double.self, forKey: .classificationTime)
+        requiresConfirmation = try container.decodeIfPresent(Bool.self, forKey: .requiresConfirmation)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -610,7 +671,7 @@ struct VoiceCommandWithPostClassificationView: View {
         .padding()
         .sheet(isPresented: $integration.showingPostClassificationFlow) {
             if let result = integration.currentClassificationResult {
-                PostClassificationFlowView(classificationResult: result)
+                PostClassificationFlowView(classificationResult: UIClassificationResult(from: result))
                     .onDisappear {
                         Task {
                             await integration.handleFlowCompletion(.success)

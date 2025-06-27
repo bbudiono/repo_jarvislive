@@ -46,7 +46,7 @@ protocol VoiceActivityDelegate: AnyObject {
 // MARK: - LiveKit Manager
 
 @MainActor
-final class LiveKitManager: NSObject, ObservableObject {
+public final class LiveKitManager: NSObject, ObservableObject {
     // MARK: - Conversation Management Integration
     @Published var conversationManager = ConversationManager()
     @Published var currentConversation: Conversation?

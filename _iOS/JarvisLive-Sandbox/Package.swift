@@ -25,13 +25,15 @@ let package = Package(
             dependencies: [
                 "JarvisLiveCore",
                 .product(name: "KeychainAccess", package: "KeychainAccess")
-            ]
+            ],
+            path: "Sources/App"
         ),
         .target(
             name: "JarvisLiveCore",
             dependencies: [
                 .product(name: "KeychainAccess", package: "KeychainAccess")
-            ]
+            ],
+            path: "Sources/Core"
         ),
         .testTarget(
             name: "JarvisLiveSandboxTests",

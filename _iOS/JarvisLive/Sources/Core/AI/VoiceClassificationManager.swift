@@ -725,25 +725,25 @@ final class VoiceClassificationManager: ObservableObject {
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.timeoutInterval = configuration.timeout
 
-        let (data, response) = try await session.data(for: request)
+        let (data, httpResponse) = try await session.data(for: request)
 
-        guard let httpResponse = response as? HTTPURLResponse else {
+        guard let httpURLResponse = httpResponse as? HTTPURLResponse else {
             throw VoiceClassificationError.invalidResponse
         }
 
-        guard httpResponse.statusCode == 200 else {
-            if httpResponse.statusCode == 401 {
+        guard httpURLResponse.statusCode == 200 else {
+            if httpURLResponse.statusCode == 401 {
                 throw VoiceClassificationError.tokenExpired
             }
             let errorMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
-            throw VoiceClassificationError.serverError(httpResponse.statusCode, errorMessage)
+            throw VoiceClassificationError.serverError(httpURLResponse.statusCode, errorMessage)
         }
 
         let decoder = JSONDecoder()
-        let response = try decoder.decode(ContextualSuggestionsResponse.self, from: data)
+        let suggestionsResponse = try decoder.decode(ContextualSuggestionsResponse.self, from: data)
 
         // Convert to ContextualSuggestion objects
-        return response.suggestions.enumerated().map { index, suggestion in
+        return suggestionsResponse.suggestions.enumerated().map { index, suggestion in
             ContextualSuggestion(
                 suggestion: suggestion,
                 category: "contextual",

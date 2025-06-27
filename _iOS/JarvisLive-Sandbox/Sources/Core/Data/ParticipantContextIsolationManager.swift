@@ -192,12 +192,12 @@ final class ParticipantContextIsolationManager: ObservableObject {
         )
         
         switch visibility {
-        case .private:
+        case .`private`:
             // Encrypt private data
             let encryptedEntry = try await encryptContextData(dataEntry, for: participantId)
             context.encryptedData[key] = encryptedEntry
             
-        case .public:
+        case .`public`:
             context.publicData[key] = dataEntry
             
         case .shared(let allowedParticipants):
@@ -1030,8 +1030,8 @@ struct ContextDataEntry: Codable {
 }
 
 enum ContextDataVisibility: Codable {
-    case private
-    case public
+    case `private`
+    case `public`
     case shared([UUID]) // Specific participants
     case group(String)  // Group identifier
 }

@@ -20,12 +20,12 @@
 import Foundation
 
 /// Network request interceptor that automatically handles JWT token refresh on 401 responses
-class TokenRefreshInterceptor: NSURLProtocol {
+class TokenRefreshInterceptor: URLProtocol {
     // MARK: - Static Properties
 
     private static let handledKey = "TokenRefreshInterceptor_Handled"
     private static var refreshInProgress = false
-    private static var pendingRequests: [TokenRefreshRequest] = []
+    private static var pendingRequests: [TokenRefreshPendingRequest] = []
     private static let refreshQueue = DispatchQueue(label: "token-refresh-queue", attributes: .concurrent)
     private static let refreshSemaphore = DispatchSemaphore(value: 1)
 
@@ -51,7 +51,10 @@ class TokenRefreshInterceptor: NSURLProtocol {
 
     override func startLoading() {
         // Mark request as handled to prevent infinite loops
-        let mutableRequest = request.mutableCopy() as! NSMutableURLRequest
+        let mutableRequest = NSMutableURLRequest(url: request.url!, cachePolicy: request.cachePolicy, timeoutInterval: request.timeoutInterval)
+        mutableRequest.httpMethod = request.httpMethod ?? "GET"
+        mutableRequest.allHTTPHeaderFields = request.allHTTPHeaderFields
+        mutableRequest.httpBody = request.httpBody
         URLProtocol.setProperty(true, forKey: Self.handledKey, in: mutableRequest)
 
         Task {
@@ -87,9 +90,19 @@ class TokenRefreshInterceptor: NSURLProtocol {
     }
 
     private func handleTokenRefresh(for request: URLRequest, originalResponse: HTTPURLResponse, originalData: Data) async throws {
-        // Use semaphore to ensure only one refresh attempt at a time
-        Self.refreshSemaphore.wait()
-        defer { Self.refreshSemaphore.signal() }
+        // Use async coordination to ensure only one refresh attempt at a time
+        // Note: Semaphore wait() is not available in async context
+        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
+            Self.refreshQueue.async {
+                Self.refreshSemaphore.wait()
+                continuation.resume()
+            }
+        }
+        defer {
+            Self.refreshQueue.async {
+                Self.refreshSemaphore.signal()
+            }
+        }
 
         if Self.refreshInProgress {
             // Queue this request and wait for refresh to complete
@@ -122,7 +135,7 @@ class TokenRefreshInterceptor: NSURLProtocol {
     private func performTokenRefresh() async throws {
         // Get refresh token from keychain
         let keychainManager = KeychainManager(service: "com.ablankcanvas.jarvis-live")
-        let refreshToken = try await keychainManager.retrieveSecret(for: "jwt_refresh_token")
+        let refreshToken = try keychainManager.getCredential(forKey: "jwt_refresh_token")
 
         // Get backend URL
         let backendURL = getBackendURL()
@@ -134,7 +147,12 @@ class TokenRefreshInterceptor: NSURLProtocol {
         refreshRequest.setValue("Bearer \(refreshToken)", forHTTPHeaderField: "Authorization")
 
         // Mark refresh request as handled to prevent interception
-        URLProtocol.setProperty(true, forKey: Self.handledKey, in: refreshRequest)
+        let mutableRefreshRequest = NSMutableURLRequest(url: refreshRequest.url!, cachePolicy: refreshRequest.cachePolicy, timeoutInterval: refreshRequest.timeoutInterval)
+        mutableRefreshRequest.httpMethod = refreshRequest.httpMethod ?? "POST"
+        mutableRefreshRequest.allHTTPHeaderFields = refreshRequest.allHTTPHeaderFields
+        mutableRefreshRequest.httpBody = refreshRequest.httpBody
+        URLProtocol.setProperty(true, forKey: Self.handledKey, in: mutableRefreshRequest)
+        refreshRequest = mutableRefreshRequest as URLRequest
 
         let (data, response) = try await URLSession.shared.data(for: refreshRequest)
 
@@ -154,23 +172,28 @@ class TokenRefreshInterceptor: NSURLProtocol {
         let authResponse = try decoder.decode(AuthenticationResponse.self, from: data)
 
         // Store new tokens in keychain
-        try await keychainManager.storeSecret(authResponse.accessToken, for: "jwt_access_token")
+        try keychainManager.storeCredential(authResponse.accessToken, forKey: "jwt_access_token")
         if let newRefreshToken = authResponse.refreshToken {
-            try await keychainManager.storeSecret(newRefreshToken, for: "jwt_refresh_token")
+            try keychainManager.storeCredential(newRefreshToken, forKey: "jwt_refresh_token")
         }
     }
 
     private func retryRequestWithNewToken(_ request: URLRequest) async throws {
         // Get new access token
         let keychainManager = KeychainManager(service: "com.ablankcanvas.jarvis-live")
-        let newAccessToken = try await keychainManager.retrieveSecret(for: "jwt_access_token")
+        let newAccessToken = try keychainManager.getCredential(forKey: "jwt_access_token")
 
         // Create new request with updated token
         var retryRequest = request
         retryRequest.setValue("Bearer \(newAccessToken)", forHTTPHeaderField: "Authorization")
 
         // Mark as handled to prevent re-interception
-        URLProtocol.setProperty(true, forKey: Self.handledKey, in: retryRequest)
+        let mutableRetryRequest = NSMutableURLRequest(url: retryRequest.url!, cachePolicy: retryRequest.cachePolicy, timeoutInterval: retryRequest.timeoutInterval)
+        mutableRetryRequest.httpMethod = retryRequest.httpMethod ?? "GET"
+        mutableRetryRequest.allHTTPHeaderFields = retryRequest.allHTTPHeaderFields
+        mutableRetryRequest.httpBody = retryRequest.httpBody
+        URLProtocol.setProperty(true, forKey: Self.handledKey, in: mutableRetryRequest)
+        retryRequest = mutableRetryRequest as URLRequest
 
         // Perform retry
         let (data, response) = try await URLSession.shared.data(for: retryRequest)
@@ -182,9 +205,9 @@ class TokenRefreshInterceptor: NSURLProtocol {
     }
 
     private func queueRequest(_ request: URLRequest) async {
-        await withCheckedContinuation { continuation in
+        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
             Self.refreshQueue.async(flags: .barrier) {
-                let tokenRequest = TokenRefreshRequest(
+                let tokenRequest = TokenRefreshPendingRequest(
                     request: request,
                     client: self.client,
                     continuation: continuation
@@ -195,7 +218,7 @@ class TokenRefreshInterceptor: NSURLProtocol {
     }
 
     private func processQueuedRequests() async {
-        let requests = await withCheckedContinuation { continuation in
+        let requests = await withCheckedContinuation { (continuation: CheckedContinuation<[TokenRefreshPendingRequest], Never>) in
             Self.refreshQueue.async(flags: .barrier) {
                 let pendingRequests = Self.pendingRequests
                 Self.pendingRequests.removeAll()
@@ -218,7 +241,7 @@ class TokenRefreshInterceptor: NSURLProtocol {
     }
 
     private func processQueuedRequestsWithFailure() async {
-        let requests = await withCheckedContinuation { continuation in
+        let requests = await withCheckedContinuation { (continuation: CheckedContinuation<[TokenRefreshPendingRequest], Never>) in
             Self.refreshQueue.async(flags: .barrier) {
                 let pendingRequests = Self.pendingRequests
                 Self.pendingRequests.removeAll()
@@ -234,17 +257,22 @@ class TokenRefreshInterceptor: NSURLProtocol {
         }
     }
 
-    private func retryQueuedRequest(_ tokenRequest: TokenRefreshRequest) async throws {
+    private func retryQueuedRequest(_ tokenRequest: TokenRefreshPendingRequest) async throws {
         // Get new access token
         let keychainManager = KeychainManager(service: "com.ablankcanvas.jarvis-live")
-        let newAccessToken = try await keychainManager.retrieveSecret(for: "jwt_access_token")
+        let newAccessToken = try keychainManager.getCredential(forKey: "jwt_access_token")
 
         // Create new request with updated token
         var retryRequest = tokenRequest.request
         retryRequest.setValue("Bearer \(newAccessToken)", forHTTPHeaderField: "Authorization")
 
         // Mark as handled
-        URLProtocol.setProperty(true, forKey: Self.handledKey, in: retryRequest)
+        let mutableRetryRequest = NSMutableURLRequest(url: retryRequest.url!, cachePolicy: retryRequest.cachePolicy, timeoutInterval: retryRequest.timeoutInterval)
+        mutableRetryRequest.httpMethod = retryRequest.httpMethod ?? "GET"
+        mutableRetryRequest.allHTTPHeaderFields = retryRequest.allHTTPHeaderFields
+        mutableRetryRequest.httpBody = retryRequest.httpBody
+        URLProtocol.setProperty(true, forKey: Self.handledKey, in: mutableRetryRequest)
+        retryRequest = mutableRetryRequest as URLRequest
 
         // Perform retry
         let (data, response) = try await URLSession.shared.data(for: retryRequest)
@@ -258,8 +286,8 @@ class TokenRefreshInterceptor: NSURLProtocol {
     private func handleRefreshFailure(originalResponse: HTTPURLResponse, originalData: Data) async {
         // Clear tokens from keychain
         let keychainManager = KeychainManager(service: "com.ablankcanvas.jarvis-live")
-        try? await keychainManager.deleteSecret(for: "jwt_access_token")
-        try? await keychainManager.deleteSecret(for: "jwt_refresh_token")
+        try? keychainManager.deleteCredential(forKey: "jwt_access_token")
+        try? keychainManager.deleteCredential(forKey: "jwt_refresh_token")
 
         // Notify authentication manager to log out user
         await MainActor.run {
@@ -295,7 +323,7 @@ class TokenRefreshInterceptor: NSURLProtocol {
 
 // MARK: - Supporting Types
 
-struct TokenRefreshRequest {
+struct TokenRefreshPendingRequest {
     let request: URLRequest
     let client: URLProtocolClient?
     let continuation: CheckedContinuation<Void, Never>

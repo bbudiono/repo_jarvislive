@@ -21,6 +21,7 @@
 import Foundation
 import LiveKit
 import Combine
+// import WebRTC // TODO: Add WebRTC dependency if direct WebRTC API access is needed
 import Network
 import MultipeerConnectivity
 
@@ -233,7 +234,7 @@ public final class LiveKitCollaborationManager: NSObject, ObservableObject {
     private let room: Room
     private let keychainManager: KeychainManager
     private let liveKitManager: LiveKitManager
-    private var dataChannel: RTCDataChannel?
+    // private var dataChannel: RTCDataChannel? // TODO: Implement WebRTC data channel when WebRTC dependency is added
     private var cancellables = Set<AnyCancellable>()
     private var heartbeatTimer: Timer?
 
@@ -248,7 +249,7 @@ public final class LiveKitCollaborationManager: NSObject, ObservableObject {
 
     // MARK: - Initialization
 
-    public init(liveKitManager: LiveKitManager, keychainManager: KeychainManager) {
+    init(liveKitManager: LiveKitManager, keychainManager: KeychainManager) {
         self.room = Room()
         self.liveKitManager = liveKitManager
         self.keychainManager = keychainManager

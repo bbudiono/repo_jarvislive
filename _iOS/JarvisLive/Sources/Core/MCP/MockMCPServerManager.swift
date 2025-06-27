@@ -29,6 +29,7 @@ protocol MCPServerManagerProtocol: ObservableObject {
     var serverStatus: [String: String] { get }
     var isInitialized: Bool { get }
     var lastError: Error? { get }
+    var lastErrorPublisher: Published<Error?>.Publisher { get }
     
     func connect() async throws
     func disconnect() async
@@ -49,6 +50,9 @@ final class MockMCPServerManager: MCPServerManagerProtocol, ObservableObject {
     @Published var availableServers: [String] = []
     @Published var serverStatus: [String: String] = [:]
     @Published var lastError: Error?
+    
+    var lastErrorPublisher: Published<Error?>.Publisher { $lastError }
+    var isInitialized: Bool { !availableServers.isEmpty }
 
     // MARK: - Private Properties
 
@@ -236,6 +240,14 @@ final class MockMCPServerManager: MCPServerManagerProtocol, ObservableObject {
             "available_servers": availableServers,
             "server_status": serverStatus,
         ]
+    }
+    
+    // MARK: - Initialization
+    
+    func initialize() async {
+        if !isInitialized {
+            setupMockServers()
+        }
     }
 }
 

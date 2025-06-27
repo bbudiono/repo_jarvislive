@@ -107,7 +107,7 @@ final class VoiceCommandPipeline: ObservableObject {
             .store(in: &cancellables)
 
         // Observe MCP server manager state
-        mcpServerManager.$lastError
+        mcpServerManager.lastErrorPublisher
             .compactMap { $0 }
             .sink { [weak self] error in
                 self?.lastError = error

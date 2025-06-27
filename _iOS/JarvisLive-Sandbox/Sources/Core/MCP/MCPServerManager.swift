@@ -76,6 +76,10 @@ final class MCPServerManager: MCPServerManagerProtocol, ObservableObject {
     @Published private(set) var isInitialized: Bool = false
     @Published private(set) var lastError: Error?
     @Published private(set) var activeOperations: Set<String> = []
+    
+    // MARK: - Computed Properties for Protocol Conformance
+    
+    var lastErrorPublisher: Published<Error?>.Publisher { $lastError }
 
     // MARK: - Private Properties
 
@@ -428,12 +432,12 @@ final class MCPServerManager: MCPServerManagerProtocol, ObservableObject {
             return MCPExecutionResult(
                 success: true,
                 response: "Document generated successfully at \(documentResult.documentURL)",
-                executionTime: documentResult.generationTime,
+                executionTime: Date().timeIntervalSince(documentResult.generatedAt),
                 serverUsed: "document-generator",
                 metadata: [
                     "document_url": documentResult.documentURL,
                     "format": format.rawValue,
-                    "size": "\(documentResult.size)"
+                    "size": "\(documentResult.fileSize)"
                 ],
                 error: nil
             )
@@ -459,11 +463,11 @@ final class MCPServerManager: MCPServerManagerProtocol, ObservableObject {
             return MCPExecutionResult(
                 success: true,
                 response: "Email sent successfully with ID: \(emailResult.messageId)",
-                executionTime: emailResult.deliveryTime,
+                executionTime: Date().timeIntervalSince(emailResult.sentAt),
                 serverUsed: "email-server",
                 metadata: [
                     "message_id": emailResult.messageId,
-                    "status": emailResult.status,
+                    "status": emailResult.status.rawValue,
                     "recipients": recipients.joined(separator: ", ")
                 ],
                 error: nil
@@ -497,13 +501,13 @@ final class MCPServerManager: MCPServerManagerProtocol, ObservableObject {
             
             return MCPExecutionResult(
                 success: true,
-                response: "Calendar event created: \(calendarResult.title)",
-                executionTime: 1.0,
+                response: "Calendar event created: \(title)",
+                executionTime: Date().timeIntervalSince(calendarResult.createdAt),
                 serverUsed: "calendar-server",
                 metadata: [
                     "event_id": calendarResult.eventId,
-                    "title": calendarResult.title,
-                    "status": calendarResult.status
+                    "title": title,
+                    "status": calendarResult.status.rawValue
                 ],
                 error: nil
             )
@@ -559,11 +563,11 @@ final class MCPServerManager: MCPServerManagerProtocol, ObservableObject {
             return MCPExecutionResult(
                 success: true,
                 response: "File uploaded successfully to \(storageResult.path)",
-                executionTime: storageResult.uploadTime,
+                executionTime: storageResult.lastModified.map { Date().timeIntervalSince($0) } ?? 1.0,
                 serverUsed: "storage-server",
                 metadata: [
                     "path": storageResult.path,
-                    "size": "\(storageResult.size)"
+                    "size": "\(storageResult.size ?? 0)"
                 ],
                 error: nil
             )
