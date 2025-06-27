@@ -434,24 +434,8 @@ enum SessionCommand: Codable {
     case voteOnDecision(String, CollaborativeVote)
 }
 
-struct CollaborationMessage: Codable {
-    let type: MessageType
-    let sessionId: String
-    let timestamp: Date
-    let participant: Collaborator?
-    let participantId: String?
-    let transcription: SharedTranscription?
-    let decision: CollaborativeDecision?
-    let vote: CollaborativeVote?
-
-    enum MessageType: String, Codable {
-        case participantJoined = "participant_joined"
-        case participantLeft = "participant_left"
-        case transcriptionAdded = "transcription_added"
-        case decisionProposed = "decision_proposed"
-        case voteReceived = "vote_received"
-    }
-}
+// CollaborationMessage type moved to LiveKitCollaborationManager.swift to avoid duplication
+// Use the canonical enum definition from LiveKitCollaborationManager
 
 // MARK: - Collaborative Session View
 
