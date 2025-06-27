@@ -26,10 +26,10 @@ import CoreData
 
 struct MCPConversationContext: Codable {
     let conversationId: UUID
-    let activeContext: MCPActiveContext
-    let contextHistory: [MCPContextEntry]
-    let pendingOperations: [MCPPendingOperation]
-    let lastUpdated: Date
+    var activeContext: MCPActiveContext
+    var contextHistory: [MCPContextEntry]
+    var pendingOperations: [MCPPendingOperation]
+    var lastUpdated: Date
     let expiresAt: Date?
 
     struct MCPActiveContext: Codable {
@@ -337,7 +337,7 @@ final class MCPContextManager: ObservableObject {
         updateContext(for: conversationId) { context in
             // Merge extracted parameters
             for (key, value) in extractedParams {
-                context.activeContext.pendingParameters[key] = value
+                context.activeContext.pendingParameters[key] = AnyCodable(value)
             }
 
             // Update required parameters list

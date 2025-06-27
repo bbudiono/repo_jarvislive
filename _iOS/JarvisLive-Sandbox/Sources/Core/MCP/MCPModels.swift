@@ -118,11 +118,11 @@ struct MCPRequest: Codable {
 struct MCPResponse<T: Codable>: Codable {
     let id: String
     let result: T?
-    let error: MCPError?
+    let error: MCPResponseError?
     let jsonrpc: String
 }
 
-struct MCPError: Codable, Error, LocalizedError {
+struct MCPResponseError: Codable, Error, LocalizedError {
     let code: Int
     let message: String
     let data: MCPErrorData?
@@ -436,7 +436,7 @@ struct MCPConfiguration: Codable {
 
 // MARK: - Error Types
 
-enum MCPClientError: Error, LocalizedError {
+enum MCPModelsClientError: Error, LocalizedError {
     case serverNotFound(String)
     case networkError(Error)
     case invalidResponse(String)
