@@ -482,6 +482,25 @@ public final class KeychainManager {
         let context = LAContext()
         context.invalidate()
     }
+
+    // MARK: - Async Wrappers for Authentication
+    
+    /// Asynchronously stores a secret in the keychain
+    /// - Parameters:
+    ///   - secret: The secret string to store
+    ///   - key: The key to associate with the secret
+    /// - Throws: KeychainManagerError if storage fails
+    public func storeSecret(_ secret: String, for key: String) async throws {
+        try storeCredential(secret, forKey: key)
+    }
+    
+    /// Asynchronously retrieves a secret from the keychain
+    /// - Parameter key: The key associated with the secret
+    /// - Returns: The stored secret string
+    /// - Throws: KeychainManagerError if retrieval fails
+    public func retrieveSecret(for key: String) async throws -> String {
+        return try getCredential(forKey: key)
+    }
 }
 
 // MARK: - Convenience Extensions

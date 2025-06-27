@@ -119,12 +119,12 @@ class VoiceCommandClassifierDemo {
             }
 
             // Show MCP-formatted parameters
-            let mcpParams = await classifier?.formatParametersForMCP(
-                classification.parameters,
+            let mcpParams = await classifier.formatParametersForMCP(
+                classification.extractedParameters,
                 intent: classification.intent
             ) ?? [:]
 
-            if mcpParams.count > classification.parameters.count {
+            if mcpParams.count > classification.extractedParameters.count {
                 print("   🔧 Additional MCP Parameters:")
                 for (key, value) in mcpParams {
                     if classification.parameters[key] == nil {
@@ -169,7 +169,7 @@ class VoiceCommandClassifierDemo {
             }
 
             // Show fallback decision
-            let shouldFallback = await classifier?.shouldFallbackToGeneralAI(classification) ?? true
+            let shouldFallback = await classifier.shouldFallbackToGeneralAI(classification)
             print("   🤖 Fallback to General AI: \(shouldFallback ? "Yes" : "No")")
         }
     }

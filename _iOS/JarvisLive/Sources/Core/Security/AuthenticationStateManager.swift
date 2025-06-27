@@ -25,7 +25,7 @@ import SwiftUI
 
 // MARK: - Authentication Flow States
 
-public enum AuthenticationFlow {
+public enum AuthenticationFlow: Equatable {
     case initial
     case onboarding
     case setupRequired
@@ -35,6 +35,24 @@ public enum AuthenticationFlow {
     case authenticated
     case error(AuthenticationFlowError)
     case maintenance
+    
+    public static func == (lhs: AuthenticationFlow, rhs: AuthenticationFlow) -> Bool {
+        switch (lhs, rhs) {
+        case (.initial, .initial),
+             (.onboarding, .onboarding),
+             (.setupRequired, .setupRequired),
+             (.apiKeyEntry, .apiKeyEntry),
+             (.biometricSetup, .biometricSetup),
+             (.biometricAuthentication, .biometricAuthentication),
+             (.authenticated, .authenticated),
+             (.maintenance, .maintenance):
+            return true
+        case (.error(let lhsError), .error(let rhsError)):
+            return lhsError == rhsError
+        default:
+            return false
+        }
+    }
 }
 
 // MARK: - Authentication Flow Errors

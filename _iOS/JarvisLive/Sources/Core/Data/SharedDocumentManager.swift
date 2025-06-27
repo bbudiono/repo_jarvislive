@@ -33,7 +33,7 @@ final class SharedDocumentManager: ObservableObject {
     @Published private(set) var versionTrees: [UUID: DocumentVersionTree] = [:]
     @Published private(set) var pendingOperations: [UUID: [DocumentOperation]] = [:]
     @Published private(set) var documentDecisions: [UUID: [DocumentDecision]] = [:]
-    @Published private(set) var collaborationSessions: [UUID: CollaborationSession] = [:]
+    @Published private(set) var collaborationSessions: [UUID: DocumentCollaborationSession] = [:]
     
     // MARK: - Private Properties
     
@@ -192,7 +192,7 @@ final class SharedDocumentManager: ObservableObject {
         )
         
         // Create collaboration session
-        let session = CollaborationSession(
+        let session = DocumentCollaborationSession(
             id: UUID(),
             documentId: documentId,
             participants: [createdBy],
@@ -666,7 +666,7 @@ final class SharedDocumentManager: ObservableObject {
     func joinDocumentCollaboration(
         documentId: UUID,
         participantId: UUID
-    ) async throws -> CollaborationSession {
+    ) async throws -> DocumentCollaborationSession {
         
         guard let document = documents[documentId] else {
             throw SharedDocumentError.documentNotFound(documentId)
@@ -683,7 +683,7 @@ final class SharedDocumentManager: ObservableObject {
         documentSubscriptions[documentId, default: Set()].insert(participantId)
         
         // Find or create collaboration session
-        let session: CollaborationSession
+        let session: DocumentCollaborationSession
         if let existingSession = collaborationSessions.values.first(where: { $0.documentId == documentId && $0.status == .active }) {
             var updatedSession = existingSession
             updatedSession.participants.append(participantId)
@@ -691,7 +691,7 @@ final class SharedDocumentManager: ObservableObject {
             collaborationSessions[existingSession.id] = updatedSession
             session = updatedSession
         } else {
-            let newSession = CollaborationSession(
+            let newSession = DocumentCollaborationSession(
                 id: UUID(),
                 documentId: documentId,
                 participants: [participantId],
@@ -1267,7 +1267,7 @@ final class SharedDocumentManager: ObservableObject {
         return versionTrees[documentId]
     }
     
-    func getCollaborationSessions() -> [CollaborationSession] {
+    func getCollaborationSessions() -> [DocumentCollaborationSession] {
         return Array(collaborationSessions.values)
     }
 }
@@ -1714,7 +1714,7 @@ struct DocumentSection: Codable {
     }
 }
 
-struct CollaborationSession: Identifiable, Codable {
+struct DocumentCollaborationSession: Identifiable, Codable {
     let id: UUID
     let documentId: UUID
     var participants: [UUID]

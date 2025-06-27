@@ -15,6 +15,8 @@ let package = Package(
         ),
     ],
     dependencies: [
+        // LiveKit client SDK for real-time audio collaboration
+        .package(url: "https://github.com/livekit/client-sdk-swift.git", .upToNextMajor(from: "2.0.0")),
         // Keychain access for secure storage
         .package(url: "https://github.com/kishikawakatsumi/KeychainAccess.git", .upToNextMajor(from: "4.2.2")),
         // Snapshot testing for automated UI regression detection
@@ -24,6 +26,7 @@ let package = Package(
         .target(
             name: "JarvisLive",
             dependencies: [
+                .product(name: "LiveKit", package: "client-sdk-swift"),
                 .product(name: "KeychainAccess", package: "KeychainAccess")
             ],
             path: "JarvisLive/Sources"

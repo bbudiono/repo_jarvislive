@@ -1,0 +1,332 @@
+name: Performance Intelligence & Trend Analysis
+
+on:
+  push:
+    branches: [ main, develop, hotfix/* ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    - cron: '0 3 * * *'  # Daily at 3 AM for trend analysis
+
+jobs:
+  performance-baseline-analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 100  # Fetch history for trend analysis
+        
+    - name: Set up Python for performance analysis
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: Install performance analysis dependencies
+      working-directory: _python
+      run: |
+        pip install -r requirements.txt
+        pip install pytest-benchmark memory-profiler psutil matplotlib pandas numpy
+        
+    - name: Run comprehensive performance benchmarks
+      working-directory: _python
+      run: |
+        # Create performance results directory
+        mkdir -p performance-results
+        
+        # Run micro-benchmarks
+        python -m pytest tests/performance/test_benchmark_micro.py \
+          --benchmark-json=performance-results/micro-benchmarks.json \
+          --benchmark-histogram=performance-results/micro-histogram \
+          --benchmark-save=micro_$(date +%Y%m%d_%H%M%S) \
+          -v
+        
+        # Run load performance tests
+        python -m pytest tests/performance/test_load_performance.py \
+          --benchmark-json=performance-results/load-benchmarks.json \
+          --benchmark-save=load_$(date +%Y%m%d_%H%M%S) \
+          -v
+        
+        # Memory profiling
+        python -m memory_profiler tests/performance/run_performance_tests.py > performance-results/memory-profile.txt
+        
+    - name: Analyze performance trends and generate insights
+      run: |
+        python3 << 'PYTHON'
+        import json
+        import os
+        import pandas as pd
+        import numpy as np
+        from datetime import datetime, timedelta
+        import matplotlib.pyplot as plt
+        
+        # Load current benchmark results
+        results_dir = '_python/performance-results'
+        insights = {
+            'timestamp': datetime.now().isoformat(),
+            'benchmarks': {},
+            'trends': {},
+            'regressions': [],
+            'improvements': [],
+            'recommendations': [],
+            'overall_score': 0.0
+        }
+        
+        # Process micro-benchmark results
+        if os.path.exists(f'{results_dir}/micro-benchmarks.json'):
+            with open(f'{results_dir}/micro-benchmarks.json', 'r') as f:
+                micro_results = json.load(f)
+            
+            for benchmark in micro_results.get('benchmarks', []):
+                name = benchmark['name']
+                stats = benchmark['stats']
+                
+                insights['benchmarks'][name] = {
+                    'mean': stats['mean'],
+                    'stddev': stats['stddev'],
+                    'min': stats['min'],
+                    'max': stats['max'],
+                    'ops_per_sec': 1.0 / stats['mean'] if stats['mean'] > 0 else 0
+                }
+                
+                # Performance thresholds (customizable per benchmark)
+                if 'voice_classification' in name and stats['mean'] > 0.2:
+                    insights['regressions'].append(f"Voice classification slow: {stats['mean']:.3f}s")
+                elif 'mcp_processing' in name and stats['mean'] > 0.1:
+                    insights['regressions'].append(f"MCP processing slow: {stats['mean']:.3f}s")
+        
+        # Analyze memory usage
+        if os.path.exists(f'{results_dir}/memory-profile.txt'):
+            with open(f'{results_dir}/memory-profile.txt', 'r') as f:
+                memory_content = f.read()
+            
+            # Extract peak memory usage (simplified)
+            import re
+            memory_numbers = re.findall(r'(\d+\.\d+) MiB', memory_content)
+            if memory_numbers:
+                peak_memory = max(float(x) for x in memory_numbers)
+                insights['peak_memory_mb'] = peak_memory
+                
+                if peak_memory > 512:  # 512MB threshold
+                    insights['regressions'].append(f"High memory usage: {peak_memory:.1f} MB")
+        
+        # Generate performance recommendations
+        if len(insights['regressions']) > 0:
+            insights['recommendations'].extend([
+                'Profile bottleneck functions with detailed analysis',
+                'Consider caching strategies for repeated operations',
+                'Review algorithmic complexity of slow functions'
+            ])
+        
+        if insights.get('peak_memory_mb', 0) > 256:
+            insights['recommendations'].append('Investigate memory leaks and optimize data structures')
+        
+        # Calculate overall performance score (0-100)
+        regression_penalty = min(50, len(insights['regressions']) * 10)
+        improvement_bonus = min(20, len(insights['improvements']) * 5)
+        insights['overall_score'] = max(0, 100 - regression_penalty + improvement_bonus)
+        
+        # Save detailed analysis
+        with open('performance-intelligence.json', 'w') as f:
+            json.dump(insights, f, indent=2)
+        
+        print(f"Performance analysis completed. Overall Score: {insights['overall_score']}/100")
+        print(f"Regressions detected: {len(insights['regressions'])}")
+        print(f"Improvements detected: {len(insights['improvements'])}")
+        PYTHON
+        
+    - name: Generate performance visualization
+      run: |
+        python3 << 'PYTHON'
+        import json
+        import matplotlib.pyplot as plt
+        import numpy as np
+        from datetime import datetime
+        
+        # Load performance data
+        with open('performance-intelligence.json', 'r') as f:
+            data = json.load(f)
+        
+        # Create performance dashboard visualization
+        fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 10))
+        fig.suptitle('Performance Intelligence Dashboard', fontsize=16)
+        
+        # Benchmark times
+        if data['benchmarks']:
+            names = list(data['benchmarks'].keys())
+            means = [data['benchmarks'][name]['mean'] for name in names]
+            
+            ax1.bar(range(len(names)), means)
+            ax1.set_title('Benchmark Mean Times')
+            ax1.set_ylabel('Time (seconds)')
+            ax1.set_xticks(range(len(names)))
+            ax1.set_xticklabels([n.split('_')[-1] for n in names], rotation=45)
+        
+        # Performance score gauge
+        score = data['overall_score']
+        colors = ['red' if score < 60 else 'yellow' if score < 80 else 'green']
+        ax2.pie([score, 100-score], labels=[f'Score: {score}', ''], colors=colors[0:1] + ['lightgray'])
+        ax2.set_title('Overall Performance Score')
+        
+        # Regression/Improvement counts
+        regression_count = len(data['regressions'])
+        improvement_count = len(data['improvements'])
+        ax3.bar(['Regressions', 'Improvements'], [regression_count, improvement_count], 
+                color=['red', 'green'])
+        ax3.set_title('Performance Changes')
+        ax3.set_ylabel('Count')
+        
+        # Memory usage (if available)
+        if 'peak_memory_mb' in data:
+            memory_usage = data['peak_memory_mb']
+            memory_limit = 512  # MB
+            ax4.bar(['Memory Usage'], [memory_usage], color='orange' if memory_usage > 256 else 'blue')
+            ax4.axhline(y=memory_limit, color='red', linestyle='--', label='Limit')
+            ax4.set_title('Peak Memory Usage')
+            ax4.set_ylabel('Memory (MB)')
+            ax4.legend()
+        else:
+            ax4.text(0.5, 0.5, 'Memory data\nnot available', ha='center', va='center', transform=ax4.transAxes)
+            ax4.set_title('Memory Analysis')
+        
+        plt.tight_layout()
+        plt.savefig('performance-dashboard.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        print("Performance visualization generated: performance-dashboard.png")
+        PYTHON
+        
+    - name: Upload performance results and visualization
+      uses: actions/upload-artifact@v3
+      with:
+        name: performance-intelligence-results
+        path: |
+          _python/performance-results/
+          performance-intelligence.json
+          performance-dashboard.png
+
+  ios-performance-analysis:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Comprehensive iOS build performance analysis
+      working-directory: _iOS
+      run: |
+        echo "Starting comprehensive iOS performance analysis..."
+        
+        # Create performance tracking directory
+        mkdir -p performance-analysis
+        
+        if [ -d "JarvisLive-Sandbox" ]; then
+            # Clean build time measurement
+            echo "Measuring clean build time..."
+            time xcodebuild clean build \
+              -project JarvisLive-Sandbox/JarvisLive-Sandbox.xcodeproj \
+              -scheme JarvisLive-Sandbox \
+              -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=latest' \
+              -quiet 2>&1 | tee performance-analysis/build-time.log
+            
+            # Incremental build time
+            echo "Measuring incremental build time..."
+            touch JarvisLive-Sandbox/Sources/App/JarvisLiveSandboxApp.swift
+            time xcodebuild build \
+              -project JarvisLive-Sandbox/JarvisLive-Sandbox.xcodeproj \
+              -scheme JarvisLive-Sandbox \
+              -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=latest' \
+              -quiet 2>&1 | tee performance-analysis/incremental-build-time.log
+            
+            # Build size analysis
+            echo "Analyzing build artifacts size..."
+            xcodebuild build \
+              -project JarvisLive-Sandbox/JarvisLive-Sandbox.xcodeproj \
+              -scheme JarvisLive-Sandbox \
+              -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=latest' \
+              -derivedDataPath performance-analysis/DerivedData
+            
+            if [ -d "performance-analysis/DerivedData" ]; then
+                du -sh performance-analysis/DerivedData > performance-analysis/build-size.txt
+                find performance-analysis/DerivedData -name "*.app" -exec du -sh {} \; >> performance-analysis/build-size.txt
+            fi
+            
+            # Extract and analyze build metrics
+            python3 << 'PYTHON'
+import re
+import json
+from datetime import datetime
+
+metrics = {
+    'timestamp': datetime.now().isoformat(),
+    'clean_build_time': 'unknown',
+    'incremental_build_time': 'unknown',
+    'build_size_mb': 0,
+    'performance_score': 0
+}
+
+# Extract build times
+try:
+    with open('performance-analysis/build-time.log', 'r') as f:
+        content = f.read()
+        time_match = re.search(r'real\s+(\d+m\d+\.\d+s)', content)
+        if time_match:
+            metrics['clean_build_time'] = time_match.group(1)
+except:
+    pass
+
+try:
+    with open('performance-analysis/incremental-build-time.log', 'r') as f:
+        content = f.read()
+        time_match = re.search(r'real\s+(\d+m\d+\.\d+s)', content)
+        if time_match:
+            metrics['incremental_build_time'] = time_match.group(1)
+except:
+    pass
+
+# Extract build size
+try:
+    with open('performance-analysis/build-size.txt', 'r') as f:
+        content = f.read()
+        # Look for app size
+        app_match = re.search(r'(\d+(?:\.\d+)?[MG])\s+.*\.app', content)
+        if app_match:
+            size_str = app_match.group(1)
+            if 'G' in size_str:
+                metrics['build_size_mb'] = float(size_str.replace('G', '')) * 1024
+            else:
+                metrics['build_size_mb'] = float(size_str.replace('M', ''))
+except:
+    pass
+
+# Calculate performance score
+score = 100
+if 'clean_build_time' in metrics and metrics['clean_build_time'] != 'unknown':
+    # Penalize slow builds (over 3 minutes)
+    time_str = metrics['clean_build_time']
+    if 'min' in time_str:
+        minutes = int(re.search(r'(\d+)m', time_str).group(1))
+        if minutes > 3:
+            score -= (minutes - 3) * 10
+
+if metrics['build_size_mb'] > 100:
+    score -= (metrics['build_size_mb'] - 100) / 10
+
+metrics['performance_score'] = max(0, score)
+
+with open('performance-analysis/ios-metrics.json', 'w') as f:
+    json.dump(metrics, f, indent=2)
+
+print(f"iOS Performance Score: {metrics['performance_score']}/100")
+print(f"Clean Build Time: {metrics['clean_build_time']}")
+print(f"Incremental Build Time: {metrics['incremental_build_time']}")
+print(f"Build Size: {metrics['build_size_mb']:.1f} MB")
+PYTHON
+        fi
+        
+    - name: Upload iOS performance analysis
+      uses: actions/upload-artifact@v3
+      with:
+        name: ios-performance-analysis
+        path: _iOS/performance-analysis/

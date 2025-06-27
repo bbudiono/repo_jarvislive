@@ -122,10 +122,10 @@ struct ParticipantListView: View {
 
     private var participantStatsView: some View {
         HStack(spacing: 20) {
-            StatItem(title: "Total", value: participants.count, color: .blue)
-            StatItem(title: "Active", value: activeParticipantsCount, color: .green)
-            StatItem(title: "Speaking", value: speakingParticipantsCount, color: .orange)
-            StatItem(title: "Quiet", value: participants.count - speakingParticipantsCount, color: .gray)
+            StatItem(title: "Total", value: "\(participants.count)", icon: "person.3", color: .blue)
+            StatItem(title: "Active", value: "\(activeParticipantsCount)", icon: "person.wave.2", color: .green)
+            StatItem(title: "Speaking", value: "\(speakingParticipantsCount)", icon: "mic", color: .orange)
+            StatItem(title: "Quiet", value: "\(participants.count - speakingParticipantsCount)", icon: "mic.slash", color: .gray)
         }
         .padding()
         .background(Color(UIColor.systemBackground))
