@@ -214,6 +214,115 @@ Configure multiple AI providers for optimal performance and cost:
 let provider = AIProviderManager.selectProvider(for: .conversation, budget: 0.00002)
 ```
 
+## 🚀 Production Deployment
+
+### Environment Configuration
+
+#### Backend Configuration
+1. **Copy environment template**
+   ```bash
+   cd _python
+   cp .env.example .env
+   ```
+
+2. **Configure required environment variables in `.env`**
+   ```bash
+   # Essential API Keys (Required)
+   ANTHROPIC_API_KEY=your_anthropic_api_key_here
+   OPENAI_API_KEY=your_openai_api_key_here
+   ELEVENLABS_API_KEY=your_elevenlabs_api_key_here
+   
+   # Optional Services
+   GOOGLE_AI_API_KEY=your_google_ai_api_key_here
+   LIVEKIT_API_KEY=your_livekit_api_key_here
+   LIVEKIT_API_SECRET=your_livekit_secret_here
+   
+   # Production Settings
+   JARVIS_DEV_MODE=false
+   LOG_LEVEL=warning
+   ```
+
+#### iOS Configuration
+Configure API credentials through the iOS app Settings screen:
+1. Launch the app
+2. Navigate to Settings
+3. Enter your API keys (stored securely in iOS Keychain)
+4. Enable biometric authentication for credential access
+
+### Production Release Process
+
+#### Version Management
+```bash
+# Prepare a new release (automated versioning)
+./scripts/prepare_release.sh 1.0.1
+
+# Review changes
+git diff
+
+# Commit release preparation
+git add .
+git commit -m "chore: prepare release v1.0.1"
+
+# Create and push release tag
+git tag -a v1.0.1 -m "Release v1.0.1"
+git push origin v1.0.1
+```
+
+#### Production Deployment
+```bash
+# 1. Merge to main branch (triggers production validation)
+git checkout main
+git merge feature/your-feature-branch
+git push origin main
+
+# 2. Monitor CI/CD pipeline for production validation
+# Visit GitHub Actions to see the validate-production-build job
+
+# 3. Manual production sync (if needed)
+./scripts/promote_sandbox_to_production.sh --dry-run
+./scripts/promote_sandbox_to_production.sh
+```
+
+### Release Validation Checklist
+
+Before deploying to production, ensure:
+
+- [ ] **All tests pass**: Both iOS and Python test suites green
+- [ ] **Security audit clean**: No dependency vulnerabilities detected
+- [ ] **Production build validated**: CI/CD `validate-production-build` job successful
+- [ ] **Version numbers updated**: iOS, Python, and CHANGELOG.md all reflect new version
+- [ ] **Environment configured**: All required API keys and production settings in place
+- [ ] **Backup available**: Production sync script created backup before deployment
+
+### Production Monitoring
+
+#### Health Checks
+```bash
+# Python backend health
+curl https://your-api-domain.com/auth/health
+
+# iOS app functionality
+# Use TestFlight for production validation before App Store release
+```
+
+#### Rollback Procedure
+If critical issues are discovered:
+```bash
+# Automated rollback (uses last backup)
+./scripts/rollback_production.sh
+
+# Manual rollback (specify backup)
+cp -R /path/to/backup/_iOS/JarvisLive/* _iOS/JarvisLive/
+```
+
+### Deployment Environments
+
+| Environment | Purpose | Branch | Auto-Deploy |
+|-------------|---------|--------|-------------|
+| **Sandbox** | Development & Testing | `feature/*` | ✅ Yes |
+| **Production** | Live Application | `main` | ⚠️ Manual |
+| **Release Candidate** | Pre-production Validation | `main` | ✅ CI Validation |
+
 ## 🗂️ Project Structure
 
 ```
