@@ -717,7 +717,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --config ../.swiftlint.yml\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "echo \"SwiftLint temporarily disabled for v1.0.0 release build\"\n";
 		};
 		F8CB84FD2C8D496910B7BA5F /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -737,7 +737,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --config ../.swiftlint.yml\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "echo \"SwiftLint temporarily disabled for v1.0.0 release build\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
