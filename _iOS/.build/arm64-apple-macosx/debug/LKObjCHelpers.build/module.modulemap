@@ -1,0 +1,4 @@
+module LKObjCHelpers {
+    umbrella header "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/client-sdk-swift/Sources/LKObjCHelpers/include/LKObjCHelpers.h"
+    export *
+}

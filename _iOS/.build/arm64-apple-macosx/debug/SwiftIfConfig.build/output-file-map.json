@@ -1,0 +1,89 @@
+{
+  "": {
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/master.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftIfConfig/ActiveClauseEvaluator.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ActiveClauseEvaluator.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ActiveClauseEvaluator.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ActiveClauseEvaluator~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ActiveClauseEvaluator.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftIfConfig/ActiveSyntaxRewriter.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ActiveSyntaxRewriter.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ActiveSyntaxRewriter.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ActiveSyntaxRewriter~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ActiveSyntaxRewriter.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftIfConfig/ActiveSyntaxVisitor.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ActiveSyntaxVisitor.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ActiveSyntaxVisitor.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ActiveSyntaxVisitor~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ActiveSyntaxVisitor.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftIfConfig/BuildConfiguration.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/BuildConfiguration.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/BuildConfiguration.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/BuildConfiguration~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/BuildConfiguration.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftIfConfig/ConfiguredRegions.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ConfiguredRegions.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ConfiguredRegions.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ConfiguredRegions~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/ConfiguredRegions.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftIfConfig/IfConfigDecl+IfConfig.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigDecl+IfConfig.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigDecl+IfConfig.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigDecl+IfConfig~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigDecl+IfConfig.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftIfConfig/IfConfigDiagnostic.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigDiagnostic.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigDiagnostic.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigDiagnostic~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigDiagnostic.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftIfConfig/IfConfigEvaluation.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigEvaluation.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigEvaluation.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigEvaluation~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigEvaluation.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftIfConfig/IfConfigFunctions.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigFunctions.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigFunctions.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigFunctions~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigFunctions.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftIfConfig/IfConfigRegionState.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigRegionState.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigRegionState.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigRegionState~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/IfConfigRegionState.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftIfConfig/SyntaxLiteralUtils.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/SyntaxLiteralUtils.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/SyntaxLiteralUtils.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/SyntaxLiteralUtils~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/SyntaxLiteralUtils.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftIfConfig/SyntaxProtocol+IfConfig.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/SyntaxProtocol+IfConfig.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/SyntaxProtocol+IfConfig.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/SyntaxProtocol+IfConfig~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/SyntaxProtocol+IfConfig.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftIfConfig/VersionTuple+Parsing.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/VersionTuple+Parsing.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/VersionTuple+Parsing.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/VersionTuple+Parsing~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/VersionTuple+Parsing.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftIfConfig/VersionTuple.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/VersionTuple.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/VersionTuple.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/VersionTuple~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftIfConfig.build/VersionTuple.swiftdeps"
+  }
+}

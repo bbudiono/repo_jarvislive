@@ -1,0 +1,179 @@
+{
+  "": {
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/master.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Conformances/CoreImage.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CoreImage.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CoreImage.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CoreImage~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CoreImage.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Conformances/CoreLocation.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CoreLocation.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CoreLocation.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CoreLocation~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CoreLocation.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Conformances/CoreMotion.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CoreMotion.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CoreMotion.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CoreMotion~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CoreMotion.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Conformances/Foundation.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Foundation.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Foundation.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Foundation~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Foundation.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Conformances/GameKit.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/GameKit.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/GameKit.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/GameKit~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/GameKit.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Conformances/KeyPath.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/KeyPath.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/KeyPath.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/KeyPath~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/KeyPath.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Conformances/Photos.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Photos.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Photos.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Photos~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Photos.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Conformances/Speech.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Speech.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Speech.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Speech~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Speech.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Conformances/StoreKit.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/StoreKit.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/StoreKit.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/StoreKit~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/StoreKit.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Conformances/Swift.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Swift.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Swift.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Swift~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Swift.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Conformances/SwiftUI.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/SwiftUI.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/SwiftUI.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/SwiftUI~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/SwiftUI.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Conformances/UIKit.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/UIKit.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/UIKit.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/UIKit~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/UIKit.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Conformances/UserNotifications.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/UserNotifications.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/UserNotifications.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/UserNotifications~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/UserNotifications.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Conformances/UserNotificationsUI.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/UserNotificationsUI.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/UserNotificationsUI.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/UserNotificationsUI~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/UserNotificationsUI.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/CustomDumpReflectable.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CustomDumpReflectable.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CustomDumpReflectable.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CustomDumpReflectable~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CustomDumpReflectable.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/CustomDumpRepresentable.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CustomDumpRepresentable.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CustomDumpRepresentable.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CustomDumpRepresentable~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CustomDumpRepresentable.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/CustomDumpStringConvertible.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CustomDumpStringConvertible.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CustomDumpStringConvertible.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CustomDumpStringConvertible~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CustomDumpStringConvertible.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Diff.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Diff.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Diff.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Diff~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Diff.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Dump.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Dump.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Dump.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Dump~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Dump.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/ExpectDifference.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/ExpectDifference.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/ExpectDifference.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/ExpectDifference~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/ExpectDifference.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/ExpectNoDifference.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/ExpectNoDifference.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/ExpectNoDifference.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/ExpectNoDifference~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/ExpectNoDifference.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Internal/AnyType.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/AnyType.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/AnyType.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/AnyType~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/AnyType.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Internal/CollectionDifference.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CollectionDifference.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CollectionDifference.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CollectionDifference~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/CollectionDifference.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Internal/Identifiable.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Identifiable.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Identifiable.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Identifiable~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Identifiable.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Internal/Mirror.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Mirror.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Mirror.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Mirror~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Mirror.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Internal/String.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/String.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/String.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/String~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/String.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/Internal/Unordered.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Unordered.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Unordered.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Unordered~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/Unordered.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/XCTAssertDifference.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/XCTAssertDifference.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/XCTAssertDifference.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/XCTAssertDifference~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/XCTAssertDifference.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-custom-dump/Sources/CustomDump/XCTAssertNoDifference.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/XCTAssertNoDifference.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/XCTAssertNoDifference.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/XCTAssertNoDifference~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/CustomDump.build/XCTAssertNoDifference.swiftdeps"
+  }
+}

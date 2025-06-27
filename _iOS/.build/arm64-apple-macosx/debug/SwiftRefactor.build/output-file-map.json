@@ -1,0 +1,89 @@
+{
+  "": {
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/master.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftRefactor/AddSeparatorsToIntegerLiteral.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/AddSeparatorsToIntegerLiteral.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/AddSeparatorsToIntegerLiteral.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/AddSeparatorsToIntegerLiteral~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/AddSeparatorsToIntegerLiteral.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftRefactor/CallToTrailingClosures.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/CallToTrailingClosures.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/CallToTrailingClosures.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/CallToTrailingClosures~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/CallToTrailingClosures.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftRefactor/ConvertComputedPropertyToStored.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertComputedPropertyToStored.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertComputedPropertyToStored.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertComputedPropertyToStored~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertComputedPropertyToStored.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftRefactor/ConvertComputedPropertyToZeroParameterFunction.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertComputedPropertyToZeroParameterFunction.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertComputedPropertyToZeroParameterFunction.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertComputedPropertyToZeroParameterFunction~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertComputedPropertyToZeroParameterFunction.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftRefactor/ConvertStoredPropertyToComputed.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertStoredPropertyToComputed.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertStoredPropertyToComputed.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertStoredPropertyToComputed~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertStoredPropertyToComputed.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftRefactor/ConvertZeroParameterFunctionToComputedProperty.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertZeroParameterFunctionToComputedProperty.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertZeroParameterFunctionToComputedProperty.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertZeroParameterFunctionToComputedProperty~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ConvertZeroParameterFunctionToComputedProperty.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftRefactor/ExpandEditorPlaceholder.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ExpandEditorPlaceholder.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ExpandEditorPlaceholder.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ExpandEditorPlaceholder~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/ExpandEditorPlaceholder.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftRefactor/FormatRawStringLiteral.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/FormatRawStringLiteral.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/FormatRawStringLiteral.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/FormatRawStringLiteral~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/FormatRawStringLiteral.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftRefactor/IntegerLiteralUtilities.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/IntegerLiteralUtilities.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/IntegerLiteralUtilities.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/IntegerLiteralUtilities~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/IntegerLiteralUtilities.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftRefactor/MigrateToNewIfLetSyntax.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/MigrateToNewIfLetSyntax.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/MigrateToNewIfLetSyntax.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/MigrateToNewIfLetSyntax~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/MigrateToNewIfLetSyntax.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftRefactor/OpaqueParameterToGeneric.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/OpaqueParameterToGeneric.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/OpaqueParameterToGeneric.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/OpaqueParameterToGeneric~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/OpaqueParameterToGeneric.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftRefactor/RefactoringProvider.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/RefactoringProvider.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/RefactoringProvider.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/RefactoringProvider~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/RefactoringProvider.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftRefactor/RemoveSeparatorsFromIntegerLiteral.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/RemoveSeparatorsFromIntegerLiteral.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/RemoveSeparatorsFromIntegerLiteral.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/RemoveSeparatorsFromIntegerLiteral~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/RemoveSeparatorsFromIntegerLiteral.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftRefactor/SyntaxUtils.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/SyntaxUtils.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/SyntaxUtils.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/SyntaxUtils~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftRefactor.build/SyntaxUtils.swiftdeps"
+  }
+}

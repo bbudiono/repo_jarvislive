@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftSyntaxMacrosGenericTestSupport.build/master.swiftdeps"
+  },
+  "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/checkouts/swift-syntax/Sources/SwiftSyntaxMacrosGenericTestSupport/Assertions.swift": {
+    "dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftSyntaxMacrosGenericTestSupport.build/Assertions.d",
+    "object": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftSyntaxMacrosGenericTestSupport.build/Assertions.swift.o",
+    "swiftmodule": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftSyntaxMacrosGenericTestSupport.build/Assertions~partial.swiftmodule",
+    "swift-dependencies": "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftSyntaxMacrosGenericTestSupport.build/Assertions.swiftdeps"
+  }
+}

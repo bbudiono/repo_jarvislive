@@ -1,0 +1,87 @@
+# FastAPI Core Dependencies
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# WebSocket and Real-time Communication
+websockets==12.0
+python-socketio==5.10.0
+
+# HTTP Client for MCP Communications
+httpx==0.25.2
+aiohttp==3.9.1
+
+# Audio Processing
+librosa==0.10.1
+soundfile==0.12.1
+numpy==1.24.3
+
+# AI Provider Integrations
+openai==1.3.7
+anthropic==0.7.7
+google-generativeai==0.3.2
+
+# Voice Processing
+elevenlabs==0.2.26
+whisper-openai==0.3.0
+
+# LiveKit Integration
+livekit==0.6.1
+livekit-api==0.5.9
+
+# Database and Caching
+redis==5.0.1
+aioredis==2.0.1
+
+# Security and Authentication
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.6
+
+# Environment and Configuration
+python-dotenv==1.0.0
+PyYAML==6.0.1
+
+# JSON Schema and Validation
+jsonschema==4.20.0
+marshmallow==3.20.1
+
+# Utility Libraries
+python-dateutil==2.8.2
+pytz==2023.3
+click==8.1.7
+
+# Development and Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-mock==3.12.0
+httpx-oauth==0.10.2
+playwright==1.40.0
+pytest-playwright==0.4.3
+
+# Logging and Monitoring
+structlog==23.2.0
+sentry-sdk[fastapi]==1.38.0
+
+# MCP Protocol Support
+mcp-python==0.1.0
+websockets-extensions==0.1.0
+
+# File Processing for Document Generation
+python-docx==0.8.11
+PyPDF2==3.0.1
+reportlab==4.0.7
+
+# Email Integration
+aiosmtplib==3.0.1
+jinja2==3.1.2
+
+# Web Search Integration
+beautifulsoup4==4.12.2
+requests==2.31.0
+
+# NLP and Machine Learning for Voice Classification
+spacy==3.7.2
+scikit-learn==1.3.2
+nltk==3.8.1

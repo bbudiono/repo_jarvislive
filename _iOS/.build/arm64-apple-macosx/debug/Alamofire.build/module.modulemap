@@ -1,0 +1,4 @@
+module Alamofire {
+    header "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/Alamofire.build/Alamofire-Swift.h"
+    requires objc
+}

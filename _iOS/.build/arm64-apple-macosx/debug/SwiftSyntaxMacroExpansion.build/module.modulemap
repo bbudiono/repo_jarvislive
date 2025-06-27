@@ -1,0 +1,4 @@
+module SwiftSyntaxMacroExpansion {
+    header "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftSyntaxMacroExpansion.build/SwiftSyntaxMacroExpansion-Swift.h"
+    requires objc
+}

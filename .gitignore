@@ -1,0 +1,283 @@
+# Jarvis Live iOS Voice AI Assistant - Git Ignore File
+# Version: 1.0.0
+# Last Updated: 2025-06-25
+
+# ============================================================================
+# Environment & Secrets
+# ============================================================================
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.mobileprovision
+
+# ============================================================================
+# iOS Development
+# ============================================================================
+# Xcode
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+*.xcworkspace/xcuserdata/
+*.xcworkspace/xcshareddata/
+
+# Build products
+build/
+DerivedData/
+
+# Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+# Other
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+
+# Obj-C/Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# CocoaPods
+Pods/
+*.xcworkspace
+
+# Carthage
+Carthage/Build/
+
+# Accio dependency management
+Dependencies/
+.accio/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Code Injection
+iOSInjectionProject/
+
+# ============================================================================
+# Python Backend
+# ============================================================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# ============================================================================
+# Node.js / npm (if using for tooling)
+# ============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# ============================================================================
+# Development Tools
+# ============================================================================
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ============================================================================
+# Temporary Files & Logs
+# ============================================================================
+temp/
+*.tmp
+*.log
+*.backup
+*.bak
+
+# ============================================================================
+# Audio & Media Files (development only)
+# ============================================================================
+*.wav
+*.mp3
+*.m4a
+*.aac
+*.flac
+*.ogg
+
+# ============================================================================
+# Database Files
+# ============================================================================
+*.db
+*.sqlite
+*.sqlite3
+
+# ============================================================================
+# Documentation Build
+# ============================================================================
+docs/_build/
+site/
+
+# ============================================================================
+# Testing
+# ============================================================================
+.coverage
+coverage.xml
+test-results/
+test-reports/
+
+# ============================================================================
+# Deployment
+# ============================================================================
+deployment/
+.deploy/
+
+# ============================================================================
+# MCP Server Logs
+# ============================================================================
+mcp-logs/
+*.mcp.log

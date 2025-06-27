@@ -1,0 +1,4 @@
+module SwiftCompilerPluginMessageHandling {
+    header "/Users/bernhardbudiono/Library/CloudStorage/Dropbox/_Documents - Apps (Working)/repos_github/Working/repo_jarvis_live/_iOS/.build/arm64-apple-macosx/debug/SwiftCompilerPluginMessageHandling.build/SwiftCompilerPluginMessageHandling-Swift.h"
+    requires objc
+}
