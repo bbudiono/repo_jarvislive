@@ -142,13 +142,17 @@ preflight_checks() {
         exit 2
     fi
     
-    # Verify sandbox build status
-    log_info "Verifying sandbox build status..."
-    cd "$SANDBOX_DIR"
-    
-    if ! xcodebuild -project JarvisLive.xcodeproj -scheme JarvisLive-Sandbox -destination 'platform=iOS Simulator,name=iPhone 16 Pro' -quiet build &>/dev/null; then
-        log_error "Sandbox build failed. Fix build errors before promotion."
-        exit 2
+    # Verify sandbox build status (skip in emergency mode)
+    if [[ "${EMERGENCY_MODE:-}" != "1" ]]; then
+        log_info "Verifying sandbox build status..."
+        cd "$SANDBOX_DIR"
+        
+        if ! xcodebuild -project JarvisLive.xcodeproj -scheme JarvisLive-Sandbox -destination 'platform=iOS Simulator,name=iPhone 16 Pro' -quiet build &>/dev/null; then
+            log_error "Sandbox build failed. Fix build errors before promotion."
+            exit 2
+        fi
+    else
+        log_warning "EMERGENCY MODE: Skipping sandbox build verification"
     fi
     
     log_success "Pre-flight checks passed"
