@@ -1,0 +1,1369 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		012B049447C35FF6BA102EA1 /* RealtimeSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4393FCD20EF89D86DFC3F05 /* RealtimeSyncManager.swift */; };
+		02EB026E2952E85EA0C9F665 /* MCPModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E249713CFFC9ECFFEE117976 /* MCPModels.swift */; };
+		055E713C5D54B826FC64CAD2 /* DocumentGenerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB0AC59BCA0B630F832A845 /* DocumentGenerationView.swift */; };
+		077D410DBAC2B4ACFEE26C63 /* MCPActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7697B4004BFB44DA5A8C97 /* MCPActionsView.swift */; };
+		087CDF2F4DCB4B27E1F54C75 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93848C9377612B6C646B7091 /* SettingsManager.swift */; };
+		0B47B3438556045B76666032 /* ParticipantContextIsolationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A876B15EAEBEF3B8A32A38E /* ParticipantContextIsolationManager.swift */; };
+		0C8DA959D58377AF71489565 /* MCPActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7697B4004BFB44DA5A8C97 /* MCPActionsView.swift */; };
+		0E785BB5FBA64A3727B7D315 /* DecisionTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88624B2FDF77800444A699A /* DecisionTrackingView.swift */; };
+		0FD88A184A20AE11EF52AE44 /* VoiceCommandClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231C963DCEA8570D6F7C8BFD /* VoiceCommandClassifier.swift */; };
+		110E858B88D61383396E756F /* ConversationMemoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDDC9EC52DFB3E255BA64A1 /* ConversationMemoryManager.swift */; };
+		119FB719DCA76614B4292832 /* DocumentCameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AF1A9170AB42955855F2C1 /* DocumentCameraManager.swift */; };
+		14774E77CFCFD672AEC4BFCE /* CategorySpecificPreviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB043AE857AB8AFE098F8FF7 /* CategorySpecificPreviews.swift */; };
+		167B824341E71C7823CB94CB /* SimpleConversationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62BE0AC47E57938DA65E499 /* SimpleConversationManager.swift */; };
+		174AD8490F78133C670F9772 /* JarvisLiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE96ABCF7838DB283519DE4 /* JarvisLiveTests.swift */; };
+		189700FA862EE9A1E76B719F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB3713E91A3CD03EFD80FC /* ContentView.swift */; };
+		1BE6F1C1836FFCD32C163D17 /* PostClassificationFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BED291BFF9BFF1B74870E5 /* PostClassificationFlowView.swift */; };
+		210E8D1FADFC2B2AB579208F /* VoiceCommandClassifierDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AB1E49F50195DF32B62CB /* VoiceCommandClassifierDemo.swift */; };
+		25D1093E81C8BA850DAA487A /* JarvisLiveSandboxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F9B80E774DC6151FA01DCD /* JarvisLiveSandboxApp.swift */; };
+		290BB818CCF673EBEE7FF505 /* CollaborativeAISessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A30A2AE4066723DCF6BCDC /* CollaborativeAISessionManager.swift */; };
+		2ADAF676E50DFC0A6A05F0E0 /* PostClassificationComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FBE0BDE938D26657052906 /* PostClassificationComponents.swift */; };
+		2D4275D40FCF584340EE79CF /* ConversationThreadVisualizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFA508670582AB0EDEEDBB3 /* ConversationThreadVisualizationView.swift */; };
+		31CD26F7F2C3D634B35A9AAF /* VoiceCommandExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556B79EBE082BD080F65DA3A /* VoiceCommandExamples.swift */; };
+		37422E9C0BBC05AEB1929F14 /* VisualEvidenceEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06583753ABFE4157B70EF29C /* VisualEvidenceEngine.swift */; };
+		375CD3A29B73C48D54A2CC97 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E73F005C68005984418657C /* TitleView.swift */; };
+		3779BF9D2C19C90673581D65 /* ConversationThreadVisualizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFA508670582AB0EDEEDBB3 /* ConversationThreadVisualizationView.swift */; };
+		37CE151C19924EA0E71E5348 /* VoiceCommandClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231C963DCEA8570D6F7C8BFD /* VoiceCommandClassifier.swift */; };
+		39ED54682D860248F8A2B013 /* DecisionTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88624B2FDF77800444A699A /* DecisionTrackingView.swift */; };
+		3A541966DA372DC24EC61C1E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5303A329278672D2C4B9CF /* KeychainManager.swift */; };
+		3A58DC1F9ADEEA0B777DDDA4 /* RealTimeDocumentCollaborationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A290E18FF163A780D8574 /* RealTimeDocumentCollaborationManager.swift */; };
+		3AD18F1E14910F7392BDA29A /* VoiceCommandPostClassificationIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01C88CA09F27A8428E858DA /* VoiceCommandPostClassificationIntegration.swift */; };
+		3BC463D32CB517E3C663341C /* SharedContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F4C8743699AD9193F9A374 /* SharedContextManager.swift */; };
+		3C70986EBACB847CCFEC343F /* SwiftSnapshot in Frameworks */ = {isa = PBXBuildFile; productRef = 7CD245B6CAAEE298FDDDE456 /* SwiftSnapshot */; };
+		3FEC62DD0A0AA607222EEE94 /* LiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0265274791EB6C717BC38444 /* LiveKit */; };
+		40A7480678207B56DC231F09 /* LiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6EA48CE6BB9726F1AC51F262 /* LiveKit */; };
+		434ADA3CAFABE5020D32D68E /* PythonBackendClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FFDCC2D08DEAB47D1BB764 /* PythonBackendClient.swift */; };
+		4393D168355D2CEE994FDCEC /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE0A95DB51D498A762C7EFC /* FooterView.swift */; };
+		449C7780C5261EAD543AA097 /* ConversationLinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C601F703CD8B4A59620110F /* ConversationLinker.swift */; };
+		44E51F013C2BF9DDA5B67264 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = C3054F8B14DBE1A2CD8237E0 /* KeychainAccess */; };
+		47CB87C2DE9A042D695316CE /* CollaborationSupportViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6763886D41DAA834C1E7834B /* CollaborationSupportViews.swift */; };
+		4807269657E10867AB2205AE /* AdvancedVoiceCommandProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8EF91E91231F2C9D005977 /* AdvancedVoiceCommandProcessor.swift */; };
+		4ABA7201DC75F13A6235A52B /* AdvancedVoiceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A619E08749EAD5C19FC2BAE /* AdvancedVoiceControlView.swift */; };
+		4AD23E424FDAA53371E50ECF /* ConversationDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B560DE82D29C052731DE16FC /* ConversationDataModel.xcdatamodeld */; };
+		4F896068E9C3515A23A2EB08 /* AdvancedMCPIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF990929C4F8368C41AD128 /* AdvancedMCPIntegration.swift */; };
+		501645F8865688A0AE54590B /* CollaborationSupportViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6763886D41DAA834C1E7834B /* CollaborationSupportViews.swift */; };
+		5218A57D4CC05F2EA76992CB /* WorkflowBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D2D3B550369F27B20DF835 /* WorkflowBuilderView.swift */; };
+		54DBA1E5FF433B3798BC06FE /* RealtimeSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4393FCD20EF89D86DFC3F05 /* RealtimeSyncManager.swift */; };
+		55BE88697D3B0A0C92B15C36 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856A3A2DFE38E9BDA5E88ABC /* HeaderView.swift */; };
+		588DFE89DEDFC327BE84E772 /* AuthenticationStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E8D38C98860DE6E420365 /* AuthenticationStateManager.swift */; };
+		5B7CEB47F9C844D78AEFD410 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5303A329278672D2C4B9CF /* KeychainManager.swift */; };
+		5CC2ADB2A8ACE5E141FAD04F /* CollaborativeVoiceTranscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4CB6B40D55C71E6676D638 /* CollaborativeVoiceTranscriptionManager.swift */; };
+		5F1AF2BCA9547BC896CA58A6 /* VoiceClassificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD542995378BAAB21FDBE16 /* VoiceClassificationManager.swift */; };
+		60A2C33CC34C04E3039B32F7 /* AuthenticationStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E8D38C98860DE6E420365 /* AuthenticationStateManager.swift */; };
+		62D0DACAFA8532DA995F9B1B /* LiveKitCollaborationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518750EC7D8B76C650AA59E /* LiveKitCollaborationManager.swift */; };
+		6316C3002F1AE7C9C52CC827 /* APIAuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A3F692E02093F50788C55E /* APIAuthenticationManager.swift */; };
+		6487AA1C46E816FB151C6A9C /* VoiceCommandLearning.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2901E70F37C455F3CC5DC45 /* VoiceCommandLearning.swift */; };
+		65E99875A73969CC877DF7DD /* WorkflowBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D2D3B550369F27B20DF835 /* WorkflowBuilderView.swift */; };
+		6912A2A25DD0A0056D505101 /* TokenRefreshInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB07D2E7899A4638F4B9E11 /* TokenRefreshInterceptor.swift */; };
+		6A4389CF6A8861DE468D2014 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = F1CF5D177137EC5A3EACA065 /* KeychainAccess */; };
+		6C776A5D0DBA985C6ED42F80 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB3713E91A3CD03EFD80FC /* ContentView.swift */; };
+		6D3BC46320D8875AF0F327B7 /* DocumentScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7246C61730AB3747407A638 /* DocumentScannerView.swift */; };
+		6E20FB3AA69C8B8BCB15C7F8 /* ConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FE9824BC209443DABADD5 /* ConnectionStatusView.swift */; };
+		6E48DADF3C6676177561333D /* AdvancedVoiceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A619E08749EAD5C19FC2BAE /* AdvancedVoiceControlView.swift */; };
+		6F159010CC920A78936066B3 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE0A95DB51D498A762C7EFC /* FooterView.swift */; };
+		6F7D3B96836F3E5F116EA3BE /* TokenRefreshInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB07D2E7899A4638F4B9E11 /* TokenRefreshInterceptor.swift */; };
+		6FB21C1C92A246D99CF1ADF1 /* LiveKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2A1828AC8B34B24646A71 /* LiveKitManager.swift */; };
+		70EE608C773118D3ADA1D47C /* APIAuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A3F692E02093F50788C55E /* APIAuthenticationManager.swift */; };
+		7193D2B38A9613EB30BD3DFC /* VoiceRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6A0B149910D1A068E80DF /* VoiceRecordingView.swift */; };
+		7344F3451BE08DD678307447 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93848C9377612B6C646B7091 /* SettingsManager.swift */; };
+		73CAC06E6DC4C702BD76677B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC4C447442AC3EC5EE9EFB7 /* SettingsView.swift */; };
+		7715ECDBBF805611C95A13EF /* LiveKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2A1828AC8B34B24646A71 /* LiveKitManager.swift */; };
+		7A1E15F5C4CE2032B32E8D7C /* MockMCPServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C9B6EF1F3153D05493BE68 /* MockMCPServerManager.swift */; };
+		7AC8DA5D4CAB2B5957730118 /* DocumentCameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AF1A9170AB42955855F2C1 /* DocumentCameraManager.swift */; };
+		7CEA3FDA1D39E09635D9CBD3 /* ConnectionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A983C05F835397CFC31DE6D9 /* ConnectionButtonView.swift */; };
+		827FCD2B823F1D330818C885 /* MockMCPServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C9B6EF1F3153D05493BE68 /* MockMCPServerManager.swift */; };
+		82AC9930B93A1E5F7A8A3D25 /* VoiceRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6A0B149910D1A068E80DF /* VoiceRecordingView.swift */; };
+		83FA743D0E3AE104F7AF350E /* ConversationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E11DD82638C98C7F184DFE /* ConversationManager.swift */; };
+		87132BA5F639AB6FAE2F0C54 /* ContextHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E0770FC4DB045A52526FAB /* ContextHelpView.swift */; };
+		8F378BF532C256BCDEEC44FD /* JarvisLiveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBC4E4D26654975B3B74DE3 /* JarvisLiveUITests.swift */; };
+		8F383595FC4353207CFB4B19 /* VoiceCommandExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380E3C7194A080306092F091 /* VoiceCommandExecutor.swift */; };
+		8F889E3BACAE937A2C5EE33D /* CollaborativeVoiceTranscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4CB6B40D55C71E6676D638 /* CollaborativeVoiceTranscriptionManager.swift */; };
+		904B7A76F21F8BCB414AB100 /* MCPServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB823A089925E06610A89621 /* MCPServerManager.swift */; };
+		9093566389238DB509B4B336 /* ElevenLabsVoiceSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E50EECC87CB713CDE6AF975 /* ElevenLabsVoiceSynthesizer.swift */; };
+		90FF82D2A1C4EF7B766B0CE9 /* VoiceCommandExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556B79EBE082BD080F65DA3A /* VoiceCommandExamples.swift */; };
+		9213B221B4798679280E399B /* RootContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEC79BB218D1815BE0358D /* RootContentView.swift */; };
+		925A66250048709599E9ECB5 /* ParticipantManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DBD528E0D8BD3F75CCEA50 /* ParticipantManager.swift */; };
+		93ACA4026B106615A050D7F1 /* DocumentGenerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB0AC59BCA0B630F832A845 /* DocumentGenerationView.swift */; };
+		947013A496508A61AEB50206 /* MCPContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8936C99F98C6EE222F4697F /* MCPContextManager.swift */; };
+		94AEA4CA4B65465D2A30DC80 /* MCPIntegrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BC95D4D0BCB884EF16583 /* MCPIntegrationManager.swift */; };
+		97D1EAACE5080E7B038060DA /* ParticipantManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DBD528E0D8BD3F75CCEA50 /* ParticipantManager.swift */; };
+		99E5DA1D77B1FAFC61E35038 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC4C447442AC3EC5EE9EFB7 /* SettingsView.swift */; };
+		9A717C34790913ADD7A6AB6C /* GlassViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099D926F2DDDAD69CBD90CE6 /* GlassViewModifier.swift */; };
+		9AB5D481659FAAAB3AAA4F54 /* JarvisLiveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831B4F76C12385310336E40A /* JarvisLiveApp.swift */; };
+		9B5E1701EDDFBEABDA04F605 /* PostClassificationComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FBE0BDE938D26657052906 /* PostClassificationComponents.swift */; };
+		9C56CF4449500B6D1A32F285 /* VoiceCommandPipelineModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EACDD32A4AC6CDFC2BE45E3 /* VoiceCommandPipelineModels.swift */; };
+		9D746E685FF465536207BE56 /* GlassViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099D926F2DDDAD69CBD90CE6 /* GlassViewModifier.swift */; };
+		9E6DED7ABFA0F5CD9261A1AE /* MCPContextExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9945C9E0CD128734D52D5FC1 /* MCPContextExamples.swift */; };
+		A79751C3E6C59C3E5FB36F54 /* VoiceWorkflowAutomation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0D06678D91D9FD456B1EFD /* VoiceWorkflowAutomation.swift */; };
+		AAD6C1AB381A4B0D89268052 /* VoiceCommandPipelineModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EACDD32A4AC6CDFC2BE45E3 /* VoiceCommandPipelineModels.swift */; };
+		AB37814E3495C2C9AA620435 /* AuthenticationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3889B6ECC9C99B6D08DF6 /* AuthenticationModels.swift */; };
+		AB4FFA665C1B37F08D3B4131 /* ConversationHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601C848311752E7BEC4E8D73 /* ConversationHistoryView.swift */; };
+		AB926375970C3F0A2606C50C /* ConversationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E11DD82638C98C7F184DFE /* ConversationManager.swift */; };
+		AC2527866F9F5AA3A43BC3E8 /* ParticipantContextIsolationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A876B15EAEBEF3B8A32A38E /* ParticipantContextIsolationManager.swift */; };
+		B2595E3F6EC587D326E55F5B /* SharedTranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904E0B2AF3A4F10D6B0984AA /* SharedTranscriptionView.swift */; };
+		B2F3080CBD3DDC072E51216F /* VoiceCommandPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1E49574607AEBA396E373 /* VoiceCommandPipeline.swift */; };
+		B44AF5AC1889B76ADFA32143 /* VoiceCommandPostClassificationIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01C88CA09F27A8428E858DA /* VoiceCommandPostClassificationIntegration.swift */; };
+		B71E219BE4E6912F1F820E2F /* VisualEvidenceEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06583753ABFE4157B70EF29C /* VisualEvidenceEngine.swift */; };
+		B7FE4C46E40FEE7D31E02AEA /* VoiceGuidanceSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA89BE9F49A0EBAF64A0DD24 /* VoiceGuidanceSystem.swift */; };
+		B938E4F3C7303ABAAE9F6E43 /* MCPServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB823A089925E06610A89621 /* MCPServerManager.swift */; };
+		B9FC3D07297349D6D6D23329 /* MCPModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E249713CFFC9ECFFEE117976 /* MCPModels.swift */; };
+		BAAA1834DA6DF4FC403B968F /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0939493968AE95B45E79EC /* AuthenticationView.swift */; };
+		BAD5C499699B84C0D49CA745 /* VoiceClassificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD542995378BAAB21FDBE16 /* VoiceClassificationManager.swift */; };
+		BB4690E56724D67D40E63FC3 /* SharedDocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1E6902430DC1FD01F116FA /* SharedDocumentManager.swift */; };
+		BDCDD36B32E9C5E742ED399A /* ConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FE9824BC209443DABADD5 /* ConnectionStatusView.swift */; };
+		BE5AEDDC828E00073DB09714 /* SharedTranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904E0B2AF3A4F10D6B0984AA /* SharedTranscriptionView.swift */; };
+		C17AC7875F63D5E429409240 /* CollaborativeConversationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC4607CBB379EBED12D8F6A /* CollaborativeConversationManager.swift */; };
+		C2F5C9B664CC917C873474C7 /* CollaborativeConversationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC4607CBB379EBED12D8F6A /* CollaborativeConversationManager.swift */; };
+		C4305B43155E58AA8A70FC81 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E73F005C68005984418657C /* TitleView.swift */; };
+		C49A58299D9DF44E0ED723FB /* VoiceGuidanceSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA89BE9F49A0EBAF64A0DD24 /* VoiceGuidanceSystem.swift */; };
+		C6F58F1F1739B1073B1A5A82 /* SimpleConversationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62BE0AC47E57938DA65E499 /* SimpleConversationManager.swift */; };
+		C72D56E83173A07DAD668DCB /* PostClassificationFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BED291BFF9BFF1B74870E5 /* PostClassificationFlowView.swift */; };
+		CD7B809E33A4C25ECB70862C /* AdvancedVoiceCommandProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8EF91E91231F2C9D005977 /* AdvancedVoiceCommandProcessor.swift */; };
+		D0418D4FF509D636B9D71EA1 /* ContextHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E0770FC4DB045A52526FAB /* ContextHelpView.swift */; };
+		D1888F3F6C7599C125BB3EC5 /* ConversationDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B560DE82D29C052731DE16FC /* ConversationDataModel.xcdatamodeld */; };
+		D21DB7039237ED1371EB68D8 /* VoiceCommandExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380E3C7194A080306092F091 /* VoiceCommandExecutor.swift */; };
+		D46950C3C371763E6E83105B /* AuthenticationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F3889B6ECC9C99B6D08DF6 /* AuthenticationModels.swift */; };
+		D65A1852B98DFCD9CBE62E27 /* MCPIntegrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BC95D4D0BCB884EF16583 /* MCPIntegrationManager.swift */; };
+		D8307B2C428C0828A77991DB /* StepEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46A992A36CA1721FBF43739 /* StepEditorView.swift */; };
+		D91244AEE5A55E6043ED2F19 /* DocumentScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7246C61730AB3747407A638 /* DocumentScannerView.swift */; };
+		D9D16EFD1DE69FFA49BE9DA1 /* CollaborativeSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA994699DBE74C2EA6FA9060 /* CollaborativeSessionView.swift */; };
+		D9FB35F01CFB47FAA0CB33B3 /* ConflictResolutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3286C56E73564E187B3AD /* ConflictResolutionEngine.swift */; };
+		DB0543F817EFA349557E863B /* MCPContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8936C99F98C6EE222F4697F /* MCPContextManager.swift */; };
+		DB39381C0A2E4FAF11B506EC /* LiveKitCollaborationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518750EC7D8B76C650AA59E /* LiveKitCollaborationManager.swift */; };
+		DCF3116FE4A2B7CA250C5322 /* CollaborativeSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA994699DBE74C2EA6FA9060 /* CollaborativeSessionView.swift */; };
+		DD289BB6FC38EAE9B50808D6 /* ConnectionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A983C05F835397CFC31DE6D9 /* ConnectionButtonView.swift */; };
+		DD7FE5744F2F6EC8A94CF95F /* ParticipantListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD68BFDDE8BBE1876E0F033C /* ParticipantListView.swift */; };
+		DED2DBF6FDC435053F697F4F /* RealTimeDocumentCollaborationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A290E18FF163A780D8574 /* RealTimeDocumentCollaborationManager.swift */; };
+		E1F49163FDABF07638D7B65A /* ConversationMemoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDDC9EC52DFB3E255BA64A1 /* ConversationMemoryManager.swift */; };
+		E35A000DD34F5962DA11C96A /* AdvancedMCPIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF990929C4F8368C41AD128 /* AdvancedMCPIntegration.swift */; };
+		E47EB436BD086F3E68F43CC7 /* ElevenLabsVoiceSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E50EECC87CB713CDE6AF975 /* ElevenLabsVoiceSynthesizer.swift */; };
+		E5055CEECDE7802A280A8402 /* MCPContextExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9945C9E0CD128734D52D5FC1 /* MCPContextExamples.swift */; };
+		E53EE4F571CDE3EBAEA851E8 /* StepEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46A992A36CA1721FBF43739 /* StepEditorView.swift */; };
+		E61A289DEECD4FC15C1E9D95 /* SharedDocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1E6902430DC1FD01F116FA /* SharedDocumentManager.swift */; };
+		E74C48578DD4FC9D7B286A19 /* VoiceCommandLearning.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2901E70F37C455F3CC5DC45 /* VoiceCommandLearning.swift */; };
+		ED646131ED6D155B0247F66A /* VoiceCommandClassifierDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AB1E49F50195DF32B62CB /* VoiceCommandClassifierDemo.swift */; };
+		EEC8B8DE221ED5799032E102 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856A3A2DFE38E9BDA5E88ABC /* HeaderView.swift */; };
+		F1704B147907E593C95C96F5 /* VoiceWorkflowAutomation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0D06678D91D9FD456B1EFD /* VoiceWorkflowAutomation.swift */; };
+		F1DA4DF70E9C77383ADEA867 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0939493968AE95B45E79EC /* AuthenticationView.swift */; };
+		F573B44501B899D57AE16512 /* ConflictResolutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3286C56E73564E187B3AD /* ConflictResolutionEngine.swift */; };
+		F6439EA106BB7EE50E7DD13C /* ConversationLinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C601F703CD8B4A59620110F /* ConversationLinker.swift */; };
+		F67F5A6FBDA5EA60B844FEFE /* ParticipantListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD68BFDDE8BBE1876E0F033C /* ParticipantListView.swift */; };
+		F80B54B4A041567E65E78F01 /* SharedContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F4C8743699AD9193F9A374 /* SharedContextManager.swift */; };
+		F866B319450BE901325CACBE /* PythonBackendClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FFDCC2D08DEAB47D1BB764 /* PythonBackendClient.swift */; };
+		FA9013722AAF3714E967E953 /* CollaborativeAISessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A30A2AE4066723DCF6BCDC /* CollaborativeAISessionManager.swift */; };
+		FB3767CED8A94736D98E258D /* CategorySpecificPreviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB043AE857AB8AFE098F8FF7 /* CategorySpecificPreviews.swift */; };
+		FC1F51D5399A9611AFE4B780 /* VoiceCommandPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1E49574607AEBA396E373 /* VoiceCommandPipeline.swift */; };
+		FD9C619562B2322768E797E6 /* ConversationHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601C848311752E7BEC4E8D73 /* ConversationHistoryView.swift */; };
+		FEF7C1BCDCCDF4D9E14637B8 /* RootContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEC79BB218D1815BE0358D /* RootContentView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2D5FB5FC86E1F072E63F149A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A548F99CB62466EDBEF1F734 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B4C999A0470B32F1567700A2;
+			remoteInfo = "JarvisLive-Sandbox";
+		};
+		52A73DABC076202FFD35CA2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A548F99CB62466EDBEF1F734 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B4C999A0470B32F1567700A2;
+			remoteInfo = "JarvisLive-Sandbox";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		06583753ABFE4157B70EF29C /* VisualEvidenceEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEvidenceEngine.swift; sourceTree = "<group>"; };
+		099D926F2DDDAD69CBD90CE6 /* GlassViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassViewModifier.swift; sourceTree = "<group>"; };
+		0A5303A329278672D2C4B9CF /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		0FBC4E4D26654975B3B74DE3 /* JarvisLiveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JarvisLiveUITests.swift; sourceTree = "<group>"; };
+		1EACDD32A4AC6CDFC2BE45E3 /* VoiceCommandPipelineModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceCommandPipelineModels.swift; sourceTree = "<group>"; };
+		1FDDC9EC52DFB3E255BA64A1 /* ConversationMemoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMemoryManager.swift; sourceTree = "<group>"; };
+		214AB1E49F50195DF32B62CB /* VoiceCommandClassifierDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceCommandClassifierDemo.swift; sourceTree = "<group>"; };
+		22F3889B6ECC9C99B6D08DF6 /* AuthenticationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModels.swift; sourceTree = "<group>"; };
+		231C963DCEA8570D6F7C8BFD /* VoiceCommandClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceCommandClassifier.swift; sourceTree = "<group>"; };
+		25F4C8743699AD9193F9A374 /* SharedContextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedContextManager.swift; sourceTree = "<group>"; };
+		28FFDCC2D08DEAB47D1BB764 /* PythonBackendClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonBackendClient.swift; sourceTree = "<group>"; };
+		2DFA508670582AB0EDEEDBB3 /* ConversationThreadVisualizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationThreadVisualizationView.swift; sourceTree = "<group>"; };
+		380E3C7194A080306092F091 /* VoiceCommandExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceCommandExecutor.swift; sourceTree = "<group>"; };
+		3B8EF91E91231F2C9D005977 /* AdvancedVoiceCommandProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedVoiceCommandProcessor.swift; sourceTree = "<group>"; };
+		3E50EECC87CB713CDE6AF975 /* ElevenLabsVoiceSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevenLabsVoiceSynthesizer.swift; sourceTree = "<group>"; };
+		42D2D3B550369F27B20DF835 /* WorkflowBuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkflowBuilderView.swift; sourceTree = "<group>"; };
+		4FE0A95DB51D498A762C7EFC /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		519E8D38C98860DE6E420365 /* AuthenticationStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationStateManager.swift; sourceTree = "<group>"; };
+		543BC95D4D0BCB884EF16583 /* MCPIntegrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPIntegrationManager.swift; sourceTree = "<group>"; };
+		556B79EBE082BD080F65DA3A /* VoiceCommandExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceCommandExamples.swift; sourceTree = "<group>"; };
+		5A619E08749EAD5C19FC2BAE /* AdvancedVoiceControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedVoiceControlView.swift; sourceTree = "<group>"; };
+		5A876B15EAEBEF3B8A32A38E /* ParticipantContextIsolationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantContextIsolationManager.swift; sourceTree = "<group>"; };
+		5AD542995378BAAB21FDBE16 /* VoiceClassificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceClassificationManager.swift; sourceTree = "<group>"; };
+		5D6E0AED7AA42E1410F61181 /* ConversationDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConversationDataModel.xcdatamodel; sourceTree = "<group>"; };
+		5E73F005C68005984418657C /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		601C848311752E7BEC4E8D73 /* ConversationHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationHistoryView.swift; sourceTree = "<group>"; };
+		63080DE10A093281DD5BD165 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		64E11DD82638C98C7F184DFE /* ConversationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationManager.swift; sourceTree = "<group>"; };
+		6763886D41DAA834C1E7834B /* CollaborationSupportViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationSupportViews.swift; sourceTree = "<group>"; };
+		6A3D27F91FE9C1413A6D59AB /* JarvisLive.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = JarvisLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C4CB6B40D55C71E6676D638 /* CollaborativeVoiceTranscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborativeVoiceTranscriptionManager.swift; sourceTree = "<group>"; };
+		6C9A290E18FF163A780D8574 /* RealTimeDocumentCollaborationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeDocumentCollaborationManager.swift; sourceTree = "<group>"; };
+		6DB3286C56E73564E187B3AD /* ConflictResolutionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConflictResolutionEngine.swift; sourceTree = "<group>"; };
+		74A3F692E02093F50788C55E /* APIAuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAuthenticationManager.swift; sourceTree = "<group>"; };
+		78FBE0BDE938D26657052906 /* PostClassificationComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostClassificationComponents.swift; sourceTree = "<group>"; };
+		79F9B80E774DC6151FA01DCD /* JarvisLiveSandboxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JarvisLiveSandboxApp.swift; sourceTree = "<group>"; };
+		7DE96ABCF7838DB283519DE4 /* JarvisLiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JarvisLiveTests.swift; sourceTree = "<group>"; };
+		831B4F76C12385310336E40A /* JarvisLiveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JarvisLiveApp.swift; sourceTree = "<group>"; };
+		856A3A2DFE38E9BDA5E88ABC /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		88148067D190403BA4FA2495 /* JarvisLive-Sandbox.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "JarvisLive-Sandbox.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B9BFC77B855FFC30F43EF32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8C601F703CD8B4A59620110F /* ConversationLinker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationLinker.swift; sourceTree = "<group>"; };
+		8E1E6902430DC1FD01F116FA /* SharedDocumentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDocumentManager.swift; sourceTree = "<group>"; };
+		8F753EA3CF04E741B6DC0D1A /* JarvisLiveUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = JarvisLiveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		904E0B2AF3A4F10D6B0984AA /* SharedTranscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTranscriptionView.swift; sourceTree = "<group>"; };
+		93848C9377612B6C646B7091 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		9945C9E0CD128734D52D5FC1 /* MCPContextExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPContextExamples.swift; sourceTree = "<group>"; };
+		9C7697B4004BFB44DA5A8C97 /* MCPActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPActionsView.swift; sourceTree = "<group>"; };
+		9E0D06678D91D9FD456B1EFD /* VoiceWorkflowAutomation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceWorkflowAutomation.swift; sourceTree = "<group>"; };
+		9ED6A0B149910D1A068E80DF /* VoiceRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecordingView.swift; sourceTree = "<group>"; };
+		9FC4C447442AC3EC5EE9EFB7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A01C88CA09F27A8428E858DA /* VoiceCommandPostClassificationIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceCommandPostClassificationIntegration.swift; sourceTree = "<group>"; };
+		A2DBD528E0D8BD3F75CCEA50 /* ParticipantManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantManager.swift; sourceTree = "<group>"; };
+		A7246C61730AB3747407A638 /* DocumentScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScannerView.swift; sourceTree = "<group>"; };
+		A8675BFC46148377BF6D92B1 /* JarvisLiveTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = JarvisLiveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A983C05F835397CFC31DE6D9 /* ConnectionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionButtonView.swift; sourceTree = "<group>"; };
+		AA994699DBE74C2EA6FA9060 /* CollaborativeSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborativeSessionView.swift; sourceTree = "<group>"; };
+		AB823A089925E06610A89621 /* MCPServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPServerManager.swift; sourceTree = "<group>"; };
+		AEAEC79BB218D1815BE0358D /* RootContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContentView.swift; sourceTree = "<group>"; };
+		AEB0AC59BCA0B630F832A845 /* DocumentGenerationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentGenerationView.swift; sourceTree = "<group>"; };
+		AEF990929C4F8368C41AD128 /* AdvancedMCPIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedMCPIntegration.swift; sourceTree = "<group>"; };
+		B1A30A2AE4066723DCF6BCDC /* CollaborativeAISessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborativeAISessionManager.swift; sourceTree = "<group>"; };
+		B2901E70F37C455F3CC5DC45 /* VoiceCommandLearning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceCommandLearning.swift; sourceTree = "<group>"; };
+		B518750EC7D8B76C650AA59E /* LiveKitCollaborationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveKitCollaborationManager.swift; sourceTree = "<group>"; };
+		B5E0770FC4DB045A52526FAB /* ContextHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextHelpView.swift; sourceTree = "<group>"; };
+		B62BE0AC47E57938DA65E499 /* SimpleConversationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleConversationManager.swift; sourceTree = "<group>"; };
+		BB043AE857AB8AFE098F8FF7 /* CategorySpecificPreviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySpecificPreviews.swift; sourceTree = "<group>"; };
+		BDC4607CBB379EBED12D8F6A /* CollaborativeConversationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborativeConversationManager.swift; sourceTree = "<group>"; };
+		C1AF1A9170AB42955855F2C1 /* DocumentCameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCameraManager.swift; sourceTree = "<group>"; };
+		C4393FCD20EF89D86DFC3F05 /* RealtimeSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeSyncManager.swift; sourceTree = "<group>"; };
+		C46A992A36CA1721FBF43739 /* StepEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepEditorView.swift; sourceTree = "<group>"; };
+		C88624B2FDF77800444A699A /* DecisionTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionTrackingView.swift; sourceTree = "<group>"; };
+		CC0939493968AE95B45E79EC /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		CDC2A1828AC8B34B24646A71 /* LiveKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveKitManager.swift; sourceTree = "<group>"; };
+		D2FB3713E91A3CD03EFD80FC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D9C9B6EF1F3153D05493BE68 /* MockMCPServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMCPServerManager.swift; sourceTree = "<group>"; };
+		E249713CFFC9ECFFEE117976 /* MCPModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPModels.swift; sourceTree = "<group>"; };
+		E2A1E49574607AEBA396E373 /* VoiceCommandPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceCommandPipeline.swift; sourceTree = "<group>"; };
+		EA89BE9F49A0EBAF64A0DD24 /* VoiceGuidanceSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceGuidanceSystem.swift; sourceTree = "<group>"; };
+		EDB07D2E7899A4638F4B9E11 /* TokenRefreshInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRefreshInterceptor.swift; sourceTree = "<group>"; };
+		F8936C99F98C6EE222F4697F /* MCPContextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPContextManager.swift; sourceTree = "<group>"; };
+		F8BED291BFF9BFF1B74870E5 /* PostClassificationFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostClassificationFlowView.swift; sourceTree = "<group>"; };
+		FB0FE9824BC209443DABADD5 /* ConnectionStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatusView.swift; sourceTree = "<group>"; };
+		FD68BFDDE8BBE1876E0F033C /* ParticipantListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantListView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3F2883B8714A3F497A48030C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40A7480678207B56DC231F09 /* LiveKit in Frameworks */,
+				44E51F013C2BF9DDA5B67264 /* KeychainAccess in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		57CE376A973A79C03B02BD42 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C70986EBACB847CCFEC343F /* SwiftSnapshot in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DC46F20A2549005DAA4EC2A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FEC62DD0A0AA607222EEE94 /* LiveKit in Frameworks */,
+				6A4389CF6A8861DE468D2014 /* KeychainAccess in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		06E6C4662D006091B5E61A02 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				28FFDCC2D08DEAB47D1BB764 /* PythonBackendClient.swift */,
+				C4393FCD20EF89D86DFC3F05 /* RealtimeSyncManager.swift */,
+				EDB07D2E7899A4638F4B9E11 /* TokenRefreshInterceptor.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		087E63D4C2CF62E30DA9AD31 /* MCP */ = {
+			isa = PBXGroup;
+			children = (
+				9945C9E0CD128734D52D5FC1 /* MCPContextExamples.swift */,
+				F8936C99F98C6EE222F4697F /* MCPContextManager.swift */,
+				543BC95D4D0BCB884EF16583 /* MCPIntegrationManager.swift */,
+				E249713CFFC9ECFFEE117976 /* MCPModels.swift */,
+				AB823A089925E06610A89621 /* MCPServerManager.swift */,
+				D9C9B6EF1F3153D05493BE68 /* MockMCPServerManager.swift */,
+			);
+			path = MCP;
+			sourceTree = "<group>";
+		};
+		1034BB9840C6E05DB736A936 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				C1AF1A9170AB42955855F2C1 /* DocumentCameraManager.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		13D9A2AE28500ED185437BB0 /* Collaboration */ = {
+			isa = PBXGroup;
+			children = (
+				A2DBD528E0D8BD3F75CCEA50 /* ParticipantManager.swift */,
+				6C9A290E18FF163A780D8574 /* RealTimeDocumentCollaborationManager.swift */,
+			);
+			path = Collaboration;
+			sourceTree = "<group>";
+		};
+		1CD2F2F2023DC442632541A3 /* MainContentView */ = {
+			isa = PBXGroup;
+			children = (
+				A983C05F835397CFC31DE6D9 /* ConnectionButtonView.swift */,
+				FB0FE9824BC209443DABADD5 /* ConnectionStatusView.swift */,
+				4FE0A95DB51D498A762C7EFC /* FooterView.swift */,
+				856A3A2DFE38E9BDA5E88ABC /* HeaderView.swift */,
+				9C7697B4004BFB44DA5A8C97 /* MCPActionsView.swift */,
+				5E73F005C68005984418657C /* TitleView.swift */,
+				9ED6A0B149910D1A068E80DF /* VoiceRecordingView.swift */,
+			);
+			path = MainContentView;
+			sourceTree = "<group>";
+		};
+		396CE403D4B5D3EEF3283E0B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				099D926F2DDDAD69CBD90CE6 /* GlassViewModifier.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		4512C076D2F3E2678EB236DE /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				396CE403D4B5D3EEF3283E0B /* Components */,
+				7D905C862035B796267996C1 /* Views */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		53DD20264CB54B9FE42743DC /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				6C4CB6B40D55C71E6676D638 /* CollaborativeVoiceTranscriptionManager.swift */,
+				3E50EECC87CB713CDE6AF975 /* ElevenLabsVoiceSynthesizer.swift */,
+				B518750EC7D8B76C650AA59E /* LiveKitCollaborationManager.swift */,
+				CDC2A1828AC8B34B24646A71 /* LiveKitManager.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		5CB986A35BF5B8BDCE0E1878 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				9BB5448C56B49E95BA15B708 /* DocumentGeneration */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		67BF37BD507EF78C173E493D /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				74A3F692E02093F50788C55E /* APIAuthenticationManager.swift */,
+				22F3889B6ECC9C99B6D08DF6 /* AuthenticationModels.swift */,
+				519E8D38C98860DE6E420365 /* AuthenticationStateManager.swift */,
+				0A5303A329278672D2C4B9CF /* KeychainManager.swift */,
+			);
+			path = Security;
+			sourceTree = "<group>";
+		};
+		6F4B2AADE1BC61DE274BFBC5 /* JarvisLiveUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8B9BFC77B855FFC30F43EF32 /* Info.plist */,
+				0FBC4E4D26654975B3B74DE3 /* JarvisLiveUITests.swift */,
+			);
+			path = JarvisLiveUITests;
+			sourceTree = "<group>";
+		};
+		7D905C862035B796267996C1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5A619E08749EAD5C19FC2BAE /* AdvancedVoiceControlView.swift */,
+				CC0939493968AE95B45E79EC /* AuthenticationView.swift */,
+				BB043AE857AB8AFE098F8FF7 /* CategorySpecificPreviews.swift */,
+				6763886D41DAA834C1E7834B /* CollaborationSupportViews.swift */,
+				AA994699DBE74C2EA6FA9060 /* CollaborativeSessionView.swift */,
+				D2FB3713E91A3CD03EFD80FC /* ContentView.swift */,
+				B5E0770FC4DB045A52526FAB /* ContextHelpView.swift */,
+				601C848311752E7BEC4E8D73 /* ConversationHistoryView.swift */,
+				2DFA508670582AB0EDEEDBB3 /* ConversationThreadVisualizationView.swift */,
+				C88624B2FDF77800444A699A /* DecisionTrackingView.swift */,
+				A7246C61730AB3747407A638 /* DocumentScannerView.swift */,
+				FD68BFDDE8BBE1876E0F033C /* ParticipantListView.swift */,
+				78FBE0BDE938D26657052906 /* PostClassificationComponents.swift */,
+				F8BED291BFF9BFF1B74870E5 /* PostClassificationFlowView.swift */,
+				AEAEC79BB218D1815BE0358D /* RootContentView.swift */,
+				9FC4C447442AC3EC5EE9EFB7 /* SettingsView.swift */,
+				904E0B2AF3A4F10D6B0984AA /* SharedTranscriptionView.swift */,
+				C46A992A36CA1721FBF43739 /* StepEditorView.swift */,
+				42D2D3B550369F27B20DF835 /* WorkflowBuilderView.swift */,
+				1CD2F2F2023DC442632541A3 /* MainContentView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8205EC6D3BDF81233A98ED6B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				831B4F76C12385310336E40A /* JarvisLiveApp.swift */,
+				79F9B80E774DC6151FA01DCD /* JarvisLiveSandboxApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		84576650FDE2C6676A1BAAE9 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				06583753ABFE4157B70EF29C /* VisualEvidenceEngine.swift */,
+			);
+			path = Testing;
+			sourceTree = "<group>";
+		};
+		8CC59FC5E7585310590F6C65 /* AI */ = {
+			isa = PBXGroup;
+			children = (
+				AEF990929C4F8368C41AD128 /* AdvancedMCPIntegration.swift */,
+				3B8EF91E91231F2C9D005977 /* AdvancedVoiceCommandProcessor.swift */,
+				B1A30A2AE4066723DCF6BCDC /* CollaborativeAISessionManager.swift */,
+				5AD542995378BAAB21FDBE16 /* VoiceClassificationManager.swift */,
+				231C963DCEA8570D6F7C8BFD /* VoiceCommandClassifier.swift */,
+				214AB1E49F50195DF32B62CB /* VoiceCommandClassifierDemo.swift */,
+				556B79EBE082BD080F65DA3A /* VoiceCommandExamples.swift */,
+				380E3C7194A080306092F091 /* VoiceCommandExecutor.swift */,
+				B2901E70F37C455F3CC5DC45 /* VoiceCommandLearning.swift */,
+				EA89BE9F49A0EBAF64A0DD24 /* VoiceGuidanceSystem.swift */,
+				9E0D06678D91D9FD456B1EFD /* VoiceWorkflowAutomation.swift */,
+			);
+			path = AI;
+			sourceTree = "<group>";
+		};
+		9BB5448C56B49E95BA15B708 /* DocumentGeneration */ = {
+			isa = PBXGroup;
+			children = (
+				AEB0AC59BCA0B630F832A845 /* DocumentGenerationView.swift */,
+			);
+			path = DocumentGeneration;
+			sourceTree = "<group>";
+		};
+		A62B6156575E724A328F69F8 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				8205EC6D3BDF81233A98ED6B /* App */,
+				EB7AE402937B13B1F2785372 /* Core */,
+				5CB986A35BF5B8BDCE0E1878 /* Features */,
+				4512C076D2F3E2678EB236DE /* UI */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		ACC5A28478FAD55B4ACD5ACF /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BDC4607CBB379EBED12D8F6A /* CollaborativeConversationManager.swift */,
+				6DB3286C56E73564E187B3AD /* ConflictResolutionEngine.swift */,
+				B560DE82D29C052731DE16FC /* ConversationDataModel.xcdatamodeld */,
+				8C601F703CD8B4A59620110F /* ConversationLinker.swift */,
+				64E11DD82638C98C7F184DFE /* ConversationManager.swift */,
+				1FDDC9EC52DFB3E255BA64A1 /* ConversationMemoryManager.swift */,
+				5A876B15EAEBEF3B8A32A38E /* ParticipantContextIsolationManager.swift */,
+				25F4C8743699AD9193F9A374 /* SharedContextManager.swift */,
+				8E1E6902430DC1FD01F116FA /* SharedDocumentManager.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		B9FC466A964E61CD87D5785E /* JarvisLiveTests */ = {
+			isa = PBXGroup;
+			children = (
+				63080DE10A093281DD5BD165 /* Info.plist */,
+				7DE96ABCF7838DB283519DE4 /* JarvisLiveTests.swift */,
+			);
+			path = JarvisLiveTests;
+			sourceTree = "<group>";
+		};
+		C25228BC999AED6B1A35B7D3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				88148067D190403BA4FA2495 /* JarvisLive-Sandbox.app */,
+				6A3D27F91FE9C1413A6D59AB /* JarvisLive.app */,
+				A8675BFC46148377BF6D92B1 /* JarvisLiveTests.xctest */,
+				8F753EA3CF04E741B6DC0D1A /* JarvisLiveUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC40ED44F6F1924ED9A3F809 = {
+			isa = PBXGroup;
+			children = (
+				B9FC466A964E61CD87D5785E /* JarvisLiveTests */,
+				6F4B2AADE1BC61DE274BFBC5 /* JarvisLiveUITests */,
+				A62B6156575E724A328F69F8 /* Sources */,
+				C25228BC999AED6B1A35B7D3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EB7AE402937B13B1F2785372 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				93848C9377612B6C646B7091 /* SettingsManager.swift */,
+				B62BE0AC47E57938DA65E499 /* SimpleConversationManager.swift */,
+				8CC59FC5E7585310590F6C65 /* AI */,
+				53DD20264CB54B9FE42743DC /* Audio */,
+				1034BB9840C6E05DB736A936 /* Camera */,
+				13D9A2AE28500ED185437BB0 /* Collaboration */,
+				ACC5A28478FAD55B4ACD5ACF /* Data */,
+				087E63D4C2CF62E30DA9AD31 /* MCP */,
+				06E6C4662D006091B5E61A02 /* Network */,
+				EE656E84263A19B57DFF1B51 /* Pipeline */,
+				67BF37BD507EF78C173E493D /* Security */,
+				84576650FDE2C6676A1BAAE9 /* Testing */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		EE656E84263A19B57DFF1B51 /* Pipeline */ = {
+			isa = PBXGroup;
+			children = (
+				E2A1E49574607AEBA396E373 /* VoiceCommandPipeline.swift */,
+				1EACDD32A4AC6CDFC2BE45E3 /* VoiceCommandPipelineModels.swift */,
+				A01C88CA09F27A8428E858DA /* VoiceCommandPostClassificationIntegration.swift */,
+			);
+			path = Pipeline;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		791E7F32AAEDC4CE74F1E242 /* JarvisLiveUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2DECC10B8288B990FEC12E0B /* Build configuration list for PBXNativeTarget "JarvisLiveUITests" */;
+			buildPhases = (
+				88213A770A4424D6A09B8690 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F11D8BAE5FB0085AF06777FB /* PBXTargetDependency */,
+			);
+			name = JarvisLiveUITests;
+			packageProductDependencies = (
+			);
+			productName = JarvisLiveUITests;
+			productReference = 8F753EA3CF04E741B6DC0D1A /* JarvisLiveUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		8021901F593806BB98E11871 /* JarvisLiveTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 342FB0DC039ABD5F6A370F28 /* Build configuration list for PBXNativeTarget "JarvisLiveTests" */;
+			buildPhases = (
+				94FB8E2D5924F2FAEF28CBFF /* Sources */,
+				57CE376A973A79C03B02BD42 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C9D81378C41573DCFE8624FB /* PBXTargetDependency */,
+			);
+			name = JarvisLiveTests;
+			packageProductDependencies = (
+				7CD245B6CAAEE298FDDDE456 /* SwiftSnapshot */,
+			);
+			productName = JarvisLiveTests;
+			productReference = A8675BFC46148377BF6D92B1 /* JarvisLiveTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B4C999A0470B32F1567700A2 /* JarvisLive-Sandbox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BAE1E7D3E0627AAD935A3B7 /* Build configuration list for PBXNativeTarget "JarvisLive-Sandbox" */;
+			buildPhases = (
+				A1AF9FF6A1731EBFA0C986F0 /* SwiftLint */,
+				819FAA84024D7AD6F6AFF2FE /* Sources */,
+				3F2883B8714A3F497A48030C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "JarvisLive-Sandbox";
+			packageProductDependencies = (
+				6EA48CE6BB9726F1AC51F262 /* LiveKit */,
+				C3054F8B14DBE1A2CD8237E0 /* KeychainAccess */,
+			);
+			productName = "JarvisLive-Sandbox";
+			productReference = 88148067D190403BA4FA2495 /* JarvisLive-Sandbox.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E99CE8589C930F6F4D7492FE /* JarvisLive */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6C2DC9F8676CC7A24B3AD8BD /* Build configuration list for PBXNativeTarget "JarvisLive" */;
+			buildPhases = (
+				F8CB84FD2C8D496910B7BA5F /* SwiftLint */,
+				0954194E7CC60A42385A829E /* Sources */,
+				8DC46F20A2549005DAA4EC2A /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JarvisLive;
+			packageProductDependencies = (
+				0265274791EB6C717BC38444 /* LiveKit */,
+				F1CF5D177137EC5A3EACA065 /* KeychainAccess */,
+			);
+			productName = JarvisLive;
+			productReference = 6A3D27F91FE9C1413A6D59AB /* JarvisLive.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A548F99CB62466EDBEF1F734 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					791E7F32AAEDC4CE74F1E242 = {
+						TestTargetID = B4C999A0470B32F1567700A2;
+					};
+					B4C999A0470B32F1567700A2 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					E99CE8589C930F6F4D7492FE = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 125B5CB5BF3815E7A83B524A /* Build configuration list for PBXProject "JarvisLive" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = DC40ED44F6F1924ED9A3F809;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7484C5E6BBFE1894AA9AB93F /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				2ECB7D2D5DC06BA82D247B6F /* XCRemoteSwiftPackageReference "client-sdk-swift" */,
+				4607DA401674EDF123D114CC /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+			);
+			preferredProjectObjectVersion = 54;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E99CE8589C930F6F4D7492FE /* JarvisLive */,
+				B4C999A0470B32F1567700A2 /* JarvisLive-Sandbox */,
+				8021901F593806BB98E11871 /* JarvisLiveTests */,
+				791E7F32AAEDC4CE74F1E242 /* JarvisLiveUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A1AF9FF6A1731EBFA0C986F0 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Sources/**/*.swift",
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/swiftlint-output.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"SwiftLint temporarily disabled for v1.0.0 release build\"\n";
+		};
+		F8CB84FD2C8D496910B7BA5F /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Sources/**/*.swift",
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/swiftlint-output.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"SwiftLint temporarily disabled for v1.0.0 release build\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0954194E7CC60A42385A829E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6316C3002F1AE7C9C52CC827 /* APIAuthenticationManager.swift in Sources */,
+				4F896068E9C3515A23A2EB08 /* AdvancedMCPIntegration.swift in Sources */,
+				CD7B809E33A4C25ECB70862C /* AdvancedVoiceCommandProcessor.swift in Sources */,
+				6E48DADF3C6676177561333D /* AdvancedVoiceControlView.swift in Sources */,
+				D46950C3C371763E6E83105B /* AuthenticationModels.swift in Sources */,
+				588DFE89DEDFC327BE84E772 /* AuthenticationStateManager.swift in Sources */,
+				BAAA1834DA6DF4FC403B968F /* AuthenticationView.swift in Sources */,
+				14774E77CFCFD672AEC4BFCE /* CategorySpecificPreviews.swift in Sources */,
+				47CB87C2DE9A042D695316CE /* CollaborationSupportViews.swift in Sources */,
+				FA9013722AAF3714E967E953 /* CollaborativeAISessionManager.swift in Sources */,
+				C2F5C9B664CC917C873474C7 /* CollaborativeConversationManager.swift in Sources */,
+				D9D16EFD1DE69FFA49BE9DA1 /* CollaborativeSessionView.swift in Sources */,
+				5CC2ADB2A8ACE5E141FAD04F /* CollaborativeVoiceTranscriptionManager.swift in Sources */,
+				D9FB35F01CFB47FAA0CB33B3 /* ConflictResolutionEngine.swift in Sources */,
+				7CEA3FDA1D39E09635D9CBD3 /* ConnectionButtonView.swift in Sources */,
+				BDCDD36B32E9C5E742ED399A /* ConnectionStatusView.swift in Sources */,
+				189700FA862EE9A1E76B719F /* ContentView.swift in Sources */,
+				D0418D4FF509D636B9D71EA1 /* ContextHelpView.swift in Sources */,
+				4AD23E424FDAA53371E50ECF /* ConversationDataModel.xcdatamodeld in Sources */,
+				FD9C619562B2322768E797E6 /* ConversationHistoryView.swift in Sources */,
+				449C7780C5261EAD543AA097 /* ConversationLinker.swift in Sources */,
+				83FA743D0E3AE104F7AF350E /* ConversationManager.swift in Sources */,
+				110E858B88D61383396E756F /* ConversationMemoryManager.swift in Sources */,
+				2D4275D40FCF584340EE79CF /* ConversationThreadVisualizationView.swift in Sources */,
+				39ED54682D860248F8A2B013 /* DecisionTrackingView.swift in Sources */,
+				119FB719DCA76614B4292832 /* DocumentCameraManager.swift in Sources */,
+				93ACA4026B106615A050D7F1 /* DocumentGenerationView.swift in Sources */,
+				D91244AEE5A55E6043ED2F19 /* DocumentScannerView.swift in Sources */,
+				9093566389238DB509B4B336 /* ElevenLabsVoiceSynthesizer.swift in Sources */,
+				4393D168355D2CEE994FDCEC /* FooterView.swift in Sources */,
+				9A717C34790913ADD7A6AB6C /* GlassViewModifier.swift in Sources */,
+				EEC8B8DE221ED5799032E102 /* HeaderView.swift in Sources */,
+				9AB5D481659FAAAB3AAA4F54 /* JarvisLiveApp.swift in Sources */,
+				3A541966DA372DC24EC61C1E /* KeychainManager.swift in Sources */,
+				DB39381C0A2E4FAF11B506EC /* LiveKitCollaborationManager.swift in Sources */,
+				6FB21C1C92A246D99CF1ADF1 /* LiveKitManager.swift in Sources */,
+				077D410DBAC2B4ACFEE26C63 /* MCPActionsView.swift in Sources */,
+				9E6DED7ABFA0F5CD9261A1AE /* MCPContextExamples.swift in Sources */,
+				DB0543F817EFA349557E863B /* MCPContextManager.swift in Sources */,
+				94AEA4CA4B65465D2A30DC80 /* MCPIntegrationManager.swift in Sources */,
+				B9FC3D07297349D6D6D23329 /* MCPModels.swift in Sources */,
+				B938E4F3C7303ABAAE9F6E43 /* MCPServerManager.swift in Sources */,
+				7A1E15F5C4CE2032B32E8D7C /* MockMCPServerManager.swift in Sources */,
+				0B47B3438556045B76666032 /* ParticipantContextIsolationManager.swift in Sources */,
+				DD7FE5744F2F6EC8A94CF95F /* ParticipantListView.swift in Sources */,
+				97D1EAACE5080E7B038060DA /* ParticipantManager.swift in Sources */,
+				9B5E1701EDDFBEABDA04F605 /* PostClassificationComponents.swift in Sources */,
+				C72D56E83173A07DAD668DCB /* PostClassificationFlowView.swift in Sources */,
+				434ADA3CAFABE5020D32D68E /* PythonBackendClient.swift in Sources */,
+				3A58DC1F9ADEEA0B777DDDA4 /* RealTimeDocumentCollaborationManager.swift in Sources */,
+				54DBA1E5FF433B3798BC06FE /* RealtimeSyncManager.swift in Sources */,
+				FEF7C1BCDCCDF4D9E14637B8 /* RootContentView.swift in Sources */,
+				7344F3451BE08DD678307447 /* SettingsManager.swift in Sources */,
+				73CAC06E6DC4C702BD76677B /* SettingsView.swift in Sources */,
+				3BC463D32CB517E3C663341C /* SharedContextManager.swift in Sources */,
+				E61A289DEECD4FC15C1E9D95 /* SharedDocumentManager.swift in Sources */,
+				B2595E3F6EC587D326E55F5B /* SharedTranscriptionView.swift in Sources */,
+				C6F58F1F1739B1073B1A5A82 /* SimpleConversationManager.swift in Sources */,
+				D8307B2C428C0828A77991DB /* StepEditorView.swift in Sources */,
+				375CD3A29B73C48D54A2CC97 /* TitleView.swift in Sources */,
+				6F7D3B96836F3E5F116EA3BE /* TokenRefreshInterceptor.swift in Sources */,
+				B71E219BE4E6912F1F820E2F /* VisualEvidenceEngine.swift in Sources */,
+				5F1AF2BCA9547BC896CA58A6 /* VoiceClassificationManager.swift in Sources */,
+				37CE151C19924EA0E71E5348 /* VoiceCommandClassifier.swift in Sources */,
+				ED646131ED6D155B0247F66A /* VoiceCommandClassifierDemo.swift in Sources */,
+				90FF82D2A1C4EF7B766B0CE9 /* VoiceCommandExamples.swift in Sources */,
+				8F383595FC4353207CFB4B19 /* VoiceCommandExecutor.swift in Sources */,
+				6487AA1C46E816FB151C6A9C /* VoiceCommandLearning.swift in Sources */,
+				FC1F51D5399A9611AFE4B780 /* VoiceCommandPipeline.swift in Sources */,
+				AAD6C1AB381A4B0D89268052 /* VoiceCommandPipelineModels.swift in Sources */,
+				3AD18F1E14910F7392BDA29A /* VoiceCommandPostClassificationIntegration.swift in Sources */,
+				C49A58299D9DF44E0ED723FB /* VoiceGuidanceSystem.swift in Sources */,
+				7193D2B38A9613EB30BD3DFC /* VoiceRecordingView.swift in Sources */,
+				F1704B147907E593C95C96F5 /* VoiceWorkflowAutomation.swift in Sources */,
+				65E99875A73969CC877DF7DD /* WorkflowBuilderView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		819FAA84024D7AD6F6AFF2FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70EE608C773118D3ADA1D47C /* APIAuthenticationManager.swift in Sources */,
+				E35A000DD34F5962DA11C96A /* AdvancedMCPIntegration.swift in Sources */,
+				4807269657E10867AB2205AE /* AdvancedVoiceCommandProcessor.swift in Sources */,
+				4ABA7201DC75F13A6235A52B /* AdvancedVoiceControlView.swift in Sources */,
+				AB37814E3495C2C9AA620435 /* AuthenticationModels.swift in Sources */,
+				60A2C33CC34C04E3039B32F7 /* AuthenticationStateManager.swift in Sources */,
+				F1DA4DF70E9C77383ADEA867 /* AuthenticationView.swift in Sources */,
+				FB3767CED8A94736D98E258D /* CategorySpecificPreviews.swift in Sources */,
+				501645F8865688A0AE54590B /* CollaborationSupportViews.swift in Sources */,
+				290BB818CCF673EBEE7FF505 /* CollaborativeAISessionManager.swift in Sources */,
+				C17AC7875F63D5E429409240 /* CollaborativeConversationManager.swift in Sources */,
+				DCF3116FE4A2B7CA250C5322 /* CollaborativeSessionView.swift in Sources */,
+				8F889E3BACAE937A2C5EE33D /* CollaborativeVoiceTranscriptionManager.swift in Sources */,
+				F573B44501B899D57AE16512 /* ConflictResolutionEngine.swift in Sources */,
+				DD289BB6FC38EAE9B50808D6 /* ConnectionButtonView.swift in Sources */,
+				6E20FB3AA69C8B8BCB15C7F8 /* ConnectionStatusView.swift in Sources */,
+				6C776A5D0DBA985C6ED42F80 /* ContentView.swift in Sources */,
+				87132BA5F639AB6FAE2F0C54 /* ContextHelpView.swift in Sources */,
+				D1888F3F6C7599C125BB3EC5 /* ConversationDataModel.xcdatamodeld in Sources */,
+				AB4FFA665C1B37F08D3B4131 /* ConversationHistoryView.swift in Sources */,
+				F6439EA106BB7EE50E7DD13C /* ConversationLinker.swift in Sources */,
+				AB926375970C3F0A2606C50C /* ConversationManager.swift in Sources */,
+				E1F49163FDABF07638D7B65A /* ConversationMemoryManager.swift in Sources */,
+				3779BF9D2C19C90673581D65 /* ConversationThreadVisualizationView.swift in Sources */,
+				0E785BB5FBA64A3727B7D315 /* DecisionTrackingView.swift in Sources */,
+				7AC8DA5D4CAB2B5957730118 /* DocumentCameraManager.swift in Sources */,
+				055E713C5D54B826FC64CAD2 /* DocumentGenerationView.swift in Sources */,
+				6D3BC46320D8875AF0F327B7 /* DocumentScannerView.swift in Sources */,
+				E47EB436BD086F3E68F43CC7 /* ElevenLabsVoiceSynthesizer.swift in Sources */,
+				6F159010CC920A78936066B3 /* FooterView.swift in Sources */,
+				9D746E685FF465536207BE56 /* GlassViewModifier.swift in Sources */,
+				55BE88697D3B0A0C92B15C36 /* HeaderView.swift in Sources */,
+				25D1093E81C8BA850DAA487A /* JarvisLiveSandboxApp.swift in Sources */,
+				5B7CEB47F9C844D78AEFD410 /* KeychainManager.swift in Sources */,
+				62D0DACAFA8532DA995F9B1B /* LiveKitCollaborationManager.swift in Sources */,
+				7715ECDBBF805611C95A13EF /* LiveKitManager.swift in Sources */,
+				0C8DA959D58377AF71489565 /* MCPActionsView.swift in Sources */,
+				E5055CEECDE7802A280A8402 /* MCPContextExamples.swift in Sources */,
+				947013A496508A61AEB50206 /* MCPContextManager.swift in Sources */,
+				D65A1852B98DFCD9CBE62E27 /* MCPIntegrationManager.swift in Sources */,
+				02EB026E2952E85EA0C9F665 /* MCPModels.swift in Sources */,
+				904B7A76F21F8BCB414AB100 /* MCPServerManager.swift in Sources */,
+				827FCD2B823F1D330818C885 /* MockMCPServerManager.swift in Sources */,
+				AC2527866F9F5AA3A43BC3E8 /* ParticipantContextIsolationManager.swift in Sources */,
+				F67F5A6FBDA5EA60B844FEFE /* ParticipantListView.swift in Sources */,
+				925A66250048709599E9ECB5 /* ParticipantManager.swift in Sources */,
+				2ADAF676E50DFC0A6A05F0E0 /* PostClassificationComponents.swift in Sources */,
+				1BE6F1C1836FFCD32C163D17 /* PostClassificationFlowView.swift in Sources */,
+				F866B319450BE901325CACBE /* PythonBackendClient.swift in Sources */,
+				DED2DBF6FDC435053F697F4F /* RealTimeDocumentCollaborationManager.swift in Sources */,
+				012B049447C35FF6BA102EA1 /* RealtimeSyncManager.swift in Sources */,
+				9213B221B4798679280E399B /* RootContentView.swift in Sources */,
+				087CDF2F4DCB4B27E1F54C75 /* SettingsManager.swift in Sources */,
+				99E5DA1D77B1FAFC61E35038 /* SettingsView.swift in Sources */,
+				F80B54B4A041567E65E78F01 /* SharedContextManager.swift in Sources */,
+				BB4690E56724D67D40E63FC3 /* SharedDocumentManager.swift in Sources */,
+				BE5AEDDC828E00073DB09714 /* SharedTranscriptionView.swift in Sources */,
+				167B824341E71C7823CB94CB /* SimpleConversationManager.swift in Sources */,
+				E53EE4F571CDE3EBAEA851E8 /* StepEditorView.swift in Sources */,
+				C4305B43155E58AA8A70FC81 /* TitleView.swift in Sources */,
+				6912A2A25DD0A0056D505101 /* TokenRefreshInterceptor.swift in Sources */,
+				37422E9C0BBC05AEB1929F14 /* VisualEvidenceEngine.swift in Sources */,
+				BAD5C499699B84C0D49CA745 /* VoiceClassificationManager.swift in Sources */,
+				0FD88A184A20AE11EF52AE44 /* VoiceCommandClassifier.swift in Sources */,
+				210E8D1FADFC2B2AB579208F /* VoiceCommandClassifierDemo.swift in Sources */,
+				31CD26F7F2C3D634B35A9AAF /* VoiceCommandExamples.swift in Sources */,
+				D21DB7039237ED1371EB68D8 /* VoiceCommandExecutor.swift in Sources */,
+				E74C48578DD4FC9D7B286A19 /* VoiceCommandLearning.swift in Sources */,
+				B2F3080CBD3DDC072E51216F /* VoiceCommandPipeline.swift in Sources */,
+				9C56CF4449500B6D1A32F285 /* VoiceCommandPipelineModels.swift in Sources */,
+				B44AF5AC1889B76ADFA32143 /* VoiceCommandPostClassificationIntegration.swift in Sources */,
+				B7FE4C46E40FEE7D31E02AEA /* VoiceGuidanceSystem.swift in Sources */,
+				82AC9930B93A1E5F7A8A3D25 /* VoiceRecordingView.swift in Sources */,
+				A79751C3E6C59C3E5FB36F54 /* VoiceWorkflowAutomation.swift in Sources */,
+				5218A57D4CC05F2EA76992CB /* WorkflowBuilderView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88213A770A4424D6A09B8690 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F378BF532C256BCDEEC44FD /* JarvisLiveUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94FB8E2D5924F2FAEF28CBFF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				174AD8490F78133C670F9772 /* JarvisLiveTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C9D81378C41573DCFE8624FB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B4C999A0470B32F1567700A2 /* JarvisLive-Sandbox */;
+			targetProxy = 2D5FB5FC86E1F072E63F149A /* PBXContainerItemProxy */;
+		};
+		F11D8BAE5FB0085AF06777FB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B4C999A0470B32F1567700A2 /* JarvisLive-Sandbox */;
+			targetProxy = 52A73DABC076202FFD35CA2C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0260BD6DAD51F64091212391 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		13E4A11611D179EE9BFF393D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = JarvisLiveTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ablankcanvas.JarvisLiveTests;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JarvisLive-Sandbox.app/JarvisLive-Sandbox";
+			};
+			name = Debug;
+		};
+		14D4AAC2D470C6A33B6FEE33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = JarvisLiveUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ablankcanvas.JarvisLiveUITests;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "JarvisLive-Sandbox";
+			};
+			name = Release;
+		};
+		97D083213CDB4CF302EE74FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "JarvisLive-Sandbox/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Jarvis Live needs camera access for document scanning and visual analysis";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Jarvis Live needs microphone access for voice interaction";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ablankcanvas.JarvisLive.Sandbox;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SANDBOX;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9AE7D6C3833185DF4BFCC992 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Jarvis Live needs camera access for document scanning and visual analysis";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Jarvis Live needs microphone access for voice interaction";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ablankcanvas.JarvisLive;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9BAA600A6F24391C5B8C19E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Jarvis Live needs camera access for document scanning and visual analysis";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Jarvis Live needs microphone access for voice interaction";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ablankcanvas.JarvisLive;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ABC47C81062FF3153E3FAF26 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "JarvisLive-Sandbox/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Jarvis Live needs camera access for document scanning and visual analysis";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Jarvis Live needs microphone access for voice interaction";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ablankcanvas.JarvisLive.Sandbox;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SANDBOX;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ACDBE9DAFC1352D98087DEE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = JarvisLiveTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ablankcanvas.JarvisLiveTests;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JarvisLive-Sandbox.app/JarvisLive-Sandbox";
+			};
+			name = Release;
+		};
+		B7FEC439B5F7BA35D99F1432 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = JarvisLiveUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ablankcanvas.JarvisLiveUITests;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "JarvisLive-Sandbox";
+			};
+			name = Debug;
+		};
+		C029592AA31B96DE9C6986EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		125B5CB5BF3815E7A83B524A /* Build configuration list for PBXProject "JarvisLive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C029592AA31B96DE9C6986EC /* Debug */,
+				0260BD6DAD51F64091212391 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		2DECC10B8288B990FEC12E0B /* Build configuration list for PBXNativeTarget "JarvisLiveUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B7FEC439B5F7BA35D99F1432 /* Debug */,
+				14D4AAC2D470C6A33B6FEE33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		342FB0DC039ABD5F6A370F28 /* Build configuration list for PBXNativeTarget "JarvisLiveTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13E4A11611D179EE9BFF393D /* Debug */,
+				ACDBE9DAFC1352D98087DEE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6C2DC9F8676CC7A24B3AD8BD /* Build configuration list for PBXNativeTarget "JarvisLive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BAA600A6F24391C5B8C19E0 /* Debug */,
+				9AE7D6C3833185DF4BFCC992 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7BAE1E7D3E0627AAD935A3B7 /* Build configuration list for PBXNativeTarget "JarvisLive-Sandbox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABC47C81062FF3153E3FAF26 /* Debug */,
+				97D083213CDB4CF302EE74FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2ECB7D2D5DC06BA82D247B6F /* XCRemoteSwiftPackageReference "client-sdk-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/livekit/client-sdk-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		4607DA401674EDF123D114CC /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.15.1;
+			};
+		};
+		7484C5E6BBFE1894AA9AB93F /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0265274791EB6C717BC38444 /* LiveKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2ECB7D2D5DC06BA82D247B6F /* XCRemoteSwiftPackageReference "client-sdk-swift" */;
+			productName = LiveKit;
+		};
+		6EA48CE6BB9726F1AC51F262 /* LiveKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2ECB7D2D5DC06BA82D247B6F /* XCRemoteSwiftPackageReference "client-sdk-swift" */;
+			productName = LiveKit;
+		};
+		7CD245B6CAAEE298FDDDE456 /* SwiftSnapshot */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4607DA401674EDF123D114CC /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SwiftSnapshot;
+		};
+		C3054F8B14DBE1A2CD8237E0 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7484C5E6BBFE1894AA9AB93F /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+		F1CF5D177137EC5A3EACA065 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7484C5E6BBFE1894AA9AB93F /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		B560DE82D29C052731DE16FC /* ConversationDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5D6E0AED7AA42E1410F61181 /* ConversationDataModel.xcdatamodel */,
+			);
+			currentVersion = 5D6E0AED7AA42E1410F61181 /* ConversationDataModel.xcdatamodel */;
+			path = ConversationDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = A548F99CB62466EDBEF1F734 /* Project object */;
+}

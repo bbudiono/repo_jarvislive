@@ -1,0 +1,261 @@
+# SwiftLint Configuration for Jarvis Live iOS Voice AI Assistant
+# Version: 1.0.0
+# Last Updated: 2025-06-29
+# Purpose: Enforce code quality standards per AUDIT-2024JUL25-QUALITY_AND_SCOPE_ENFORCEMENT
+
+# Include all Swift source files
+included:
+  - Sources/
+  - Tests/
+  - JarvisLive/
+  - JarvisLive-Sandbox/
+
+# Exclude generated and third-party files
+excluded:
+  - Carthage/
+  - Pods/
+  - .build/
+  - build/
+  - DerivedData/
+  - "*.generated.swift"
+  - "**/R.generated.swift"
+  - "**/*.pb.swift"
+
+# Disable rules that conflict with project patterns
+disabled_rules:
+  - line_length # Handled by custom rule below
+  - file_length # Allow longer files for complex view models
+  - type_body_length # Allow complex managers and services
+  - function_body_length # Allow complex voice processing functions
+  - cyclomatic_complexity # Voice command processing inherently complex
+  - nesting # SwiftUI view builders require nesting
+  - force_cast # Justified in specific audio processing contexts
+  - force_unwrapping # Justified in SwiftUI environment values
+
+# Enable additional rules for better code quality
+opt_in_rules:
+  - array_init
+  - attributes
+  - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  - comma_inheritance
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
+  - contains_over_first_not_nil
+  - contains_over_range_nil_comparison
+  - discouraged_optional_boolean
+  - empty_count
+  - empty_string
+  - enum_case_associated_values_count
+  - explicit_init
+  - fallthrough
+  - fatal_error_message
+  - file_name_no_space
+  - first_where
+  - flatmap_over_map_reduce
+  - identical_operands
+  - implicit_return
+  - joined_default_parameter
+  - last_where
+  - legacy_multiple
+  - literal_expression_end_indentation
+  - lower_acl_than_parent
+  - modifier_order
+  - multiline_arguments
+  - multiline_function_chains
+  - multiline_literal_brackets
+  - multiline_parameters
+  - multiline_parameters_brackets
+  - nimble_operator
+  - number_separator
+  - object_literal
+  - operator_usage_whitespace
+  - overridden_super_call
+  - override_in_extension
+  - pattern_matching_keywords
+  - prefer_self_type_over_type_of_self
+  - prefer_zero_over_explicit_init
+  - prefixed_toplevel_constant
+  - private_action
+  - private_outlet
+  - prohibited_super_call
+  - quick_discouraged_call
+  - quick_discouraged_focused_test
+  - quick_discouraged_pending_test
+  - reduce_into
+  - redundant_nil_coalescing
+  - redundant_type_annotation
+  - single_test_class
+  - sorted_first_last
+  - sorted_imports
+  - static_operator
+  - strong_iboutlet
+  - switch_case_on_newline
+  - toggle_bool
+  - trailing_closure
+  - unavailable_function
+  - unneeded_parentheses_in_closure_argument
+  - unowned_variable_capture
+  - untyped_error_in_catch
+  - unused_import
+  - unused_private_declaration
+  - vertical_parameter_alignment_on_call
+  - vertical_whitespace_closing_braces
+  - xct_specific_matcher
+  - yoda_condition
+
+# Custom rule configurations
+line_length:
+  warning: 120
+  error: 150
+  ignores_urls: true
+  ignores_function_declarations: true
+  ignores_comments: true
+
+identifier_name:
+  min_length:
+    warning: 2
+    error: 1
+  max_length:
+    warning: 50
+    error: 60
+  excluded:
+    - id
+    - ai
+    - ui
+    - mcp
+    - api
+    - url
+    - uri
+    - sdk
+    - ios
+    - app
+    - key
+
+type_name:
+  min_length:
+    warning: 3
+    error: 2
+  max_length:
+    warning: 50
+    error: 60
+  excluded:
+    - AI
+    - MCP
+    - API
+    - URL
+    - URI
+    - SDK
+    - iOS
+    - App
+    - UI
+
+function_parameter_count:
+  warning: 6
+  error: 8
+
+large_tuple:
+  warning: 3
+  error: 4
+
+short_variable_name:
+  minimum_length: 2
+  excluded:
+    - id
+    - ai
+    - ui
+    - x
+    - y
+    - z
+
+# File naming conventions
+file_name:
+  excluded:
+    - "Localizable.strings"
+    - "InfoPlist.strings"
+    - "Localizable.stringsdict"
+
+# Custom rules for project-specific patterns
+custom_rules:
+  # Voice processing components should use consistent naming
+  voice_component_naming:
+    name: "Voice Component Naming"
+    regex: '(class|struct|enum)\s+(?!Voice|Audio|Speech|Sound|LiveKit|ElevenLabs)[A-Za-z]*(?:Voice|Audio|Speech|Sound)'
+    message: "Voice-related components should start with 'Voice', 'Audio', 'Speech', or 'Sound' prefix"
+    severity: warning
+  
+  # MCP-related components should use consistent naming
+  mcp_component_naming:
+    name: "MCP Component Naming"
+    regex: '(class|struct|enum)\s+(?!MCP)[A-Za-z]*MCP(?!Manager|Service|Client|Request|Response|Error)'
+    message: "MCP components should use consistent suffixes: Manager, Service, Client, Request, Response, Error"
+    severity: warning
+  
+  # AI provider components should use consistent naming
+  ai_provider_naming:
+    name: "AI Provider Naming"
+    regex: '(class|struct|enum)\s+(?!AI|Claude|OpenAI|Gemini)[A-Za-z]*(?:AI|Claude|OpenAI|Gemini)'
+    message: "AI provider components should start with provider name or 'AI' prefix"
+    severity: warning
+  
+  # SwiftUI views should end with 'View'
+  swiftui_view_naming:
+    name: "SwiftUI View Naming"
+    regex: 'struct\s+[A-Za-z]+(?<!View)\s*:\s*View'
+    message: "SwiftUI views should end with 'View' suffix"
+    severity: warning
+  
+  # Managers should end with 'Manager'
+  manager_naming:
+    name: "Manager Naming"
+    regex: 'class\s+[A-Za-z]+(?<!Manager)\s*:\s*[A-Za-z]*Manager'
+    message: "Manager classes should end with 'Manager' suffix"
+    severity: warning
+  
+  # Services should end with 'Service'
+  service_naming:
+    name: "Service Naming"
+    regex: 'class\s+[A-Za-z]+(?<!Service)\s*:\s*[A-Za-z]*Service'
+    message: "Service classes should end with 'Service' suffix"
+    severity: warning
+  
+  # Avoid hardcoded strings for API endpoints
+  no_hardcoded_api_endpoints:
+    name: "No Hardcoded API Endpoints"
+    regex: '["'\'']https?://[^"'\'']*\/[^"'\''\\ ]*["'\'']'
+    message: "API endpoints should be configured through constants or environment variables"
+    severity: error
+  
+  # Ensure proper error handling in async functions
+  async_error_handling:
+    name: "Async Error Handling"
+    regex: 'func\s+[A-Za-z_][A-Za-z0-9_]*\s*\([^)]*\)\s+async(?!\s+throws)'
+    message: "Async functions should include 'throws' for proper error handling"
+    severity: warning
+  
+  # Ensure voice processing functions handle errors
+  voice_processing_error_handling:
+    name: "Voice Processing Error Handling"
+    regex: 'func\s+[A-Za-z_]*(?:voice|audio|speech|sound)[A-Za-z_]*\s*\([^)]*\)(?!.*throws)'
+    message: "Voice processing functions should handle errors with 'throws'"
+    severity: warning
+  
+  # Prevent usage of deprecated AVAudioSession methods
+  deprecated_audio_session:
+    name: "Deprecated Audio Session"
+    regex: '\.setCategory\([^,)]*\)'
+    message: "Use setCategory(_:mode:options:) instead of deprecated setCategory(_:) method"
+    severity: error
+
+# Reporter configuration
+reporter: "xcode"
+
+# Exclude test files from certain rules
+excluded:
+  - rule: "function_body_length"
+    path: "**/Tests/**"
+  - rule: "type_body_length"
+    path: "**/Tests/**"
+  - rule: "file_length"
+    path: "**/Tests/**"

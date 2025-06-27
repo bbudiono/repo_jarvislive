@@ -1,0 +1,121 @@
+{
+  "configurations" : [ ],
+  "entities" : [
+    {
+      "name" : "Conversation",
+      "className" : "Conversation",
+      "codeGenerationType" : "manual",
+      "properties" : [
+        {
+          "name" : "id",
+          "type" : "UUID",
+          "optional" : false,
+          "indexed" : true
+        },
+        {
+          "name" : "title",
+          "type" : "String",
+          "optional" : false,
+          "maxLength" : 200
+        },
+        {
+          "name" : "createdAt",
+          "type" : "Date",
+          "optional" : false,
+          "indexed" : true
+        },
+        {
+          "name" : "updatedAt",
+          "type" : "Date",
+          "optional" : false,
+          "indexed" : true
+        },
+        {
+          "name" : "isArchived",
+          "type" : "Boolean",
+          "optional" : false,
+          "defaultValue" : false,
+          "indexed" : true
+        },
+        {
+          "name" : "totalMessages",
+          "type" : "Integer 32",
+          "optional" : false,
+          "defaultValue" : 0
+        },
+        {
+          "name" : "conversationContext",
+          "type" : "String",
+          "optional" : true
+        }
+      ],
+      "relationships" : [
+        {
+          "name" : "messages",
+          "destination" : "ConversationMessage",
+          "type" : "To Many",
+          "inverseRelationship" : "conversation",
+          "deleteRule" : "Cascade"
+        }
+      ]
+    },
+    {
+      "name" : "ConversationMessage",
+      "className" : "ConversationMessage", 
+      "codeGenerationType" : "manual",
+      "properties" : [
+        {
+          "name" : "id",
+          "type" : "UUID",
+          "optional" : false,
+          "indexed" : true
+        },
+        {
+          "name" : "content",
+          "type" : "String",
+          "optional" : false
+        },
+        {
+          "name" : "role",
+          "type" : "String",
+          "optional" : false,
+          "maxLength" : 20,
+          "indexed" : true
+        },
+        {
+          "name" : "timestamp",
+          "type" : "Date",
+          "optional" : false,
+          "indexed" : true
+        },
+        {
+          "name" : "audioTranscription",
+          "type" : "String",
+          "optional" : true
+        },
+        {
+          "name" : "aiProvider",
+          "type" : "String",
+          "optional" : true,
+          "maxLength" : 50
+        },
+        {
+          "name" : "processingTime",
+          "type" : "Double",
+          "optional" : false,
+          "defaultValue" : 0.0
+        }
+      ],
+      "relationships" : [
+        {
+          "name" : "conversation",
+          "destination" : "Conversation",
+          "type" : "To One",
+          "inverseRelationship" : "messages",
+          "deleteRule" : "Nullify"
+        }
+      ]
+    }
+  ],
+  "version" : "1.0.0"
+}
