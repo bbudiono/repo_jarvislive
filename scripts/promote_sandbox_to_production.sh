@@ -205,30 +205,23 @@ EOF
 perform_sync() {
     log_info "Starting sandbox to production sync..."
     
-    # Define exclusions for sandbox-only files
+    # Define exclusions for sandbox-only files (FIXED - more specific patterns)
     local exclusions=(
-        # Sandbox-specific files
-        "--exclude=*Sandbox*"
-        "--exclude=*-Sandbox*"
-        "--exclude=.sandbox"
-        "--exclude=sandbox_*"
-        
-        # Development and testing files
+        # Sandbox-specific directories and files only
+        "--exclude=JarvisLive-Sandbox/"
+        "--exclude=JarvisLive-Sandbox.xcodeproj/"
+        "--exclude=.build/"
+        "--exclude=Demo/"
+        "--exclude=Content/"
         "--exclude=*.playground"
-        "--exclude=*/Preview Content/*"
+        "--exclude=IMPLEMENTATION_SUMMARY.md"
+        "--exclude=INTEGRATION_TESTING_FRAMEWORK.md"
+        
+        # Development temporary files
         "--exclude=*/DerivedData/*"
-        "--exclude=*/.build/*"
         "--exclude=*/xcuserdata/*"
         "--exclude=*/.swiftpm/*"
-        
-        # Mock and test data
-        "--exclude=mock_*"
-        "--exclude=test_data/*"
-        "--exclude=*/TestPlans/*"
-        
-        # Debug configurations
-        "--exclude=Debug.xcconfig"
-        "--exclude=*/Debug/*"
+        "--exclude=*/Preview Content/*"
         
         # Temporary files
         "--exclude=*.tmp"

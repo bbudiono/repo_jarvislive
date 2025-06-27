@@ -1,0 +1,3984 @@
+Only in _iOS/JarvisLive-Sandbox: .build
+Only in _iOS/JarvisLive-Sandbox: .gitignore
+Only in _iOS/JarvisLive-Sandbox: .swiftlint.yml
+Only in _iOS/JarvisLive-Sandbox: Content
+Only in _iOS/JarvisLive-Sandbox: Demo
+Only in _iOS/JarvisLive-Sandbox: IMPLEMENTATION_SUMMARY.md
+Only in _iOS/JarvisLive-Sandbox: INTEGRATION_TESTING_FRAMEWORK.md
+Only in _iOS/JarvisLive-Sandbox: JarvisLive-Sandbox
+Only in _iOS/JarvisLive-Sandbox: JarvisLive-Sandbox.xcodeproj
+Only in _iOS/JarvisLive-Sandbox: JarvisLive.xcodeproj
+Only in _iOS/JarvisLive-Sandbox: JarvisLiveTests
+Only in _iOS/JarvisLive-Sandbox: JarvisLiveUITests
+Only in _iOS/JarvisLive-Sandbox: Package.resolved
+Only in _iOS/JarvisLive-Sandbox: Package.swift
+diff -r _iOS/JarvisLive-Sandbox/Resources/Info.plist _iOS/JarvisLive/Resources/Info.plist
+54c54
+< </plist>
+\ No newline at end of file
+---
+> </plist>
+Only in _iOS/JarvisLive-Sandbox: Scripts
+diff -r _iOS/JarvisLive-Sandbox/Sources/App/JarvisLiveApp.swift _iOS/JarvisLive/Sources/App/JarvisLiveApp.swift
+2,3c2,3
+<  * Purpose: Main application entry point for Jarvis Live Production with authentication flow
+<  * Issues & Complexity Summary: SwiftUI App implementation with authentication-aware root view
+---
+>  * Purpose: Main app entry point for Jarvis Live iOS application
+>  * Issues & Complexity Summary: Simple app lifecycle management with dependency injection
+5,17c5,17
+<  *   - Logic Scope (Est. LoC): ~20
+<  *   - Core Algorithm Complexity: Low
+<  *   - Dependencies: 2 (SwiftUI, RootContentView)
+<  *   - State Management Complexity: Low
+<  *   - Novelty/Uncertainty Factor: Low
+<  * AI Pre-Task Self-Assessment (Est. Solution Difficulty %): 95%
+<  * Problem Estimate (Inherent Problem Difficulty %): 60%
+<  * Initial Code Complexity Estimate %: 65%
+<  * Justification for Estimates: Standard App entry point with authentication integration
+<  * Final Code Complexity (Actual %): 70%
+<  * Overall Result Score (Success & Quality %): 95%
+<  * Key Variances/Learnings: Clean separation of authentication and main app concerns
+<  * Last Updated: 2025-06-28
+---
+>  *   - Logic Scope (Est. LoC): ~50
+>  *   - Core Algorithm Complexity: Low (App lifecycle)
+>  *   - Dependencies: 2 New (SwiftUI, LiveKitManager)
+>  *   - State Management Complexity: Low (App-level state)
+>  *   - Novelty/Uncertainty Factor: Low (Standard SwiftUI app)
+>  * AI Pre-Task Self-Assessment (Est. Solution Difficulty %): 60%
+>  * Problem Estimate (Inherent Problem Difficulty %): 30%
+>  * Initial Code Complexity Estimate %: 40%
+>  * Justification for Estimates: Standard iOS app entry point with dependency setup
+>  * Final Code Complexity (Actual %): 40%
+>  * Overall Result Score (Success & Quality %): 90%
+>  * Key Variances/Learnings: Clean dependency injection for conversation management
+>  * Last Updated: 2025-06-26
+23a24,26
+>     // Create the main LiveKit manager instance
+>     @StateObject private var liveKitManager = LiveKitManager()
+>     
+26,28c29,33
+<             // Use the new root content view that manages authentication flow
+<             RootContentView()
+<                 .preferredColorScheme(.dark) // Ensure consistent dark theme
+---
+>             ContentView(liveKitManager: liveKitManager)
+>                 .preferredColorScheme(.dark)
+>                 .onAppear {
+>                     setupApp()
+>                 }
+29a35,40
+>     }
+>     
+>     private func setupApp() {
+>         print("🚀 Jarvis Live App Starting...")
+>         print("💬 Enhanced Conversation Management Ready")
+>         print("🔗 Dependencies: LiveKitManager, ConversationManager, KeychainManager")
+Only in _iOS/JarvisLive-Sandbox/Sources/App: JarvisLiveSandboxApp.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/AI: AdvancedMCPIntegration.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/AI: AdvancedVoiceCommandProcessor.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/AI: CollaborativeAISessionManager.swift
+diff -r _iOS/JarvisLive-Sandbox/Sources/Core/AI/VoiceClassificationManager.swift _iOS/JarvisLive/Sources/Core/AI/VoiceClassificationManager.swift
+1d0
+< // SANDBOX FILE: For iOS testing/development. See .cursorrules.
+3,4c2,3
+<  * Purpose: Production-ready Voice Classification Manager with JWT authentication and secure Python backend integration
+<  * Issues & Complexity Summary: Enterprise-grade voice command classification with secure authentication, fallback mechanisms, and LiveKit integration
+---
+>  * Purpose: Enhanced voice classification manager with remote API integration and local fallback
+>  * Issues & Complexity Summary: Manages remote voice classification with sophisticated fallback mechanisms
+6,17c5,16
+<  *   - Logic Scope (Est. LoC): ~650
+<  *   - Core Algorithm Complexity: High (JWT authentication, secure networking, voice pipeline integration)
+<  *   - Dependencies: 5 New (Foundation, Combine, KeychainManager, PythonBackendClient, LiveKit)
+<  *   - State Management Complexity: High (Authentication states, connection management, voice processing pipeline)
+<  *   - Novelty/Uncertainty Factor: Medium (JWT token management, secure credential flow)
+<  * AI Pre-Task Self-Assessment (Est. Solution Difficulty %): 85%
+<  * Problem Estimate (Inherent Problem Difficulty %): 80%
+<  * Initial Code Complexity Estimate %: 88%
+<  * Justification for Estimates: Production authentication with voice processing requires careful state management and error handling
+<  * Final Code Complexity (Actual %): 89%
+<  * Overall Result Score (Success & Quality %): 93%
+<  * Key Variances/Learnings: JWT token lifecycle management critical for seamless user experience
+---
+>  *   - Logic Scope (Est. LoC): ~450
+>  *   - Core Algorithm Complexity: Medium-High (Remote API calls, error handling, fallback logic)
+>  *   - Dependencies: 3 New (Foundation, Combine, Network monitoring)
+>  *   - State Management Complexity: Medium (Remote/local state, error recovery)
+>  *   - Novelty/Uncertainty Factor: Medium (Remote API integration with fallbacks)
+>  * AI Pre-Task Self-Assessment (Est. Solution Difficulty %): 80%
+>  * Problem Estimate (Inherent Problem Difficulty %): 75%
+>  * Initial Code Complexity Estimate %: 78%
+>  * Justification for Estimates: Network client with sophisticated fallback and error handling
+>  * Final Code Complexity (Actual %): 82%
+>  * Overall Result Score (Success & Quality %): 94%
+>  * Key Variances/Learnings: Remote classification enhances accuracy but requires robust fallback
+23d21
+< import Speech
+25c23
+< // MARK: - Authentication Models
+---
+> // MARK: - Network Session Protocol for Testing
+27,32c25,26
+< struct TokenRequest: Codable {
+<     let apiKey: String
+< 
+<     enum CodingKeys: String, CodingKey {
+<         case apiKey = "api_key"
+<     }
+---
+> protocol NetworkSession {
+>     func data(for request: URLRequest) async throws -> (Data, URLResponse)
+35,38c29
+< struct TokenResponse: Codable {
+<     let accessToken: String
+<     let tokenType: String
+<     let expiresIn: Int
+---
+> extension URLSession: NetworkSession {}
+40,45c31
+<     enum CodingKeys: String, CodingKey {
+<         case accessToken = "access_token"
+<         case tokenType = "token_type"
+<         case expiresIn = "expires_in"
+<     }
+< }
+---
+> // MARK: - Enhanced Network Models
+47,65c33
+< struct TokenVerificationResponse: Codable {
+<     let userId: String
+<     let tokenType: String
+<     let expiresAt: Int
+<     let issuedAt: Int
+<     let status: String
+< 
+<     enum CodingKeys: String, CodingKey {
+<         case userId = "user_id"
+<         case tokenType = "token_type"
+<         case expiresAt = "expires_at"
+<         case issuedAt = "issued_at"
+<         case status
+<     }
+< }
+< 
+< // MARK: - Voice Classification Models
+< 
+< struct ClassificationRequest: Codable {
+---
+> struct EnhancedClassificationRequest: Codable {
+71,77c39,51
+< 
+<     enum CodingKeys: String, CodingKey {
+<         case text
+<         case userId = "user_id"
+<         case sessionId = "session_id"
+<         case useContext = "use_context"
+<         case includeSuggestions = "include_suggestions"
+---
+>     let conversationHistory: [String]?
+>     let userPreferences: [String: String]?
+>     let processingMode: String // "fast", "accurate", "balanced"
+>     
+>     init(text: String, userId: String, sessionId: String, useContext: Bool = true, includeSuggestions: Bool = true, conversationHistory: [String]? = nil, userPreferences: [String: String]? = nil, processingMode: String = "balanced") {
+>         self.text = text
+>         self.userId = userId
+>         self.sessionId = sessionId
+>         self.useContext = useContext
+>         self.includeSuggestions = includeSuggestions
+>         self.conversationHistory = conversationHistory
+>         self.userPreferences = userPreferences
+>         self.processingMode = processingMode
+81,83c55,57
+< struct ClassificationResult: Codable, Equatable {
+<     static func == (lhs: ClassificationResult, rhs: ClassificationResult) -> Bool {
+<         return lhs.intent == rhs.intent && lhs.category == rhs.category
+---
+> struct EnhancedClassificationResult: Codable, Equatable {
+>     static func == (lhs: EnhancedClassificationResult, rhs: EnhancedClassificationResult) -> Bool {
+>         return lhs.intent == rhs.intent && lhs.category == rhs.category && lhs.confidence == rhs.confidence
+85c59
+< 
+---
+>     
+98,107c72,91
+< 
+<     enum CodingKeys: String, CodingKey {
+<         case category, intent, confidence, parameters, suggestions
+<         case rawText = "raw_text"
+<         case normalizedText = "normalized_text"
+<         case confidenceLevel = "confidence_level"
+<         case contextUsed = "context_used"
+<         case preprocessingTime = "preprocessing_time"
+<         case classificationTime = "classification_time"
+<         case requiresConfirmation = "requires_confirmation"
+---
+>     let fallbackUsed: Bool?
+>     let processingMode: String?
+>     let mcpServerRecommendations: [String]?
+>     
+>     init(category: String, intent: String, confidence: Double, parameters: [String: String], suggestions: [String] = [], rawText: String, normalizedText: String, confidenceLevel: String, contextUsed: Bool, preprocessingTime: Double, classificationTime: Double, requiresConfirmation: Bool, fallbackUsed: Bool? = nil, processingMode: String? = nil, mcpServerRecommendations: [String]? = nil) {
+>         self.category = category
+>         self.intent = intent
+>         self.confidence = confidence
+>         self.parameters = parameters
+>         self.suggestions = suggestions
+>         self.rawText = rawText
+>         self.normalizedText = normalizedText
+>         self.confidenceLevel = confidenceLevel
+>         self.contextUsed = contextUsed
+>         self.preprocessingTime = preprocessingTime
+>         self.classificationTime = classificationTime
+>         self.requiresConfirmation = requiresConfirmation
+>         self.fallbackUsed = fallbackUsed
+>         self.processingMode = processingMode
+>         self.mcpServerRecommendations = mcpServerRecommendations
+109,126c93,110
+< }
+< 
+< // MARK: - Command Execution Models
+< 
+< /// Command execution result - canonical definition for the app
+< /// This is the authoritative definition used throughout the application
+< struct CommandExecutionResult: Codable {
+<     let success: Bool
+<     let message: String
+<     let actionPerformed: String?
+<     let timeSpent: Double
+<     let additionalData: [String: String]?
+< 
+<     enum CodingKeys: String, CodingKey {
+<         case success, message
+<         case actionPerformed = "action_performed"
+<         case timeSpent = "time_spent"
+<         case additionalData = "additional_data"
+---
+>     
+>     // Convert from local VoiceCommand
+>     init(from voiceCommand: VoiceCommand, fallbackUsed: Bool = true) {
+>         self.category = voiceCommand.intent.rawValue
+>         self.intent = voiceCommand.intent.rawValue
+>         self.confidence = voiceCommand.confidence
+>         self.parameters = voiceCommand.parameters.compactMapValues { "\($0)" }
+>         self.suggestions = []
+>         self.rawText = voiceCommand.originalText
+>         self.normalizedText = voiceCommand.originalText.lowercased()
+>         self.confidenceLevel = voiceCommand.confidence > 0.8 ? "high" : voiceCommand.confidence > 0.6 ? "medium" : "low"
+>         self.contextUsed = false
+>         self.preprocessingTime = voiceCommand.processingTime * 0.3
+>         self.classificationTime = voiceCommand.processingTime * 0.7
+>         self.requiresConfirmation = voiceCommand.confidence < 0.7
+>         self.fallbackUsed = fallbackUsed
+>         self.processingMode = "local_fallback"
+>         self.mcpServerRecommendations = voiceCommand.intent.mcpServerIds
+130,135c114
+< struct ContextualSuggestion: Codable, Identifiable {
+<     let id = UUID()
+<     let suggestion: String
+<     let category: String
+<     let confidence: Double
+<     let priority: String
+---
+> // MARK: - Classification Source
+137,139c116,120
+<     enum CodingKeys: String, CodingKey {
+<         case suggestion, category, confidence, priority
+<     }
+---
+> enum ClassificationSource {
+>     case remote
+>     case localFallback
+>     case cached
+>     case hybrid
+142,152c123
+< struct ContextSummaryResponse: Codable {
+<     let userId: String
+<     let sessionId: String
+<     let totalInteractions: Int
+<     let categoriesUsed: [String]
+<     let currentTopic: String?
+<     let recentTopics: [String]
+<     let lastActivity: String
+<     let activeParameters: [String: String]
+<     let sessionDuration: Double
+<     let preferences: [String: String]
+---
+> // MARK: - Enhanced Voice Classification Manager
+154,231d124
+<     enum CodingKeys: String, CodingKey {
+<         case userId = "user_id"
+<         case sessionId = "session_id"
+<         case totalInteractions = "total_interactions"
+<         case categoriesUsed = "categories_used"
+<         case currentTopic = "current_topic"
+<         case recentTopics = "recent_topics"
+<         case lastActivity = "last_activity"
+<         case activeParameters = "active_parameters"
+<         case sessionDuration = "session_duration"
+<         case preferences
+<     }
+< }
+< 
+< struct ContextualSuggestionsResponse: Codable {
+<     let suggestions: [String]
+<     let userId: String
+<     let sessionId: String
+<     let contextAvailable: Bool
+< 
+<     enum CodingKeys: String, CodingKey {
+<         case suggestions
+<         case userId = "user_id"
+<         case sessionId = "session_id"
+<         case contextAvailable = "context_available"
+<     }
+< }
+< 
+< // MARK: - Voice Classification Manager Errors
+< 
+< enum VoiceClassificationError: Error, LocalizedError {
+<     case invalidConfiguration
+<     case authenticationFailed
+<     case tokenExpired
+<     case networkError(Error)
+<     case classificationFailed(String)
+<     case invalidResponse
+<     case keychainError(KeychainManagerError)
+<     case apiKeyNotFound
+<     case invalidAPIKey
+<     case serverError(Int, String)
+< 
+<     var errorDescription: String? {
+<         switch self {
+<         case .invalidConfiguration:
+<             return "Invalid voice classification configuration"
+<         case .authenticationFailed:
+<             return "Authentication failed"
+<         case .tokenExpired:
+<             return "Access token has expired"
+<         case .networkError(let error):
+<             return "Network error: \(error.localizedDescription)"
+<         case .classificationFailed(let message):
+<             return "Voice classification failed: \(message)"
+<         case .invalidResponse:
+<             return "Invalid response from server"
+<         case .keychainError(let error):
+<             return "Keychain error: \(error.localizedDescription)"
+<         case .apiKeyNotFound:
+<             return "API key not found in keychain"
+<         case .invalidAPIKey:
+<             return "Invalid API key provided"
+<         case .serverError(let code, let message):
+<             return "Server error (\(code)): \(message)"
+<         }
+<     }
+< }
+< 
+< // MARK: - Network Session Protocol
+< 
+< protocol NetworkSession {
+<     func data(for request: URLRequest) async throws -> (Data, URLResponse)
+< }
+< 
+< extension URLSession: NetworkSession {}
+< 
+< // MARK: - Voice Classification Manager
+< 
+233c126,127
+< final class VoiceClassificationManager: ObservableObject {
+---
+> class VoiceClassificationManager: ObservableObject {
+>     
+235c129
+< 
+---
+>     
+237,261c131,135
+<     @Published var isAuthenticated: Bool = false
+<     @Published var lastClassification: ClassificationResult?
+<     @Published var connectionStatus: ConnectionStatus = .disconnected
+<     @Published var lastError: VoiceClassificationError?
+< 
+<     // MARK: - Connection Status
+< 
+<     enum ConnectionStatus: Equatable {
+<         case disconnected
+<         case authenticating
+<         case connected
+<         case error(String)
+< 
+<         static func == (lhs: ConnectionStatus, rhs: ConnectionStatus) -> Bool {
+<             switch (lhs, rhs) {
+<             case (.disconnected, .disconnected), (.authenticating, .authenticating), (.connected, .connected):
+<                 return true
+<             case (.error(let lhsError), .error(let rhsError)):
+<                 return lhsError == rhsError
+<             default:
+<                 return false
+<             }
+<         }
+<     }
+< 
+---
+>     @Published var lastClassification: EnhancedClassificationResult?
+>     @Published var classificationSource: ClassificationSource = .remote
+>     @Published var networkAvailable: Bool = true
+>     @Published var remoteServiceAvailable: Bool = true
+>     
+263,279c137,149
+< 
+<     struct Configuration {
+<         let baseURL: URL
+<         let apiKeyService: String
+<         let timeout: TimeInterval
+<         let maxRetryAttempts: Int
+<         let retryDelay: TimeInterval
+< 
+<         static let `default` = Configuration(
+<             baseURL: URL(string: "http://localhost:8000")!,
+<             apiKeyService: "jarvis-live-backend",
+<             timeout: 30.0,
+<             maxRetryAttempts: 3,
+<             retryDelay: 1.0
+<         )
+<     }
+< 
+---
+>     
+>     @Published var useRemoteFirst: Bool = true
+>     @Published var enableCaching: Bool = true
+>     @Published var maxRetries: Int = 2
+>     @Published var timeoutInterval: TimeInterval = 10.0
+>     
+>     // MARK: - Performance Metrics
+>     
+>     @Published private(set) var totalClassifications: Int = 0
+>     @Published private(set) var remoteSuccessRate: Double = 0.0
+>     @Published private(set) var averageRemoteTime: TimeInterval = 0.0
+>     @Published private(set) var averageFallbackTime: TimeInterval = 0.0
+>     
+281,282c151
+< 
+<     private let configuration: Configuration
+---
+>     
+284,292c153,171
+<     private let keychainManager: KeychainManager
+<     private var currentToken: String?
+<     private var tokenExpirationDate: Date?
+<     private var retryAttempts: Int = 0
+< 
+<     // Authentication integration
+<     private var authenticationManager: APIAuthenticationManager?
+<     private var useSharedAuthentication: Bool = false
+< 
+---
+>     private let baseURL = URL(string: "http://localhost:8000")!
+>     private var localFallback: VoiceCommandClassifier?
+>     
+>     // Caching
+>     private var classificationCache: [String: EnhancedClassificationResult] = [:]
+>     private let maxCacheSize = 100
+>     private let cacheExpirationTime: TimeInterval = 300 // 5 minutes
+>     private var cacheTimestamps: [String: Date] = [:]
+>     
+>     // Performance tracking
+>     private var remoteClassificationTimes: [TimeInterval] = []
+>     private var fallbackClassificationTimes: [TimeInterval] = []
+>     private var remoteSuccesses: Int = 0
+>     private var remoteFails: Int = 0
+>     
+>     // Context management
+>     private var conversationHistory: [String] = []
+>     private let maxHistoryLength = 10
+>     
+294,309c173,176
+<     private let sessionId: String = UUID().uuidString
+<     private var userId: String = "default_user"
+< 
+<     // Voice integration properties
+<     weak var voiceDelegate: VoiceActivityDelegate?
+< 
+<     // MARK: - Initialization
+< 
+<     @MainActor
+<     init(
+<         configuration: Configuration = .default,
+<         session: NetworkSession = URLSession.shared,
+<         keychainManager: KeychainManager? = nil,
+<         authenticationManager: APIAuthenticationManager? = nil
+<     ) {
+<         self.configuration = configuration
+---
+>     private let sessionId = UUID().uuidString
+>     private let userId = "default_user" // Should be configurable
+>     
+>     init(session: NetworkSession = URLSession.shared, localFallback: VoiceCommandClassifier? = nil) {
+311,322c178,181
+<         self.keychainManager = keychainManager ?? KeychainManager(service: "com.jarvis.voice-classification")
+< 
+<         // Integrate with main authentication manager if provided
+<         if let authManager = authenticationManager {
+<             self.authenticationManager = authManager
+<             self.useSharedAuthentication = true
+<         }
+< 
+<         // Try to restore authentication on initialization
+<         Task {
+<             await restoreAuthentication()
+<         }
+---
+>         self.localFallback = localFallback ?? VoiceCommandClassifier()
+>         
+>         setupPerformanceMonitoring()
+>         checkNetworkAvailability()
+324,341c183,198
+< 
+<     // MARK: - Authentication Management
+< 
+<     /// Authenticate with the Python backend using API key and obtain JWT token
+<     func authenticate() async throws {
+<         connectionStatus = .authenticating
+< 
+<         do {
+<             let apiKey: String
+< 
+<             // Use shared authentication manager if available
+<             if useSharedAuthentication, let authManager = authenticationManager {
+<                 // Get API key from shared authentication manager
+<                 apiKey = try await authManager.getAPIKey()
+<             } else {
+<                 // Get API key from local keychain
+<                 guard let localApiKey = try? keychainManager.getCredential(forKey: "api_key") else {
+<                     throw VoiceClassificationError.apiKeyNotFound
+---
+>     
+>     // MARK: - Network Availability
+>     
+>     private func checkNetworkAvailability() {
+>         // Simplified network check - in production, use Network framework
+>         Task {
+>             do {
+>                 let url = baseURL.appendingPathComponent("health")
+>                 let request = URLRequest(url: url)
+>                 let (_, response) = try await session.data(for: request)
+>                 
+>                 if let httpResponse = response as? HTTPURLResponse {
+>                     await MainActor.run {
+>                         self.networkAvailable = true
+>                         self.remoteServiceAvailable = httpResponse.statusCode == 200
+>                     }
+343c200,204
+<                 apiKey = localApiKey
+---
+>             } catch {
+>                 await MainActor.run {
+>                     self.networkAvailable = false
+>                     self.remoteServiceAvailable = false
+>                 }
+345,377d205
+< 
+<             // Request JWT token
+<             let tokenResponse = try await requestJWTToken(apiKey: apiKey)
+< 
+<             // Store token and expiration
+<             currentToken = tokenResponse.accessToken
+<             tokenExpirationDate = Date().addingTimeInterval(TimeInterval(tokenResponse.expiresIn))
+< 
+<             // Verify token works
+<             _ = try await verifyToken()
+< 
+<             isAuthenticated = true
+<             connectionStatus = .connected
+<             retryAttempts = 0
+< 
+<             print("✅ Voice Classification Manager authenticated successfully")
+<         } catch {
+<             currentToken = nil
+<             tokenExpirationDate = nil
+<             isAuthenticated = false
+<             connectionStatus = .error(error.localizedDescription)
+< 
+<             let classificationError: VoiceClassificationError
+<             if let apiError = error as? APIAuthenticationError {
+<                 classificationError = mapAPIAuthError(apiError)
+<             } else if let kcError = error as? KeychainManagerError {
+<                 classificationError = .keychainError(kcError)
+<             } else {
+<                 classificationError = .authenticationFailed
+<             }
+< 
+<             lastError = classificationError
+<             throw classificationError
+380,490c208,218
+< 
+<     /// Map API authentication errors to voice classification errors
+<     private func mapAPIAuthError(_ error: APIAuthenticationError) -> VoiceClassificationError {
+<         switch error {
+<         case .invalidAPIKey, .unauthorizedAccess:
+<             return .invalidAPIKey
+<         case .tokenExpired:
+<             return .tokenExpired
+<         case .networkError(let message):
+<             return .networkError(NSError(domain: "VoiceClassification", code: -1, userInfo: [NSLocalizedDescriptionKey: message]))
+<         case .biometricAuthenticationFailed, .biometricNotAvailable:
+<             return .authenticationFailed
+<         case .keychainError(let message):
+<             return .keychainError(.encryptionFailed) // Map to a generic keychain error
+<         case .serverError(let statusCode, let message):
+<             return .serverError(statusCode, message)
+<         case .missingCredentials:
+<             return .apiKeyNotFound
+<         default:
+<             return .authenticationFailed
+<         }
+<     }
+< 
+<     /// Request JWT token from the backend
+<     private func requestJWTToken(apiKey: String) async throws -> TokenResponse {
+<         let url = configuration.baseURL.appendingPathComponent("/auth/token")
+< 
+<         var request = URLRequest(url: url)
+<         request.httpMethod = "POST"
+<         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+<         request.timeoutInterval = configuration.timeout
+< 
+<         let tokenRequest = TokenRequest(apiKey: apiKey)
+<         let encoder = JSONEncoder()
+<         request.httpBody = try encoder.encode(tokenRequest)
+< 
+<         let (data, response) = try await session.data(for: request)
+< 
+<         guard let httpResponse = response as? HTTPURLResponse else {
+<             throw VoiceClassificationError.invalidResponse
+<         }
+< 
+<         guard httpResponse.statusCode == 200 else {
+<             let errorMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
+<             throw VoiceClassificationError.serverError(httpResponse.statusCode, errorMessage)
+<         }
+< 
+<         let decoder = JSONDecoder()
+<         return try decoder.decode(TokenResponse.self, from: data)
+<     }
+< 
+<     /// Verify current JWT token
+<     private func verifyToken() async throws -> TokenVerificationResponse {
+<         guard let token = currentToken else {
+<             throw VoiceClassificationError.authenticationFailed
+<         }
+< 
+<         let url = configuration.baseURL.appendingPathComponent("/auth/verify")
+< 
+<         var request = URLRequest(url: url)
+<         request.httpMethod = "GET"
+<         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+<         request.timeoutInterval = configuration.timeout
+< 
+<         let (data, response) = try await session.data(for: request)
+< 
+<         guard let httpResponse = response as? HTTPURLResponse else {
+<             throw VoiceClassificationError.invalidResponse
+<         }
+< 
+<         guard httpResponse.statusCode == 200 else {
+<             throw VoiceClassificationError.tokenExpired
+<         }
+< 
+<         let decoder = JSONDecoder()
+<         return try decoder.decode(TokenVerificationResponse.self, from: data)
+<     }
+< 
+<     /// Check if current token is valid and not expired
+<     private func isTokenValid() -> Bool {
+<         guard let token = currentToken,
+<               let expirationDate = tokenExpirationDate else {
+<             return false
+<         }
+< 
+<         // Check if token expires in the next 5 minutes
+<         let bufferTime: TimeInterval = 5 * 60 // 5 minutes
+<         return Date().addingTimeInterval(bufferTime) < expirationDate
+<     }
+< 
+<     /// Ensure we have a valid token, refreshing if necessary
+<     private func ensureValidToken() async throws {
+<         if !isTokenValid() {
+<             try await authenticate()
+<         }
+<     }
+< 
+<     /// Restore authentication from stored credentials
+<     private func restoreAuthentication() async {
+<         do {
+<             try await authenticate()
+<         } catch {
+<             print("⚠️ Failed to restore authentication: \(error.localizedDescription)")
+<             // Don't throw error during initialization
+<         }
+<     }
+< 
+<     // MARK: - Voice Classification Methods
+< 
+<     /// Classify voice command with live Python backend integration and JWT authentication
+<     func classifyVoiceCommand(_ text: String, userId: String? = nil, sessionId: String? = nil) async throws -> ClassificationResult {
+---
+>     
+>     // MARK: - Enhanced Classification Method
+>     
+>     func classifyVoiceCommand(
+>         _ text: String,
+>         useContext: Bool = true,
+>         includeSuggestions: Bool = true,
+>         processingMode: String = "balanced"
+>     ) async throws -> EnhancedClassificationResult {
+>         
+>         let startTime = Date()
+493,542c221,228
+< 
+<         do {
+<             // Get JWT token from AuthenticationStateManager
+<             let jwtToken = try await getJWTTokenFromAuthManager()
+< 
+<             // Use provided or default values
+<             let finalUserId = userId ?? self.userId
+<             let finalSessionId = sessionId ?? self.sessionId
+< 
+<             // Make the classification request with live backend
+<             let result = try await performLiveClassificationRequest(
+<                 text: text,
+<                 userId: finalUserId,
+<                 sessionId: finalSessionId,
+<                 jwtToken: jwtToken
+<             )
+< 
+<             lastClassification = result
+<             retryAttempts = 0
+< 
+<             // Update connection status
+<             connectionStatus = .connected
+<             isAuthenticated = true
+< 
+<             // Notify voice delegate if available
+<             voiceDelegate?.speechRecognitionResult(text, isFinal: true)
+< 
+<             return result
+<         } catch let error as VoiceClassificationError {
+<             lastError = error
+< 
+<             // Retry logic for certain errors
+<             if retryAttempts < configuration.maxRetryAttempts {
+<                 switch error {
+<                 case .tokenExpired, .authenticationFailed:
+<                     retryAttempts += 1
+<                     try await Task.sleep(nanoseconds: UInt64(configuration.retryDelay * 1_000_000_000))
+<                     return try await classifyVoiceCommand(text, userId: userId, sessionId: sessionId)
+<                 default:
+<                     break
+<                 }
+<             }
+< 
+<             connectionStatus = .error(error.localizedDescription)
+<             throw error
+<         } catch {
+<             let classificationError = VoiceClassificationError.networkError(error)
+<             lastError = classificationError
+<             connectionStatus = .error(error.localizedDescription)
+<             throw classificationError
+---
+>         
+>         // Add to conversation history
+>         addToHistory(text)
+>         
+>         // Check cache first
+>         if enableCaching, let cached = getCachedResult(for: text) {
+>             classificationSource = .cached
+>             return cached
+544,553c230,260
+<     }
+< 
+<     /// Get JWT token from AuthenticationStateManager
+<     private func getJWTTokenFromAuthManager() async throws -> String {
+<         // Access the global authentication manager
+<         // This assumes there's a shared instance available
+<         guard let authManager = authenticationManager else {
+<             // Fallback to local token if no shared auth manager
+<             if let token = currentToken, isTokenValid() {
+<                 return token
+---
+>         
+>         var result: EnhancedClassificationResult
+>         var source: ClassificationSource
+>         
+>         // Try remote classification first if enabled and available
+>         if useRemoteFirst && remoteServiceAvailable && networkAvailable {
+>             do {
+>                 result = try await classifyRemotely(
+>                     text: text,
+>                     useContext: useContext,
+>                     includeSuggestions: includeSuggestions,
+>                     processingMode: processingMode
+>                 )
+>                 source = .remote
+>                 
+>                 // Track remote success
+>                 remoteSuccesses += 1
+>                 let processingTime = Date().timeIntervalSince(startTime)
+>                 remoteClassificationTimes.append(processingTime)
+>                 
+>             } catch {
+>                 print("⚠️ Remote classification failed: \(error)")
+>                 
+>                 // Fall back to local classification
+>                 result = try await classifyLocally(text)
+>                 source = .localFallback
+>                 
+>                 // Track remote failure
+>                 remoteFails += 1
+>                 let processingTime = Date().timeIntervalSince(startTime)
+>                 fallbackClassificationTimes.append(processingTime)
+555c262,268
+<             throw VoiceClassificationError.authenticationFailed
+---
+>         } else {
+>             // Use local classification directly
+>             result = try await classifyLocally(text)
+>             source = .localFallback
+>             
+>             let processingTime = Date().timeIntervalSince(startTime)
+>             fallbackClassificationTimes.append(processingTime)
+557,571c270,273
+< 
+<         // Use the authentication manager's JWT token
+<         do {
+<             if let authStateManager = authManager as? AuthenticationStateManager {
+<                 return try await authStateManager.getStoredJWTToken()
+<             } else {
+<                 // Fallback for older API authentication manager
+<                 try await authenticate()
+<                 guard let token = currentToken else {
+<                     throw VoiceClassificationError.authenticationFailed
+<                 }
+<                 return token
+<             }
+<         } catch {
+<             throw VoiceClassificationError.authenticationFailed
+---
+>         
+>         // Cache the result
+>         if enableCaching {
+>             cacheResult(result, for: text)
+572a275,284
+>         
+>         // Update state
+>         lastClassification = result
+>         classificationSource = source
+>         totalClassifications += 1
+>         
+>         // Update performance metrics
+>         updatePerformanceMetrics()
+>         
+>         return result
+574,576c286,289
+< 
+<     /// Perform live classification request with Python backend
+<     private func performLiveClassificationRequest(
+---
+>     
+>     // MARK: - Remote Classification
+>     
+>     private func classifyRemotely(
+578,585c291,297
+<         userId: String,
+<         sessionId: String,
+<         jwtToken: String
+<     ) async throws -> ClassificationResult {
+<         let backendURL = getBackendURL()
+<         let classifyURL = URL(string: "\(backendURL)/voice/classify")!
+< 
+<         var request = URLRequest(url: classifyURL)
+---
+>         useContext: Bool,
+>         includeSuggestions: Bool,
+>         processingMode: String
+>     ) async throws -> EnhancedClassificationResult {
+>         
+>         let url = baseURL.appendingPathComponent("voice/classify")
+>         var request = URLRequest(url: url)
+588,591c300,302
+<         request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
+<         request.timeoutInterval = configuration.timeout
+< 
+<         let requestBody = VoiceClassificationRequest(
+---
+>         request.timeoutInterval = timeoutInterval
+>         
+>         let requestBody = EnhancedClassificationRequest(
+595,596c306,309
+<             useContext: true,
+<             includeSuggestions: true
+---
+>             useContext: useContext,
+>             includeSuggestions: includeSuggestions,
+>             conversationHistory: useContext ? Array(conversationHistory.suffix(5)) : nil,
+>             processingMode: processingMode
+598c311
+< 
+---
+>         
+599a313
+>         encoder.keyEncodingStrategy = .convertToSnakeCase
+601,610c315,330
+< 
+<         do {
+<             let (data, response) = try await session.data(for: request)
+< 
+<             guard let httpResponse = response as? HTTPURLResponse else {
+<                 throw VoiceClassificationError.invalidResponse
+<             }
+< 
+<             switch httpResponse.statusCode {
+<             case 200:
+---
+>         
+>         var lastError: Error?
+>         
+>         // Retry logic
+>         for attempt in 1...maxRetries {
+>             do {
+>                 let (data, response) = try await session.data(for: request)
+>                 
+>                 guard let httpResponse = response as? HTTPURLResponse else {
+>                     throw ClassificationError.invalidResponse
+>                 }
+>                 
+>                 guard httpResponse.statusCode == 200 else {
+>                     throw ClassificationError.serverError(httpResponse.statusCode)
+>                 }
+>                 
+612,625c332,364
+<                 return try decoder.decode(ClassificationResult.self, from: data)
+< 
+<             case 401:
+<                 throw VoiceClassificationError.tokenExpired
+< 
+<             case 403:
+<                 throw VoiceClassificationError.authenticationFailed
+< 
+<             case 503:
+<                 throw VoiceClassificationError.serverError(503, "Backend service unavailable")
+< 
+<             default:
+<                 let errorMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
+<                 throw VoiceClassificationError.serverError(httpResponse.statusCode, errorMessage)
+---
+>                 decoder.keyDecodingStrategy = .convertFromSnakeCase
+>                 var result = try decoder.decode(EnhancedClassificationResult.self, from: data)
+>                 
+>                 // Mark as non-fallback
+>                 result = EnhancedClassificationResult(
+>                     category: result.category,
+>                     intent: result.intent,
+>                     confidence: result.confidence,
+>                     parameters: result.parameters,
+>                     suggestions: result.suggestions,
+>                     rawText: result.rawText,
+>                     normalizedText: result.normalizedText,
+>                     confidenceLevel: result.confidenceLevel,
+>                     contextUsed: result.contextUsed,
+>                     preprocessingTime: result.preprocessingTime,
+>                     classificationTime: result.classificationTime,
+>                     requiresConfirmation: result.requiresConfirmation,
+>                     fallbackUsed: false,
+>                     processingMode: result.processingMode,
+>                     mcpServerRecommendations: result.mcpServerRecommendations
+>                 )
+>                 
+>                 return result
+>                 
+>             } catch {
+>                 lastError = error
+>                 print("❌ Classification attempt \(attempt) failed: \(error)")
+>                 
+>                 if attempt < maxRetries {
+>                     // Wait before retry with exponential backoff
+>                     let delay = TimeInterval(pow(2.0, Double(attempt - 1)))
+>                     try await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+>                 }
+627,639d365
+<         } catch let error as DecodingError {
+<             throw VoiceClassificationError.invalidResponse
+<         } catch let error as URLError {
+<             switch error.code {
+<             case .notConnectedToInternet, .networkConnectionLost, .timedOut:
+<                 throw VoiceClassificationError.networkError(error)
+<             default:
+<                 throw VoiceClassificationError.networkError(error)
+<             }
+<         } catch let vcError as VoiceClassificationError {
+<             throw vcError
+<         } catch {
+<             throw VoiceClassificationError.networkError(error)
+640a367,373
+>         
+>         // All retries failed
+>         await MainActor.run {
+>             self.remoteServiceAvailable = false
+>         }
+>         
+>         throw lastError ?? ClassificationError.maxRetriesExceeded
+642,646c375,380
+< 
+<     /// Get backend URL from launch arguments or environment
+<     private func getBackendURL() -> String {
+<         if let urlFromArgs = ProcessInfo.processInfo.environment["PythonBackendURL"] {
+<             return urlFromArgs
+---
+>     
+>     // MARK: - Local Fallback Classification
+>     
+>     private func classifyLocally(_ text: String) async throws -> EnhancedClassificationResult {
+>         guard let localFallback = localFallback else {
+>             throw ClassificationError.localFallbackNotAvailable
+648,657c382,384
+< 
+<         // Check launch arguments for testing
+<         let args = ProcessInfo.processInfo.arguments
+<         if let urlIndex = args.firstIndex(of: "-PythonBackendURL"),
+<            urlIndex + 1 < args.count {
+<             return args[urlIndex + 1]
+<         }
+< 
+<         // Default to local development server
+<         return "http://localhost:8000"
+---
+>         
+>         let voiceCommand = await localFallback.classifyVoiceCommand(text)
+>         return EnhancedClassificationResult(from: voiceCommand, fallbackUsed: true)
+659,667c386,396
+< 
+<     /// Perform the actual classification request
+<     private func performClassificationRequest(
+<         text: String,
+<         userId: String,
+<         sessionId: String
+<     ) async throws -> ClassificationResult {
+<         guard let token = currentToken else {
+<             throw VoiceClassificationError.authenticationFailed
+---
+>     
+>     // MARK: - Caching
+>     
+>     private func getCachedResult(for text: String) -> EnhancedClassificationResult? {
+>         let key = text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+>         
+>         // Check if cache entry exists and is not expired
+>         if let result = classificationCache[key],
+>            let timestamp = cacheTimestamps[key],
+>            Date().timeIntervalSince(timestamp) < cacheExpirationTime {
+>             return result
+669,697c398,420
+< 
+<         let url = configuration.baseURL.appendingPathComponent("/voice/classify")
+< 
+<         var request = URLRequest(url: url)
+<         request.httpMethod = "POST"
+<         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+<         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+<         request.timeoutInterval = configuration.timeout
+< 
+<         let requestBody = ClassificationRequest(
+<             text: text,
+<             userId: userId,
+<             sessionId: sessionId,
+<             useContext: true,
+<             includeSuggestions: true
+<         )
+< 
+<         let encoder = JSONEncoder()
+<         request.httpBody = try encoder.encode(requestBody)
+< 
+<         let (data, response) = try await session.data(for: request)
+< 
+<         guard let httpResponse = response as? HTTPURLResponse else {
+<             throw VoiceClassificationError.invalidResponse
+<         }
+< 
+<         guard httpResponse.statusCode == 200 else {
+<             if httpResponse.statusCode == 401 {
+<                 throw VoiceClassificationError.tokenExpired
+---
+>         
+>         // Remove expired entry
+>         classificationCache.removeValue(forKey: key)
+>         cacheTimestamps.removeValue(forKey: key)
+>         
+>         return nil
+>     }
+>     
+>     private func cacheResult(_ result: EnhancedClassificationResult, for text: String) {
+>         let key = text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+>         
+>         classificationCache[key] = result
+>         cacheTimestamps[key] = Date()
+>         
+>         // Maintain cache size
+>         if classificationCache.count > maxCacheSize {
+>             // Remove oldest entries
+>             let sortedKeys = cacheTimestamps.sorted { $0.value < $1.value }.map { $0.key }
+>             let keysToRemove = sortedKeys.prefix(20)
+>             
+>             for key in keysToRemove {
+>                 classificationCache.removeValue(forKey: key)
+>                 cacheTimestamps.removeValue(forKey: key)
+699,701d421
+< 
+<             let errorMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
+<             throw VoiceClassificationError.serverError(httpResponse.statusCode, errorMessage)
+703,705d422
+< 
+<         let decoder = JSONDecoder()
+<         return try decoder.decode(ClassificationResult.self, from: data)
+707,715c424,431
+< 
+<     // MARK: - Context Management
+< 
+<     /// Get contextual suggestions based on conversation history
+<     func getContextualSuggestions(userId: String? = nil, sessionId: String? = nil) async throws -> [ContextualSuggestion] {
+<         try await ensureValidToken()
+< 
+<         guard let token = currentToken else {
+<             throw VoiceClassificationError.authenticationFailed
+---
+>     
+>     // MARK: - History Management
+>     
+>     private func addToHistory(_ text: String) {
+>         conversationHistory.append(text)
+>         
+>         if conversationHistory.count > maxHistoryLength {
+>             conversationHistory.removeFirst()
+717,736c433,440
+< 
+<         let finalUserId = userId ?? self.userId
+<         let finalSessionId = sessionId ?? self.sessionId
+< 
+<         let url = configuration.baseURL.appendingPathComponent("/context/\(finalUserId)/\(finalSessionId)/suggestions")
+< 
+<         var request = URLRequest(url: url)
+<         request.httpMethod = "GET"
+<         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+<         request.timeoutInterval = configuration.timeout
+< 
+<         let (data, response) = try await session.data(for: request)
+< 
+<         guard let httpResponse = response as? HTTPURLResponse else {
+<             throw VoiceClassificationError.invalidResponse
+<         }
+< 
+<         guard httpResponse.statusCode == 200 else {
+<             if httpResponse.statusCode == 401 {
+<                 throw VoiceClassificationError.tokenExpired
+---
+>     }
+>     
+>     // MARK: - Performance Monitoring
+>     
+>     private func setupPerformanceMonitoring() {
+>         Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { [weak self] _ in
+>             Task { @MainActor in
+>                 self?.updatePerformanceMetrics()
+738,739d441
+<             let errorMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
+<             throw VoiceClassificationError.serverError(httpResponse.statusCode, errorMessage)
+741,753d442
+< 
+<         let decoder = JSONDecoder()
+<         let response = try decoder.decode(ContextualSuggestionsResponse.self, from: data)
+< 
+<         // Convert to ContextualSuggestion objects
+<         return response.suggestions.enumerated().map { index, suggestion in
+<             ContextualSuggestion(
+<                 suggestion: suggestion,
+<                 category: "contextual",
+<                 confidence: 0.8 - (Double(index) * 0.1), // Decreasing confidence
+<                 priority: index < 3 ? "high" : "medium"
+<             )
+<         }
+755,761c444,452
+< 
+<     /// Get context summary for current session
+<     func getContextSummary(userId: String? = nil, sessionId: String? = nil) async throws -> ContextSummaryResponse {
+<         try await ensureValidToken()
+< 
+<         guard let token = currentToken else {
+<             throw VoiceClassificationError.authenticationFailed
+---
+>     
+>     private func updatePerformanceMetrics() {
+>         // Calculate remote success rate
+>         let totalRemoteAttempts = remoteSuccesses + remoteFails
+>         remoteSuccessRate = totalRemoteAttempts > 0 ? Double(remoteSuccesses) / Double(totalRemoteAttempts) : 0.0
+>         
+>         // Calculate average processing times
+>         if !remoteClassificationTimes.isEmpty {
+>             averageRemoteTime = remoteClassificationTimes.reduce(0, +) / Double(remoteClassificationTimes.count)
+763,777c454,456
+< 
+<         let finalUserId = userId ?? self.userId
+<         let finalSessionId = sessionId ?? self.sessionId
+< 
+<         let url = configuration.baseURL.appendingPathComponent("/context/\(finalUserId)/\(finalSessionId)/summary")
+< 
+<         var request = URLRequest(url: url)
+<         request.httpMethod = "GET"
+<         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+<         request.timeoutInterval = configuration.timeout
+< 
+<         let (data, response) = try await session.data(for: request)
+< 
+<         guard let httpResponse = response as? HTTPURLResponse else {
+<             throw VoiceClassificationError.invalidResponse
+---
+>         
+>         if !fallbackClassificationTimes.isEmpty {
+>             averageFallbackTime = fallbackClassificationTimes.reduce(0, +) / Double(fallbackClassificationTimes.count)
+779,785c458,461
+< 
+<         guard httpResponse.statusCode == 200 else {
+<             if httpResponse.statusCode == 401 {
+<                 throw VoiceClassificationError.tokenExpired
+<             }
+<             let errorMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
+<             throw VoiceClassificationError.serverError(httpResponse.statusCode, errorMessage)
+---
+>         
+>         // Clean up old metrics
+>         if remoteClassificationTimes.count > 100 {
+>             remoteClassificationTimes.removeFirst(50)
+787,835c463,465
+< 
+<         let decoder = JSONDecoder()
+<         return try decoder.decode(ContextSummaryResponse.self, from: data)
+<     }
+< 
+<     // MARK: - Command Execution
+< 
+<     /// Execute a classified voice command (placeholder for future MCP integration)
+<     func executeClassifiedCommand(_ result: ClassificationResult) async throws -> CommandExecutionResult {
+<         // This would integrate with MCP servers for actual command execution
+<         // For now, we'll return a mock result
+< 
+<         let startTime = Date()
+< 
+<         // Simulate command execution based on category
+<         let success: Bool
+<         let message: String
+<         let actionPerformed: String?
+< 
+<         switch result.category {
+<         case "document_generation":
+<             success = true
+<             message = "Document generation command processed"
+<             actionPerformed = "document_created"
+< 
+<         case "email_management":
+<             success = true
+<             message = "Email command processed"
+<             actionPerformed = "email_sent"
+< 
+<         case "calendar_scheduling":
+<             success = true
+<             message = "Calendar event command processed"
+<             actionPerformed = "event_created"
+< 
+<         case "web_search":
+<             success = true
+<             message = "Search command processed"
+<             actionPerformed = "search_performed"
+< 
+<         case "general_conversation":
+<             success = true
+<             message = "Conversation response generated"
+<             actionPerformed = "response_generated"
+< 
+<         default:
+<             success = false
+<             message = "Unknown command category: \(result.category)"
+<             actionPerformed = nil
+---
+>         
+>         if fallbackClassificationTimes.count > 100 {
+>             fallbackClassificationTimes.removeFirst(50)
+837,846d466
+< 
+<         let timeSpent = Date().timeIntervalSince(startTime)
+< 
+<         return CommandExecutionResult(
+<             success: success,
+<             message: message,
+<             actionPerformed: actionPerformed,
+<             timeSpent: timeSpent,
+<             additionalData: result.parameters
+<         )
+848,861c468,473
+< 
+<     // MARK: - Configuration Management
+< 
+<     /// Configure voice classification manager with shared authentication
+<     func configureWithSharedAuthentication(_ authManager: APIAuthenticationManager) {
+<         self.authenticationManager = authManager
+<         self.useSharedAuthentication = true
+< 
+<         // Re-initialize authentication if the auth manager is already authenticated
+<         if authManager.isAuthenticated {
+<             Task {
+<                 try? await authenticate()
+<             }
+<         }
+---
+>     
+>     // MARK: - Public Configuration Methods
+>     
+>     func enableRemoteClassification() {
+>         useRemoteFirst = true
+>         checkNetworkAvailability()
+863,871c475,477
+< 
+<     /// Store API key in keychain
+<     func storeAPIKey(_ apiKey: String) throws {
+<         do {
+<             try keychainManager.storeCredential(apiKey, forKey: "api_key")
+<             print("✅ API key stored successfully")
+<         } catch {
+<             throw VoiceClassificationError.keychainError(error as? KeychainManagerError ?? .encryptionFailed)
+<         }
+---
+>     
+>     func disableRemoteClassification() {
+>         useRemoteFirst = false
+873,881c479,482
+< 
+<     /// Check if API key is stored
+<     func hasStoredAPIKey() -> Bool {
+<         do {
+<             _ = try keychainManager.getCredential(forKey: "api_key")
+<             return true
+<         } catch {
+<             return false
+<         }
+---
+>     
+>     func clearCache() {
+>         classificationCache.removeAll()
+>         cacheTimestamps.removeAll()
+883,889c484,495
+< 
+<     /// Remove stored API key and clear authentication
+<     func clearAuthentication() async {
+<         do {
+<             try keychainManager.deleteCredential(forKey: "api_key")
+<         } catch {
+<             print("⚠️ Failed to clear API key: \(error.localizedDescription)")
+---
+>     
+>     func clearHistory() {
+>         conversationHistory.removeAll()
+>     }
+>     
+>     func updateConfiguration(
+>         maxRetries: Int? = nil,
+>         timeoutInterval: TimeInterval? = nil,
+>         enableCaching: Bool? = nil
+>     ) {
+>         if let maxRetries = maxRetries {
+>             self.maxRetries = max(1, min(5, maxRetries))
+891,897c497,507
+< 
+<         currentToken = nil
+<         tokenExpirationDate = nil
+<         isAuthenticated = false
+<         connectionStatus = .disconnected
+< 
+<         print("🔓 Authentication cleared")
+---
+>         
+>         if let timeoutInterval = timeoutInterval {
+>             self.timeoutInterval = max(5.0, min(30.0, timeoutInterval))
+>         }
+>         
+>         if let enableCaching = enableCaching {
+>             self.enableCaching = enableCaching
+>             if !enableCaching {
+>                 clearCache()
+>             }
+>         }
+899,902c509,525
+< 
+<     /// Set user ID for classification requests
+<     func setUserId(_ userId: String) {
+<         self.userId = userId
+---
+>     
+>     // MARK: - Performance Metrics Access
+>     
+>     func getPerformanceMetrics() -> (
+>         totalClassifications: Int,
+>         remoteSuccessRate: Double,
+>         averageRemoteTime: TimeInterval,
+>         averageFallbackTime: TimeInterval,
+>         cacheSize: Int
+>     ) {
+>         return (
+>             totalClassifications,
+>             remoteSuccessRate,
+>             averageRemoteTime,
+>             averageFallbackTime,
+>             classificationCache.count
+>         )
+904,914c527,530
+< 
+<     // MARK: - Health and Metrics
+< 
+<     /// Perform health check on the voice classification service
+<     func performHealthCheck() async throws -> Bool {
+<         let url = configuration.baseURL.appendingPathComponent("/auth/health")
+< 
+<         var request = URLRequest(url: url)
+<         request.httpMethod = "GET"
+<         request.timeoutInterval = 10.0 // Shorter timeout for health checks
+< 
+---
+>     
+>     // MARK: - Health Check
+>     
+>     func performHealthCheck() async -> Bool {
+915a532,533
+>             let url = baseURL.appendingPathComponent("health")
+>             let request = URLRequest(url: url)
+917,919c535,544
+< 
+<             guard let httpResponse = response as? HTTPURLResponse else {
+<                 return false
+---
+>             
+>             if let httpResponse = response as? HTTPURLResponse {
+>                 let isHealthy = httpResponse.statusCode == 200
+>                 
+>                 await MainActor.run {
+>                     self.networkAvailable = true
+>                     self.remoteServiceAvailable = isHealthy
+>                 }
+>                 
+>                 return isHealthy
+921,922c546,548
+< 
+<             return httpResponse.statusCode == 200
+---
+>             
+>             return false
+>             
+923a550,554
+>             await MainActor.run {
+>                 self.networkAvailable = false
+>                 self.remoteServiceAvailable = false
+>             }
+>             
+927,948d557
+< 
+<     /// Get current authentication status information
+<     func getAuthenticationStatus() -> [String: Any] {
+<         var status: [String: Any] = [
+<             "isAuthenticated": isAuthenticated,
+<             "connectionStatus": String(describing: connectionStatus),
+<             "hasStoredAPIKey": hasStoredAPIKey(),
+<             "userId": userId,
+<             "sessionId": sessionId,
+<         ]
+< 
+<         if let tokenExpiration = tokenExpirationDate {
+<             status["tokenExpiresAt"] = ISO8601DateFormatter().string(from: tokenExpiration)
+<             status["tokenValid"] = isTokenValid()
+<         }
+< 
+<         if let lastError = lastError {
+<             status["lastError"] = lastError.localizedDescription
+<         }
+< 
+<         return status
+<     }
+951c560
+< // MARK: - Voice Activity Integration
+---
+> // MARK: - Classification Errors
+953,973c562,583
+< extension VoiceClassificationManager {
+<     /// Process voice input with automatic classification
+<     func processVoiceInput(_ text: String) async {
+<         do {
+<             let result = try await classifyVoiceCommand(text)
+< 
+<             // Execute the command if confidence is high enough
+<             if result.confidence > 0.7 {
+<                 let executionResult = try await executeClassifiedCommand(result)
+< 
+<                 // Notify delegate about AI response
+<                 let responseText = executionResult.success ? executionResult.message : "I couldn't process that command"
+<                 voiceDelegate?.aiResponseReceived(responseText, isComplete: true)
+<             } else {
+<                 // Low confidence, ask for clarification
+<                 let clarificationText = "I'm not sure what you meant. Could you please rephrase that?"
+<                 voiceDelegate?.aiResponseReceived(clarificationText, isComplete: true)
+<             }
+<         } catch {
+<             print("❌ Voice processing error: \(error.localizedDescription)")
+<             voiceDelegate?.aiResponseReceived("Sorry, I encountered an error processing your request.", isComplete: true)
+---
+> enum ClassificationError: LocalizedError {
+>     case invalidResponse
+>     case serverError(Int)
+>     case maxRetriesExceeded
+>     case localFallbackNotAvailable
+>     case networkUnavailable
+>     case timeoutExceeded
+>     
+>     var errorDescription: String? {
+>         switch self {
+>         case .invalidResponse:
+>             return "Invalid response from classification server"
+>         case .serverError(let code):
+>             return "Server error with status code: \(code)"
+>         case .maxRetriesExceeded:
+>             return "Maximum retry attempts exceeded"
+>         case .localFallbackNotAvailable:
+>             return "Local fallback classifier not available"
+>         case .networkUnavailable:
+>             return "Network connection unavailable"
+>         case .timeoutExceeded:
+>             return "Classification request timed out"
+975,979d584
+<     }
+< 
+<     /// Set the voice activity delegate for integration with LiveKitManager
+<     func setVoiceDelegate(_ delegate: VoiceActivityDelegate) {
+<         self.voiceDelegate = delegate
+981c586
+< }
+---
+> }
+\ No newline at end of file
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/AI: VoiceCommandClassifier.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/AI: VoiceCommandClassifierDemo.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/AI: VoiceCommandExamples.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/AI: VoiceCommandExecutor.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/AI: VoiceCommandLearning.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/AI: VoiceGuidanceSystem.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/AI: VoiceWorkflowAutomation.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/Audio: CollaborativeVoiceTranscriptionManager.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/Audio: ElevenLabsVoiceSynthesizer.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/Audio: LiveKitCollaborationManager.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/Audio: LiveKitManager.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core: Camera
+Only in _iOS/JarvisLive-Sandbox/Sources/Core: Collaboration
+Only in _iOS/JarvisLive-Sandbox/Sources/Core: Data
+Only in _iOS/JarvisLive/Sources/Core: LiveKitManager.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/MCP: MCPContextExamples.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/MCP: MCPContextManager.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/MCP: MCPIntegrationManager.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/MCP: MCPModels.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/MCP: MCPServerManager.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/MCP: MockMCPServerManager.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/Network: PythonBackendClient.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/Network: RealtimeSyncManager.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/Network: TokenRefreshInterceptor.swift
+Only in _iOS/JarvisLive/Sources/Core: PerformanceMonitor.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core: Pipeline
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/Security: APIAuthenticationManager.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/Security: AuthenticationModels.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/Security: AuthenticationStateManager.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core/Security: KeychainManager.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Core: SettingsManager.swift
+diff -r _iOS/JarvisLive-Sandbox/Sources/Core/SimpleConversationManager.swift _iOS/JarvisLive/Sources/Core/SimpleConversationManager.swift
+1d0
+< // SANDBOX FILE: For iOS testing/development. See .cursorrules.
+18c17
+<  * Last Updated: 2025-06-25
+---
+>  * Last Updated: 2025-06-26
+33,34c32,33
+<     var messages: [SimpleConversationMessage]
+< 
+---
+>     var messages: [ConversationMessage]
+>     
+46,48c45
+< /// Simple conversation message struct (renamed to avoid conflict with Core Data ConversationMessage)
+< /// Use this for in-memory conversation handling without persistence
+< struct SimpleConversationMessage: Identifiable, Codable {
+---
+> struct ConversationMessage: Identifiable, Codable {
+56c53
+< 
+---
+>     
+77c74,75
+< class SimpleConversationManager: ObservableObject {
+---
+> class ConversationManager: ObservableObject {
+>     
+83c81
+< 
+---
+>     
+87c85
+< 
+---
+>     
+92c90
+< 
+---
+>     
+94c92
+< 
+---
+>     
+103c101
+< 
+---
+>     
+116c114
+< 
+---
+>     
+118c116
+< 
+---
+>     
+128c126
+< 
+---
+>     
+131c129
+< 
+---
+>         
+138c136
+< 
+---
+>         
+148c146
+< 
+---
+>         
+151c149
+< 
+---
+>     
+153c151
+< 
+---
+>     
+162c160
+< 
+---
+>     
+167c165
+< 
+---
+>     
+176c174
+< 
+---
+>     
+181c179
+< 
+---
+>             
+185c183
+< 
+---
+>             
+191c189
+< 
+---
+>     
+196c194
+< 
+---
+>         
+202c200
+< 
+---
+>     
+204c202
+< 
+---
+>     
+212,213c210,211
+<     ) -> SimpleConversationMessage {
+<         let message = SimpleConversationMessage(
+---
+>     ) -> ConversationMessage {
+>         let message = ConversationMessage(
+220c218
+< 
+---
+>         
+225c223
+< 
+---
+>             
+231c229
+< 
+---
+>             
+236c234
+< 
+---
+>             
+240c238
+< 
+---
+>         
+244,245c242,243
+< 
+<     func getMessages(for conversation: Conversation) -> [SimpleConversationMessage] {
+---
+>     
+>     func getMessages(for conversation: Conversation) -> [ConversationMessage] {
+248c246
+< 
+---
+>     
+250c248
+< 
+---
+>     
+253c251
+< 
+---
+>         
+259c257
+< 
+---
+>         
+262c260
+< 
+---
+>     
+264c262
+< 
+---
+>     
+269c267
+< 
+---
+>         
+277c275
+< 
+---
+>         
+280c278
+< 
+---
+>     
+286c284
+< 
+---
+>         
+291c289
+< 
+---
+>         
+294c292
+< 
+---
+>     
+296c294
+< 
+---
+>     
+301c299
+< 
+---
+>         
+309c307
+< 
+---
+>     
+311c309
+< 
+---
+>     
+315c313
+< 
+---
+>         
+319c317
+< 
+---
+>         
+331c329
+< }
+---
+> }
+\ No newline at end of file
+Only in _iOS/JarvisLive-Sandbox/Sources/Core: Testing
+Only in _iOS/JarvisLive/Sources/Core: VoiceCommandClassifier.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/Features/DocumentGeneration: DocumentGenerationView.swift
+Only in _iOS/JarvisLive-Sandbox/Sources: JarvisLiveSandbox
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Components: GlassViewModifier.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: AdvancedVoiceControlView.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: AuthenticationView.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: CategorySpecificPreviews.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: CollaborationSupportViews.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: CollaborativeSessionView.swift
+diff -r _iOS/JarvisLive-Sandbox/Sources/UI/Views/ContentView.swift _iOS/JarvisLive/Sources/UI/Views/ContentView.swift
+1d0
+< // SANDBOX FILE: For iOS testing/development. See .cursorrules.
+3,4c2,3
+<  * Purpose: Refactored main content view using modular UI components
+<  * Issues & Complexity Summary: Simplified coordinator view managing modular child components
+---
+>  * Purpose: Main content view with glassmorphism theme and conversation history integration
+>  * Issues & Complexity Summary: UI design with glassmorphism effects and state management
+6,18c5,17
+<  *   - Logic Scope (Est. LoC): ~250 (was ~1200, now modular)
+<  *   - Core Algorithm Complexity: Medium (state coordination between components)
+<  *   - Dependencies: 8 New (modular UI components + existing dependencies)
+<  *   - State Management Complexity: Medium (state passing to child components)
+<  *   - Novelty/Uncertainty Factor: Low (refactored existing code)
+<  * AI Pre-Task Self-Assessment (Est. Solution Difficulty %): 85%
+<  * Problem Estimate (Inherent Problem Difficulty %): 75%
+<  * Initial Code Complexity Estimate %: 80%
+<  * Justification for Estimates: Modular architecture improves maintainability while managing state flow
+<  * Final Code Complexity (Actual %): 78%
+<  * Overall Result Score (Success & Quality %): 95%
+<  * Key Variances/Learnings: Modular refactoring significantly improves code organization and testability
+<  * Last Updated: 2025-06-27
+---
+>  *   - Logic Scope (Est. LoC): ~400
+>  *   - Core Algorithm Complexity: Medium
+>  *   - Dependencies: 3 New (SwiftUI, LiveKitManager, ConversationManager)
+>  *   - State Management Complexity: Medium
+>  *   - Novelty/Uncertainty Factor: Low
+>  * AI Pre-Task Self-Assessment (Est. Solution Difficulty %): 80%
+>  * Problem Estimate (Inherent Problem Difficulty %): 60%
+>  * Initial Code Complexity Estimate %: 70%
+>  * Justification for Estimates: Glassmorphism effects with state binding and navigation
+>  * Final Code Complexity (Actual %): 75%
+>  * Overall Result Score (Success & Quality %): 92%
+>  * Key Variances/Learnings: Conversation history integration provides seamless user experience
+>  * Last Updated: 2025-06-26
+30c29
+< 
+---
+>     
+36,39c35
+< 
+<     // Pipeline integration
+<     var onTranscriptionComplete: ((String) -> Void)?
+< 
+---
+>     
+44c40
+< 
+---
+>     
+49c45
+< 
+---
+>     
+53,57d48
+< 
+<         // If this is a final transcription, trigger pipeline processing
+<         if isFinal && !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+<             onTranscriptionComplete?(text)
+<         }
+59c50
+< 
+---
+>     
+69c60
+< 
+---
+>     
+72,75c63
+< 
+<     // Voice command pipeline
+<     @StateObject private var voiceCommandPipeline: VoiceCommandPipeline
+< 
+---
+>     
+78c66
+< 
+---
+>     
+81c69
+< 
+---
+>     
+86,95c74
+<     @State private var showingDocumentGeneration = false
+< 
+<     // MCP action states
+<     @State private var mcpActionInProgress = false
+<     @State private var mcpActionResult = ""
+< 
+<     // Voice pipeline states
+<     @State private var pipelineProcessing = false
+<     @State private var lastPipelineResult: VoiceCommandPipelineResult?
+< 
+---
+>     
+99,100d77
+< 
+<         // Initialize document camera manager
+105,118d81
+< 
+<         // Initialize voice command pipeline with dependencies
+<         let classificationManager = VoiceClassificationManager(
+<             keychainManager: liveKitManager.keychainManager
+<         )
+<         let mcpServerManager = MCPServerManager(
+<             keychainManager: liveKitManager.keychainManager
+<         )
+< 
+<         self._voiceCommandPipeline = StateObject(wrappedValue: VoiceCommandPipeline(
+<             classificationManager: classificationManager,
+<             mcpServerManager: mcpServerManager,
+<             keychainManager: liveKitManager.keychainManager
+<         ))
+122c85
+< 
+---
+>     
+126c89
+< 
+---
+>     
+145c108
+< 
+---
+>     
+160c123
+< 
+---
+>     
+170c133
+< 
+---
+>     
+178c141
+<                     Color(red: 0.1, green: 0.1, blue: 0.2),
+---
+>                     Color(red: 0.1, green: 0.1, blue: 0.2)
+184c147
+< 
+---
+>             
+192c155
+<                                 Color.purple.opacity(0.2),
+---
+>                                 Color.purple.opacity(0.2)
+210c173
+< 
+---
+>             
+212,230c175,269
+<                 // Header with sandbox watermark and navigation
+<                 HeaderView(
+<                     onConversationHistoryTap: { showingConversationHistory = true },
+<                     onDocumentScannerTap: { showingDocumentScanner = true },
+<                     onSettingsTap: { showingSettings = true }
+<                 )
+< 
+<                 // Main title card
+<                 TitleView()
+< 
+<                 // Connection status indicator
+<                 ConnectionStatusView(
+<                     statusText: statusText,
+<                     statusColor: statusColor,
+<                     isConnected: isConnected,
+<                     isConnecting: isConnecting
+<                 )
+< 
+<                 // Voice interface when connected
+---
+>                 // Feature Navigation Bar
+>                 glassmorphicCard {
+>                     HStack {
+>                         Text("Jarvis Live")
+>                             .font(.title2)
+>                             .fontWeight(.bold)
+>                             .foregroundColor(.white)
+>                         
+>                         Spacer()
+>                         
+>                         // Feature buttons
+>                         HStack(spacing: 16) {
+>                             // Conversation History Button
+>                             Button(action: {
+>                                 showingConversationHistory = true
+>                             }) {
+>                                 Image(systemName: "bubble.left.and.bubble.right.fill")
+>                                     .font(.title2)
+>                                     .foregroundColor(.purple)
+>                             }
+>                             .accessibilityIdentifier("ConversationHistoryButton")
+>                             .accessibilityLabel("Open Conversation History")
+>                             
+>                             // Document Scanner Button
+>                             Button(action: {
+>                                 showingDocumentScanner = true
+>                             }) {
+>                                 Image(systemName: "doc.viewfinder.fill")
+>                                     .font(.title2)
+>                                     .foregroundColor(.blue)
+>                             }
+>                             .accessibilityIdentifier("DocumentScannerButton")
+>                             .accessibilityLabel("Open Document Scanner")
+>                             
+>                             // Settings Button
+>                             Button(action: {
+>                                 showingSettings = true
+>                             }) {
+>                                 Image(systemName: "gearshape.fill")
+>                                     .font(.title2)
+>                                     .foregroundColor(.cyan)
+>                             }
+>                             .accessibilityLabel("Settings")
+>                         }
+>                     }
+>                     .padding()
+>                 }
+>                 .padding(.top, 20)
+>                 
+>                 // Main Title Card
+>                 glassmorphicCard {
+>                     VStack(spacing: 15) {
+>                         Text("Jarvis Live")
+>                             .font(.system(size: 32, weight: .ultraLight, design: .rounded))
+>                             .foregroundColor(.white)
+>                         
+>                         Text("AI Voice Assistant")
+>                             .font(.subheadline)
+>                             .foregroundColor(.white.opacity(0.8))
+>                     }
+>                     .padding(.vertical, 20)
+>                     .padding(.horizontal, 30)
+>                 }
+>                 
+>                 // Connection Status Card
+>                 glassmorphicCard {
+>                     VStack(spacing: 10) {
+>                         HStack {
+>                             Circle()
+>                                 .fill(statusColor)
+>                                 .frame(width: 12, height: 12)
+>                                 .scaleEffect(isConnecting ? 1.2 : 1.0)
+>                                 .animation(
+>                                     isConnecting ? 
+>                                     Animation.easeInOut(duration: 0.6).repeatForever(autoreverses: true) : 
+>                                     .default,
+>                                     value: isConnecting
+>                                 )
+>                             
+>                             Text(statusText)
+>                                 .font(.headline)
+>                                 .foregroundColor(.white)
+>                                 .accessibilityIdentifier("ConnectionStatus")
+>                         }
+>                         
+>                         if isConnected {
+>                             Text("Voice commands are active")
+>                                 .font(.caption)
+>                                 .foregroundColor(.white.opacity(0.7))
+>                         }
+>                     }
+>                     .padding()
+>                 }
+>                 
+>                 // Voice Recording Interface
+233,246c272,303
+<                         // Voice recording controls and displays
+<                         VoiceRecordingView(
+<                             voiceCoordinator: voiceCoordinator,
+<                             audioLevel: liveKitManager.audioLevel,
+<                             onToggleRecording: toggleRecording
+<                         )
+< 
+<                         // MCP actions panel
+<                         MCPActionsView(
+<                             mcpActionInProgress: mcpActionInProgress || pipelineProcessing,
+<                             mcpActionResult: mcpActionResult,
+<                             onDocumentGeneration: {
+<                                 Task {
+<                                     await processCompletedTranscription("Create a document")
+---
+>                         // Voice Recording Button
+>                         glassmorphicCard {
+>                             VStack(spacing: 15) {
+>                                 Button(action: {
+>                                     toggleRecording()
+>                                 }) {
+>                                     ZStack {
+>                                         // Voice Activity Indicator
+>                                         if voiceCoordinator.showVoiceActivity && voiceCoordinator.isRecording {
+>                                             Circle()
+>                                                 .stroke(Color.red.opacity(0.6), lineWidth: 3)
+>                                                 .frame(width: 100, height: 100)
+>                                                 .scaleEffect(1.2)
+>                                                 .animation(
+>                                                     Animation.easeInOut(duration: 0.8)
+>                                                         .repeatForever(autoreverses: true),
+>                                                     value: voiceCoordinator.showVoiceActivity
+>                                                 )
+>                                                 .accessibilityIdentifier("VoiceActivityIndicator")
+>                                         }
+>                                         
+>                                         // Recording State Indicator
+>                                         Circle()
+>                                             .fill(voiceCoordinator.isRecording ? Color.red.opacity(0.8) : Color.green.opacity(0.8))
+>                                             .frame(width: 80, height: 80)
+>                                             .accessibilityIdentifier("RecordingStateIndicator")
+>                                         
+>                                         // Record/Stop Icon
+>                                         Image(systemName: voiceCoordinator.isRecording ? "stop.fill" : "mic.fill")
+>                                             .font(.system(size: 30, weight: .medium))
+>                                             .foregroundColor(.white)
+>                                     }
+248,251c305,324
+<                             },
+<                             onSendEmail: {
+<                                 Task {
+<                                     await processCompletedTranscription("Send a test email to test@example.com with subject 'Test Email from Jarvis'")
+---
+>                                 .buttonStyle(GlassmorphicButtonStyle())
+>                                 .accessibilityIdentifier(voiceCoordinator.isRecording ? "Stop Recording" : "Record")
+>                                 .accessibilityLabel(voiceCoordinator.isRecording ? "Stop Recording" : "Start Recording")
+>                                 
+>                                 Text(voiceCoordinator.isRecording ? "Recording..." : "Tap to Record")
+>                                     .font(.caption)
+>                                     .foregroundColor(.white.opacity(0.7))
+>                                 
+>                                 // Audio Level Meter
+>                                 if voiceCoordinator.isRecording {
+>                                     VStack(spacing: 5) {
+>                                         Text("Audio Level")
+>                                             .font(.caption2)
+>                                             .foregroundColor(.white.opacity(0.6))
+>                                         
+>                                         ProgressView(value: abs(liveKitManager.audioLevel) / 60.0)
+>                                             .progressViewStyle(LinearProgressViewStyle(tint: .cyan))
+>                                             .frame(height: 8)
+>                                             .accessibilityIdentifier("AudioLevelMeter")
+>                                     }
+253,256c326,342
+<                             },
+<                             onSearch: {
+<                                 Task {
+<                                     await processCompletedTranscription("Search for iOS development best practices")
+---
+>                             }
+>                             .padding(.vertical, 20)
+>                             .padding(.horizontal, 30)
+>                         }
+>                         
+>                         // Transcription Display
+>                         glassmorphicCard {
+>                             VStack(alignment: .leading, spacing: 10) {
+>                                 HStack {
+>                                     Text("Live Transcription")
+>                                         .font(.headline)
+>                                         .foregroundColor(.white)
+>                                     Spacer()
+>                                     if !voiceCoordinator.currentTranscription.isEmpty {
+>                                         Image(systemName: "waveform")
+>                                             .foregroundColor(.cyan)
+>                                     }
+258,261c344,354
+<                             },
+<                             onCreateEvent: {
+<                                 Task {
+<                                     await processCompletedTranscription("Create a calendar event for Jarvis Test Meeting")
+---
+>                                 
+>                                 if voiceCoordinator.currentTranscription.isEmpty {
+>                                     Text("Your speech will appear here...")
+>                                         .font(.subheadline)
+>                                         .foregroundColor(.white.opacity(0.5))
+>                                         .italic()
+>                                 } else {
+>                                     Text(voiceCoordinator.currentTranscription)
+>                                         .font(.subheadline)
+>                                         .foregroundColor(.white)
+>                                         .accessibilityIdentifier("TranscriptionText")
+262a356,374
+>                                 
+>                                 if !voiceCoordinator.currentAIResponse.isEmpty {
+>                                     Divider()
+>                                         .background(Color.white.opacity(0.3))
+>                                     
+>                                     HStack {
+>                                         Text("AI Response")
+>                                             .font(.headline)
+>                                             .foregroundColor(.cyan)
+>                                         Spacer()
+>                                         Image(systemName: "brain.head.profile")
+>                                             .foregroundColor(.cyan)
+>                                     }
+>                                     
+>                                     Text(voiceCoordinator.currentAIResponse)
+>                                         .font(.subheadline)
+>                                         .foregroundColor(.white)
+>                                         .accessibilityIdentifier("AIResponseText")
+>                                 }
+264c376,377
+<                         )
+---
+>                             .padding()
+>                         }
+267,274c380,430
+<                     // Connection button when disconnected
+<                     ConnectionButtonView(
+<                         statusColor: statusColor,
+<                         microphoneIcon: microphoneIcon,
+<                         isConnecting: isConnecting,
+<                         onConnect: {
+<                             Task {
+<                                 await liveKitManager.connect()
+---
+>                     // Connection Interface
+>                     glassmorphicCard {
+>                         VStack(spacing: 20) {
+>                             Button(action: {
+>                                 Task {
+>                                     await liveKitManager.connect()
+>                                 }
+>                             }) {
+>                                 ZStack {
+>                                     // Outer glow ring
+>                                     Circle()
+>                                         .stroke(
+>                                             LinearGradient(
+>                                                 gradient: Gradient(colors: [
+>                                                     statusColor.opacity(0.3),
+>                                                     statusColor.opacity(0.1)
+>                                                 ]),
+>                                                 startPoint: .topLeading,
+>                                                 endPoint: .bottomTrailing
+>                                             ),
+>                                             lineWidth: 4
+>                                         )
+>                                         .frame(width: 100, height: 100)
+>                                     
+>                                     // Main button background
+>                                     Circle()
+>                                         .fill(
+>                                             LinearGradient(
+>                                                 gradient: Gradient(colors: [
+>                                                     statusColor.opacity(0.3),
+>                                                     statusColor.opacity(0.1)
+>                                                 ]),
+>                                                 startPoint: .topLeading,
+>                                                 endPoint: .bottomTrailing
+>                                             )
+>                                         )
+>                                         .frame(width: 80, height: 80)
+>                                         .blur(radius: 1)
+>                                     
+>                                     // Connection icon
+>                                     Image(systemName: microphoneIcon)
+>                                         .font(.system(size: 30, weight: .light))
+>                                         .foregroundColor(.white)
+>                                         .scaleEffect(isConnecting ? 0.9 : 1.0)
+>                                         .animation(
+>                                             isConnecting ? 
+>                                             Animation.easeInOut(duration: 0.5).repeatForever(autoreverses: true) : 
+>                                             .default,
+>                                             value: isConnecting
+>                                         )
+>                                 }
+275a432,436
+>                             .buttonStyle(GlassmorphicButtonStyle())
+>                             
+>                             Text("Connect to start voice chat")
+>                                 .font(.caption)
+>                                 .foregroundColor(.white.opacity(0.7))
+277c438,439
+<                     )
+---
+>                         .padding(.vertical, 30)
+>                     }
+279,281c441,455
+< 
+<                 // Footer with development info
+<                 FooterView()
+---
+>                 
+>                 // Version Info Card
+>                 glassmorphicCard {
+>                     VStack(spacing: 5) {
+>                         Text("Production Build")
+>                             .font(.caption2)
+>                             .foregroundColor(.white.opacity(0.6))
+>                         
+>                         Text("Version 1.0.0")
+>                             .font(.caption2)
+>                             .foregroundColor(.white.opacity(0.5))
+>                     }
+>                     .padding(.vertical, 8)
+>                 }
+>                 .padding(.bottom, 20)
+288,299d461
+< 
+<             // Set up voice pipeline integration
+<             voiceCoordinator.onTranscriptionComplete = { [weak self] transcription in
+<                 Task { @MainActor in
+<                     await self?.processCompletedTranscription(transcription)
+<                 }
+<             }
+< 
+<             // Initialize voice command pipeline
+<             Task {
+<                 try? await voiceCommandPipeline.initialize()
+<             }
+312,314d473
+<         .sheet(isPresented: $showingDocumentGeneration) {
+<             DocumentGenerationView(liveKitManager: liveKitManager)
+<         }
+316,362c475,507
+< 
+<     // MARK: - MCP Action Helper
+< 
+<     private func performMCPAction(_ action: @escaping () async throws -> String) {
+<         guard !mcpActionInProgress else { return }
+< 
+<         mcpActionInProgress = true
+<         mcpActionResult = ""
+< 
+<         Task {
+<             do {
+<                 let result = try await action()
+<                 await MainActor.run {
+<                     mcpActionResult = result
+<                     mcpActionInProgress = false
+<                 }
+< 
+<                 // Clear result after a delay
+<                 DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+<                     mcpActionResult = ""
+<                 }
+<             } catch {
+<                 await MainActor.run {
+<                     mcpActionResult = "Error: \(error.localizedDescription)"
+<                     mcpActionInProgress = false
+<                 }
+< 
+<                 // Clear error after a delay
+<                 DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+<                     mcpActionResult = ""
+<                 }
+<             }
+<         }
+<     }
+< 
+<     // MARK: - Voice Command Pipeline Integration
+< 
+<     private func processCompletedTranscription(_ transcription: String) async {
+<         guard !pipelineProcessing else { return }
+< 
+<         pipelineProcessing = true
+< 
+<         do {
+<             let result = try await voiceCommandPipeline.processVoiceCommand(
+<                 transcription,
+<                 userId: "current_user", // TODO: Get from authentication state
+<                 sessionId: UUID().uuidString
+---
+>     
+>     // MARK: - Glassmorphism Helper Views
+>     
+>     @ViewBuilder
+>     private func glassmorphicCard<Content: View>(@ViewBuilder content: () -> Content) -> some View {
+>         content()
+>             .background(
+>                 RoundedRectangle(cornerRadius: 20)
+>                     .fill(
+>                         LinearGradient(
+>                             gradient: Gradient(colors: [
+>                                 Color.white.opacity(0.25),
+>                                 Color.white.opacity(0.1)
+>                             ]),
+>                             startPoint: .topLeading,
+>                             endPoint: .bottomTrailing
+>                         )
+>                     )
+>                     .background(
+>                         RoundedRectangle(cornerRadius: 20)
+>                             .stroke(
+>                                 LinearGradient(
+>                                     gradient: Gradient(colors: [
+>                                         Color.white.opacity(0.6),
+>                                         Color.white.opacity(0.2)
+>                                     ]),
+>                                     startPoint: .topLeading,
+>                                     endPoint: .bottomTrailing
+>                                 ),
+>                                 lineWidth: 1.5
+>                             )
+>                     )
+>                     .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 5)
+364,382c509
+< 
+<             await MainActor.run {
+<                 lastPipelineResult = result
+<                 pipelineProcessing = false
+< 
+<                 // Update UI based on pipeline result
+<                 handlePipelineResult(result)
+<             }
+<         } catch {
+<             await MainActor.run {
+<                 pipelineProcessing = false
+<                 mcpActionResult = "Error processing voice command: \(error.localizedDescription)"
+< 
+<                 // Clear error after delay
+<                 DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+<                     mcpActionResult = ""
+<                 }
+<             }
+<         }
+---
+>             .clipShape(RoundedRectangle(cornerRadius: 20))
+384,416c511
+< 
+<     private func handlePipelineResult(_ result: VoiceCommandPipelineResult) {
+<         // Update voice coordinator with final response
+<         voiceCoordinator.currentAIResponse = result.finalResponse
+< 
+<         if result.success {
+<             // If there was an MCP execution result, update the MCP action result
+<             if let mcpResult = result.mcpExecutionResult {
+<                 mcpActionResult = mcpResult.response
+<             } else {
+<                 mcpActionResult = result.finalResponse
+<             }
+< 
+<             // Show successful classification in a different way if needed
+<             if result.classification.category == "document_generation" {
+<                 showingDocumentGeneration = true
+<             }
+<         } else {
+<             // Handle failure - show suggestions or error message
+<             if !result.suggestions.isEmpty {
+<                 let suggestionText = "Suggestions: " + result.suggestions.joined(separator: ", ")
+<                 mcpActionResult = result.finalResponse + "\n\n" + suggestionText
+<             } else {
+<                 mcpActionResult = result.finalResponse
+<             }
+<         }
+< 
+<         // Clear result after delay
+<         DispatchQueue.main.asyncAfter(deadline: .now() + 8.0) {
+<             mcpActionResult = ""
+<         }
+<     }
+< 
+---
+>     
+418c513
+< 
+---
+>     
+426c521
+< 
+---
+>     
+429c524
+< 
+---
+>         
+433c528
+< 
+---
+>         
+438c533
+< 
+---
+>     
+442c537
+< 
+---
+>         
+459,460d553
+< // MARK: - Preview
+< 
+467c560
+< 
+---
+>     
+474c567
+< 
+---
+>     
+480c573
+< 
+---
+>     
+489c582
+<                         Color(red: 0.1, green: 0.1, blue: 0.2),
+---
+>                         Color(red: 0.1, green: 0.1, blue: 0.2)
+495c588
+< 
+---
+>                 
+511c604
+< 
+---
+>                                 
+519c612
+< 
+---
+>                         
+530c623
+< 
+---
+>                                 
+533c626
+< 
+---
+>                                 
+553c646
+< 
+---
+>                                     
+559c652
+< 
+---
+>                         
+570c663
+< 
+---
+>                                 
+573c666
+< 
+---
+>                                 
+593c686
+< 
+---
+>                                     
+599c692
+< 
+---
+>                         
+610c703
+< 
+---
+>                                 
+613c706
+< 
+---
+>                                 
+633c726
+< 
+---
+>                                     
+639c732
+< 
+---
+>                         
+650c743
+< 
+---
+>                                 
+655c748
+< 
+---
+>                                     
+659c752
+< 
+---
+>                                 
+664c757
+< 
+---
+>                                     
+671c764
+< 
+---
+>                         
+681c774
+< 
+---
+>                         
+714c807
+< 
+---
+>     
+716c809
+< 
+---
+>     
+726c819
+<                                 Color.white.opacity(0.05),
+---
+>                                 Color.white.opacity(0.05)
+739c832
+< 
+---
+>     
+741c834
+< 
+---
+>     
+749c842
+< 
+---
+>     
+769c862
+< 
+---
+>                 
+774c867
+< 
+---
+>                 
+781c874
+< 
+---
+>                 
+783c876
+< 
+---
+>                 
+786a880
+>                 
+792,793c886,887
+< 
+<     func testClaudeAPI() {
+---
+>     
+>     private func testClaudeAPI() {
+795c889
+< 
+---
+>         
+798c892
+< 
+---
+>         
+807c901
+< 
+---
+>                 
+811c905
+<                     "messages": [["role": "user", "content": "Test"]],
+---
+>                     "messages": [["role": "user", "content": "Test"]]
+813c907
+< 
+---
+>                 
+815c909
+< 
+---
+>                 
+817c911
+< 
+---
+>                 
+824a919
+>                 
+828c923
+< 
+---
+>             
+832,833c927,928
+< 
+<     func testOpenAIAPI() {
+---
+>     
+>     private func testOpenAIAPI() {
+835c930
+< 
+---
+>         
+838c933
+< 
+---
+>         
+845c940
+< 
+---
+>                 
+847c942
+< 
+---
+>                 
+854a950
+>                 
+858c954
+< 
+---
+>             
+862,863c958,959
+< 
+<     func testElevenLabsAPI() {
+---
+>     
+>     private func testElevenLabsAPI() {
+865c961
+< 
+---
+>         
+868c964
+< 
+---
+>         
+875c971
+< 
+---
+>                 
+877c973
+< 
+---
+>                 
+884a981
+>                 
+888c985
+< 
+---
+>             
+918c1015
+< }
+---
+> }
+\ No newline at end of file
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: ContextHelpView.swift
+diff -r _iOS/JarvisLive-Sandbox/Sources/UI/Views/ConversationHistoryView.swift _iOS/JarvisLive/Sources/UI/Views/ConversationHistoryView.swift
+1d0
+< // SANDBOX FILE: For iOS testing/development. See .cursorrules.
+15,18c14,17
+<  * Final Code Complexity (Actual %): TBD
+<  * Overall Result Score (Success & Quality %): TBD
+<  * Key Variances/Learnings: TBD
+<  * Last Updated: 2025-06-25
+---
+>  * Final Code Complexity (Actual %): 80%
+>  * Overall Result Score (Success & Quality %): 92%
+>  * Key Variances/Learnings: Complex glassmorphism UI with comprehensive conversation management
+>  * Last Updated: 2025-06-26
+27c26
+< 
+---
+>     
+36c35
+< 
+---
+>     
+39c38
+< 
+---
+>     
+47c46
+<                     Color(red: 0.1, green: 0.1, blue: 0.2),
+---
+>                     Color(red: 0.1, green: 0.1, blue: 0.2)
+53c52
+< 
+---
+>             
+61c60
+<                                 Color.blue.opacity(0.2),
+---
+>                                 Color.blue.opacity(0.2)
+79c78
+< 
+---
+>             
+83c82
+< 
+---
+>                 
+86c85
+< 
+---
+>                 
+89c88
+< 
+---
+>                 
+92c91
+< 
+---
+>                 
+106c105
+< 
+---
+>             
+113c112
+< 
+---
+>                     
+146c145
+< 
+---
+>     
+148c147
+< 
+---
+>     
+156c155
+< 
+---
+>                     
+161c160
+< 
+---
+>                     
+163,171d161
+< 
+<                     // Sandbox Indicator
+<                     Text("SANDBOX")
+<                         .font(.caption2)
+<                         .foregroundColor(.orange)
+<                         .padding(.horizontal, 8)
+<                         .padding(.vertical, 4)
+<                         .background(Color.orange.opacity(0.2))
+<                         .cornerRadius(6)
+173c163
+< 
+---
+>                 
+183c173
+< 
+---
+>     
+185c175
+< 
+---
+>     
+191c181
+< 
+---
+>                 
+198c188
+< 
+---
+>                 
+209c199
+< 
+---
+>     
+211c201
+< 
+---
+>     
+214c204
+< 
+---
+>         
+223c213
+< 
+---
+>                 
+227c217
+< 
+---
+>                 
+234c224
+< 
+---
+>                 
+238c228
+< 
+---
+>                 
+249c239
+< 
+---
+>     
+251c241
+< 
+---
+>     
+259c249
+< 
+---
+>                     
+261c251
+< 
+---
+>                     
+268c258
+< 
+---
+>                 
+294c284
+< 
+---
+>     
+296c286
+< 
+---
+>     
+302c292
+< 
+---
+>             
+307c297
+< 
+---
+>             
+311c301
+< 
+---
+>             
+326c316
+< 
+---
+>     
+328c318
+< 
+---
+>     
+338c328
+<                                 Color.white.opacity(0.1),
+---
+>                                 Color.white.opacity(0.1)
+350c340
+<                                         Color.white.opacity(0.2),
+---
+>                                         Color.white.opacity(0.2)
+362c352
+< 
+---
+>     
+364c354
+< 
+---
+>     
+371c361
+< 
+---
+>     
+378c368
+< 
+---
+>     
+383c373
+< 
+---
+>     
+387c377
+< 
+---
+>     
+401c391
+< 
+---
+>     
+407c397
+< 
+---
+>             
+412c402
+< 
+---
+>             
+426c416
+< 
+---
+>     
+435c425
+<                             Color.blue.opacity(0.6),
+---
+>                             Color.blue.opacity(0.6)
+447c437
+< 
+---
+>             
+454c444
+< 
+---
+>                 
+459c449
+< 
+---
+>                     
+461c451
+< 
+---
+>                     
+467c457
+< 
+---
+>             
+469c459
+< 
+---
+>             
+475c465
+< 
+---
+>                 
+479c469
+< 
+---
+>                 
+502c492
+< 
+---
+>     
+505c495,497
+<         if Calendar.current.isToday(date) {
+---
+>         let calendar = Calendar.current
+>         
+>         if calendar.isDate(date, inSameDayAs: Date()) {
+508c500
+<         } else if Calendar.current.isDate(date, equalTo: Date(), toGranularity: .weekOfYear) {
+---
+>         } else if calendar.isDate(date, equalTo: Date(), toGranularity: .weekOfYear) {
+521c513
+< 
+---
+>     
+526c518
+< 
+---
+>                 
+543c535
+< 
+---
+>                 
+559a552
+>         
+574c567
+< }
+---
+> }
+\ No newline at end of file
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: ConversationThreadVisualizationView.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: DecisionTrackingView.swift
+diff -r _iOS/JarvisLive-Sandbox/Sources/UI/Views/DocumentScannerView.swift _iOS/JarvisLive/Sources/UI/Views/DocumentScannerView.swift
+1d0
+< // SANDBOX FILE: For iOS testing/development. See .cursorrules.
+3,4c2,3
+<  * Purpose: Document scanner UI with real-time camera integration and AI analysis
+<  * Issues & Complexity Summary: SwiftUI camera integration with document detection and analysis UI
+---
+>  * Purpose: Minimal document scanner view for conversation management integration
+>  * Issues & Complexity Summary: Simplified document scanning UI focused on demo functionality
+6,18c5,17
+<  *   - Logic Scope (Est. LoC): ~400
+<  *   - Core Algorithm Complexity: Medium
+<  *   - Dependencies: 3 New (SwiftUI, VisionKit, AVFoundation)
+<  *   - State Management Complexity: Medium
+<  *   - Novelty/Uncertainty Factor: Low
+<  * AI Pre-Task Self-Assessment (Est. Solution Difficulty %): 70%
+<  * Problem Estimate (Inherent Problem Difficulty %): 75%
+<  * Initial Code Complexity Estimate %: 70%
+<  * Justification for Estimates: SwiftUI camera integration with state management
+<  * Final Code Complexity (Actual %): TBD
+<  * Overall Result Score (Success & Quality %): TBD
+<  * Key Variances/Learnings: TBD
+<  * Last Updated: 2025-06-25
+---
+>  *   - Logic Scope (Est. LoC): ~100
+>  *   - Core Algorithm Complexity: Low (Demo implementation)
+>  *   - Dependencies: 2 New (SwiftUI, DocumentCameraManager)
+>  *   - State Management Complexity: Low (Basic state management)
+>  *   - Novelty/Uncertainty Factor: Low (Simplified UI)
+>  * AI Pre-Task Self-Assessment (Est. Solution Difficulty %): 60%
+>  * Problem Estimate (Inherent Problem Difficulty %): 40%
+>  * Initial Code Complexity Estimate %: 50%
+>  * Justification for Estimates: Minimal document scanner for conversation demo
+>  * Final Code Complexity (Actual %): 50%
+>  * Overall Result Score (Success & Quality %): 80%
+>  * Key Variances/Learnings: Simplified approach provides placeholder functionality
+>  * Last Updated: 2025-06-26
+22,23d20
+< import VisionKit
+< import AVFoundation
+28,34c25,28
+< 
+<     @State private var showingPermissionAlert = false
+<     @State private var showingResultsSheet = false
+<     @State private var selectedScanResult: DocumentScanResult?
+<     @State private var showingAnalysisDetail = false
+<     @State private var selectedAnalysis: DocumentAnalysis?
+< 
+---
+>     
+>     @State private var isScanning = false
+>     @State private var scannedText = ""
+>     
+43c37
+<                         Color(red: 0.1, green: 0.1, blue: 0.2),
+---
+>                         Color(red: 0.1, green: 0.1, blue: 0.2)
+49,50c43,44
+< 
+<                 VStack(spacing: 20) {
+---
+>                 
+>                 VStack(spacing: 30) {
+52,62c46,64
+<                     documentScannerHeader
+< 
+<                     // Camera Status
+<                     cameraStatusView
+< 
+<                     // Main Content
+<                     if documentCameraManager.isCameraAvailable && documentCameraManager.hasPermission {
+<                         if documentCameraManager.isScanning || documentCameraManager.isAnalyzing {
+<                             scanningProgressView
+<                         } else {
+<                             scanControlsView
+---
+>                     glassmorphicCard {
+>                         VStack(spacing: 15) {
+>                             HStack {
+>                                 Image(systemName: "doc.viewfinder.fill")
+>                                     .font(.title)
+>                                     .foregroundColor(.blue)
+>                                 
+>                                 Text("Document Scanner")
+>                                     .font(.title2)
+>                                     .fontWeight(.bold)
+>                                     .foregroundColor(.white)
+>                                 
+>                                 Spacer()
+>                             }
+>                             
+>                             Text("Demo document scanning functionality")
+>                                 .font(.subheadline)
+>                                 .foregroundColor(.white.opacity(0.7))
+>                                 .frame(maxWidth: .infinity, alignment: .leading)
+64,68c66
+< 
+<                         // Scan Results
+<                         if !documentCameraManager.scanResults.isEmpty {
+<                             scanResultsView
+<                         }
+---
+>                         .padding()
+70,100c68,108
+< 
+<                     Spacer()
+<                 }
+<                 .padding()
+<             }
+<             .navigationBarHidden(true)
+<             .onAppear {
+<                 Task {
+<                     await documentCameraManager.requestCameraPermission()
+<                 }
+<             }
+<             .alert("Camera Permission Required", isPresented: $showingPermissionAlert) {
+<                 Button("Settings") {
+<                     if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+<                         UIApplication.shared.open(settingsURL)
+<                     }
+<                 }
+<                 Button("Cancel", role: .cancel) {
+<                     dismiss()
+<                 }
+<             } message: {
+<                 Text("To scan documents, please enable camera access in Settings.")
+<             }
+<             .sheet(isPresented: $showingResultsSheet) {
+<                 if let result = selectedScanResult {
+<                     DocumentResultDetailView(
+<                         scanResult: result,
+<                         analysis: documentCameraManager.getAnalysisResult(for: result.id),
+<                         onAnalyze: {
+<                             Task {
+<                                 await documentCameraManager.analyzeDocument(result)
+---
+>                     
+>                     // Scanner Interface
+>                     glassmorphicCard {
+>                         VStack(spacing: 20) {
+>                             if documentCameraManager.isProcessing {
+>                                 ProgressView("Processing document...")
+>                                     .progressViewStyle(CircularProgressViewStyle(tint: .cyan))
+>                                     .foregroundColor(.white)
+>                             } else {
+>                                 // Simulated camera view
+>                                 RoundedRectangle(cornerRadius: 12)
+>                                     .fill(Color.black.opacity(0.3))
+>                                     .frame(height: 200)
+>                                     .overlay(
+>                                         VStack {
+>                                             Image(systemName: "camera.fill")
+>                                                 .font(.system(size: 50))
+>                                                 .foregroundColor(.white.opacity(0.5))
+>                                             
+>                                             Text("Demo Camera View")
+>                                                 .font(.headline)
+>                                                 .foregroundColor(.white.opacity(0.7))
+>                                             
+>                                             Text("Tap 'Scan Document' to simulate scanning")
+>                                                 .font(.caption)
+>                                                 .foregroundColor(.white.opacity(0.5))
+>                                                 .multilineTextAlignment(.center)
+>                                         }
+>                                     )
+>                                 
+>                                 Button(action: { simulateDocumentScan() }) {
+>                                     HStack {
+>                                         Image(systemName: "doc.text.viewfinder")
+>                                         Text("Scan Document")
+>                                     }
+>                                     .foregroundColor(.white)
+>                                     .frame(maxWidth: .infinity)
+>                                     .padding()
+>                                     .background(Color.blue.opacity(0.8))
+>                                     .cornerRadius(12)
+>                                 }
+103,271c111
+<                     )
+<                 }
+<             }
+<         }
+<     }
+< 
+<     // MARK: - Header
+< 
+<     private var documentScannerHeader: some View {
+<         VStack(spacing: 8) {
+<             HStack {
+<                 Button("Cancel") {
+<                     documentCameraManager.cancelScanning()
+<                     dismiss()
+<                 }
+<                 .foregroundColor(.white)
+< 
+<                 Spacer()
+< 
+<                 Text("Document Scanner")
+<                     .font(.title2)
+<                     .fontWeight(.semibold)
+<                     .foregroundColor(.white)
+< 
+<                 Spacer()
+< 
+<                 Button("Clear") {
+<                     documentCameraManager.clearResults()
+<                 }
+<                 .foregroundColor(.white)
+<                 .opacity(documentCameraManager.scanResults.isEmpty ? 0.5 : 1.0)
+<                 .disabled(documentCameraManager.scanResults.isEmpty)
+<             }
+< 
+<             Text("Capture documents and get AI-powered insights")
+<                 .font(.caption)
+<                 .foregroundColor(.white.opacity(0.8))
+<                 .multilineTextAlignment(.center)
+<         }
+<         .accessibilityIdentifier("DocumentScannerHeader")
+<     }
+< 
+<     // MARK: - Camera Status
+< 
+<     private var cameraStatusView: some View {
+<         VStack(spacing: 12) {
+<             if !documentCameraManager.isCameraAvailable {
+<                 StatusCard(
+<                     icon: "camera.fill",
+<                     title: "Camera Not Available",
+<                     message: "This device does not support camera functionality",
+<                     color: .red
+<                 )
+<             } else if !documentCameraManager.hasPermission {
+<                 StatusCard(
+<                     icon: "camera.circle",
+<                     title: "Camera Permission Required",
+<                     message: "Please grant camera access to scan documents",
+<                     color: .orange,
+<                     action: {
+<                         Task {
+<                             let granted = await documentCameraManager.requestCameraPermission()
+<                             if !granted {
+<                                 showingPermissionAlert = true
+<                             }
+<                         }
+<                     },
+<                     actionLabel: "Grant Permission"
+<                 )
+<             } else {
+<                 StatusCard(
+<                     icon: "checkmark.circle.fill",
+<                     title: "Camera Ready",
+<                     message: "Ready to scan documents",
+<                     color: .green
+<                 )
+<             }
+<         }
+<     }
+< 
+<     // MARK: - Scanning Progress
+< 
+<     private var scanningProgressView: some View {
+<         VStack(spacing: 20) {
+<             // Progress indicator
+<             ZStack {
+<                 Circle()
+<                     .stroke(Color.white.opacity(0.3), lineWidth: 8)
+<                     .frame(width: 120, height: 120)
+< 
+<                 Circle()
+<                     .trim(from: 0, to: CGFloat(documentCameraManager.currentProgress))
+<                     .stroke(
+<                         LinearGradient(
+<                             colors: [.blue, .purple],
+<                             startPoint: .topLeading,
+<                             endPoint: .bottomTrailing
+<                         ),
+<                         style: StrokeStyle(lineWidth: 8, lineCap: .round)
+<                     )
+<                     .frame(width: 120, height: 120)
+<                     .rotationEffect(.degrees(-90))
+<                     .animation(.easeInOut(duration: 0.3), value: documentCameraManager.currentProgress)
+< 
+<                 if documentCameraManager.isScanning {
+<                     Image(systemName: "doc.viewfinder")
+<                         .font(.system(size: 32))
+<                         .foregroundColor(.white)
+<                 } else if documentCameraManager.isAnalyzing {
+<                     Image(systemName: "brain.head.profile")
+<                         .font(.system(size: 32))
+<                         .foregroundColor(.white)
+<                 }
+<             }
+< 
+<             VStack(spacing: 8) {
+<                 if documentCameraManager.isScanning {
+<                     Text("Scanning Document...")
+<                         .font(.headline)
+<                         .foregroundColor(.white)
+< 
+<                     Text("Position document within the camera frame")
+<                         .font(.caption)
+<                         .foregroundColor(.white.opacity(0.8))
+<                         .multilineTextAlignment(.center)
+<                 } else if documentCameraManager.isAnalyzing {
+<                     Text("Analyzing with AI...")
+<                         .font(.headline)
+<                         .foregroundColor(.white)
+< 
+<                     Text("Extracting insights and information")
+<                         .font(.caption)
+<                         .foregroundColor(.white.opacity(0.8))
+<                         .multilineTextAlignment(.center)
+<                 }
+<             }
+< 
+<             Button("Cancel") {
+<                 documentCameraManager.cancelScanning()
+<             }
+<             .padding(.horizontal, 30)
+<             .padding(.vertical, 12)
+<             .background(Color.red.opacity(0.3))
+<             .foregroundColor(.white)
+<             .cornerRadius(25)
+<             .accessibilityIdentifier("CancelScanningButton")
+<         }
+<         .padding()
+<         .background(
+<             RoundedRectangle(cornerRadius: 20)
+<                 .fill(Color.black.opacity(0.3))
+<                 .background(
+<                     RoundedRectangle(cornerRadius: 20)
+<                         .fill(.ultraThinMaterial)
+<                 )
+<         )
+<     }
+< 
+<     // MARK: - Scan Controls
+< 
+<     private var scanControlsView: some View {
+<         VStack(spacing: 16) {
+<             // Main scan button
+<             Button(action: {
+<                 Task {
+<                     do {
+<                         try await documentCameraManager.startDocumentScanning()
+<                     } catch {
+<                         print("Scanning failed: \(error)")
+---
+>                         .padding()
+273,531c113,143
+<                 }
+<             }) {
+<                 HStack(spacing: 12) {
+<                     Image(systemName: "doc.viewfinder.fill")
+<                         .font(.title2)
+< 
+<                     Text("Scan Document")
+<                         .font(.headline)
+<                         .fontWeight(.semibold)
+<                 }
+<                 .foregroundColor(.white)
+<                 .padding(.horizontal, 40)
+<                 .padding(.vertical, 16)
+<                 .background(
+<                     LinearGradient(
+<                         colors: [.blue, .purple],
+<                         startPoint: .leading,
+<                         endPoint: .trailing
+<                     )
+<                 )
+<                 .cornerRadius(30)
+<                 .shadow(color: .blue.opacity(0.3), radius: 10, x: 0, y: 5)
+<             }
+<             .accessibilityIdentifier("ScanDocumentButton")
+<             .scaleEffect(1.0)
+<             .animation(.easeInOut(duration: 0.1), value: documentCameraManager.isScanning)
+< 
+<             // Feature highlights
+<             VStack(spacing: 8) {
+<                 FeatureHighlight(
+<                     icon: "brain.head.profile",
+<                     title: "AI Analysis",
+<                     description: "Extract key information automatically"
+<                 )
+< 
+<                 FeatureHighlight(
+<                     icon: "text.viewfinder",
+<                     title: "Text Recognition",
+<                     description: "Convert documents to searchable text"
+<                 )
+< 
+<                 FeatureHighlight(
+<                     icon: "square.and.arrow.up",
+<                     title: "Smart Insights",
+<                     description: "Get recommendations and summaries"
+<                 )
+<             }
+<             .padding(.top, 8)
+<         }
+<     }
+< 
+<     // MARK: - Scan Results
+< 
+<     private var scanResultsView: some View {
+<         VStack(alignment: .leading, spacing: 12) {
+<             HStack {
+<                 Text("Recent Scans")
+<                     .font(.headline)
+<                     .foregroundColor(.white)
+< 
+<                 Spacer()
+< 
+<                 Text("\(documentCameraManager.scanResults.count)")
+<                     .font(.caption)
+<                     .foregroundColor(.white.opacity(0.7))
+<                     .padding(.horizontal, 8)
+<                     .padding(.vertical, 4)
+<                     .background(Color.white.opacity(0.2))
+<                     .cornerRadius(8)
+<             }
+< 
+<             ScrollView(.horizontal, showsIndicators: false) {
+<                 HStack(spacing: 12) {
+<                     ForEach(documentCameraManager.scanResults.reversed().prefix(5), id: \.id) { result in
+<                         ScanResultThumbnail(
+<                             result: result,
+<                             analysis: documentCameraManager.getAnalysisResult(for: result.id)
+<                         ) {
+<                             selectedScanResult = result
+<                             showingResultsSheet = true
+<                         }
+<                     }
+<                 }
+<                 .padding(.horizontal, 4)
+<             }
+<         }
+<         .accessibilityIdentifier("ScanResultsView")
+<     }
+< }
+< 
+< // MARK: - Supporting Views
+< 
+< struct StatusCard: View {
+<     let icon: String
+<     let title: String
+<     let message: String
+<     let color: Color
+<     var action: (() -> Void)?
+<     var actionLabel: String?
+< 
+<     var body: some View {
+<         VStack(spacing: 12) {
+<             Image(systemName: icon)
+<                 .font(.system(size: 32))
+<                 .foregroundColor(color)
+< 
+<             VStack(spacing: 4) {
+<                 Text(title)
+<                     .font(.headline)
+<                     .foregroundColor(.white)
+< 
+<                 Text(message)
+<                     .font(.caption)
+<                     .foregroundColor(.white.opacity(0.8))
+<                     .multilineTextAlignment(.center)
+<             }
+< 
+<             if let action = action, let actionLabel = actionLabel {
+<                 Button(actionLabel, action: action)
+<                     .padding(.horizontal, 20)
+<                     .padding(.vertical, 8)
+<                     .background(color.opacity(0.3))
+<                     .foregroundColor(.white)
+<                     .cornerRadius(15)
+<             }
+<         }
+<         .padding()
+<         .background(
+<             RoundedRectangle(cornerRadius: 16)
+<                 .fill(Color.black.opacity(0.3))
+<                 .background(
+<                     RoundedRectangle(cornerRadius: 16)
+<                         .fill(.ultraThinMaterial)
+<                 )
+<         )
+<     }
+< }
+< 
+< struct FeatureHighlight: View {
+<     let icon: String
+<     let title: String
+<     let description: String
+< 
+<     var body: some View {
+<         HStack(spacing: 12) {
+<             Image(systemName: icon)
+<                 .font(.title3)
+<                 .foregroundColor(.blue)
+<                 .frame(width: 24)
+< 
+<             VStack(alignment: .leading, spacing: 2) {
+<                 Text(title)
+<                     .font(.subheadline)
+<                     .fontWeight(.medium)
+<                     .foregroundColor(.white)
+< 
+<                 Text(description)
+<                     .font(.caption)
+<                     .foregroundColor(.white.opacity(0.7))
+<             }
+< 
+<             Spacer()
+<         }
+<         .padding(.horizontal, 16)
+<         .padding(.vertical, 8)
+<         .background(
+<             RoundedRectangle(cornerRadius: 12)
+<                 .fill(Color.white.opacity(0.1))
+<         )
+<     }
+< }
+< 
+< struct ScanResultThumbnail: View {
+<     let result: DocumentScanResult
+<     let analysis: DocumentAnalysis?
+<     let onTap: () -> Void
+< 
+<     var body: some View {
+<         Button(action: onTap) {
+<             VStack(spacing: 8) {
+<                 // Image thumbnail
+<                 Image(uiImage: result.originalImage)
+<                     .resizable()
+<                     .aspectRatio(contentMode: .fill)
+<                     .frame(width: 80, height: 100)
+<                     .clipped()
+<                     .cornerRadius(8)
+< 
+<                 // Analysis status
+<                 if let analysis = analysis {
+<                     VStack(spacing: 2) {
+<                         Image(systemName: "checkmark.circle.fill")
+<                             .font(.caption)
+<                             .foregroundColor(.green)
+< 
+<                         Text("Analyzed")
+<                             .font(.caption2)
+<                             .foregroundColor(.white.opacity(0.8))
+<                     }
+<                 } else {
+<                     VStack(spacing: 2) {
+<                         Image(systemName: "clock.circle")
+<                             .font(.caption)
+<                             .foregroundColor(.orange)
+< 
+<                         Text("Pending")
+<                             .font(.caption2)
+<                             .foregroundColor(.white.opacity(0.8))
+<                     }
+<                 }
+<             }
+<             .padding(8)
+<             .background(
+<                 RoundedRectangle(cornerRadius: 12)
+<                     .fill(Color.white.opacity(0.1))
+<             )
+<         }
+<         .buttonStyle(PlainButtonStyle())
+<     }
+< }
+< 
+< // MARK: - Document Result Detail View
+< 
+< struct DocumentResultDetailView: View {
+<     let scanResult: DocumentScanResult
+<     let analysis: DocumentAnalysis?
+<     let onAnalyze: () -> Void
+< 
+<     @Environment(\.dismiss) private var dismiss
+< 
+<     var body: some View {
+<         NavigationView {
+<             ScrollView {
+<                 VStack(alignment: .leading, spacing: 20) {
+<                     // Document Image
+<                     Image(uiImage: scanResult.originalImage)
+<                         .resizable()
+<                         .aspectRatio(contentMode: .fit)
+<                         .frame(maxHeight: 300)
+<                         .cornerRadius(12)
+<                         .shadow(radius: 5)
+< 
+<                     // Scan Information
+<                     VStack(alignment: .leading, spacing: 12) {
+<                         Text("Scan Details")
+<                             .font(.headline)
+<                             .foregroundColor(.primary)
+< 
+<                         DetailRow(label: "Scanned", value: DateFormatter.medium.string(from: scanResult.timestamp))
+<                         DetailRow(label: "Confidence", value: String(format: "%.1f%%", scanResult.confidence * 100))
+< 
+<                         if let detectedText = scanResult.detectedText, !detectedText.isEmpty {
+<                             VStack(alignment: .leading, spacing: 8) {
+<                                 Text("Detected Text")
+<                                     .font(.subheadline)
+<                                     .fontWeight(.medium)
+< 
+<                                 Text(detectedText)
+<                                     .font(.caption)
+---
+>                     
+>                     // Scanned Text Display
+>                     if let lastDocument = documentCameraManager.lastScannedDocument {
+>                         glassmorphicCard {
+>                             VStack(alignment: .leading, spacing: 15) {
+>                                 HStack {
+>                                     Text("Scanned Text")
+>                                         .font(.headline)
+>                                         .foregroundColor(.white)
+>                                     
+>                                     Spacer()
+>                                     
+>                                     Image(systemName: "checkmark.circle.fill")
+>                                         .foregroundColor(.green)
+>                                 }
+>                                 
+>                                 ScrollView {
+>                                     Text(lastDocument)
+>                                         .font(.subheadline)
+>                                         .foregroundColor(.white)
+>                                         .frame(maxWidth: .infinity, alignment: .leading)
+>                                 }
+>                                 .frame(maxHeight: 150)
+>                                 
+>                                 Button(action: { processScannedDocument() }) {
+>                                     HStack {
+>                                         Image(systemName: "brain.head.profile")
+>                                         Text("Analyze with AI")
+>                                     }
+>                                     .foregroundColor(.white)
+>                                     .frame(maxWidth: .infinity)
+533,534c145,147
+<                                     .background(Color.gray.opacity(0.1))
+<                                     .cornerRadius(8)
+---
+>                                     .background(Color.purple.opacity(0.8))
+>                                     .cornerRadius(10)
+>                                 }
+535a149
+>                             .padding()
+538,548c152
+<                     .padding()
+<                     .background(Color.gray.opacity(0.05))
+<                     .cornerRadius(12)
+< 
+<                     // Analysis Results
+<                     if let analysis = analysis {
+<                         analysisResultsView(analysis)
+<                     } else {
+<                         analysisPlaceholderView
+<                     }
+< 
+---
+>                     
+553c157
+<             .navigationTitle("Document Details")
+---
+>             .navigationTitle("Document Scanner")
+559a164
+>                     .foregroundColor(.cyan)
+564,617c169,203
+< 
+<     private func analysisResultsView(_ analysis: DocumentAnalysis) -> some View {
+<         VStack(alignment: .leading, spacing: 12) {
+<             HStack {
+<                 Text("AI Analysis")
+<                     .font(.headline)
+<                     .foregroundColor(.primary)
+< 
+<                 Spacer()
+< 
+<                 Text(analysis.aiProvider)
+<                     .font(.caption)
+<                     .padding(.horizontal, 8)
+<                     .padding(.vertical, 4)
+<                     .background(Color.blue.opacity(0.2))
+<                     .cornerRadius(6)
+<             }
+< 
+<             if !analysis.summary.isEmpty {
+<                 VStack(alignment: .leading, spacing: 4) {
+<                     Text("Summary")
+<                         .font(.subheadline)
+<                         .fontWeight(.medium)
+< 
+<                     Text(analysis.summary)
+<                         .font(.body)
+<                 }
+<             }
+< 
+<             if !analysis.recommendations.isEmpty {
+<                 VStack(alignment: .leading, spacing: 4) {
+<                     Text("Recommendations")
+<                         .font(.subheadline)
+<                         .fontWeight(.medium)
+< 
+<                     ForEach(analysis.recommendations, id: \.self) { recommendation in
+<                         HStack(alignment: .top, spacing: 8) {
+<                             Image(systemName: "checkmark.circle.fill")
+<                                 .foregroundColor(.green)
+<                                 .font(.caption)
+< 
+<                             Text(recommendation)
+<                                 .font(.body)
+<                         }
+<                     }
+<                 }
+<             }
+< 
+<             DetailRow(label: "Processing Time", value: String(format: "%.2fs", analysis.processingTime))
+<             DetailRow(label: "Confidence", value: String(format: "%.1f%%", analysis.confidence * 100))
+<         }
+<         .padding()
+<         .background(Color.gray.opacity(0.05))
+<         .cornerRadius(12)
+---
+>     
+>     // MARK: - Glassmorphism Helper
+>     
+>     @ViewBuilder
+>     private func glassmorphicCard<Content: View>(@ViewBuilder content: () -> Content) -> some View {
+>         content()
+>             .background(
+>                 RoundedRectangle(cornerRadius: 20)
+>                     .fill(
+>                         LinearGradient(
+>                             gradient: Gradient(colors: [
+>                                 Color.white.opacity(0.25),
+>                                 Color.white.opacity(0.1)
+>                             ]),
+>                             startPoint: .topLeading,
+>                             endPoint: .bottomTrailing
+>                         )
+>                     )
+>                     .background(
+>                         RoundedRectangle(cornerRadius: 20)
+>                             .stroke(
+>                                 LinearGradient(
+>                                     gradient: Gradient(colors: [
+>                                         Color.white.opacity(0.6),
+>                                         Color.white.opacity(0.2)
+>                                     ]),
+>                                     startPoint: .topLeading,
+>                                     endPoint: .bottomTrailing
+>                                 ),
+>                                 lineWidth: 1.5
+>                             )
+>                     )
+>                     .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 5)
+>             )
+>             .clipShape(RoundedRectangle(cornerRadius: 20))
+619,642c205,224
+< 
+<     private var analysisPlaceholderView: some View {
+<         VStack(spacing: 16) {
+<             Image(systemName: "brain.head.profile")
+<                 .font(.system(size: 48))
+<                 .foregroundColor(.blue.opacity(0.6))
+< 
+<             Text("Analysis Not Available")
+<                 .font(.headline)
+<                 .foregroundColor(.primary)
+< 
+<             Text("This document hasn't been analyzed yet. Tap the button below to start AI analysis.")
+<                 .font(.body)
+<                 .multilineTextAlignment(.center)
+<                 .foregroundColor(.secondary)
+< 
+<             Button("Analyze with AI") {
+<                 onAnalyze()
+<             }
+<             .padding(.horizontal, 24)
+<             .padding(.vertical, 12)
+<             .background(Color.blue)
+<             .foregroundColor(.white)
+<             .cornerRadius(20)
+---
+>     
+>     // MARK: - Demo Functions
+>     
+>     private func simulateDocumentScan() {
+>         Task {
+>             let sampleDocument = """
+>             Demo Document Content
+>             
+>             This is a simulated document scan for the Jarvis Live conversation management system.
+>             
+>             Key Features:
+>             • Voice-activated AI assistant
+>             • Document scanning and analysis
+>             • Conversation history management
+>             • Multi-provider AI integration
+>             
+>             This demo shows how scanned documents can be integrated into AI conversations for analysis and discussion.
+>             """
+>             
+>             await documentCameraManager.processDocument(sampleDocument)
+644,646d225
+<         .padding()
+<         .background(Color.gray.opacity(0.05))
+<         .cornerRadius(12)
+648,666c227,233
+< }
+< 
+< struct DetailRow: View {
+<     let label: String
+<     let value: String
+< 
+<     var body: some View {
+<         HStack {
+<             Text(label)
+<                 .font(.subheadline)
+<                 .foregroundColor(.secondary)
+< 
+<             Spacer()
+< 
+<             Text(value)
+<                 .font(.subheadline)
+<                 .fontWeight(.medium)
+<                 .foregroundColor(.primary)
+<         }
+---
+>     
+>     private func processScannedDocument() {
+>         // In a full implementation, this would send the document to AI for analysis
+>         print("📄 Processing document with AI analysis...")
+>         
+>         // Could integrate with conversation manager to create a new conversation
+>         // about the scanned document
+670,680d236
+< // MARK: - Extensions
+< 
+< extension DateFormatter {
+<     static let medium: DateFormatter = {
+<         let formatter = DateFormatter()
+<         formatter.dateStyle = .medium
+<         formatter.timeStyle = .short
+<         return formatter
+<     }()
+< }
+< 
+683,687c239,245
+< #Preview {
+<     DocumentScannerView(
+<         documentCameraManager: DocumentCameraManager(
+<             keychainManager: KeychainManager(service: "preview"),
+<             liveKitManager: LiveKitManager()
+---
+> struct DocumentScannerView_Previews: PreviewProvider {
+>     static var previews: some View {
+>         DocumentScannerView(
+>             documentCameraManager: DocumentCameraManager(
+>                 keychainManager: KeychainManager(service: "preview"),
+>                 liveKitManager: LiveKitManager()
+>             )
+689,690c247,249
+<     )
+< }
+---
+>         .preferredColorScheme(.dark)
+>     }
+> }
+\ No newline at end of file
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: MainContentView
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: ParticipantListView.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: PostClassificationComponents.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: PostClassificationFlowView.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: RootContentView.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: SettingsView.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: SharedTranscriptionView.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: StepEditorView.swift
+Only in _iOS/JarvisLive-Sandbox/Sources/UI/Views: WorkflowBuilderView.swift
+Only in _iOS/JarvisLive-Sandbox/Tests: Core
+Only in _iOS/JarvisLive-Sandbox/Tests: JarvisLiveSandboxTests
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveTests: .gitkeep
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveTests: AdvancedVoiceUIIntegrationTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveTests: AuthenticationFlowTests.swift
+Only in _iOS/JarvisLive/Tests/JarvisLiveTests: AutomatedUISnapshotTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveTests: CollaborationFeatureTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveTests: DocumentCameraManagerTests.swift
+Only in _iOS/JarvisLive/Tests/JarvisLiveTests: Info.plist
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveTests: KeychainManagerTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveTests: LiveKitManagerTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveTests: MCPContextManagerTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveTests: SettingsKeychainIntegrationTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveTests: SharedContextSynchronizationTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveTests: VoiceClassificationIntegrationTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveTests: VoiceCommandClassifierIntegrationTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveTests: VoiceCommandClassifierTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveTests: VoiceCommandIntegrationTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveTests: VoicePipelineIntegrationTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveUITests: .gitkeep
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveUITests: AuthenticationUITests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveUITests: CollaborationUIIntegrationTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveUITests: CompleteVoiceWorkflowUITests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveUITests: CoreVoiceUITests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveUITests: E2E_Authentication_And_Classification_Tests.swift
+Only in _iOS/JarvisLive/Tests/JarvisLiveUITests: Info.plist
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveUITests: JarvisLiveVisualEvidenceUITests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveUITests: PipelineE2ETests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveUITests: PostClassificationAccessibilityTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveUITests: PostClassificationUIPerformanceTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveUITests: VisualValidationTests.swift
+Only in _iOS/JarvisLive-Sandbox/Tests/JarvisLiveUITests: VoiceCommandWorkflowUITests.swift
+Only in _iOS/JarvisLive-Sandbox: project.yml
+Only in _iOS/JarvisLive-Sandbox: run_integration_tests.sh
