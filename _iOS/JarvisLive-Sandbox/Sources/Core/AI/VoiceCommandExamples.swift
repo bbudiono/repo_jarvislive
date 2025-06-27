@@ -43,7 +43,8 @@ final class VoiceCommandExamplesManager: ObservableObject {
     private let advancedProcessor: AdvancedVoiceCommandProcessor
     private let mcpContextManager: MCPContextManager
     private let workflowManager: VoiceWorkflowAutomationManager
-    private let parameterIntelligence: VoiceParameterIntelligenceManager
+    // TODO: Implement VoiceParameterIntelligenceManager
+    // private let parameterIntelligence: VoiceParameterIntelligenceManager
     private let guidanceSystem: VoiceGuidanceSystemManager
 
     // MARK: - Private Properties
@@ -57,12 +58,12 @@ final class VoiceCommandExamplesManager: ObservableObject {
     init(advancedProcessor: AdvancedVoiceCommandProcessor,
          mcpContextManager: MCPContextManager,
          workflowManager: VoiceWorkflowAutomationManager,
-         parameterIntelligence: VoiceParameterIntelligenceManager,
+         // parameterIntelligence: VoiceParameterIntelligenceManager,
          guidanceSystem: VoiceGuidanceSystemManager) {
         self.advancedProcessor = advancedProcessor
         self.mcpContextManager = mcpContextManager
         self.workflowManager = workflowManager
-        self.parameterIntelligence = parameterIntelligence
+        // self.parameterIntelligence = parameterIntelligence
         self.guidanceSystem = guidanceSystem
 
         setupExamples()

@@ -106,6 +106,21 @@ struct ClassificationResult: Codable, Equatable {
         case classificationTime = "classification_time"
         case requiresConfirmation = "requires_confirmation"
     }
+    
+    static let empty = ClassificationResult(
+        category: "unknown",
+        intent: "unknown",
+        confidence: 0.0,
+        parameters: [:],
+        suggestions: [],
+        rawText: "",
+        normalizedText: "",
+        confidenceLevel: "none",
+        contextUsed: false,
+        preprocessingTime: 0.0,
+        classificationTime: 0.0,
+        requiresConfirmation: false
+    )
 }
 
 // MARK: - Command Execution Models

@@ -73,7 +73,7 @@ struct VoiceWorkflow: Codable, Identifiable {
         struct StepCondition: Codable {
             let type: ConditionType
             let parameter: String
-            let operator: ConditionOperator
+            let `operator`: ConditionOperator
             let value: AnyCodable
             let isRequired: Bool
             

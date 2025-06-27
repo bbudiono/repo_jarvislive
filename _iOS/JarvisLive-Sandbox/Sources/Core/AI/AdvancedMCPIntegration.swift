@@ -118,7 +118,7 @@ struct MCPTransaction: Identifiable {
     let initiatedBy: String // Voice command that started this transaction
     let services: [String] // Service IDs involved
     let operations: [MCPOperation]
-    let status: TransactionStatus
+    var status: TransactionStatus
     let startTime: Date
     var endTime: Date?
     let compensationActions: [CompensationAction]
@@ -219,7 +219,8 @@ final class AdvancedMCPIntegrationManager: ObservableObject {
 
     private let advancedProcessor: AdvancedVoiceCommandProcessor
     private let workflowManager: VoiceWorkflowAutomationManager
-    private let parameterIntelligence: VoiceParameterIntelligenceManager
+    // TODO: Implement VoiceParameterIntelligenceManager
+    // private let parameterIntelligence: VoiceParameterIntelligenceManager
     private let guidanceSystem: VoiceGuidanceSystemManager
 
     // MARK: - Private Properties
@@ -245,11 +246,11 @@ final class AdvancedMCPIntegrationManager: ObservableObject {
 
     init(advancedProcessor: AdvancedVoiceCommandProcessor,
          workflowManager: VoiceWorkflowAutomationManager,
-         parameterIntelligence: VoiceParameterIntelligenceManager,
+         // parameterIntelligence: VoiceParameterIntelligenceManager,
          guidanceSystem: VoiceGuidanceSystemManager) {
         self.advancedProcessor = advancedProcessor
         self.workflowManager = workflowManager
-        self.parameterIntelligence = parameterIntelligence
+        // self.parameterIntelligence = parameterIntelligence
         self.guidanceSystem = guidanceSystem
 
         setupNetworkMonitoring()
@@ -262,7 +263,7 @@ final class AdvancedMCPIntegrationManager: ObservableObject {
 
     deinit {
         networkMonitor.cancel()
-        endBackgroundTask()
+        await endBackgroundTask()
     }
 
     // MARK: - Setup Methods
@@ -758,7 +759,7 @@ final class AdvancedMCPIntegrationManager: ObservableObject {
             transactionHistory.append(completedTransaction)
 
             // End background task
-            endBackgroundTask()
+            await endBackgroundTask()
 
             logger.info("Successfully completed MCP transaction: \(transaction.id)")
             return completedTransaction
@@ -776,7 +777,7 @@ final class AdvancedMCPIntegrationManager: ObservableObject {
             activeTransactions.removeAll { $0.id == transaction.id }
             transactionHistory.append(failedTransaction)
 
-            endBackgroundTask()
+            await endBackgroundTask()
 
             logger.error("MCP transaction failed: \(transaction.id), error: \(error.localizedDescription)")
             throw error
@@ -1044,7 +1045,7 @@ final class AdvancedMCPIntegrationManager: ObservableObject {
     // MARK: - Background Processing
 
     private func startBackgroundTask() {
-        endBackgroundTask() // End any existing task
+        await endBackgroundTask() // End any existing task
 
         backgroundTaskId = UIApplication.shared.beginBackgroundTask { [weak self] in
             self?.endBackgroundTask()

@@ -142,7 +142,7 @@ final class MCPServerManager: MCPServerManagerProtocol, ObservableObject {
         
         let result = try await executeTool(name: "\(server).\(command)", arguments: parameters)
         return result.content.reduce(into: [String: Any]()) { dict, content in
-            if case .text(let text) = content {
+            if content.type == "text", let text = content.text {
                 dict["response"] = text
             }
         }

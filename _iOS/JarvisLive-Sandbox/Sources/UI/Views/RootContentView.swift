@@ -26,6 +26,7 @@ struct RootContentView: View {
     @StateObject private var authStateManager = AuthenticationStateManager()
     @StateObject private var liveKitManager = LiveKitManager()
     @StateObject private var voiceClassificationManager = VoiceClassificationManager()
+    private let keychainManager = KeychainManager(service: "com.ablankcanvas.JarvisLive")
 
     // Transition animation state
     @State private var showMainApp = false
@@ -39,7 +40,8 @@ struct RootContentView: View {
                 MainAppContentView(
                     liveKitManager: liveKitManager,
                     voiceClassificationManager: voiceClassificationManager,
-                    authStateManager: authStateManager
+                    authStateManager: authStateManager,
+                    keychainManager: keychainManager
                 )
                 .opacity(showMainApp ? 1.0 : 0.0)
                 .scaleEffect(showMainApp ? 1.0 : 0.95)
@@ -197,11 +199,9 @@ struct RootContentView: View {
         } catch {
             print("Failed to complete authentication setup: \(error.localizedDescription)")
 
-            await MainActor.run {
-                isTransitioning = false
-                // Return to authentication flow
-                authStateManager.resetAuthentication()
-            }
+            isTransitioning = false
+            // Return to authentication flow
+            await authStateManager.resetAuthentication()
         }
     }
 
@@ -222,6 +222,7 @@ struct MainAppContentView: View {
     @ObservedObject var liveKitManager: LiveKitManager
     @ObservedObject var voiceClassificationManager: VoiceClassificationManager
     @ObservedObject var authStateManager: AuthenticationStateManager
+    let keychainManager: KeychainManager
 
     // Main app navigation state
     @State private var selectedTab = 0
@@ -243,7 +244,7 @@ struct MainAppContentView: View {
 
             // Collaboration Tab
             NavigationView {
-                CollaborativeSessionView(liveKitManager: liveKitManager)
+                CollaborativeSessionView(keychainManager: keychainManager)
                     .navigationBarHidden(true)
             }
             .tabItem {

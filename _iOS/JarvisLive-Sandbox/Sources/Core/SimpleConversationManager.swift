@@ -323,9 +323,12 @@ class SimpleConversationManager: ObservableObject {
 
 // MARK: - Supporting Types
 
+// NOTE: Using ConversationStats from ConversationManager.swift
+/*
 struct ConversationStats {
     let totalConversations: Int
     let totalMessages: Int
     let archivedConversations: Int
     let averageMessagesPerConversation: Double
 }
+*/

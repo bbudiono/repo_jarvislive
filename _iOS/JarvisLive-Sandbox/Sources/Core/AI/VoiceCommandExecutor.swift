@@ -21,6 +21,21 @@
 import Foundation
 import Combine
 
+// MARK: - Temporary Placeholder Types
+
+/// TODO: Implement proper CollaborationContext
+struct CollaborationContext {
+    let sessionId: String
+    let participants: [String]
+    let sharedDocuments: [String]
+    
+    static let empty = CollaborationContext(
+        sessionId: "",
+        participants: [],
+        sharedDocuments: []
+    )
+}
+
 // MARK: - Command Execution Models
 
 struct CommandExecutionRequest {
@@ -123,10 +138,10 @@ final class VoiceCommandExecutor: ObservableObject {
         self.configuration = configuration
 
         // Initialize MCP clients
-        self.documentGenerator = DocumentMCPClient(serverManager: mcpServerManager)
-        self.emailManager = EmailMCPClient(serverManager: mcpServerManager)
-        self.calendarManager = CalendarMCPClient(serverManager: mcpServerManager)
-        self.searchManager = SearchMCPClient(serverManager: mcpServerManager)
+        self.documentGenerator = DocumentMCPClientImpl(serverManager: mcpServerManager)
+        self.emailManager = EmailMCPClientImpl(serverManager: mcpServerManager)
+        self.calendarManager = CalendarMCPClientImpl(serverManager: mcpServerManager)
+        self.searchManager = SearchMCPClientImpl(serverManager: mcpServerManager)
         self.calculationEngine = CalculationEngine()
         self.reminderManager = ReminderManager()
     }
@@ -254,7 +269,7 @@ final class VoiceCommandExecutor: ObservableObject {
             content: content,
             format: format,
             title: title,
-            context: context?.participants.map { $0.name } ?? []
+            context: context?.participants ?? []
         )
 
         let timeSpent = Date().timeIntervalSince(startTime)
@@ -301,8 +316,8 @@ final class VoiceCommandExecutor: ObservableObject {
         let timeSpent = Date().timeIntervalSince(startTime)
 
         return CommandExecutionResult(
-            success: result.success,
-            message: result.success ? "Email sent to \(recipient)" : "Failed to send email: \(result.errorMessage ?? "Unknown error")",
+            success: result.status == .sent,
+            message: result.status == .sent ? "Email sent to \(recipient)" : "Failed to send email: \(result.status.rawValue)",
             actionPerformed: "email_sent",
             timeSpent: timeSpent,
             additionalData: [
@@ -657,7 +672,7 @@ struct WebSearchResult {
 }
 
 // Mock implementations (would be replaced with actual MCP clients)
-class DocumentMCPClient: DocumentMCPClient {
+class DocumentMCPClientImpl: DocumentMCPClient {
     private let serverManager: any MCPServerManagerProtocol
 
     init(serverManager: any MCPServerManagerProtocol) {
@@ -674,7 +689,7 @@ class DocumentMCPClient: DocumentMCPClient {
     }
 }
 
-class EmailMCPClient: EmailMCPClient {
+class EmailMCPClientImpl: EmailMCPClient {
     private let serverManager: any MCPServerManagerProtocol
 
     init(serverManager: any MCPServerManagerProtocol) {
@@ -692,7 +707,7 @@ class EmailMCPClient: EmailMCPClient {
     }
 }
 
-class CalendarMCPClient: CalendarMCPClient {
+class CalendarMCPClientImpl: CalendarMCPClient {
     private let serverManager: any MCPServerManagerProtocol
 
     init(serverManager: any MCPServerManagerProtocol) {
@@ -709,7 +724,7 @@ class CalendarMCPClient: CalendarMCPClient {
     }
 }
 
-class SearchMCPClient: SearchMCPClient {
+class SearchMCPClientImpl: SearchMCPClient {
     private let serverManager: any MCPServerManagerProtocol
 
     init(serverManager: any MCPServerManagerProtocol) {

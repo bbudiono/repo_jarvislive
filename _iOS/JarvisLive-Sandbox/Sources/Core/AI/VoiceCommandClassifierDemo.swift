@@ -23,9 +23,10 @@ import Foundation
 // MARK: - Voice Command Classifier Demo
 
 class VoiceCommandClassifierDemo {
-    private let classifier = VoiceCommandClassifier()
-
-    init() {
+    private var classifier: VoiceCommandClassifier?
+    
+    init() async {
+        self.classifier = await VoiceCommandClassifier()  
         print("🎯 VoiceCommandClassifier Demo Initialized")
     }
 
@@ -46,7 +47,8 @@ class VoiceCommandClassifierDemo {
         ]
 
         for command in sampleCommands {
-            let classification = await classifier.classifyVoiceCommand(command)
+            guard let classifier = classifier else { continue }
+            let classification = await classifier?.classifyVoiceCommand(command) ?? ClassificationResult.empty
 
             print("\n🗣️  Command: '\(command)'")
             print("   🎯 Intent: \(classification.intent.displayName)")
@@ -98,7 +100,7 @@ class VoiceCommandClassifierDemo {
         ]
 
         for (command, expectedParams) in parameterizedCommands {
-            let classification = await classifier.classifyVoiceCommand(command)
+            let classification = await classifier?.classifyVoiceCommand(command) ?? ClassificationResult.empty
 
             print("\n🗣️  Command: '\(command)'")
             print("   🎯 Intent: \(classification.intent.displayName)")
@@ -116,15 +118,15 @@ class VoiceCommandClassifierDemo {
             }
 
             // Show MCP-formatted parameters
-            let mcpParams = classifier.formatParametersForMCP(
-                classification.extractedParameters,
+            let mcpParams = await classifier?.formatParametersForMCP(
+                classification.parameters,
                 intent: classification.intent
-            )
+            ) ?? [:]
 
-            if mcpParams.count > classification.extractedParameters.count {
+            if mcpParams.count > classification.parameters.count {
                 print("   🔧 Additional MCP Parameters:")
                 for (key, value) in mcpParams {
-                    if classification.extractedParameters[key] == nil {
+                    if classification.parameters[key] == nil {
                         print("      • \(key): \(value) [auto-added]")
                     }
                 }
@@ -146,7 +148,7 @@ class VoiceCommandClassifierDemo {
         ]
 
         for command in ambiguousCommands {
-            let classification = await classifier.classifyVoiceCommand(command)
+            let classification = await classifier?.classifyVoiceCommand(command) ?? ClassificationResult.empty
 
             print("\n🗣️  Ambiguous Command: '\(command)'")
             print("   🎯 Primary Intent: \(classification.intent.displayName)")
@@ -165,7 +167,7 @@ class VoiceCommandClassifierDemo {
             }
 
             // Show fallback decision
-            let shouldFallback = classifier.shouldFallbackToGeneralAI(classification)
+            let shouldFallback = await classifier?.shouldFallbackToGeneralAI(classification) ?? true
             print("   🤖 Fallback to General AI: \(shouldFallback ? "Yes" : "No")")
         }
     }
@@ -189,7 +191,7 @@ class VoiceCommandClassifierDemo {
         var totalConfidence: Double = 0.0
 
         for command in testCommands {
-            let classification = await classifier.classifyVoiceCommand(command)
+            let classification = await classifier?.classifyVoiceCommand(command) ?? ClassificationResult.empty
             totalConfidence += classification.confidence
         }
 
@@ -207,7 +209,7 @@ class VoiceCommandClassifierDemo {
         let cacheStartTime = Date()
 
         for command in testCommands {
-            _ = await classifier.classifyVoiceCommand(command) // Should be cached
+            _ = await classifier?.classifyVoiceCommand(command) // Should be cached
         }
 
         let cacheEndTime = Date()
@@ -239,10 +241,11 @@ class VoiceCommandClassifierDemo {
         print("Classifying \(diverseCommands.count) diverse commands to generate statistics...")
 
         for command in diverseCommands {
-            _ = await classifier.classifyVoiceCommand(command)
+            _ = await classifier?.classifyVoiceCommand(command)
         }
 
-        let stats = classifier.getClassificationStatistics()
+        guard let classifier = classifier else { return }
+        let stats = await classifier.getClassificationStatistics()
 
         print("\n📊 Classification Statistics:")
         print("   📝 Total Classifications: \(stats.totalClassifications)")
@@ -275,17 +278,17 @@ class VoiceCommandClassifierDemo {
         print("Testing adaptive learning with user feedback...")
 
         for (command, isCorrect) in feedbackCommands {
-            let classification = await classifier.classifyVoiceCommand(command)
+            let classification = await classifier?.classifyVoiceCommand(command) ?? ClassificationResult.empty
             print("\n🗣️  Command: '\(command)'")
             print("   🎯 Classified as: \(classification.intent.displayName)")
             print("   📊 Initial Confidence: \(String(format: "%.2f", classification.confidence))")
 
             // Provide feedback
-            classifier.provideFeedback(for: command, wasCorrect: isCorrect)
+            await classifier?.provideFeedback(for: command, wasCorrect: isCorrect)
             print("   💭 Feedback: \(isCorrect ? "Correct ✅" : "Incorrect ❌")")
 
             // Classify again to see adaptation
-            let newClassification = await classifier.classifyVoiceCommand(command)
+            let newClassification = await classifier?.classifyVoiceCommand(command) ?? ClassificationResult.empty
             print("   📈 Updated Confidence: \(String(format: "%.2f", newClassification.confidence))")
 
             let confidenceChange = newClassification.confidence - classification.confidence
@@ -312,7 +315,7 @@ class VoiceCommandClassifierDemo {
         ]
 
         for (command, description) in edgeCases {
-            let classification = await classifier.classifyVoiceCommand(command)
+            let classification = await classifier?.classifyVoiceCommand(command) ?? ClassificationResult.empty
 
             print("\n🧪 Edge Case: \(description)")
             print("   📝 Command: '\(command.prefix(50))\(command.count > 50 ? "..." : "")'")

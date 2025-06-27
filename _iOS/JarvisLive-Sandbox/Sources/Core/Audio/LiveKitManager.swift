@@ -46,7 +46,7 @@ protocol VoiceActivityDelegate: AnyObject {
 // MARK: - LiveKit Manager
 
 @MainActor
-public final class LiveKitManager: NSObject, ObservableObject {
+public final class LiveKitManager: NSObject, ObservableObject, VoiceActivityDelegate {
     // MARK: - Conversation Management Integration
     @Published var conversationManager = ConversationManager()
     @Published var currentConversation: Conversation?
@@ -442,28 +442,21 @@ public final class LiveKitManager: NSObject, ObservableObject {
             )
 
             // Log processing metrics
-            let metrics = result.processingMetrics
             print("✅ Voice Pipeline Complete:")
             print("  - Classification: \(result.classification.category) (\(result.classification.confidence))")
-            print("  - Execution: \(result.execution?.success == true ? "Success" : "Failed")")
-            print("  - Total Time: \(metrics.totalProcessingTime)s")
-            print("  - Classification Time: \(metrics.classificationTime)s")
-            if let execTime = metrics.executionTime {
-                print("  - Execution Time: \(execTime)s")
-            }
-            print("  - Response Generation: \(metrics.responseGenerationTime)s")
-            if let voiceTime = metrics.voiceSynthesisTime {
-                print("  - Voice Synthesis: \(voiceTime)s")
-            }
+            print("  - Execution: \(result.mcpExecutionResult?.success == true ? "Success" : "Failed")")
+            print("  - Total Time: \(result.processingTime)s")
+            print("  - Success: \(result.success)")
 
+            // TODO: Implement voice response synthesis
             // Play voice response if available (using the new ElevenLabs synthesizer)
-            if let audioData = result.audioResponse {
-                Task {
-                    await playVoiceResponse(audioData)
-                }
-            }
+            // if let audioData = result.audioResponse {
+            //     Task {
+            //         await playVoiceResponse(audioData)
+            //     }
+            // }
 
-            return result.response
+            return result.finalResponse
         } catch {
             print("❌ Voice pipeline failed: \(error.localizedDescription)")
             // Fallback to traditional AI processing
@@ -865,7 +858,9 @@ public final class LiveKitManager: NSObject, ObservableObject {
             websocketURL: "ws://localhost:8000/ws",
             apiKey: nil,
             timeout: 30.0,
-            heartbeatInterval: 30.0
+            heartbeatInterval: 30.0,
+            enableCertificatePinning: false,
+            pinnedCertificateName: nil
         )
 
         self.backendClient = PythonBackendClient(configuration: backendConfig)
@@ -934,9 +929,12 @@ public final class LiveKitManager: NSObject, ObservableObject {
 
             switch classification.intent {
             case .generateDocument:
-                if let content = formattedParameters["content"] as? String,
-                   let formatString = formattedParameters["format"] as? String ?? "pdf",
-                   let format = DocumentGenerationRequest.DocumentFormat(rawValue: formatString) {
+                if let content = formattedParameters["content"] as? String {
+                    let formatString = formattedParameters["format"] as? String ?? "pdf"
+                    guard let format = DocumentGenerationRequest.DocumentFormat(rawValue: formatString) else {
+                        mcpResponse = "Unsupported document format: \(formatString)"
+                        break
+                    }
                     let result = try await mcpServerManager.generateDocument(content: content, format: format)
                     mcpResponse = "Document generated successfully: \(result.documentURL)"
                 } else {
@@ -1375,5 +1373,27 @@ extension LiveKitManager: AVAudioPlayerDelegate {
             }
             audioPlayer = nil
         }
+    }
+    
+    // MARK: - VoiceActivityDelegate
+    
+    func voiceActivityDidStart() {
+        print("🎤 Voice activity started")
+        // Handle voice activity start
+    }
+    
+    func voiceActivityDidEnd() {
+        print("🔇 Voice activity ended")
+        // Handle voice activity end
+    }
+    
+    func speechRecognitionResult(_ text: String, isFinal: Bool) {
+        print("🗣️ Speech recognition: \(text) (final: \(isFinal))")
+        // Handle speech recognition results
+    }
+    
+    func aiResponseReceived(_ response: String, isComplete: Bool) {
+        print("🤖 AI response: \(response) (complete: \(isComplete))")
+        // Handle AI responses
     }
 }

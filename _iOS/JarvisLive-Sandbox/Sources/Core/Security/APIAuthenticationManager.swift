@@ -25,7 +25,7 @@ import Combine
 import Network
 
 /// Authentication status enumeration
-public enum AuthenticationStatus {
+public enum AuthenticationStatus: Equatable {
     case notAuthenticated
     case authenticating
     case authenticated(token: String, expiresAt: Date)
