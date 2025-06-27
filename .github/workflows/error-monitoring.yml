@@ -1,0 +1,108 @@
+name: Error Monitoring and Alerting
+
+on:
+  workflow_run:
+    workflows: ["CI/CD Pipeline - Jarvis Live Quality Gate"]
+    types: [completed]
+
+jobs:
+  error-analysis:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Download workflow artifacts
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            run_id: ${{ github.event.workflow_run.id }}
+          });
+          
+          for (const artifact of artifacts.data.artifacts) {
+            const download = await github.rest.actions.downloadArtifact({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              artifact_id: artifact.id,
+              archive_format: 'zip'
+            });
+            
+            const fs = require('fs');
+            fs.writeFileSync(`${artifact.name}.zip`, Buffer.from(download.data));
+          }
+    
+    - name: Analyze failure patterns
+      run: |
+        python3 << 'PYTHON'
+        import json
+        import os
+        import re
+        from datetime import datetime
+        
+        # Analyze failure patterns and generate report
+        failure_patterns = {
+            'build_errors': [],
+            'test_failures': [],
+            'linting_issues': [],
+            'dependency_conflicts': [],
+            'performance_regressions': []
+        }
+        
+        # Generate failure analysis report
+        report = {
+            'timestamp': datetime.now().isoformat(),
+            'workflow_run_id': '${{ github.event.workflow_run.id }}',
+            'failure_patterns': failure_patterns,
+            'recommendations': [
+                'Review build logs for compilation errors',
+                'Check test coverage and failing test cases',
+                'Validate dependency versions and conflicts',
+                'Monitor performance metrics for regressions'
+            ]
+        }
+        
+        with open('failure_analysis.json', 'w') as f:
+            json.dump(report, f, indent=2)
+        PYTHON
+    
+    - name: Create GitHub issue for critical failures
+      if: contains(github.event.workflow_run.head_branch, 'main') || contains(github.event.workflow_run.head_branch, 'develop')
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('failure_analysis.json', 'utf8'));
+          
+          const issueBody = `## CI/CD Pipeline Failure Alert
+          
+          **Workflow Run:** ${{ github.event.workflow_run.id }}
+          **Branch:** ${{ github.event.workflow_run.head_branch }}
+          **Timestamp:** ${report.timestamp}
+          
+          ## Failure Analysis
+          
+          The CI/CD pipeline has failed on a critical branch. This requires immediate attention.
+          
+          ### Recommended Actions:
+          ${report.recommendations.map(r => `- ${r}`).join('\n')}
+          
+          ### Links:
+          - [Failed Workflow Run](${{ github.event.workflow_run.html_url }})
+          - [Build Logs](${{ github.event.workflow_run.logs_url }})
+          
+          **Priority:** P0 - Critical
+          **Labels:** ci-failure, p0-critical, investigation-required
+          `;
+          
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: `[P0-CRITICAL] CI/CD Pipeline Failure - ${report.timestamp}`,
+            body: issueBody,
+            labels: ['ci-failure', 'p0-critical', 'investigation-required']
+          });

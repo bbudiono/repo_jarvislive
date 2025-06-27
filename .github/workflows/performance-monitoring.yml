@@ -1,0 +1,121 @@
+name: Performance Monitoring
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    - cron: '0 2 * * *'  # Daily at 2 AM
+
+jobs:
+  performance-baseline:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: Install performance testing dependencies
+      working-directory: _python
+      run: |
+        pip install -r requirements.txt
+        pip install pytest-benchmark memory-profiler psutil
+        
+    - name: Run performance benchmarks
+      working-directory: _python
+      run: |
+        python -m pytest tests/performance/ --benchmark-json=performance-results.json -v
+        
+    - name: Analyze performance trends
+      run: |
+        python3 << 'PYTHON'
+        import json
+        import os
+        from datetime import datetime
+        
+        # Load current results
+        if os.path.exists('_python/performance-results.json'):
+            with open('_python/performance-results.json', 'r') as f:
+                results = json.load(f)
+            
+            # Extract key metrics
+            metrics = {
+                'timestamp': datetime.now().isoformat(),
+                'benchmarks': {}
+            }
+            
+            for benchmark in results.get('benchmarks', []):
+                metrics['benchmarks'][benchmark['name']] = {
+                    'mean': benchmark['stats']['mean'],
+                    'stddev': benchmark['stats']['stddev'],
+                    'min': benchmark['stats']['min'],
+                    'max': benchmark['stats']['max']
+                }
+            
+            # Save metrics for trending
+            with open('performance-metrics.json', 'w') as f:
+                json.dump(metrics, f, indent=2)
+            
+            print("Performance metrics captured successfully")
+        else:
+            print("No performance results found")
+        PYTHON
+        
+    - name: Upload performance results
+      uses: actions/upload-artifact@v3
+      with:
+        name: performance-results
+        path: |
+          _python/performance-results.json
+          performance-metrics.json
+          
+    - name: Performance regression check
+      run: |
+        echo "Checking for performance regressions..."
+        # This would typically compare against baseline stored in repository
+        # For now, we'll just log the current metrics
+        if [ -f "performance-metrics.json" ]; then
+            echo "Current performance metrics:"
+            cat performance-metrics.json
+        fi
+
+  ios-performance-analysis:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Analyze iOS build performance
+      working-directory: _iOS
+      run: |
+        # Build time analysis
+        echo "Analyzing iOS build performance..."
+        
+        if [ -d "JarvisLive-Sandbox" ]; then
+            # Measure build time
+            time xcodebuild build \
+              -project JarvisLive-Sandbox/JarvisLive-Sandbox.xcodeproj \
+              -scheme JarvisLive-Sandbox \
+              -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=latest' \
+              -quiet 2>&1 | tee build-time.log
+            
+            # Extract build metrics
+            BUILD_TIME=$(grep "real" build-time.log | awk '{print $2}' || echo "unknown")
+            echo "Build time: $BUILD_TIME"
+            
+            # Save metrics
+            echo "{\"build_time\": \"$BUILD_TIME\", \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > ios-performance-metrics.json
+        fi
+        
+    - name: Upload iOS performance results
+      uses: actions/upload-artifact@v3
+      with:
+        name: ios-performance-results
+        path: _iOS/ios-performance-metrics.json

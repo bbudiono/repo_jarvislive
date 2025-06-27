@@ -71,8 +71,8 @@ struct SharedContext: Codable, Identifiable {
         }
         
         enum VisibilityScope: String, Codable {
-            case public = "public"
-            case private = "private"
+            case `public` = "public"
+            case `private` = "private"
             case group = "group"
             case moderatorOnly = "moderator_only"
         }
@@ -164,9 +164,9 @@ struct SharedContext: Codable, Identifiable {
         }
         
         enum AccessLevel: String, Codable {
-            case public = "public"
+            case `public` = "public"
             case protected = "protected"
-            case private = "private"
+            case `private` = "private"
             case restricted = "restricted"
         }
         

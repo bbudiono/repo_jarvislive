@@ -75,12 +75,16 @@ final class MCPServerManager: MCPServerManagerProtocol, ObservableObject {
     @Published private(set) var availableTools: [String: MCPCapabilities.MCPTool] = [:]
     @Published private(set) var isInitialized: Bool = false
     @Published private(set) var lastError: Error?
-    var lastErrorPublisher: Published<Error?>.Publisher { $lastError }
     @Published private(set) var activeOperations: Set<String> = []
     
-    // MARK: - Computed Properties for Protocol Conformance
+    // MARK: - Protocol Conformance Properties
     
     var lastErrorPublisher: Published<Error?>.Publisher { $lastError }
+    var isConnected: Bool { backendClient.connectionStatus == .connected }
+    var availableServers: [String] { servers.map { $0.id } }
+    var serverStatus: [String: String] { 
+        Dictionary(uniqueKeysWithValues: servers.map { ($0.id, $0.status.rawValue) })
+    }
 
     // MARK: - Private Properties
 
@@ -110,6 +114,45 @@ final class MCPServerManager: MCPServerManagerProtocol, ObservableObject {
 
     deinit {
         serverUpdateTask?.cancel()
+    }
+
+    // MARK: - Protocol Conformance Methods
+    
+    func connect() async throws {
+        if backendClient.connectionStatus != .connected {
+            await backendClient.connect()
+        }
+        await initialize()
+    }
+    
+    func disconnect() async {
+        await backendClient.disconnect()
+        handleBackendDisconnection()
+    }
+    
+    func isHealthy() async -> Bool {
+        guard isConnected else { return false }
+        return servers.allSatisfy { $0.status == .active }
+    }
+    
+    func executeCommand(_ command: String, server: String, parameters: [String: Any]) async throws -> [String: Any] {
+        guard let serverObj = servers.first(where: { $0.id == server }) else {
+            throw MCPClientError.toolNotAvailable("Server \(server) not found")
+        }
+        
+        let result = try await executeTool(name: "\(server).\(command)", arguments: parameters)
+        return result.content.reduce(into: [String: Any]()) { dict, content in
+            if case .text(let text) = content {
+                dict["response"] = text
+            }
+        }
+    }
+    
+    func getServerCapabilities(_ server: String) async -> [String] {
+        guard let serverObj = servers.first(where: { $0.id == server }) else {
+            return []
+        }
+        return serverObj.capabilities.tools.map { $0.name }
     }
 
     // MARK: - Initialization Methods

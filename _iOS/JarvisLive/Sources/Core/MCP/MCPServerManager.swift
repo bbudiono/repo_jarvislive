@@ -432,7 +432,7 @@ final class MCPServerManager: MCPServerManagerProtocol, ObservableObject {
             return MCPExecutionResult(
                 success: true,
                 response: "Document generated successfully at \(documentResult.documentURL)",
-                executionTime: 1.0, // Default execution time since generationTime not available
+                executionTime: Date().timeIntervalSince(documentResult.generatedAt),
                 serverUsed: "document-generator",
                 metadata: [
                     "document_url": documentResult.documentURL,
@@ -463,7 +463,7 @@ final class MCPServerManager: MCPServerManagerProtocol, ObservableObject {
             return MCPExecutionResult(
                 success: true,
                 response: "Email sent successfully with ID: \(emailResult.messageId)",
-                executionTime: 1.0, // Default execution time since deliveryTime not available
+                executionTime: Date().timeIntervalSince(emailResult.sentAt),
                 serverUsed: "email-server",
                 metadata: [
                     "message_id": emailResult.messageId,
@@ -502,7 +502,7 @@ final class MCPServerManager: MCPServerManagerProtocol, ObservableObject {
             return MCPExecutionResult(
                 success: true,
                 response: "Calendar event created: \(title)",
-                executionTime: 1.0,
+                executionTime: Date().timeIntervalSince(calendarResult.createdAt),
                 serverUsed: "calendar-server",
                 metadata: [
                     "event_id": calendarResult.eventId,
@@ -563,7 +563,7 @@ final class MCPServerManager: MCPServerManagerProtocol, ObservableObject {
             return MCPExecutionResult(
                 success: true,
                 response: "File uploaded successfully to \(storageResult.path)",
-                executionTime: 1.0, // Default execution time since uploadTime not available
+                executionTime: storageResult.lastModified.map { Date().timeIntervalSince($0) } ?? 1.0,
                 serverUsed: "storage-server",
                 metadata: [
                     "path": storageResult.path,

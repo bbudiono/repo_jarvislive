@@ -107,11 +107,11 @@ struct ParticipantListView: View {
             // Quick filter buttons
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
-                    FilterButton(title: "All", count: participants.count, isSelected: true)
-                    FilterButton(title: "Active", count: activeParticipantsCount, isSelected: false)
-                    FilterButton(title: "Speaking", count: speakingParticipantsCount, isSelected: false)
-                    FilterButton(title: "Hosts", count: hostParticipantsCount, isSelected: false)
-                    FilterButton(title: "Observers", count: observerParticipantsCount, isSelected: false)
+                    ParticipantFilterButton(title: "All", count: participants.count, isSelected: true)
+                    ParticipantFilterButton(title: "Active", count: activeParticipantsCount, isSelected: false)
+                    ParticipantFilterButton(title: "Speaking", count: speakingParticipantsCount, isSelected: false)
+                    ParticipantFilterButton(title: "Hosts", count: hostParticipantsCount, isSelected: false)
+                    ParticipantFilterButton(title: "Observers", count: observerParticipantsCount, isSelected: false)
                 }
                 .padding(.horizontal)
             }
@@ -122,10 +122,10 @@ struct ParticipantListView: View {
 
     private var participantStatsView: some View {
         HStack(spacing: 20) {
-            StatItem(title: "Total", value: participants.count, color: .blue)
-            StatItem(title: "Active", value: activeParticipantsCount, color: .green)
-            StatItem(title: "Speaking", value: speakingParticipantsCount, color: .orange)
-            StatItem(title: "Quiet", value: participants.count - speakingParticipantsCount, color: .gray)
+            ParticipantStatItem(title: "Total", value: participants.count, color: .blue)
+            ParticipantStatItem(title: "Active", value: activeParticipantsCount, color: .green)
+            ParticipantStatItem(title: "Speaking", value: speakingParticipantsCount, color: .orange)
+            ParticipantStatItem(title: "Quiet", value: participants.count - speakingParticipantsCount, color: .gray)
         }
         .padding()
         .background(Color(UIColor.systemBackground))
@@ -360,7 +360,7 @@ struct AudioLevelIndicator: View {
     }
 }
 
-struct FilterButton: View {
+private struct ParticipantFilterButton: View {
     let title: String
     let count: Int
     let isSelected: Bool
@@ -390,7 +390,7 @@ struct FilterButton: View {
     }
 }
 
-struct StatItem: View {
+private struct ParticipantStatItem: View {
     let title: String
     let value: Int
     let color: Color

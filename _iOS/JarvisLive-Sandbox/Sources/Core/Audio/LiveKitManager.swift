@@ -433,20 +433,13 @@ public final class LiveKitManager: NSObject, ObservableObject {
             currentConversation = conversationManager.createNewConversation()
         }
 
-        // Prepare voice processing request
-        let request = VoiceProcessingRequest(
-            audioInput: input,
-            userId: "current_user", // Would be actual user ID
-            sessionId: UUID().uuidString,
-            collaborationContext: nil, // Would be set if in collaboration mode
-            conversationHistory: currentConversation?.messages ?? [],
-            enableMCPExecution: true,
-            enableVoiceResponse: true
-        )
-
         do {
             // Process through the complete voice pipeline
-            let result = try await pipeline.processVoiceInput(request)
+            let result = try await pipeline.processVoiceCommand(
+                input,
+                userId: "current_user",
+                sessionId: UUID().uuidString
+            )
 
             // Log processing metrics
             let metrics = result.processingMetrics
@@ -839,7 +832,7 @@ public final class LiveKitManager: NSObject, ObservableObject {
         )
 
         // Initialize MCP server manager (placeholder for now)
-        let mcpServerManager = MockMCPServerManager()
+        let mcpServerManager: any MCPServerManagerProtocol = MockMCPServerManager()
 
         // Initialize voice command executor
         let voiceCommandExecutor = VoiceCommandExecutor(
@@ -847,15 +840,11 @@ public final class LiveKitManager: NSObject, ObservableObject {
         )
 
         // Initialize the complete voice command pipeline
-        if let voiceClassifier = voiceClassificationManager,
-           let voiceSynthesizer = elevenLabsVoiceSynthesizer {
+        if let voiceClassifier = voiceClassificationManager {
             self.voiceCommandPipeline = VoiceCommandPipeline(
-                voiceClassifier: voiceClassifier,
-                commandExecutor: voiceCommandExecutor,
-                conversationManager: conversationManager,
-                collaborationManager: nil, // Would be set if collaboration is active
-                voiceSynthesizer: voiceSynthesizer,
-                mcpServerManager: mcpServerManager
+                classificationManager: voiceClassifier,
+                mcpServerManager: mcpServerManager,
+                keychainManager: _keychainManager
             )
 
             // Set this manager as the voice delegate
@@ -1378,7 +1367,7 @@ extension LiveKitManager: AVAudioPlayerDelegate {
         }
     }
 
-    nonisolated func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+    public nonisolated func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
         Task { @MainActor in
             print("Audio decode error: \(error?.localizedDescription ?? "Unknown error")")
             if audioState == .playing {

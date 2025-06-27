@@ -85,7 +85,7 @@ final class VoiceCommandExecutor: ObservableObject {
 
     // MARK: - Dependencies
 
-    private let mcpServerManager: MCPServerManager
+    private let mcpServerManager: any MCPServerManagerProtocol
     private let documentGenerator: DocumentMCPClient
     private let emailManager: EmailMCPClient
     private let calendarManager: CalendarMCPClient
@@ -116,7 +116,7 @@ final class VoiceCommandExecutor: ObservableObject {
     // MARK: - Initialization
 
     init(
-        mcpServerManager: MCPServerManager,
+        mcpServerManager: any MCPServerManagerProtocol,
         configuration: Configuration = .default
     ) {
         self.mcpServerManager = mcpServerManager
@@ -658,9 +658,9 @@ struct WebSearchResult {
 
 // Mock implementations (would be replaced with actual MCP clients)
 class DocumentMCPClient: DocumentMCPClient {
-    private let serverManager: MCPServerManager
+    private let serverManager: any MCPServerManagerProtocol
 
-    init(serverManager: MCPServerManager) {
+    init(serverManager: any MCPServerManagerProtocol) {
         self.serverManager = serverManager
     }
 
@@ -675,26 +675,27 @@ class DocumentMCPClient: DocumentMCPClient {
 }
 
 class EmailMCPClient: EmailMCPClient {
-    private let serverManager: MCPServerManager
+    private let serverManager: any MCPServerManagerProtocol
 
-    init(serverManager: MCPServerManager) {
+    init(serverManager: any MCPServerManagerProtocol) {
         self.serverManager = serverManager
     }
 
     func sendEmail(to: String, subject: String, body: String, attachments: [String]) async throws -> EmailResult {
         // Mock implementation
         return EmailResult(
-            success: true,
             messageId: "msg_\(UUID().uuidString)",
-            errorMessage: nil
+            status: .sent,
+            sentAt: Date(),
+            recipientCount: 1
         )
     }
 }
 
 class CalendarMCPClient: CalendarMCPClient {
-    private let serverManager: MCPServerManager
+    private let serverManager: any MCPServerManagerProtocol
 
-    init(serverManager: MCPServerManager) {
+    init(serverManager: any MCPServerManagerProtocol) {
         self.serverManager = serverManager
     }
 
@@ -709,9 +710,9 @@ class CalendarMCPClient: CalendarMCPClient {
 }
 
 class SearchMCPClient: SearchMCPClient {
-    private let serverManager: MCPServerManager
+    private let serverManager: any MCPServerManagerProtocol
 
-    init(serverManager: MCPServerManager) {
+    init(serverManager: any MCPServerManagerProtocol) {
         self.serverManager = serverManager
     }
 
