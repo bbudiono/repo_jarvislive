@@ -41,11 +41,12 @@ class MCPContextExamples {
      * AI: "Document generated successfully: project_updates.pdf"
      */
 
+    @MainActor
     static func documentGenerationExample() async {
         // This example shows how the system maintains context across multiple turns
 
         // Setup (normally done in your app initialization)
-        let conversationManager = ConversationManager()
+        let conversationManager = await ConversationManager()
         let mcpServerManager = MCPServerManager(
             backendClient: PythonBackendClient(),
             keychainManager: KeychainManager.shared
@@ -61,8 +62,8 @@ class MCPContextExamples {
         )
 
         // Create a conversation
-        let conversation = conversationManager.createNewConversation(title: "Document Generation")
-        conversationManager.setCurrentConversation(conversation)
+        let conversation = await conversationManager.createNewConversation(title: "Document Generation")
+        await conversationManager.setCurrentConversation(conversation)
 
         // Simulate the conversation flow
         do {
@@ -112,19 +113,20 @@ class MCPContextExamples {
      * AI: "Email sent successfully with ID: msg_12345"
      */
 
+    @MainActor
     static func emailCompositionExample() async {
         // Setup integration manager (as above)
-        let integrationManager = createIntegrationManager()
+        let integrationManager = await createIntegrationManager()
 
         // Simulate email composition flow
-        let conversation = setupTestConversation(integrationManager)
+        let conversationId = await setupTestConversation(integrationManager)
 
         do {
             // Multi-turn email composition
             let responses = await processEmailFlow(integrationManager)
 
             // Show how context was maintained throughout
-            printContextAnalysis(integrationManager)
+            await printContextAnalysis(integrationManager)
         } catch {
             print("❌ Email composition failed: \(error)")
         }
@@ -145,9 +147,10 @@ class MCPContextExamples {
      * AI: "Returning to document generation. You wanted a document about quarterly results. What format would you prefer?"
      */
 
+    @MainActor
     static func contextSwitchingExample() async {
-        let integrationManager = createIntegrationManager()
-        setupTestConversation(integrationManager)
+        let integrationManager = await createIntegrationManager()
+        await setupTestConversation(integrationManager)
 
         do {
             // Start document generation
@@ -171,7 +174,7 @@ class MCPContextExamples {
             print("🤖 AI: \(response4.response)")
 
             // Show context preservation
-            let pendingParams = integrationManager.getPendingParameters()
+            let pendingParams = await integrationManager.getPendingParameters()
             print("\n📋 Pending Parameters: \(pendingParams)")
         } catch {
             print("❌ Context switching failed: \(error)")
@@ -192,9 +195,10 @@ class MCPContextExamples {
      * [Success] AI: "Document generated successfully: project_status_report.pdf"
      */
 
+    @MainActor
     static func errorRecoveryExample() async {
-        let integrationManager = createIntegrationManager()
-        setupTestConversation(integrationManager)
+        let integrationManager = await createIntegrationManager()
+        await setupTestConversation(integrationManager)
 
         // Simulate error and recovery
         do {
@@ -226,9 +230,10 @@ class MCPContextExamples {
      * AI: "I'll help you with all three tasks. Let's start with the project report..."
      */
 
+    @MainActor
     static func batchOperationsExample() async {
-        let integrationManager = createIntegrationManager()
-        setupTestConversation(integrationManager)
+        let integrationManager = await createIntegrationManager()
+        await setupTestConversation(integrationManager)
 
         let batchCommands = [
             "Create a project report about Q4 results",
@@ -253,8 +258,9 @@ class MCPContextExamples {
 
     // MARK: - Helper Methods
 
-    private static func createIntegrationManager() -> MCPIntegrationManager {
-        let conversationManager = ConversationManager()
+    @MainActor
+    private static func createIntegrationManager() async -> MCPIntegrationManager {
+        let conversationManager = await ConversationManager()
         let mcpServerManager = MCPServerManager(
             backendClient: PythonBackendClient(),
             keychainManager: KeychainManager.shared
@@ -271,9 +277,11 @@ class MCPContextExamples {
         )
     }
 
-    private static func setupTestConversation(_ integrationManager: MCPIntegrationManager) -> Conversation {
-        // This would be implemented based on your app's conversation setup
-        fatalError("Implement conversation setup based on your app structure")
+    @MainActor
+    private static func setupTestConversation(_ integrationManager: MCPIntegrationManager) async -> UUID {
+        // Return a mock conversation ID for example purposes
+        // In a real implementation, this would use ConversationManager to create a conversation
+        return UUID()
     }
 
     private static func processEmailFlow(_ integrationManager: MCPIntegrationManager) async -> [MCPProcessingResult] {
@@ -288,8 +296,9 @@ class MCPContextExamples {
         return await integrationManager.processBatchCommands(commands)
     }
 
-    private static func printContextAnalysis(_ integrationManager: MCPIntegrationManager) {
-        let stats = integrationManager.getIntegrationStats()
+    @MainActor
+    private static func printContextAnalysis(_ integrationManager: MCPIntegrationManager) async {
+        let stats = await integrationManager.getIntegrationStats()
         print("\n📊 Context Analysis:")
         print("   Active Contexts: \(stats.activeContexts)")
         print("   Total Operations: \(stats.totalMCPOperations)")
@@ -355,11 +364,12 @@ struct MCPIntegrationPatterns {
     /**
      * Pattern for providing context-aware command suggestions
      */
+    @MainActor
     static func generateContextualSuggestions(
         integrationManager: MCPIntegrationManager
-    ) -> [String] {
-        let currentState = integrationManager.getCurrentContextState()
-        let pendingParams = integrationManager.getPendingParameters()
+    ) async -> [String] {
+        let currentState = await integrationManager.getCurrentContextState()
+        let pendingParams = await integrationManager.getPendingParameters()
 
         switch currentState {
         case .idle:
@@ -390,12 +400,13 @@ struct MCPIntegrationPatterns {
     /**
      * Pattern for persisting context across app sessions
      */
+    @MainActor
     static func persistContextPattern(
         contextManager: MCPContextManager,
         conversationId: UUID
-    ) -> String? {
+    ) async -> String? {
         // Export current context
-        let contextData = contextManager.exportContext(for: conversationId)
+        let contextData = await contextManager.exportContext(for: conversationId)
 
         // Save to persistent storage (UserDefaults, Core Data, etc.)
         if let contextData = contextData {
@@ -409,10 +420,11 @@ struct MCPIntegrationPatterns {
     /**
      * Pattern for restoring context from persistent storage
      */
+    @MainActor
     static func restoreContextPattern(
         contextManager: MCPContextManager,
         conversationId: UUID
-    ) -> Bool {
+    ) async -> Bool {
         // Retrieve from persistent storage
         guard let contextData = UserDefaults.standard.string(forKey: "mcp_context_\(conversationId)"),
               let data = contextData.data(using: .utf8),
@@ -421,7 +433,7 @@ struct MCPIntegrationPatterns {
         }
 
         // Restore context
-        contextManager.updateContext(for: conversationId) { contextRef in
+        await contextManager.updateContext(for: conversationId) { contextRef in
             contextRef = context
         }
 

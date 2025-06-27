@@ -65,6 +65,9 @@ public enum KeychainManagerError: Error, Equatable {
 public final class KeychainManager {
     private let service: String
     private let accessGroup: String?
+    
+    /// Shared instance for convenience
+    public static let shared = KeychainManager(service: "com.ablankcanvas.JarvisLive")
 
     // MARK: - Initialization
 

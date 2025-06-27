@@ -80,6 +80,18 @@ final class MCPServerManager: MCPServerManagerProtocol, ObservableObject {
     // MARK: - Computed Properties for Protocol Conformance
     
     var lastErrorPublisher: Published<Error?>.Publisher { $lastError }
+    
+    var isConnected: Bool {
+        return backendClient.connectionStatus == .connected
+    }
+    
+    var availableServers: [String] {
+        return servers.compactMap { $0.status == .active ? $0.id : nil }
+    }
+    
+    var serverStatus: [String: String] {
+        return Dictionary(uniqueKeysWithValues: servers.map { ($0.id, $0.status.rawValue) })
+    }
 
     // MARK: - Private Properties
 
@@ -751,6 +763,50 @@ final class MCPServerManager: MCPServerManagerProtocol, ObservableObject {
 
     func getAllServerConfigurations() -> [MCPConfiguration.MCPServerConfig] {
         return serverConfigurations
+    }
+    
+    // MARK: - Protocol Conformance Methods
+    
+    func connect() async throws {
+        if backendClient.connectionStatus != .connected {
+            await backendClient.connect()
+        }
+        if !isInitialized {
+            await initialize()
+        }
+    }
+    
+    func disconnect() async {
+        await backendClient.disconnect()
+        handleBackendDisconnection()
+    }
+    
+    func isHealthy() async -> Bool {
+        return isConnected && !servers.isEmpty
+    }
+    
+    func executeCommand(_ command: String, server: String, parameters: [String: Any]) async throws -> [String: Any] {
+        let toolName = "\(server).\(command)"
+        let result = try await executeTool(name: toolName, arguments: parameters)
+        
+        var resultDict: [String: Any] = [
+            "success": !result.isError,
+            "content": result.content.compactMap { $0.text }.joined(separator: "\n")
+        ]
+        
+        if result.isError {
+            resultDict["error"] = "Tool execution failed"
+        }
+        
+        return resultDict
+    }
+    
+    func getServerCapabilities(_ server: String) async -> [String] {
+        guard let foundServer = servers.first(where: { $0.id == server && $0.status == .active }) else {
+            return []
+        }
+        
+        return foundServer.capabilities.tools.map { $0.name }
     }
 }
 

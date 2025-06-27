@@ -25,7 +25,7 @@ import Combine
 import Network
 
 /// Authentication status enumeration
-public enum AuthenticationStatus {
+public enum AuthenticationStatus: Equatable {
     case notAuthenticated
     case authenticating
     case authenticated(token: String, expiresAt: Date)
@@ -54,6 +54,25 @@ public enum AuthenticationStatus {
             return true
         }
         return false
+    }
+
+    // Manual Equatable implementation for enum with associated values
+    public static func == (lhs: AuthenticationStatus, rhs: AuthenticationStatus) -> Bool {
+        switch (lhs, rhs) {
+        case (.notAuthenticated, .notAuthenticated),
+             (.authenticating, .authenticating),
+             (.refreshing, .refreshing),
+             (.expired, .expired),
+             (.biometricRequired, .biometricRequired),
+             (.networkUnavailable, .networkUnavailable):
+            return true
+        case (.authenticated(let lhsToken, let lhsDate), .authenticated(let rhsToken, let rhsDate)):
+            return lhsToken == rhsToken && lhsDate == rhsDate
+        case (.failed(let lhsError), .failed(let rhsError)):
+            return lhsError == rhsError
+        default:
+            return false
+        }
     }
 }
 

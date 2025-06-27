@@ -155,9 +155,7 @@ final class MCPIntegrationManager: ObservableObject {
             pendingUserInput = contextualResponse.needsUserInput ? "Waiting for user input..." : nil
 
             // Optional: Trigger text-to-speech
-            if let liveKitManager = liveKitManager {
-                await liveKitManager.synthesizeAndPlay(text: contextualResponse.message)
-            }
+            // Note: LiveKit synthesis is handled internally through delegate methods
 
             return MCPProcessingResult(
                 response: contextualResponse.message,

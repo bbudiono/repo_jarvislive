@@ -46,14 +46,16 @@ class VoiceCommandPostClassificationIntegration: ObservableObject {
     // MARK: - Initialization
 
     init(
-        voiceClassificationManager: VoiceClassificationManager = VoiceClassificationManager(),
-        pythonBackendClient: PythonBackendClient = PythonBackendClient(),
-        conversationManager: ConversationManager = ConversationManager(),
+        voiceClassificationManager: VoiceClassificationManager? = nil,
+        pythonBackendClient: PythonBackendClient? = nil,
+        conversationManager: ConversationManager? = nil,
         userId: String = "default_user"
     ) {
-        self.voiceClassificationManager = voiceClassificationManager
-        self.pythonBackendClient = pythonBackendClient
-        self.conversationManager = conversationManager
+        // Use provided dependencies or create with default initializers
+        // Note: This assumes the dependencies have non-async initializers available
+        self.voiceClassificationManager = voiceClassificationManager ?? VoiceClassificationManager()
+        self.pythonBackendClient = pythonBackendClient ?? PythonBackendClient()
+        self.conversationManager = conversationManager ?? ConversationManager()
         self.currentUserId = userId
         self.configuration = IntegrationConfiguration()
 
@@ -189,7 +191,7 @@ class VoiceCommandPostClassificationIntegration: ObservableObject {
                     includeContext: true
                 )
                 let backendResult = try await pythonBackendClient.classifyVoiceCommand(
-                    audioRequest.toStandardRequest()
+                    audioRequest.text
                 )
 
                 // TODO: Fix ClassificationResult constructor to match actual definition
@@ -561,14 +563,18 @@ struct VoiceClassificationRequestWithAudio: Codable {
 extension ClassificationResult {
     init(from backendResult: BackendClassificationResult) {
         self.init(
-            category: CommandCategory(rawValue: backendResult.category) ?? .unknown,
+            category: (CommandCategory(rawValue: backendResult.category) ?? .unknown).rawValue,
             intent: backendResult.intent,
             confidence: backendResult.confidence,
-            parameters: backendResult.parameters.mapValues { AnyCodable($0) },
+            parameters: backendResult.parameters.compactMapValues { $0 as? String },
             suggestions: backendResult.suggestions,
             rawText: backendResult.rawText,
             normalizedText: backendResult.normalizedText,
-            processingTime: backendResult.processingTime
+            confidenceLevel: backendResult.confidence > 0.8 ? "high" : (backendResult.confidence > 0.5 ? "medium" : "low"),
+            contextUsed: false,
+            preprocessingTime: 0.0,
+            classificationTime: backendResult.processingTime,
+            requiresConfirmation: backendResult.confidence < 0.7
         )
     }
 }
@@ -655,7 +661,7 @@ struct VoiceCommandWithPostClassificationView: View {
         .padding()
         .sheet(isPresented: $integration.showingPostClassificationFlow) {
             if let result = integration.currentClassificationResult {
-                PostClassificationFlowView(classificationResult: result)
+                PostClassificationFlowView(classificationResult: result.toUIClassificationResult())
                     .onDisappear {
                         Task {
                             await integration.handleFlowCompletion(.success)
@@ -669,4 +675,29 @@ struct VoiceCommandWithPostClassificationView: View {
 #Preview {
     VoiceCommandWithPostClassificationView()
         .modifier(GlassViewModifier())
+}
+
+// MARK: - ClassificationResult to UIClassificationResult Conversion
+
+extension ClassificationResult {
+    func toUIClassificationResult() -> UIClassificationResult {
+        // Convert parameters to UIAnyCodable
+        let uiParameters: [String: UIAnyCodable] = parameters.mapValues { value in
+            UIAnyCodable(value)
+        }
+        
+        // Convert category string to CommandCategory
+        let commandCategory = CommandCategory(rawValue: category) ?? .unknown
+        
+        return UIClassificationResult(
+            category: commandCategory,
+            intent: intent,
+            confidence: confidence,
+            parameters: uiParameters,
+            suggestions: suggestions,
+            rawText: rawText,
+            normalizedText: normalizedText,
+            processingTime: classificationTime
+        )
+    }
 }
