@@ -846,7 +846,7 @@ struct PredictionContext {
     let recentCommands: [String]
     let deviceState: String?
     let location: String?
-    let conversationHistory: [SimpleConversationMessage]
+    let conversationHistory: [ConversationMessageDTO]
 }
 
 struct CommandChain {

@@ -29,7 +29,7 @@ struct ConversationThread {
     let title: String
     let startTime: Date
     let endTime: Date?
-    let messages: [ConversationMessage]
+    let messages: [ConversationMessageUI]
     let context: ThreadContext
     let participants: [String]
     let tags: [String]
@@ -68,7 +68,7 @@ struct ConversationThread {
     }
 }
 
-struct ConversationMessage {
+struct ConversationMessageUI {
     let id = UUID()
     let content: String
     let timestamp: Date

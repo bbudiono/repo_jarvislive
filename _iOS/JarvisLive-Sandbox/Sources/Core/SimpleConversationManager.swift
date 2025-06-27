@@ -23,14 +23,14 @@ import Combine
 
 // MARK: - Simple Data Models
 
-struct Conversation: Identifiable, Codable {
+struct ConversationDTO: Identifiable, Codable {
     let id: UUID
     var title: String
     let createdAt: Date
     var updatedAt: Date
     var isArchived: Bool
     var totalMessages: Int
-    var messages: [SimpleConversationMessage]
+    var messages: [ConversationMessageDTO]
 
     init(title: String = "New Conversation") {
         self.id = UUID()
@@ -45,7 +45,7 @@ struct Conversation: Identifiable, Codable {
 
 /// Simple conversation message struct (renamed to avoid conflict with Core Data ConversationMessage)
 /// Use this for in-memory conversation handling without persistence
-struct SimpleConversationMessage: Identifiable, Codable {
+struct ConversationMessageDTO: Identifiable, Codable {
     let id: UUID
     let content: String
     let role: SimpleConversationManager.MessageRole
@@ -75,11 +75,11 @@ class SimpleConversationManager: ObservableObject {
         case assistant = "assistant"
         case system = "system"
     }
-    @Published var conversations: [Conversation] = []
-    @Published var currentConversation: Conversation?
+    @Published var conversations: [ConversationDTO] = []
+    @Published var currentConversation: ConversationDTO?
     @Published var isLoading = false
     @Published var searchText = ""
-    @Published var filteredConversations: [Conversation] = []
+    @Published var filteredConversations: [ConversationDTO] = []
 
     private let userDefaults = UserDefaults.standard
     private let conversationsKey = "SavedConversations"
@@ -137,7 +137,7 @@ class SimpleConversationManager: ObservableObject {
         }
 
         do {
-            conversations = try JSONDecoder().decode([Conversation].self, from: data)
+            conversations = try JSONDecoder().decode([ConversationDTO].self, from: data)
             filteredConversations = conversations.filter { !$0.isArchived }
             print("✅ Loaded \(conversations.count) conversations")
         } catch {
@@ -151,8 +151,8 @@ class SimpleConversationManager: ObservableObject {
 
     // MARK: - Conversation Management
 
-    func createNewConversation(title: String? = nil) -> Conversation {
-        let conversation = Conversation(title: title ?? "New Conversation")
+    func createNewConversation(title: String? = nil) -> ConversationDTO {
+        let conversation = ConversationDTO(title: title ?? "New Conversation")
         conversations.insert(conversation, at: 0) // Add to beginning
         saveConversations()
         filterConversations(searchText: searchText)
@@ -160,12 +160,12 @@ class SimpleConversationManager: ObservableObject {
         return conversation
     }
 
-    func setCurrentConversation(_ conversation: Conversation) {
+    func setCurrentConversation(_ conversation: ConversationDTO) {
         currentConversation = conversation
         print("✅ Set current conversation: \(conversation.title)")
     }
 
-    func updateConversationTitle(_ conversation: Conversation, title: String) {
+    func updateConversationTitle(_ conversation: ConversationDTO, title: String) {
         if let index = conversations.firstIndex(where: { $0.id == conversation.id }) {
             conversations[index].title = title
             conversations[index].updatedAt = Date()
@@ -174,7 +174,7 @@ class SimpleConversationManager: ObservableObject {
         }
     }
 
-    func archiveConversation(_ conversation: Conversation) {
+    func archiveConversation(_ conversation: ConversationDTO) {
         if let index = conversations.firstIndex(where: { $0.id == conversation.id }) {
             conversations[index].isArchived = true
             conversations[index].updatedAt = Date()
@@ -189,7 +189,7 @@ class SimpleConversationManager: ObservableObject {
         }
     }
 
-    func deleteConversation(_ conversation: Conversation) {
+    func deleteConversation(_ conversation: ConversationDTO) {
         if currentConversation?.id == conversation.id {
             currentConversation = nil
         }
@@ -203,14 +203,14 @@ class SimpleConversationManager: ObservableObject {
     // MARK: - Message Management
 
     func addMessage(
-        to conversation: Conversation,
+        to conversation: ConversationDTO,
         content: String,
         role: SimpleConversationManager.MessageRole,
         audioTranscription: String? = nil,
         aiProvider: String? = nil,
         processingTime: Double = 0.0
-    ) -> SimpleConversationMessage {
-        let message = SimpleConversationMessage(
+    ) -> ConversationMessageDTO {
+        let message = ConversationMessageDTO(
             content: content,
             role: role,
             audioTranscription: audioTranscription,
@@ -242,13 +242,13 @@ class SimpleConversationManager: ObservableObject {
         return message
     }
 
-    func getMessages(for conversation: Conversation) -> [SimpleConversationMessage] {
+    func getMessages(for conversation: ConversationDTO) -> [ConversationMessageDTO] {
         return conversation.messages
     }
 
     // MARK: - Context Management
 
-    func buildAIContext(for conversation: Conversation) -> String {
+    func buildAIContext(for conversation: ConversationDTO) -> String {
         let recentMessages = Array(conversation.messages.suffix(10)) // Last 10 messages
 
         var contextString = "Previous conversation context:\n"
@@ -262,7 +262,7 @@ class SimpleConversationManager: ObservableObject {
 
     // MARK: - Export Functionality
 
-    func exportConversation(_ conversation: Conversation) -> String {
+    func exportConversation(_ conversation: ConversationDTO) -> String {
         var export = "Conversation: \(conversation.title)\n"
         export += "Created: \(conversation.createdAt)\n"
         export += "Messages: \(conversation.totalMessages)\n\n"
