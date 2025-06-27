@@ -49,10 +49,12 @@ final class MockPythonBackendClient: ObservableObject {
     var searchCallCount: Int = 0
     var fileUploadCallCount: Int = 0
     var healthCheckCallCount: Int = 0
+    var voiceClassificationCallCount: Int = 0
 
     // MARK: - Mock Response Configuration
 
     private var mockServerDiscoveryResponse: [MockServerInfo] = []
+    private var mockClassificationResult: ClassificationResult?
     private var mockToolResult: MCPToolResult?
     private var mockDocumentResult: DocumentGenerationResult?
     private var mockEmailResult: EmailResult?
@@ -272,6 +274,118 @@ final class MockPythonBackendClient: ObservableObject {
         return result
     }
 
+    // MARK: - Voice Classification for E2E Testing
+
+    func classifyVoiceCommand(_ text: String) async throws -> ClassificationResult {
+        voiceClassificationCallCount += 1
+
+        if shouldDelayResponses {
+            try await Task.sleep(nanoseconds: UInt64(responseDelay * 1_000_000_000))
+        }
+
+        if shouldThrowError {
+            let error = mockError ?? NSError(domain: "MockVoiceError", code: 500)
+            lastError = error
+            throw error
+        }
+
+        // Check for environment-based test scenarios
+        if let result = determineMockClassificationResponse(for: text) {
+            return result
+        }
+
+        guard let result = mockClassificationResult else {
+            // Default response for E2E testing
+            return ClassificationResult(
+                category: .unknown,
+                intent: "",
+                confidence: 0.15,
+                parameters: [:],
+                suggestions: ["Try saying: 'Show settings'", "Try saying: 'Generate document'"],
+                rawText: text,
+                normalizedText: text.lowercased(),
+                processingTime: 0.25
+            )
+        }
+
+        return result
+    }
+
+    private func determineMockClassificationResponse(for text: String) -> ClassificationResult? {
+        let environment = ProcessInfo.processInfo.environment
+        
+        // Handle specific test scenarios based on launch environment
+        if environment["MOCK_CLASSIFICATION_RESPONSES"] == "true" {
+            let lowercaseText = text.lowercased()
+            
+            if lowercaseText.contains("setting") || lowercaseText.contains("show settings") {
+                return ClassificationResult(
+                    category: .settings,
+                    intent: "show_settings",
+                    confidence: 0.92,
+                    parameters: [:],
+                    suggestions: [],
+                    rawText: text,
+                    normalizedText: lowercaseText,
+                    processingTime: 0.15
+                )
+            } else if lowercaseText.contains("document") || lowercaseText.contains("pdf") {
+                return ClassificationResult(
+                    category: .documentGeneration,
+                    intent: "create_pdf",
+                    confidence: 0.88,
+                    parameters: ["format": AnyCodable("PDF"), "topic": AnyCodable("quarterly report")],
+                    suggestions: [],
+                    rawText: text,
+                    normalizedText: lowercaseText,
+                    processingTime: 0.22
+                )
+            }
+        }
+        
+        if environment["MOCK_LOW_CONFIDENCE_RESPONSE"] == "true" {
+            return ClassificationResult(
+                category: .settings,
+                intent: "show_settings",
+                confidence: 0.45,
+                parameters: [:],
+                suggestions: ["Show settings", "Open preferences", "Display configuration"],
+                rawText: text,
+                normalizedText: text.lowercased(),
+                processingTime: 0.35
+            )
+        }
+        
+        if environment["MOCK_MULTIPLE_OPTIONS_RESPONSE"] == "true" {
+            return ClassificationResult(
+                category: .emailManagement,
+                intent: "email_action",
+                confidence: 0.75,
+                parameters: ["recipient": AnyCodable("team")],
+                suggestions: ["Send email to team", "Create calendar event", "Draft message"],
+                rawText: text,
+                normalizedText: text.lowercased(),
+                processingTime: 0.18
+            )
+        }
+        
+        if environment["SIMULATE_NETWORK_ERROR"] == "true" {
+            shouldThrowError = true
+            mockError = NSError(
+                domain: "NetworkError",
+                code: -1009,
+                userInfo: [NSLocalizedDescriptionKey: "Network connection required for voice processing"]
+            )
+        }
+        
+        if environment["SIMULATE_PROCESSING_TIMEOUT"] == "true" {
+            shouldDelayResponses = true
+            responseDelay = 35.0 // Simulate timeout
+        }
+        
+        return nil
+    }
+
     // MARK: - Mock Configuration Methods
 
     func configureMockConnection(status: PythonBackendClient.ConnectionStatus) {
@@ -328,6 +442,12 @@ final class MockPythonBackendClient: ObservableObject {
         mockError = nil
     }
 
+    func configureMockClassificationResult(_ result: ClassificationResult) {
+        mockClassificationResult = result
+        shouldThrowError = false
+        mockError = nil
+    }
+
     func configureHealthCheckFailure(serverId: String) {
         healthCheckFailures.insert(serverId)
     }
@@ -345,6 +465,7 @@ final class MockPythonBackendClient: ObservableObject {
         searchCallCount = 0
         fileUploadCallCount = 0
         healthCheckCallCount = 0
+        voiceClassificationCallCount = 0
 
         shouldThrowError = false
         mockError = nil
@@ -358,6 +479,7 @@ final class MockPythonBackendClient: ObservableObject {
         mockCalendarResult = nil
         mockSearchResult = nil
         mockFileUploadResult = nil
+        mockClassificationResult = nil
         healthCheckFailures.removeAll()
 
         connectionStatus = .disconnected
@@ -442,6 +564,7 @@ extension MockPythonBackendClient {
             "search": searchCallCount,
             "fileUpload": fileUploadCallCount,
             "healthCheck": healthCheckCallCount,
+            "voiceClassification": voiceClassificationCallCount,
             "totalRequests": requestCount,
         ]
     }

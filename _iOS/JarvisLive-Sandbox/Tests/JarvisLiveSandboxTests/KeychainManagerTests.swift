@@ -252,6 +252,64 @@ final class KeychainManagerTests: XCTestCase {
         XCTAssertEqual(retrievedKeys["openai"], "sk-openai-test")
     }
 
+    // MARK: - ADVERSARIAL SECURITY TESTS (Task 4.2)
+
+    func testLogoutRemovesAllSensitiveData() throws {
+        // GIVEN: Multiple sensitive credentials are stored (API keys, user tokens, session data)
+        let sensitiveCredentials = [
+            "anthropic_api_key": "sk-ant-real-key-12345",
+            "openai_api_key": "sk-openai-real-key-67890",
+            "elevenlabs_api_key": "el-real-key-abcdef",
+            "livekit_api_key": "lk-real-key-xyz789",
+            "user_session_token": "session-token-sensitive-data",
+            "user_refresh_token": "refresh-token-sensitive-data",
+            "user_password_hash": "password-hash-sensitive-data"
+        ]
+        
+        try keychainManager.storeCredentials(sensitiveCredentials)
+        
+        // Verify all credentials are stored
+        for (key, _) in sensitiveCredentials {
+            XCTAssertTrue(keychainManager.credentialExists(forKey: key), "Credential \(key) should exist before logout")
+        }
+        
+        // WHEN: User logs out - this should trigger complete sensitive data removal
+        try keychainManager.performSecureLogout()
+        
+        // THEN: ALL sensitive data must be completely removed from keychain
+        for (key, _) in sensitiveCredentials {
+            XCTAssertFalse(keychainManager.credentialExists(forKey: key), "Credential \(key) MUST NOT exist after logout")
+            
+            // Verify that attempting to retrieve returns nil/throws error
+            XCTAssertThrowsError(try keychainManager.getCredential(forKey: key)) { error in
+                guard let keychainError = error as? KeychainManagerError else {
+                    XCTFail("Should throw KeychainManagerError for \(key)")
+                    return
+                }
+                XCTAssertEqual(keychainError, KeychainManagerError.itemNotFound, "Should throw itemNotFound for \(key)")
+            }
+        }
+        
+        // Verify keychain is completely empty
+        let remainingCredentials = try keychainManager.getAllCredentials()
+        XCTAssertTrue(remainingCredentials.isEmpty, "CRITICAL: Keychain must be completely empty after secure logout")
+        
+        // ADDITIONAL ADVERSARIAL CHECK: Attempt to retrieve with raw keychain queries
+        // This tests that data is actually removed, not just hidden
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: testService,
+            kSecMatchLimit as String: kSecMatchLimitAll,
+            kSecReturnAttributes as String: true
+        ]
+        
+        var result: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        
+        // Should return errSecItemNotFound (no items found) or empty array
+        XCTAssertTrue(status == errSecItemNotFound, "Raw keychain query should find no items after secure logout")
+    }
+
     // MARK: - Performance Tests
 
     func test_credentialStoragePerformance() throws {

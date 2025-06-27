@@ -433,6 +433,55 @@ public final class KeychainManager {
         // For testing purposes, validate against known domains
         return knownValidDomains.contains { host.contains($0) }
     }
+
+    // MARK: - ADVERSARIAL SECURITY METHOD (Task 4.2)
+
+    /// Performs secure logout by completely removing ALL sensitive data from keychain
+    /// This is a critical security method that ensures no sensitive information remains after logout
+    /// - Throws: KeychainManagerError if secure cleanup fails
+    public func performSecureLogout() throws {
+        // CRITICAL: This method must completely remove all sensitive data
+        // Failure to properly clean up could lead to data leakage after logout
+        
+        // Step 1: Clear all credentials using the existing clearAllCredentials method
+        try clearAllCredentials()
+        
+        // Step 2: Additional adversarial cleanup - direct keychain query to ensure complete removal
+        // This provides defense-in-depth against potential bugs in clearAllCredentials
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: service
+        ]
+        
+        // Delete any remaining items that might have been missed
+        let status = SecItemDelete(query as CFDictionary)
+        
+        // Allow errSecItemNotFound (items already gone) but fail on other errors
+        if status != errSecSuccess && status != errSecItemNotFound {
+            throw KeychainManagerError.unhandledError(status: status)
+        }
+        
+        // Step 3: Verify complete removal with adversarial check
+        let verificationQuery: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: service,
+            kSecMatchLimit as String: kSecMatchLimitAll,
+            kSecReturnAttributes as String: true
+        ]
+        
+        var result: AnyObject?
+        let verificationStatus = SecItemCopyMatching(verificationQuery as CFDictionary, &result)
+        
+        // CRITICAL: If any items are found, logout has failed
+        if verificationStatus == errSecSuccess {
+            throw KeychainManagerError.unhandledError(status: -1) // Custom error for failed logout
+        }
+        
+        // Step 4: Clear any cached authentication context
+        // This ensures biometric authentication prompts will appear fresh on next login
+        let context = LAContext()
+        context.invalidate()
+    }
 }
 
 // MARK: - Convenience Extensions

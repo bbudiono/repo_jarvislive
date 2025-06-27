@@ -194,6 +194,97 @@ final class CertificatePinningTests: XCTestCase {
         XCTAssertEqual(capturedDisposition, .performDefaultHandling, "Non-server trust challenges should use default handling")
     }
 
+    // MARK: - ADVERSARIAL SECURITY TESTS (Task 4.2)
+
+    /// Test that connection FAILS with an untrusted/mismatched certificate (adversarial test)
+    func testConnectionFailsWithInvalidCertificate() throws {
+        // GIVEN: A malicious/untrusted certificate that should be rejected
+        let maliciousCertificateData = try createMaliciousCertificateData()
+        let mockChallenge = createMockAuthenticationChallenge(
+            certificateData: maliciousCertificateData,
+            host: "api.jarvis.live" // Legitimate host but with wrong certificate
+        )
+
+        // WHEN: The certificate pinning validation is performed
+        var capturedDisposition: URLSession.AuthChallengeDisposition?
+        var capturedCredential: URLCredential?
+        var callbackExecuted = false
+
+        client.urlSession(
+            mockSession,
+            didReceive: mockChallenge,
+            completionHandler: { disposition, credential in
+                capturedDisposition = disposition
+                capturedCredential = credential
+                callbackExecuted = true
+            }
+        )
+
+        // THEN: The connection MUST be rejected to prevent man-in-the-middle attacks
+        XCTAssertTrue(callbackExecuted, "Completion handler should be called")
+        XCTAssertEqual(capturedDisposition, .cancelAuthenticationChallenge, 
+                      "CRITICAL: Malicious certificate MUST be rejected to prevent security breach")
+        XCTAssertNil(capturedCredential, 
+                    "CRITICAL: No credential should be provided for malicious certificate")
+
+        // ADDITIONAL ADVERSARIAL CHECK: Verify that no connection state is established
+        // In a real implementation, you would check that no session or connection is created
+        XCTAssertNotEqual(capturedDisposition, .useCredential, 
+                         "CRITICAL: Malicious certificate must never be accepted")
+        XCTAssertNotEqual(capturedDisposition, .performDefaultHandling, 
+                         "CRITICAL: Default handling should not be used for production with pinning enabled")
+    }
+
+    /// Test certificate pinning with expired certificate (should fail)
+    func testConnectionFailsWithExpiredCertificate() throws {
+        // GIVEN: An expired certificate (simulated)
+        let expiredCertificateData = try createExpiredCertificateData()
+        let mockChallenge = createMockAuthenticationChallenge(
+            certificateData: expiredCertificateData,
+            host: "api.jarvis.live"
+        )
+
+        // WHEN: The expired certificate is validated
+        var capturedDisposition: URLSession.AuthChallengeDisposition?
+
+        client.urlSession(
+            mockSession,
+            didReceive: mockChallenge,
+            completionHandler: { disposition, _ in
+                capturedDisposition = disposition
+            }
+        )
+
+        // THEN: The expired certificate should be rejected
+        XCTAssertEqual(capturedDisposition, .cancelAuthenticationChallenge, 
+                      "Expired certificates must be rejected for security")
+    }
+
+    /// Test certificate pinning with wrong hostname (should fail)
+    func testConnectionFailsWithWrongHostname() throws {
+        // GIVEN: A valid certificate but for wrong hostname
+        let validCertificateData = try createMockCertificateData(name: "valid-cert")
+        let mockChallenge = createMockAuthenticationChallenge(
+            certificateData: validCertificateData,
+            host: "malicious.example.com" // Wrong hostname
+        )
+
+        // WHEN: The certificate is validated against wrong hostname
+        var capturedDisposition: URLSession.AuthChallengeDisposition?
+
+        client.urlSession(
+            mockSession,
+            didReceive: mockChallenge,
+            completionHandler: { disposition, _ in
+                capturedDisposition = disposition
+            }
+        )
+
+        // THEN: The certificate should be rejected due to hostname mismatch
+        XCTAssertEqual(capturedDisposition, .cancelAuthenticationChallenge, 
+                      "Certificate with wrong hostname must be rejected")
+    }
+
     // MARK: - Performance Tests
 
     /// Test certificate pinning validation performance
@@ -234,6 +325,48 @@ final class CertificatePinningTests: XCTestCase {
 
         guard let data = mockCertString.data(using: .utf8) else {
             throw NSError(domain: "CertificatePinningTests", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to create mock certificate data"])
+        }
+
+        return data
+    }
+
+    /// Create malicious certificate data for adversarial testing
+    private func createMaliciousCertificateData() throws -> Data {
+        // Create a malicious certificate that should be rejected
+        let maliciousCertString = """
+        -----BEGIN CERTIFICATE-----
+        MIIDXTCCAkWgAwIBAgIJAMALICIOUS MALICIOUS CERTIFICATE FOR TESTING
+        BAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEwHwYDVQQKDBhJbnRlcm5ldCBX
+        aWRnaXRzIFB0eSBMdGQwHhcNMTMwODI3MjM1NTQyWhcNMjMwODI1MjM1NTQyWjBF
+        MALICIOUS CONTENT THAT SHOULD BE REJECTED BY CERTIFICATE PINNING
+        ZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB
+        MALICIOUS CERTIFICATE DATA FOR SECURITY TESTING PURPOSES ONLY
+        -----END CERTIFICATE-----
+        """
+
+        guard let data = maliciousCertString.data(using: .utf8) else {
+            throw NSError(domain: "CertificatePinningTests", code: 2, userInfo: [NSLocalizedDescriptionKey: "Failed to create malicious certificate data"])
+        }
+
+        return data
+    }
+
+    /// Create expired certificate data for adversarial testing
+    private func createExpiredCertificateData() throws -> Data {
+        // Create an expired certificate (with past dates)
+        let expiredCertString = """
+        -----BEGIN CERTIFICATE-----
+        MIIDXTCCAkWgAwIBAgIJAKoK/heBjcOuMA0GCSqGSIb3DQEBBQUAMEUxCzAJBgNV
+        BAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEwHwYDVQQKDBhJbnRlcm5ldCBX
+        aWRnaXRzIFB0eSBMdGQwHhcNMDMwODI3MjM1NTQyWhcNMDQwODI1MjM1NTQyWjBF
+        EXPIRED CERTIFICATE FOR TESTING - VALID FROM 2003 TO 2004 ONLY
+        ZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB
+        EXPIRED CERTIFICATE DATA FOR SECURITY TESTING
+        -----END CERTIFICATE-----
+        """
+
+        guard let data = expiredCertString.data(using: .utf8) else {
+            throw NSError(domain: "CertificatePinningTests", code: 3, userInfo: [NSLocalizedDescriptionKey: "Failed to create expired certificate data"])
         }
 
         return data
