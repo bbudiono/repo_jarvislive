@@ -40,3 +40,6 @@ click==8.1.7
 # Coverage
 pytest-cov==4.1.0
 coverage==7.3.4
+
+# Security Auditing
+pip-audit==2.6.1

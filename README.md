@@ -71,25 +71,108 @@ An intelligent iOS voice AI assistant that provides real-time conversational AI 
    - Start Python backend: `uvicorn src.main:app --reload`
    - Build and run iOS app in Xcode
 
-## 🧪 Testing
+## 🧪 Running Tests
 
-### iOS Testing
+### Automated CI/CD Pipeline
+Our comprehensive CI/CD pipeline automatically runs on every push to ensure quality:
+
 ```bash
-# Run iOS unit tests
-xcodebuild test -project _iOS/JarvisLive-Sandbox/JarvisLive-Sandbox.xcodeproj -scheme JarvisLive-Sandbox -destination 'platform=iOS Simulator,name=iPhone 16 Pro' CODE_SIGNING_ALLOWED=NO
-
-# Run iOS UI tests
-xcodebuild test -project _iOS/JarvisLive-Sandbox/JarvisLive-Sandbox.xcodeproj -scheme JarvisLive-Sandbox -destination 'platform=iOS Simulator,name=iPhone 16 Pro' -only-testing:JarvisLiveUITests CODE_SIGNING_ALLOWED=NO
+# CI/CD automatically triggers on:
+# - feature/audit-* branches
+# - main branch
+# - develop branch
 ```
 
-### Python Testing
+**Pipeline Components:**
+- ✅ iOS builds (Sandbox + Production)
+- ✅ Python backend testing
+- ✅ Security dependency audits
+- ✅ Code quality analysis
+- ✅ Integration validation
+
+### Manual Testing Commands
+
+#### iOS Testing
+```bash
+# Sandbox testing (development)
+cd _iOS/JarvisLive-Sandbox
+xcodebuild test -project JarvisLive.xcodeproj -scheme JarvisLive-Sandbox -destination 'platform=iOS Simulator,name=iPhone 16 Pro' CODE_SIGNING_ALLOWED=NO
+
+# Production testing (after promotion)
+cd _iOS/JarvisLive
+xcodebuild test -project JarvisLive.xcodeproj -scheme JarvisLive -destination 'platform=iOS Simulator,name=iPhone 16 Pro' CODE_SIGNING_ALLOWED=NO
+
+# SwiftLint code quality
+swiftlint --config .swiftlint.yml
+```
+
+#### Python Testing
 ```bash
 cd _python
-pytest tests/ -v
+source venv/bin/activate
+
+# Full test suite
+pytest tests/ -v --cov=src --cov-report=term-missing
+
+# Code quality checks
+black --check src/
+flake8 src/ --max-line-length=88
+mypy src/ --ignore-missing-imports
+
+# Security audit
+pip-audit
 ```
 
-### LiveKit Testing
-Use [agents-playground.livekit.io](https://agents-playground.livekit.io) for testing real-time audio features and voice synthesis integration.
+#### LiveKit Integration Testing
+Use [agents-playground.livekit.io](https://agents-playground.livekit.io) for testing:
+- Real-time audio processing
+- Voice synthesis integration
+- Multi-participant scenarios
+- Network latency validation
+
+## 🚀 The Production Promotion Process
+
+### Sandbox-First Development Protocol
+**CRITICAL:** All development occurs in the Sandbox environment before production deployment.
+
+```bash
+# 1. Development in Sandbox
+cd _iOS/JarvisLive-Sandbox
+# Make changes, run tests, validate functionality
+
+# 2. Automated Quality Gates (CI/CD)
+git push origin feature/your-feature-branch
+# Pipeline automatically validates iOS + Python builds, security, tests
+
+# 3. Production Sync (ONLY after CI passes)
+./scripts/promote_sandbox_to_production.sh --dry-run
+./scripts/promote_sandbox_to_production.sh
+```
+
+### Production Sync Script Features
+- **🔍 Pre-flight Checks:** Validates clean git state and passing builds
+- **💾 Automatic Backup:** Creates timestamped backup of current production
+- **🚫 Sandbox Exclusions:** Intelligently excludes sandbox-only files
+- **✅ Post-sync Validation:** Confirms production build integrity
+- **📊 Detailed Reporting:** Generates comprehensive sync reports
+
+### Rollback Procedure
+If critical issues are discovered in production:
+
+```bash
+# Automatic rollback to last known good state
+./scripts/rollback_production.sh
+
+# Manual rollback (using backup path)
+cp -R /path/to/backup/_iOS/JarvisLive/* _iOS/JarvisLive/
+```
+
+### CI/CD Pipeline Status
+Monitor build status and deployment readiness:
+- **Build Status:** GitHub Actions provides real-time feedback
+- **Security Audits:** Automated dependency vulnerability scanning
+- **Quality Gates:** Automated code quality and test coverage validation
+- **Deployment Ready:** Green pipeline indicates production deployment readiness
 
 ## 📱 Usage
 

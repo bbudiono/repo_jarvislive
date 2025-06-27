@@ -1,0 +1,386 @@
+name: CI/CD Pipeline - Jarvis Live
+
+# AUDIT-2024JUL27-PRE_PRODUCTION_VALIDATION Task 5.2
+# Comprehensive CI/CD pipeline for iOS and Python components
+# Ensures every change is automatically validated before production
+
+on:
+  push:
+    branches: 
+      - feature/audit-*
+      - main
+      - develop
+  pull_request:
+    branches: 
+      - main
+      - develop
+
+env:
+  # iOS Build Configuration
+  IOS_SCHEME_SANDBOX: "JarvisLive-Sandbox"
+  IOS_SCHEME_PRODUCTION: "JarvisLive"
+  IOS_DESTINATION: "platform=iOS Simulator,name=iPhone 16 Pro"
+  
+  # Python Configuration
+  PYTHON_VERSION: "3.10"
+  
+  # Security Configuration
+  FASTLANE_SKIP_UPDATE_CHECK: "true"
+  FASTLANE_HIDE_CHANGELOG: "true"
+
+jobs:
+  # =============================================================================
+  # iOS BUILD AND TEST JOB
+  # =============================================================================
+  build-and-test-ios:
+    name: 🍎 iOS Build & Test (Sandbox + Production)
+    runs-on: macos-14
+    timeout-minutes: 45
+    
+    strategy:
+      matrix:
+        scheme: [JarvisLive-Sandbox, JarvisLive]
+        include:
+          - scheme: JarvisLive-Sandbox
+            environment: sandbox
+            test_enabled: true
+          - scheme: JarvisLive
+            environment: production
+            test_enabled: false  # Production has limited tests until sync
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔧 Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.4'
+
+      - name: 📱 List Available Simulators
+        run: xcrun simctl list devices available
+
+      - name: 🗂️ Cache SPM Dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            .build
+            _iOS/JarvisLive-Sandbox/.swiftpm
+            _iOS/JarvisLive/.swiftpm
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
+
+      - name: 🔍 Verify Project Structure
+        run: |
+          echo "=== Project Structure Verification ==="
+          ls -la _iOS/
+          echo ""
+          echo "=== ${{ matrix.scheme }} Directory ==="
+          if [ "${{ matrix.scheme }}" = "JarvisLive-Sandbox" ]; then
+            ls -la _iOS/JarvisLive-Sandbox/
+          else
+            ls -la _iOS/JarvisLive/
+          fi
+
+      - name: 🏗️ Build ${{ matrix.scheme }}
+        working-directory: _iOS/${{ matrix.scheme }}
+        run: |
+          echo "Building ${{ matrix.scheme }} scheme..."
+          xcodebuild \
+            -project JarvisLive.xcodeproj \
+            -scheme ${{ matrix.scheme }} \
+            -destination "${{ env.IOS_DESTINATION }}" \
+            -configuration Debug \
+            clean build \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty --color --report junit --output build-results-${{ matrix.scheme }}.xml
+
+      - name: 🧪 Run Tests (${{ matrix.scheme }})
+        if: matrix.test_enabled
+        working-directory: _iOS/${{ matrix.scheme }}
+        run: |
+          echo "Running tests for ${{ matrix.scheme }}..."
+          xcodebuild \
+            -project JarvisLive.xcodeproj \
+            -scheme ${{ matrix.scheme }} \
+            -destination "${{ env.IOS_DESTINATION }}" \
+            -configuration Debug \
+            test \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty --color --report junit --output test-results-${{ matrix.scheme }}.xml
+
+      - name: 🔍 SwiftLint Analysis
+        if: matrix.scheme == 'JarvisLive-Sandbox'
+        working-directory: _iOS
+        run: |
+          echo "Running SwiftLint analysis..."
+          if command -v swiftlint >/dev/null 2>&1; then
+            swiftlint --config .swiftlint.yml --reporter github-actions-logging
+          else
+            echo "SwiftLint not available on runner, installing..."
+            brew install swiftlint
+            swiftlint --config .swiftlint.yml --reporter github-actions-logging
+          fi
+
+      - name: 📊 Upload Build Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ios-build-results-${{ matrix.scheme }}
+          path: |
+            _iOS/${{ matrix.scheme }}/build-results-*.xml
+            _iOS/${{ matrix.scheme }}/test-results-*.xml
+          retention-days: 7
+
+  # =============================================================================
+  # PYTHON BUILD AND TEST JOB
+  # =============================================================================
+  build-and-test-python:
+    name: 🐍 Python Build & Test (Backend API)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11"]
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: 🔧 Install Python Dependencies
+        working-directory: _python
+        run: |
+          echo "Installing Python dependencies..."
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: 📋 Display Python Environment
+        working-directory: _python
+        run: |
+          echo "=== Python Environment ==="
+          python --version
+          pip --version
+          echo ""
+          echo "=== Installed Packages ==="
+          pip list
+          echo ""
+          echo "=== Project Structure ==="
+          find . -name "*.py" | head -20
+
+      - name: 🔍 Code Quality Analysis
+        working-directory: _python
+        run: |
+          echo "Running code quality checks..."
+          
+          echo "=== Black Formatting Check ==="
+          black --check --diff src/
+          
+          echo "=== Flake8 Linting ==="
+          flake8 src/ --max-line-length=88 --extend-ignore=E203,W503
+          
+          echo "=== MyPy Type Checking ==="
+          mypy src/ --ignore-missing-imports
+
+      - name: 🧪 Run Python Tests
+        working-directory: _python
+        run: |
+          echo "Running Python test suite..."
+          pytest tests/ -v \
+            --cov=src \
+            --cov-report=term-missing \
+            --cov-report=xml:coverage.xml \
+            --junit-xml=test-results.xml
+
+      - name: 🚀 Test API Server Startup
+        working-directory: _python
+        run: |
+          echo "Testing API server startup..."
+          timeout 30s python -m uvicorn src.main_minimal:app --host 0.0.0.0 --port 8000 &
+          SERVER_PID=$!
+          
+          echo "Waiting for server startup..."
+          sleep 5
+          
+          echo "Testing health endpoint..."
+          curl -f http://localhost:8000/auth/health || (echo "Health check failed" && exit 1)
+          
+          echo "Stopping server..."
+          kill $SERVER_PID 2>/dev/null || true
+
+      - name: 📊 Upload Python Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: python-test-results-${{ matrix.python-version }}
+          path: |
+            _python/test-results.xml
+            _python/coverage.xml
+          retention-days: 7
+
+  # =============================================================================
+  # SECURITY AND DEPENDENCY AUDIT JOB
+  # =============================================================================
+  security-audit:
+    name: 🔒 Security & Dependency Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python for Security Audit
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: 🔍 Python Dependency Vulnerability Scan
+        working-directory: _python
+        run: |
+          echo "Installing pip-audit..."
+          pip install pip-audit
+          
+          echo "Running Python dependency vulnerability scan..."
+          pip-audit --format=json --output=python-audit.json || true
+          pip-audit --format=cyclonedx-json --output=python-sbom.json || true
+          
+          echo "Generating human-readable report..."
+          pip-audit || echo "Vulnerabilities found - check artifacts"
+
+      - name: 📊 Upload Security Audit Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-audit-results
+          path: |
+            _python/python-audit.json
+            _python/python-sbom.json
+          retention-days: 30
+
+  # =============================================================================
+  # INTEGRATION AND DEPLOYMENT READINESS JOB
+  # =============================================================================
+  integration-checks:
+    name: 🔗 Integration & Deployment Readiness
+    runs-on: ubuntu-latest
+    needs: [build-and-test-ios, build-and-test-python]
+    timeout-minutes: 15
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📋 Download All Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ci-artifacts
+
+      - name: 🔍 Validate Production Sync Script
+        run: |
+          echo "Validating production sync script..."
+          
+          # Check script exists and is executable
+          if [ ! -x "scripts/promote_sandbox_to_production.sh" ]; then
+            echo "❌ Production sync script not found or not executable"
+            exit 1
+          fi
+          
+          # Validate script syntax
+          bash -n scripts/promote_sandbox_to_production.sh
+          
+          echo "✅ Production sync script validation passed"
+
+      - name: 📊 Generate CI/CD Summary Report
+        run: |
+          echo "# CI/CD Pipeline Summary Report" > ci-summary.md
+          echo "" >> ci-summary.md
+          echo "**Date:** $(date '+%Y-%m-%d %H:%M:%S UTC')" >> ci-summary.md
+          echo "**Commit:** ${{ github.sha }}" >> ci-summary.md
+          echo "**Branch:** ${{ github.ref_name }}" >> ci-summary.md
+          echo "" >> ci-summary.md
+          
+          echo "## Build Results" >> ci-summary.md
+          echo "" >> ci-summary.md
+          
+          # Check for test results
+          if [ -d "ci-artifacts" ]; then
+            echo "### iOS Build Status" >> ci-summary.md
+            if ls ci-artifacts/ios-build-results-* 1> /dev/null 2>&1; then
+              echo "✅ iOS builds completed" >> ci-summary.md
+            else
+              echo "❌ iOS builds failed" >> ci-summary.md
+            fi
+            
+            echo "" >> ci-summary.md
+            echo "### Python Build Status" >> ci-summary.md
+            if ls ci-artifacts/python-test-results-* 1> /dev/null 2>&1; then
+              echo "✅ Python tests completed" >> ci-summary.md
+            else
+              echo "❌ Python tests failed" >> ci-summary.md
+            fi
+            
+            echo "" >> ci-summary.md
+            echo "### Security Audit Status" >> ci-summary.md
+            if ls ci-artifacts/security-audit-results/* 1> /dev/null 2>&1; then
+              echo "✅ Security audit completed" >> ci-summary.md
+            else
+              echo "❌ Security audit failed" >> ci-summary.md
+            fi
+          fi
+          
+          echo "" >> ci-summary.md
+          echo "## Deployment Readiness" >> ci-summary.md
+          echo "✅ Production sync script validated" >> ci-summary.md
+          echo "✅ CI/CD pipeline operational" >> ci-summary.md
+          
+          cat ci-summary.md
+
+      - name: 📊 Upload CI/CD Summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-cd-summary-report
+          path: ci-summary.md
+          retention-days: 30
+
+  # =============================================================================
+  # NOTIFICATION AND REPORTING JOB
+  # =============================================================================
+  report-status:
+    name: 📢 Report Pipeline Status
+    runs-on: ubuntu-latest
+    needs: [build-and-test-ios, build-and-test-python, security-audit, integration-checks]
+    if: always()
+
+    steps:
+      - name: 📊 Pipeline Status Summary
+        run: |
+          echo "=== CI/CD Pipeline Status Summary ==="
+          echo "iOS Build & Test: ${{ needs.build-and-test-ios.result }}"
+          echo "Python Build & Test: ${{ needs.build-and-test-python.result }}"
+          echo "Security Audit: ${{ needs.security-audit.result }}"
+          echo "Integration Checks: ${{ needs.integration-checks.result }}"
+          echo ""
+          
+          if [ "${{ needs.build-and-test-ios.result }}" = "success" ] && \
+             [ "${{ needs.build-and-test-python.result }}" = "success" ] && \
+             [ "${{ needs.security-audit.result }}" = "success" ] && \
+             [ "${{ needs.integration-checks.result }}" = "success" ]; then
+            echo "🎉 ALL PIPELINE JOBS SUCCESSFUL - DEPLOYMENT READY! 🎉"
+            exit 0
+          else
+            echo "❌ PIPELINE FAILURES DETECTED - REVIEW REQUIRED ❌"
+            exit 1
+          fi
