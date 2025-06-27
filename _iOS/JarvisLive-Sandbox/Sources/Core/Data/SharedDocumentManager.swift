@@ -1714,28 +1714,8 @@ struct DocumentSection: Codable {
     }
 }
 
-struct CollaborationSession: Identifiable, Codable {
-    let id: UUID
-    let documentId: UUID
-    var participants: [UUID]
-    let startedAt: Date
-    var lastActivity: Date
-    let sessionType: SessionType
-    var status: SessionStatus
-    
-    enum SessionType: String, Codable {
-        case editing = "editing"
-        case reviewing = "reviewing"
-        case viewing = "viewing"
-        case discussing = "discussing"
-    }
-    
-    enum SessionStatus: String, Codable {
-        case active = "active"
-        case inactive = "inactive"
-        case ended = "ended"
-    }
-}
+// CollaborationSession type moved to LiveKitCollaborationManager.swift to avoid duplication
+// Use the canonical definition from LiveKitCollaborationManager
 
 struct EditingLock: Identifiable, Codable {
     let id: UUID
