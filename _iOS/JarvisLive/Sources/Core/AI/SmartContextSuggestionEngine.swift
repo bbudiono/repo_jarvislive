@@ -29,7 +29,7 @@ import OSLog
 
 struct SmartContextSuggestion {
     let id: UUID
-    let text: String
+    var text: String
     let type: SmartSuggestionType
     let category: SuggestionCategory
     var relevanceScore: Double
@@ -39,7 +39,7 @@ struct SmartContextSuggestion {
     let reasoning: String
     let evidence: [SuggestionEvidence]
     let actionability: SuggestionActionability
-    let personalization: PersonalizationAlignment
+    var personalization: PersonalizationAlignment
     let temporalRelevance: TemporalRelevance
     let adaptiveProperties: AdaptiveProperties
     let interactionHints: [InteractionHint]
@@ -480,11 +480,9 @@ class SmartContextSuggestionEngine: ObservableObject {
         // Monitor personalization updates
         personalizationEngine.$userProfile
             .debounce(for: RunLoop.SchedulerTimeType.Stride.seconds(5), scheduler: RunLoop.main)
-            .sink { [weak self] (profile: UserProfile?) in
-                if profile != nil {
-                    Task { @MainActor in
-                        await self?.updatePersonalizationAdaptations()
-                    }
+            .sink { [weak self] (profile: SuggestionUserProfile) in
+                Task { @MainActor in
+                    await self?.updatePersonalizationAdaptations()
                 }
             }
             .store(in: &cancellables)
@@ -868,9 +866,7 @@ class SmartContextSuggestionEngine: ObservableObject {
     // MARK: - Advanced Suggestion Generation
 
     private func applyPersonalization(suggestions: [SmartContextSuggestion], conversation: Conversation) async -> [SmartContextSuggestion] {
-        guard let userProfile = personalizationEngine.userProfile else {
-            return suggestions
-        }
+        let userProfile = personalizationEngine.userProfile
 
         return suggestions.map { suggestion in
             var personalizedSuggestion = suggestion
@@ -894,7 +890,7 @@ class SmartContextSuggestionEngine: ObservableObject {
             let personalizationAlignment = PersonalizationAlignment(
                 alignsWithPreferences: contentAlignment > 0.7,
                 alignmentScore: contentAlignment,
-                personalizedElements: extractPersonalizedElements(suggestion: suggestion, profile: userProfile),
+                personalizedElements: extractPersonalizedElements(suggestion: suggestion, profile: userProfile.toDictionary()),
                 adaptationReasoning: "Adapted to user's \(userProfile.communicationPreferences.primaryStyle.rawValue) communication style"
             )
             personalizedSuggestion.personalization = personalizationAlignment
@@ -1583,6 +1579,19 @@ class UserPersonalizationEngine: ObservableObject {
 struct SuggestionUserProfile {
     var preferredDepth: String = "detailed"
     var communicationPreferences: CommunicationPreferences = CommunicationPreferences()
+    var contentPreferences: [String: Any] = ["preferredDepth": "detailed"]
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "preferredDepth": preferredDepth,
+            "communicationPreferences": [
+                "confidence": communicationPreferences.confidence,
+                "style": communicationPreferences.style.rawValue,
+                "primaryStyle": communicationPreferences.primaryStyle.rawValue
+            ],
+            "contentPreferences": contentPreferences
+        ]
+    }
 }
 
 enum DepthPreference: String, CaseIterable {
