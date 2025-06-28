@@ -107,11 +107,11 @@ struct ParticipantListView: View {
             // Quick filter buttons
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
-                    FilterButton(title: "All", count: participants.count, isSelected: true)
-                    FilterButton(title: "Active", count: activeParticipantsCount, isSelected: false)
-                    FilterButton(title: "Speaking", count: speakingParticipantsCount, isSelected: false)
-                    FilterButton(title: "Hosts", count: hostParticipantsCount, isSelected: false)
-                    FilterButton(title: "Observers", count: observerParticipantsCount, isSelected: false)
+                    ParticipantFilterButton(title: "All", count: participants.count, isSelected: true)
+                    ParticipantFilterButton(title: "Active", count: activeParticipantsCount, isSelected: false)
+                    ParticipantFilterButton(title: "Speaking", count: speakingParticipantsCount, isSelected: false)
+                    ParticipantFilterButton(title: "Hosts", count: hostParticipantsCount, isSelected: false)
+                    ParticipantFilterButton(title: "Observers", count: observerParticipantsCount, isSelected: false)
                 }
                 .padding(.horizontal)
             }
@@ -122,10 +122,10 @@ struct ParticipantListView: View {
 
     private var participantStatsView: some View {
         HStack(spacing: 20) {
-            StatItem(title: "Total", value: "\(participants.count)", icon: "person.3", color: .blue)
-            StatItem(title: "Active", value: "\(activeParticipantsCount)", icon: "person.wave.2", color: .green)
-            StatItem(title: "Speaking", value: "\(speakingParticipantsCount)", icon: "mic", color: .orange)
-            StatItem(title: "Quiet", value: "\(participants.count - speakingParticipantsCount)", icon: "mic.slash", color: .gray)
+            ParticipantStatItem(title: "Total", value: "\(participants.count)", icon: "person.3", color: .blue)
+            ParticipantStatItem(title: "Active", value: "\(activeParticipantsCount)", icon: "person.wave.2", color: .green)
+            ParticipantStatItem(title: "Speaking", value: "\(speakingParticipantsCount)", icon: "mic", color: .orange)
+            ParticipantStatItem(title: "Quiet", value: "\(participants.count - speakingParticipantsCount)", icon: "mic.slash", color: .gray)
         }
         .padding()
         .background(Color(UIColor.systemBackground))
@@ -360,7 +360,7 @@ struct AudioLevelIndicator: View {
     }
 }
 
-struct FilterButton: View {
+struct ParticipantFilterButton: View {
     let title: String
     let count: Int
     let isSelected: Bool
@@ -390,14 +390,19 @@ struct FilterButton: View {
     }
 }
 
-struct StatItem: View {
+struct ParticipantStatItem: View {
     let title: String
-    let value: Int
+    let value: String
+    let icon: String
     let color: Color
 
     var body: some View {
         VStack(spacing: 4) {
-            Text("\(value)")
+            Image(systemName: icon)
+                .font(.title3)
+                .foregroundColor(color)
+            
+            Text(value)
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(color)
