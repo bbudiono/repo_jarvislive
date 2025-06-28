@@ -1329,7 +1329,7 @@ public final class LiveKitManager: NSObject, ObservableObject {
 // MARK: - RoomDelegate
 
 extension LiveKitManager: RoomDelegate {
-    nonisolated func room(_ room: Room, didUpdateConnectionState connectionState: LiveKit.ConnectionState, from oldConnectionState: LiveKit.ConnectionState) {
+    public nonisolated func room(_ room: Room, didUpdateConnectionState connectionState: LiveKit.ConnectionState, from oldConnectionState: LiveKit.ConnectionState) {
         Task { @MainActor in
             switch connectionState {
             case .connected:
@@ -1347,7 +1347,7 @@ extension LiveKitManager: RoomDelegate {
         }
     }
 
-    nonisolated func room(_ room: Room, participant: RemoteParticipant, didSubscribeTrack publication: RemoteTrackPublication) {
+    public nonisolated func room(_ room: Room, participant: RemoteParticipant, didSubscribeTrack publication: RemoteTrackPublication) {
         Task { @MainActor in
             if publication.track?.kind == .audio {
                 // Handle incoming audio track (AI responses)
@@ -1356,7 +1356,7 @@ extension LiveKitManager: RoomDelegate {
         }
     }
 
-    nonisolated func room(_ room: Room, participant: RemoteParticipant, didUnsubscribeTrack publication: RemoteTrackPublication) {
+    public nonisolated func room(_ room: Room, participant: RemoteParticipant, didUnsubscribeTrack publication: RemoteTrackPublication) {
         Task { @MainActor in
             if publication.track?.kind == .audio && audioState == .playing {
                 audioState = .idle
@@ -1368,7 +1368,7 @@ extension LiveKitManager: RoomDelegate {
 // MARK: - AVAudioPlayerDelegate
 
 extension LiveKitManager: AVAudioPlayerDelegate {
-    nonisolated func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+    public nonisolated func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         Task { @MainActor in
             print("Audio playback finished, successfully: \(flag)")
             if audioState == .playing {
