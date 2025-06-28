@@ -632,7 +632,7 @@ struct DocumentResult {
     let errorMessage: String?
 }
 
-struct VoiceEmailResult {
+struct EmailResult {
     let success: Bool
     let messageId: String?
     let errorMessage: String?

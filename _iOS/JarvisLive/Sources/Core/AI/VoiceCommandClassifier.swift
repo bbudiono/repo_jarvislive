@@ -451,7 +451,8 @@ final class VoiceCommandClassifier: ObservableObject {
     }
 
     private func setupNaturalLanguageProcessing() {
-        nlTagger.setLanguage(.english, range: NSRange(location: 0, length: 0))
+        // NLTagger language will be set when string is assigned
+        // nlTagger.setLanguage(.english, range: string.startIndex..<string.endIndex)
     }
 
     // MARK: - Main Classification Method
