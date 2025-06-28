@@ -22,6 +22,7 @@ import Foundation
 import Combine
 import CoreData
 import UserNotifications
+import UIKit
 import BackgroundTasks
 
 // MARK: - Workflow Models
