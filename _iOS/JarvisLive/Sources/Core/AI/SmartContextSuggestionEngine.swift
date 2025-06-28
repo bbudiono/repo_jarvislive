@@ -1298,17 +1298,22 @@ class SmartContextSuggestionEngine: ObservableObject {
         var alignment = 0.7 // Base alignment
 
         // Adjust for depth preference
-        switch preferences.preferredDepth {
-        case .surface:
-            if suggestion.type == .followUpQuestion {
-                alignment += 0.2
+        if let depthString = preferences["preferredDepth"] as? String,
+           let depthPreference = DepthPreference(rawValue: depthString) {
+            switch depthPreference {
+            case .surface:
+                if suggestion.type == .followUpQuestion {
+                    alignment += 0.2
+                }
+            case .detailed:
+                if suggestion.type == .clarificationRequest {
+                    alignment += 0.15
+                }
+            case .deep, .comprehensive:
+                if suggestion.type == .topicExpansion || suggestion.type == .learningOpportunity {
+                    alignment += 0.2
+                }
             }
-        case .deep, .comprehensive:
-            if suggestion.type == .topicExpansion || suggestion.type == .learningOpportunity {
-                alignment += 0.2
-            }
-        default:
-            break
         }
 
         return min(alignment, 1.0)
@@ -1317,10 +1322,11 @@ class SmartContextSuggestionEngine: ObservableObject {
     private func extractPersonalizedElements(suggestion: SmartContextSuggestion, profile: [String: Any]) -> [PersonalizedElement] {
         var elements: [PersonalizedElement] = []
 
+        let confidence = (profile["communicationPreferences"] as? [String: Any])?["confidence"] as? Double ?? 0.8
         elements.append(PersonalizedElement(
             element: "communication_style_adapted",
             personalizationType: .communicationStyle,
-            confidenceLevel: profile.communicationPreferences.confidence
+            confidenceLevel: confidence
         ))
 
         return elements
@@ -1543,5 +1549,69 @@ struct ConversationPattern {
         case problemSolving
         case learning
         case goalOriented
+    }
+}
+
+// MARK: - Missing AI Component Types
+
+class ConversationIntelligence {
+    init() {}
+    
+    func analyzeConversationPatterns() async -> [String] {
+        return []
+    }
+    
+    func extractInsights() async -> [String] {
+        return []
+    }
+}
+
+class UserPersonalizationEngine: ObservableObject {
+    @Published var userProfile: SuggestionUserProfile = SuggestionUserProfile()
+    
+    init() {}
+    
+    func getUserPreferences() async -> [String: Any] {
+        return [:]
+    }
+    
+    func adaptToUserStyle() async -> Bool {
+        return true
+    }
+}
+
+struct SuggestionUserProfile {
+    var preferredDepth: String = "detailed"
+    var communicationPreferences: CommunicationPreferences = CommunicationPreferences()
+}
+
+enum DepthPreference: String, CaseIterable {
+    case surface = "surface"
+    case detailed = "detailed"
+    case deep = "deep"
+    case comprehensive = "comprehensive"
+}
+
+struct CommunicationPreferences {
+    var confidence: Double = 0.8
+    var style: CommunicationStyle = .supportive
+    var primaryStyle: CommunicationStyle = .supportive
+}
+
+enum CommunicationStyle: String, CaseIterable {
+    case direct = "direct"
+    case supportive = "supportive"
+    case analytical = "analytical"
+    case casual = "casual"
+    case formal = "formal"
+    
+    var description: String {
+        switch self {
+        case .direct: return "Direct and concise communication"
+        case .supportive: return "Encouraging and helpful communication"
+        case .analytical: return "Data-driven and logical communication"
+        case .casual: return "Relaxed and informal communication"
+        case .formal: return "Professional and structured communication"
+        }
     }
 }
