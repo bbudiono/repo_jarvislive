@@ -536,23 +536,26 @@ final class VoiceCommandClassifier: ObservableObject {
 
         // Tokenization
         nlTokenizer.string = text
-        let tokens = nlTokenizer.tokens(for: range).compactMap { nsText.substring(with: $0) }
+        let fullRange = text.startIndex..<text.endIndex
+        let tokens = nlTokenizer.tokens(for: fullRange).map { range in
+            String(text[range])
+        }
 
         // Named entity recognition
         nlTagger.string = text
         var namedEntities: [String] = []
         var sentimentScore: Double = 0.0
 
-        nlTagger.enumerateTags(in: range, unit: .word, scheme: .nameType) { tag, tokenRange in
+        nlTagger.enumerateTags(in: fullRange, unit: .word, scheme: .nameType) { tag, tokenRange in
             if let tag = tag {
-                let entity = nsText.substring(with: tokenRange)
+                let entity = String(text[tokenRange])
                 namedEntities.append("\(tag.rawValue):\(entity)")
             }
             return true
         }
 
         // Sentiment analysis
-        nlTagger.enumerateTags(in: range, unit: .paragraph, scheme: .sentimentScore) { tag, _ in
+        nlTagger.enumerateTags(in: fullRange, unit: .paragraph, scheme: .sentimentScore) { tag, _ in
             if let tag = tag, let score = Double(tag.rawValue) {
                 sentimentScore = score
             }

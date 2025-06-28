@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		012B049447C35FF6BA102EA1 /* RealtimeSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4393FCD20EF89D86DFC3F05 /* RealtimeSyncManager.swift */; };
+		56CB97702D344326BAC3C023 /* CollaborationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CB97702D344326BAC3C024 /* CollaborationContext.swift */; };
+		8BF1CF82B39A41D38002C636 /* VoiceParameterIntelligence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1CF82B39A41D38002C637 /* VoiceParameterIntelligence.swift */; };
+		C4509F8375794FEC9E18087E /* VoiceProcessingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4509F8375794FEC9E18087F /* VoiceProcessingRequest.swift */; };
+		BC1CAA711D60439B8C93F7F2 /* SmartContextSuggestionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1CAA711D60439B8C93F7F3 /* SmartContextSuggestionEngine.swift */; };
 		02EB026E2952E85EA0C9F665 /* MCPModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E249713CFFC9ECFFEE117976 /* MCPModels.swift */; };
 		055E713C5D54B826FC64CAD2 /* DocumentGenerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB0AC59BCA0B630F832A845 /* DocumentGenerationView.swift */; };
 		077D410DBAC2B4ACFEE26C63 /* MCPActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7697B4004BFB44DA5A8C97 /* MCPActionsView.swift */; };
@@ -185,6 +189,10 @@
 
 /* Begin PBXFileReference section */
 		06583753ABFE4157B70EF29C /* VisualEvidenceEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEvidenceEngine.swift; sourceTree = "<group>"; };
+		56CB97702D344326BAC3C024 /* CollaborationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationContext.swift; sourceTree = "<group>"; };
+		8BF1CF82B39A41D38002C637 /* VoiceParameterIntelligence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceParameterIntelligence.swift; sourceTree = "<group>"; };
+		C4509F8375794FEC9E18087F /* VoiceProcessingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceProcessingRequest.swift; sourceTree = "<group>"; };
+		BC1CAA711D60439B8C93F7F3 /* SmartContextSuggestionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartContextSuggestionEngine.swift; sourceTree = "<group>"; };
 		099D926F2DDDAD69CBD90CE6 /* GlassViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassViewModifier.swift; sourceTree = "<group>"; };
 		0A5303A329278672D2C4B9CF /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		0FBC4E4D26654975B3B74DE3 /* JarvisLiveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JarvisLiveUITests.swift; sourceTree = "<group>"; };
@@ -747,6 +755,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6316C3002F1AE7C9C52CC827 /* APIAuthenticationManager.swift in Sources */,
+				56CB97702D344326BAC3C023 /* CollaborationContext.swift in Sources */,
+				8BF1CF82B39A41D38002C636 /* VoiceParameterIntelligence.swift in Sources */,
+				C4509F8375794FEC9E18087E /* VoiceProcessingRequest.swift in Sources */,
+				BC1CAA711D60439B8C93F7F2 /* SmartContextSuggestionEngine.swift in Sources */,
 				4F896068E9C3515A23A2EB08 /* AdvancedMCPIntegration.swift in Sources */,
 				CD7B809E33A4C25ECB70862C /* AdvancedVoiceCommandProcessor.swift in Sources */,
 				6E48DADF3C6676177561333D /* AdvancedVoiceControlView.swift in Sources */,

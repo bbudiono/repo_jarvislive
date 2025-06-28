@@ -615,7 +615,7 @@ protocol DocumentMCPClient {
 }
 
 protocol EmailMCPClient {
-    func sendEmail(to: String, subject: String, body: String, attachments: [String]) async throws -> EmailResult
+    func sendEmail(to: String, subject: String, body: String, attachments: [String]) async throws -> VoiceEmailResult
 }
 
 protocol CalendarMCPClient {
@@ -632,7 +632,7 @@ struct DocumentResult {
     let errorMessage: String?
 }
 
-struct EmailResult {
+struct VoiceEmailResult {
     let success: Bool
     let messageId: String?
     let errorMessage: String?
@@ -681,9 +681,9 @@ class EmailMCPClientImpl: EmailMCPClient {
         self.serverManager = serverManager
     }
 
-    func sendEmail(to: String, subject: String, body: String, attachments: [String]) async throws -> EmailResult {
+    func sendEmail(to: String, subject: String, body: String, attachments: [String]) async throws -> VoiceEmailResult {
         // Mock implementation
-        return EmailResult(
+        return VoiceEmailResult(
             success: true,
             messageId: "msg_\(UUID().uuidString)",
             errorMessage: nil
