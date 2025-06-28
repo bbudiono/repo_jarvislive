@@ -123,10 +123,10 @@ final class VoiceCommandExecutor: ObservableObject {
         self.configuration = configuration
 
         // Initialize MCP clients
-        self.documentGenerator = DocumentMCPClient(serverManager: mcpServerManager)
-        self.emailManager = EmailMCPClient(serverManager: mcpServerManager)
-        self.calendarManager = CalendarMCPClient(serverManager: mcpServerManager)
-        self.searchManager = SearchMCPClient(serverManager: mcpServerManager)
+        self.documentGenerator = DocumentMCPClientImpl(serverManager: mcpServerManager)
+        self.emailManager = EmailMCPClientImpl(serverManager: mcpServerManager)
+        self.calendarManager = CalendarMCPClientImpl(serverManager: mcpServerManager)
+        self.searchManager = SearchMCPClientImpl(serverManager: mcpServerManager)
         self.calculationEngine = CalculationEngine()
         self.reminderManager = ReminderManager()
     }
@@ -657,7 +657,7 @@ struct WebSearchResult {
 }
 
 // Mock implementations (would be replaced with actual MCP clients)
-class DocumentMCPClient: DocumentMCPClient {
+class DocumentMCPClientImpl: DocumentMCPClient {
     private let serverManager: MCPServerManager
 
     init(serverManager: MCPServerManager) {
@@ -674,7 +674,7 @@ class DocumentMCPClient: DocumentMCPClient {
     }
 }
 
-class EmailMCPClient: EmailMCPClient {
+class EmailMCPClientImpl: EmailMCPClient {
     private let serverManager: MCPServerManager
 
     init(serverManager: MCPServerManager) {
@@ -691,7 +691,7 @@ class EmailMCPClient: EmailMCPClient {
     }
 }
 
-class CalendarMCPClient: CalendarMCPClient {
+class CalendarMCPClientImpl: CalendarMCPClient {
     private let serverManager: MCPServerManager
 
     init(serverManager: MCPServerManager) {
@@ -708,7 +708,7 @@ class CalendarMCPClient: CalendarMCPClient {
     }
 }
 
-class SearchMCPClient: SearchMCPClient {
+class SearchMCPClientImpl: SearchMCPClient {
     private let serverManager: MCPServerManager
 
     init(serverManager: MCPServerManager) {
