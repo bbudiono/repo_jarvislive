@@ -32,7 +32,7 @@ struct SmartContextSuggestion {
     let text: String
     let type: SmartSuggestionType
     let category: SuggestionCategory
-    let relevanceScore: Double
+    var relevanceScore: Double
     let confidence: Double
     let priority: SuggestionPriority
     let context: SuggestionContext
@@ -224,14 +224,14 @@ struct EnvironmentalFactor {
 }
 
 struct SuggestionEvidence {
-    let type: EvidenceType
+    let type: SuggestionEvidenceType
     let description: String
     let strength: Double
     let source: EvidenceSource
     let timestamp: Date
 }
 
-enum EvidenceType: String, CaseIterable {
+enum SuggestionEvidenceType: String, CaseIterable {
     case conversationPattern = "conversation_pattern"
     case userBehavior = "user_behavior"
     case topicAnalysis = "topic_analysis"
@@ -479,8 +479,8 @@ class SmartContextSuggestionEngine: ObservableObject {
 
         // Monitor personalization updates
         personalizationEngine.$userProfile
-            .debounce(for: .seconds(5), scheduler: RunLoop.main)
-            .sink { [weak self] profile in
+            .debounce(for: RunLoop.SchedulerTimeType.Stride.seconds(5), scheduler: RunLoop.main)
+            .sink { [weak self] (profile: UserProfile?) in
                 if profile != nil {
                     Task { @MainActor in
                         await self?.updatePersonalizationAdaptations()
@@ -575,7 +575,7 @@ class SmartContextSuggestionEngine: ObservableObject {
             currentOperation = "Suggestions generated"
             isGenerating = false
 
-            logger.info("Generated \(contextualSuggestions.count) contextual suggestions")
+            logger.info("Generated \(self.contextualSuggestions.count) contextual suggestions")
         } catch {
             logger.error("Failed to generate contextual suggestions: \(error)")
             isGenerating = false
@@ -691,7 +691,9 @@ class SmartContextSuggestionEngine: ObservableObject {
 
         // Generate pattern-driven suggestions
         for pattern in patterns {
-            suggestions += await generatePatternDrivenSuggestions(pattern: pattern, conversation: conversation)
+            // TODO: Implement pattern-driven suggestions
+            // For now, we'll skip this functionality
+            logger.debug("Pattern-driven suggestions for pattern '\(String(describing: pattern))' not yet implemented")
         }
 
         return suggestions
@@ -1292,7 +1294,7 @@ class SmartContextSuggestionEngine: ObservableObject {
         }
     }
 
-    private func calculateContentAlignment(suggestion: SmartContextSuggestion, preferences: ContentPreferences) -> Double {
+    private func calculateContentAlignment(suggestion: SmartContextSuggestion, preferences: [String: Any]) -> Double {
         var alignment = 0.7 // Base alignment
 
         // Adjust for depth preference
@@ -1312,7 +1314,7 @@ class SmartContextSuggestionEngine: ObservableObject {
         return min(alignment, 1.0)
     }
 
-    private func extractPersonalizedElements(suggestion: SmartContextSuggestion, profile: UserPersonalizationProfileDetailed) -> [PersonalizedElement] {
+    private func extractPersonalizedElements(suggestion: SmartContextSuggestion, profile: [String: Any]) -> [PersonalizedElement] {
         var elements: [PersonalizedElement] = []
 
         elements.append(PersonalizedElement(

@@ -189,10 +189,10 @@
 
 /* Begin PBXFileReference section */
 		06583753ABFE4157B70EF29C /* VisualEvidenceEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEvidenceEngine.swift; sourceTree = "<group>"; };
-		56CB97702D344326BAC3C024 /* CollaborationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationContext.swift; sourceTree = "<group>"; };
-		8BF1CF82B39A41D38002C637 /* VoiceParameterIntelligence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceParameterIntelligence.swift; sourceTree = "<group>"; };
-		C4509F8375794FEC9E18087F /* VoiceProcessingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceProcessingRequest.swift; sourceTree = "<group>"; };
-		BC1CAA711D60439B8C93F7F3 /* SmartContextSuggestionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartContextSuggestionEngine.swift; sourceTree = "<group>"; };
+		56CB97702D344326BAC3C024 /* CollaborationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Core/Collaboration/CollaborationContext.swift"; sourceTree = "<group>"; };
+		8BF1CF82B39A41D38002C637 /* VoiceParameterIntelligence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Core/AI/VoiceParameterIntelligence.swift"; sourceTree = "<group>"; };
+		C4509F8375794FEC9E18087F /* VoiceProcessingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Core/Audio/VoiceProcessingRequest.swift"; sourceTree = "<group>"; };
+		BC1CAA711D60439B8C93F7F3 /* SmartContextSuggestionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Core/AI/SmartContextSuggestionEngine.swift"; sourceTree = "<group>"; };
 		099D926F2DDDAD69CBD90CE6 /* GlassViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassViewModifier.swift; sourceTree = "<group>"; };
 		0A5303A329278672D2C4B9CF /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		0FBC4E4D26654975B3B74DE3 /* JarvisLiveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JarvisLiveUITests.swift; sourceTree = "<group>"; };

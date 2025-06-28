@@ -94,7 +94,7 @@ enum LinkType: String, CaseIterable {
 }
 
 struct LinkEvidence {
-    let type: EvidenceType
+    let type: LinkingEvidenceType
     let content: String
     let confidence: Double
     let sourceMessageId: UUID?
@@ -102,7 +102,7 @@ struct LinkEvidence {
     let extractionMethod: String
 }
 
-enum EvidenceType: String, CaseIterable {
+enum LinkingEvidenceType: String, CaseIterable {
     case keywordMatch = "keyword_match"
     case entityMatch = "entity_match"
     case topicOverlap = "topic_overlap"

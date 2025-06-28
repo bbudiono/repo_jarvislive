@@ -433,44 +433,34 @@ public final class LiveKitManager: NSObject, ObservableObject {
             currentConversation = conversationManager.createNewConversation()
         }
 
-        // Prepare voice processing request
-        let request = VoiceProcessingRequest(
-            audioInput: input,
-            userId: "current_user", // Would be actual user ID
-            sessionId: UUID().uuidString,
-            collaborationContext: nil, // Would be set if in collaboration mode
-            conversationHistory: currentConversation?.messages ?? [],
-            enableMCPExecution: true,
-            enableVoiceResponse: true
-        )
-
         do {
-            // Process through the complete voice pipeline
-            let result = try await pipeline.processVoiceInput(request)
+            // Process through the complete voice pipeline with the text input
+            let result = try await pipeline.processVoiceCommand(
+                input,
+                userId: "current_user",
+                sessionId: UUID().uuidString
+            )
 
             // Log processing metrics
-            let metrics = result.processingMetrics
             print("✅ Voice Pipeline Complete:")
             print("  - Classification: \(result.classification.category) (\(result.classification.confidence))")
-            print("  - Execution: \(result.execution?.success == true ? "Success" : "Failed")")
-            print("  - Total Time: \(metrics.totalProcessingTime)s")
-            print("  - Classification Time: \(metrics.classificationTime)s")
-            if let execTime = metrics.executionTime {
-                print("  - Execution Time: \(execTime)s")
-            }
-            print("  - Response Generation: \(metrics.responseGenerationTime)s")
-            if let voiceTime = metrics.voiceSynthesisTime {
-                print("  - Voice Synthesis: \(voiceTime)s")
+            print("  - Execution: \(result.mcpExecutionResult?.success == true ? "Success" : "Failed")")
+            print("  - Processing Time: \(result.processingTime)s")
+            print("  - Final Response: \(result.finalResponse)")
+
+            // Store conversation message with response
+            if let conversation = currentConversation {
+                let _ = conversationManager.addMessage(
+                    to: conversation,
+                    content: result.finalResponse,
+                    role: .assistant
+                )
             }
 
-            // Play voice response if available (using the new ElevenLabs synthesizer)
-            if let audioData = result.audioResponse {
-                Task {
-                    await playVoiceResponse(audioData)
-                }
-            }
+            // Synthesize and play the response audio
+            await synthesizeAndPlayResponse(result.finalResponse)
 
-            return result.response
+            return result.finalResponse
         } catch {
             print("❌ Voice pipeline failed: \(error.localizedDescription)")
             // Fallback to traditional AI processing
@@ -838,24 +828,33 @@ public final class LiveKitManager: NSObject, ObservableObject {
             keychainManager: _keychainManager
         )
 
-        // Initialize MCP server manager (placeholder for now)
-        let mcpServerManager = MockMCPServerManager()
-
-        // Initialize voice command executor
-        let voiceCommandExecutor = VoiceCommandExecutor(
-            mcpServerManager: mcpServerManager
-        )
+        // Initialize MCP server manager and voice command executor
+        let voiceCommandExecutor: VoiceCommandExecutor
+        if let backendClient = backendClient {
+            let mcpServerManager = MCPServerManager(
+                backendClient: backendClient,
+                keychainManager: _keychainManager
+            )
+            voiceCommandExecutor = VoiceCommandExecutor(
+                mcpServerManager: mcpServerManager
+            )
+        } else {
+            // For now, we'll skip the voice command executor if no backend client is available
+            // This will need to be properly handled when the backend is initialized
+            print("⚠️ Backend client not available, voice command pipeline will be limited")
+            return
+        }
 
         // Initialize the complete voice command pipeline
-        if let voiceClassifier = voiceClassificationManager,
-           let voiceSynthesizer = elevenLabsVoiceSynthesizer {
+        if let voiceClassifier = voiceClassificationManager {
+            let mcpServerManager = MCPServerManager(
+                backendClient: backendClient!,
+                keychainManager: _keychainManager
+            )
             self.voiceCommandPipeline = VoiceCommandPipeline(
-                voiceClassifier: voiceClassifier,
-                commandExecutor: voiceCommandExecutor,
-                conversationManager: conversationManager,
-                collaborationManager: nil, // Would be set if collaboration is active
-                voiceSynthesizer: voiceSynthesizer,
-                mcpServerManager: mcpServerManager
+                classificationManager: voiceClassifier,
+                mcpServerManager: mcpServerManager,
+                keychainManager: _keychainManager
             )
 
             // Set this manager as the voice delegate
@@ -1378,13 +1377,45 @@ extension LiveKitManager: AVAudioPlayerDelegate {
         }
     }
 
-    nonisolated func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+    public nonisolated func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
         Task { @MainActor in
             print("Audio decode error: \(error?.localizedDescription ?? "Unknown error")")
             if audioState == .playing {
                 audioState = .error("Audio playback failed")
             }
             audioPlayer = nil
+        }
+    }
+}
+
+// MARK: - VoiceActivityDelegate
+
+extension LiveKitManager: VoiceActivityDelegate {
+    func voiceActivityDidStart() {
+        print("🎤 Voice activity started")
+        audioState = .recording
+    }
+    
+    func voiceActivityDidEnd() {
+        print("🎤 Voice activity ended")
+        if audioState == .recording {
+            audioState = .idle
+        }
+    }
+    
+    func speechRecognitionResult(_ text: String, isFinal: Bool) {
+        print("🗣️ Speech recognition: '\(text)' (final: \(isFinal))")
+        if isFinal {
+            processVoiceInputThroughAI(text)
+        }
+    }
+    
+    func aiResponseReceived(_ response: String, isComplete: Bool) {
+        print("🤖 AI response: '\(response)' (complete: \(isComplete))")
+        if isComplete {
+            Task {
+                await synthesizeAndPlayResponse(response)
+            }
         }
     }
 }

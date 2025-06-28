@@ -49,7 +49,7 @@ struct CollaborationContext {
         case paused
         case recording
         case sharing
-        case private
+        case privateMode
     }
     
     struct ContextPermissions {

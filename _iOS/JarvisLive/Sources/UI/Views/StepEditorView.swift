@@ -580,7 +580,15 @@ struct StepEditorView: View {
         case .scheduleCalendar: return "calendar.badge.plus"
         case .performSearch: return "magnifyingglass"
         case .uploadStorage: return "icloud.and.arrow.up.fill"
+        case .downloadStorage: return "icloud.and.arrow.down.fill"
+        case .createNote: return "note.text"
+        case .setReminder: return "bell.fill"
+        case .weatherQuery: return "cloud.sun.fill"
+        case .newsQuery: return "newspaper.fill"
+        case .calculation: return "function"
+        case .translation: return "globe"
         case .general: return "bubble.left.fill"
+        case .unknown: return "questionmark.circle.fill"
         }
     }
 }

@@ -254,7 +254,7 @@ final class VoiceCommandExecutor: ObservableObject {
             content: content,
             format: format,
             title: title,
-            context: context?.participants.map { $0.name } ?? []
+            context: context?.allParticipants.map { $0.displayName } ?? []
         )
 
         let timeSpent = Date().timeIntervalSince(startTime)

@@ -37,7 +37,7 @@ struct ParameterDefinition {
     let examples: [String]
     let contextHints: [ContextHint]
 
-    enum ParameterType {
+    indirect enum ParameterType {
         case string
         case number(range: ClosedRange<Double>?)
         case email
@@ -557,13 +557,13 @@ final class VoiceParameterIntelligenceManager: ObservableObject {
         // In a real implementation, this would use more sophisticated NLP
 
         nlTagger.string = command
-        let range = NSRange(location: 0, length: command.count)
+        let stringRange = command.startIndex..<command.endIndex
 
         var extractedEntities: [String] = []
 
-        nlTagger.enumerateTags(in: range, unit: .word, scheme: .nameType) { tag, tokenRange in
+        nlTagger.enumerateTags(in: stringRange, unit: .word, scheme: .nameType) { tag, tokenRange in
             if let tag = tag {
-                let entity = (command as NSString).substring(with: tokenRange)
+                let entity = String(command[tokenRange])
                 extractedEntities.append(entity)
             }
             return true
@@ -579,13 +579,13 @@ final class VoiceParameterIntelligenceManager: ObservableObject {
 
     private func extractWithNamedEntityRecognition(from command: String, paramType: ParameterDefinition.ParameterType) -> Any? {
         nlTagger.string = command
-        let range = NSRange(location: 0, length: command.count)
+        let stringRange = command.startIndex..<command.endIndex
 
         var extractedValues: [String] = []
 
-        nlTagger.enumerateTags(in: range, unit: .word, scheme: .nameType) { tag, tokenRange in
+        nlTagger.enumerateTags(in: stringRange, unit: .word, scheme: .nameType) { tag, tokenRange in
             if let tag = tag {
-                let entity = (command as NSString).substring(with: tokenRange)
+                let entity = String(command[tokenRange])
 
                 switch tag {
                 case .personalName, .organizationName:
