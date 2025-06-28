@@ -127,7 +127,7 @@ final class VoiceParameterIntelligenceManager: ObservableObject {
     
     // MARK: - Core Parameter Intelligence Methods
     
-    func extractParameters(from text: String, for intent: CommandIntent, context: [String: Any] = [:]) async -> ParameterExtractionResult {
+    func extractParameters(from text: String, for intent: ParameterCommandIntent, context: [String: Any] = [:]) async -> ParameterExtractionResult {
         isProcessing = true
         let startTime = Date()
         
@@ -176,7 +176,7 @@ final class VoiceParameterIntelligenceManager: ObservableObject {
         return result
     }
     
-    private func performParameterExtraction(text: String, intent: CommandIntent, context: [String: Any]) async -> [VoiceParameter] {
+    private func performParameterExtraction(text: String, intent: ParameterCommandIntent, context: [String: Any]) async -> [VoiceParameter] {
         var parameters: [VoiceParameter] = []
         
         // Set up text for NLP processing
@@ -213,7 +213,7 @@ final class VoiceParameterIntelligenceManager: ObservableObject {
         return parameters
     }
     
-    private func extractIntentSpecificParameters(text: String, intent: CommandIntent, context: [String: Any]) -> [VoiceParameter] {
+    private func extractIntentSpecificParameters(text: String, intent: ParameterCommandIntent, context: [String: Any]) -> [VoiceParameter] {
         var parameters: [VoiceParameter] = []
         
         switch intent {
@@ -390,14 +390,14 @@ final class VoiceParameterIntelligenceManager: ObservableObject {
     
     // MARK: - Validation Methods
     
-    private func validateParameters(_ parameters: [VoiceParameter], for intent: CommandIntent) -> [VoiceParameter] {
+    private func validateParameters(_ parameters: [VoiceParameter], for intent: ParameterCommandIntent) -> [VoiceParameter] {
         return parameters.compactMap { parameter in
             guard validateParameter(parameter, for: intent) else { return nil }
             return parameter
         }
     }
     
-    private func validateParameter(_ parameter: VoiceParameter, for intent: CommandIntent) -> Bool {
+    private func validateParameter(_ parameter: VoiceParameter, for intent: ParameterCommandIntent) -> Bool {
         // Apply validation rules
         for rule in parameter.validationRules {
             if !applyValidationRule(rule, to: parameter) {
@@ -439,14 +439,14 @@ final class VoiceParameterIntelligenceManager: ObservableObject {
         )
     }
     
-    private func identifyMissingRequiredParameters(_ parameters: [VoiceParameter], for intent: CommandIntent) -> [String] {
+    private func identifyMissingRequiredParameters(_ parameters: [VoiceParameter], for intent: ParameterCommandIntent) -> [String] {
         let requiredParameters = getRequiredParametersForIntent(intent)
         let providedParameterNames = Set(parameters.map { $0.name })
         
         return requiredParameters.filter { !providedParameterNames.contains($0) }
     }
     
-    private func getRequiredParametersForIntent(_ intent: CommandIntent) -> [String] {
+    private func getRequiredParametersForIntent(_ intent: ParameterCommandIntent) -> [String] {
         switch intent {
         case .generateDocument:
             return ["content"]
@@ -461,7 +461,7 @@ final class VoiceParameterIntelligenceManager: ObservableObject {
         }
     }
     
-    private func generateParameterSuggestions(extractedParameters: [VoiceParameter], missingParameters: [String], intent: CommandIntent, context: [String: Any]) async -> [ParameterExtractionResult.ParameterSuggestion] {
+    private func generateParameterSuggestions(extractedParameters: [VoiceParameter], missingParameters: [String], intent: ParameterCommandIntent, context: [String: Any]) async -> [ParameterExtractionResult.ParameterSuggestion] {
         var suggestions: [ParameterExtractionResult.ParameterSuggestion] = []
         
         for missingParam in missingParameters {
@@ -473,7 +473,7 @@ final class VoiceParameterIntelligenceManager: ObservableObject {
         return suggestions
     }
     
-    private func generateSuggestionForParameter(_ parameterName: String, intent: CommandIntent, context: [String: Any]) async -> ParameterExtractionResult.ParameterSuggestion? {
+    private func generateSuggestionForParameter(_ parameterName: String, intent: ParameterCommandIntent, context: [String: Any]) async -> ParameterExtractionResult.ParameterSuggestion? {
         // Generate intelligent suggestions based on context and history
         
         switch parameterName {
@@ -553,7 +553,7 @@ final class VoiceParameterIntelligenceManager: ObservableObject {
 
 // MARK: - Supporting Types
 
-enum CommandIntent: String, CaseIterable {
+enum ParameterParameterCommandIntent: String, CaseIterable {
     case generateDocument = "generate_document"
     case sendEmail = "send_email"
     case scheduleCalendar = "schedule_calendar"
