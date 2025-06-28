@@ -90,7 +90,7 @@ public struct SharedAIContext: Codable {
     public var sharedDocuments: [ContextDocument]
     public var keyInsights: [Insight]
     public var decisions: [CollaborativeDecision]
-    public var actionItems: [ActionItem]
+    public var actionItems: [AISessionActionItem]
     public var knowledgeBase: [String: Any]
     public var metadata: ContextMetadata
 
@@ -114,7 +114,7 @@ public struct SharedAIContext: Codable {
         sharedDocuments = try container.decode([ContextDocument].self, forKey: .sharedDocuments)
         keyInsights = try container.decode([Insight].self, forKey: .keyInsights)
         decisions = try container.decode([CollaborativeDecision].self, forKey: .decisions)
-        actionItems = try container.decode([ActionItem].self, forKey: .actionItems)
+        actionItems = try container.decode([AISessionActionItem].self, forKey: .actionItems)
         metadata = try container.decode(ContextMetadata.self, forKey: .metadata)
         knowledgeBase = [:]
     }
@@ -338,7 +338,7 @@ public struct AIDecisionOption: Codable, Identifiable {
     }
 }
 
-public struct ActionItem: Codable, Identifiable {
+public struct AISessionActionItem: Codable, Identifiable {
     public let id: UUID
     public let title: String
     public let description: String
@@ -453,7 +453,7 @@ public final class CollaborativeAISessionManager: ObservableObject {
     @Published public private(set) var sharedContext: SharedAIContext = SharedAIContext()
     @Published public private(set) var activeAIProviders: [CollaborativeAISession.AIProvider] = []
     @Published public private(set) var pendingDecisions: [CollaborativeDecision] = []
-    @Published public private(set) var actionItems: [ActionItem] = []
+    @Published public private(set) var actionItems: [AISessionActionItem] = []
     @Published public private(set) var sessionMetrics: SessionMetrics = SessionMetrics()
     @Published public private(set) var isProcessing: Bool = false
 
@@ -651,8 +651,8 @@ public final class CollaborativeAISessionManager: ObservableObject {
         print("📄 Added document to shared context: \(document.title)")
     }
 
-    public func createActionItem(title: String, description: String, assignedTo: [String], priority: ActionItem.Priority, dueDate: Date? = nil) async -> ActionItem {
-        let actionItem = ActionItem(
+    public func createActionItem(title: String, description: String, assignedTo: [String], priority: AISessionActionItem.Priority, dueDate: Date? = nil) async -> AISessionActionItem {
+        let actionItem = AISessionActionItem(
             title: title,
             description: description,
             assignedTo: assignedTo,
@@ -671,7 +671,7 @@ public final class CollaborativeAISessionManager: ObservableObject {
         return actionItem
     }
 
-    public func updateActionItemStatus(_ actionItemID: UUID, status: ActionItem.Status) async {
+    public func updateActionItemStatus(_ actionItemID: UUID, status: AISessionActionItem.Status) async {
         guard let index = actionItems.firstIndex(where: { $0.id == actionItemID }) else {
             print("⚠️ Action item not found: \(actionItemID)")
             return
@@ -933,11 +933,11 @@ public final class CollaborativeAISessionManager: ObservableObject {
         print("📤 Sharing document: \(document.title)")
     }
 
-    private func shareActionItem(_ actionItem: ActionItem) async {
+    private func shareActionItem(_ actionItem: AISessionActionItem) async {
         print("📤 Sharing action item: \(actionItem.title)")
     }
 
-    private func shareActionItemUpdate(actionItemID: UUID, status: ActionItem.Status) async {
+    private func shareActionItemUpdate(actionItemID: UUID, status: AISessionActionItem.Status) async {
         print("📤 Sharing action item update: \(actionItemID) -> \(status)")
     }
 

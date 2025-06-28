@@ -491,7 +491,7 @@ final class CollaborativeConversationManager: ObservableObject {
         }
     }
     
-    private func handleActionItem(_ actionItem: ActionItem, conversation: CollaborativeConversation) async {
+    private func handleActionItem(_ actionItem: ConversationActionItem, conversation: CollaborativeConversation) async {
         switch actionItem.type {
         case .decision:
             // Auto-propose decision if appropriate
@@ -1128,7 +1128,7 @@ struct MessageContext {
     let messageId: UUID
     let sentiment: Double?
     let topics: [String]?
-    let actionItems: [ActionItem]?
+    let actionItems: [ConversationActionItem]?
     let mentions: [UUID]?
     let urgency: UrgencyLevel?
     
@@ -1140,7 +1140,7 @@ struct MessageContext {
     }
 }
 
-struct ActionItem: Identifiable, Codable {
+struct ConversationActionItem: Identifiable, Codable {
     let id: UUID
     let type: ActionType
     let title: String
