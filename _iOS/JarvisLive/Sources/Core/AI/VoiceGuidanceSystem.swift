@@ -183,7 +183,7 @@ struct CommandSuggestion {
 // MARK: - Voice Guidance System Manager
 
 @MainActor
-final class VoiceGuidanceSystemManager: ObservableObject {
+final class VoiceGuidanceSystemManager: NSObject, ObservableObject {
     // MARK: - Published Properties
 
     @Published private(set) var activeSession: VoiceGuidanceSession?
@@ -924,15 +924,15 @@ enum GuidancePriority {
 // MARK: - Speech Synthesis Delegate
 
 extension VoiceGuidanceSystemManager: AVSpeechSynthesizerDelegate {
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+    nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
         print("🗣️ Started voice guidance")
     }
 
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+    nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         print("✅ Completed voice guidance")
     }
 
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+    nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
         print("❌ Voice guidance cancelled")
     }
 }

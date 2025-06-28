@@ -1276,21 +1276,21 @@ final class SharedDocumentManager: ObservableObject {
 
 extension SharedDocumentManager: RealtimeSyncManagerDelegate {
     
-    func realtimeSyncManager(_ manager: RealtimeSyncManager, didReceiveMessage message: RealtimeSyncMessage) {
+    nonisolated func realtimeSyncManager(_ manager: RealtimeSyncManager, didReceiveMessage message: RealtimeSyncMessage) {
         Task { @MainActor in
             await handleRealtimeMessage(message)
         }
     }
     
-    func realtimeSyncManager(_ manager: RealtimeSyncManager, didFailToDeliverMessage message: RealtimeSyncMessage) {
+    nonisolated func realtimeSyncManager(_ manager: RealtimeSyncManager, didFailToDeliverMessage message: RealtimeSyncMessage) {
         print("❌ Failed to deliver document message: \(message.type)")
     }
     
-    func realtimeSyncManager(_ manager: RealtimeSyncManager, connectionStatusDidChange status: RealtimeSyncManager.ConnectionStatus) {
+    nonisolated func realtimeSyncManager(_ manager: RealtimeSyncManager, connectionStatusDidChange status: RealtimeSyncManager.ConnectionStatus) {
         // Handle connection status changes
     }
     
-    func realtimeSyncManager(_ manager: RealtimeSyncManager, connectionQualityDidChange quality: RealtimeSyncManager.ConnectionQuality) {
+    nonisolated func realtimeSyncManager(_ manager: RealtimeSyncManager, connectionQualityDidChange quality: RealtimeSyncManager.ConnectionQuality) {
         // Handle connection quality changes
     }
     

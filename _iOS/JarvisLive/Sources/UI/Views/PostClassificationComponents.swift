@@ -18,6 +18,14 @@
 
 import SwiftUI
 
+// MARK: - Helper Functions
+
+private func convertUIAnyCodableToAnyCodable(_ dict: [String: UIAnyCodable]) -> [String: AnyCodable] {
+    return dict.mapValues { uiAnyCodable in
+        AnyCodable(uiAnyCodable.value)
+    }
+}
+
 // MARK: - Confidence Indicator
 
 struct ConfidenceIndicatorView: View {
@@ -145,7 +153,7 @@ struct PreviewView: View {
 
                 // Parameters
                 if !data.parameters.isEmpty {
-                    ParametersView(parameters: data.parameters, showingDetails: $showingDetails)
+                    ParametersView(parameters: convertUIAnyCodableToAnyCodable(data.parameters), showingDetails: $showingDetails)
                 }
 
                 // Execute button
@@ -298,7 +306,7 @@ struct ExecutionView: View {
                 if let timeRemaining = data.estimatedTimeRemaining, timeRemaining > 0 {
                     Text("Estimated time remaining: \(Int(timeRemaining))s")
                         .font(.caption)
-                        .foregroundColor(.tertiary)
+                        .foregroundColor(Color.secondary)
                 }
             }
 

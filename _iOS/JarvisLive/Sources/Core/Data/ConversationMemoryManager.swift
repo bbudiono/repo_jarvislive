@@ -185,7 +185,7 @@ enum PatternType: String, CaseIterable {
 
 // MARK: - Context Analysis
 
-struct ContextAnalysis {
+struct ConversationContextAnalysis {
     let topics: [String]
     let sentiment: String
     let entities: [String]
@@ -242,7 +242,7 @@ class ConversationMemoryManager: ObservableObject {
 
     // MARK: - Natural Language Processing
 
-    private let sentimentPredictor = NLModel(mlModel: try! NLModel.sentimentPredictionModel().mlModel)
+    private let sentimentPredictor: NLModel? = nil // NLModel.sentimentPredictionModel() not available
     private let languageRecognizer = NLLanguageRecognizer()
     private let tokenizer = NLTokenizer(unit: .word)
     private let tagger = NLTagger(tagSchemes: [.nameType, .lexicalClass, .sentimentScore])
@@ -257,7 +257,7 @@ class ConversationMemoryManager: ObservableObject {
 
     // MARK: - Context Cache
 
-    private var contextCache: [UUID: ContextAnalysis] = [:]
+    private var contextCache: [UUID: ConversationContextAnalysis] = [:]
     private var suggestionCache: [UUID: [ConversationSuggestion]] = [:]
     private var lastAnalysisTime: [UUID: Date] = [:]
 

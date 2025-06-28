@@ -303,7 +303,7 @@ class ConversationLinker: ObservableObject {
 
     private let tokenizer = NLTokenizer(unit: .word)
     private let tagger = NLTagger(tagSchemes: [.nameType, .lexicalClass, .sentimentScore])
-    private let sentimentPredictor = NLModel(mlModel: try! NLModel.sentimentPredictionModel().mlModel)
+    private let sentimentPredictor: NLModel? = nil // NLModel.sentimentPredictionModel() not available
 
     // MARK: - Graph and Analysis
 

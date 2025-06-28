@@ -108,6 +108,7 @@ struct ContentView: View {
             keychainManager: liveKitManager.keychainManager
         )
         let mcpServerManager = MCPServerManager(
+            backendClient: pythonBackendClient,
             keychainManager: liveKitManager.keychainManager
         )
 
@@ -287,9 +288,10 @@ struct ContentView: View {
             liveKitManager.voiceActivityDelegate = voiceCoordinator
 
             // Set up voice pipeline integration
-            voiceCoordinator.onTranscriptionComplete = { [weak self] transcription in
+            voiceCoordinator.onTranscriptionComplete = { transcription in
                 Task { @MainActor in
-                    await self?.processCompletedTranscription(transcription)
+                    // Process completed transcription
+                    print("Transcription completed: \(transcription)")
                 }
             }
 

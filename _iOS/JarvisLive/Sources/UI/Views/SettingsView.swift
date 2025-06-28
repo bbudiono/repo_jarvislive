@@ -437,9 +437,9 @@ struct APIKeySection: View {
             HStack {
                 Group {
                     if isSecureEntry {
-                        SecureField("Enter API Key", text: keyBinding)
+                        SecureField("Enter API Key", text: $keyBinding)
                     } else {
-                        TextField("Enter API Key", text: keyBinding)
+                        TextField("Enter API Key", text: $keyBinding)
                     }
                 }
                 .textFieldStyle(CustomTextFieldStyle())

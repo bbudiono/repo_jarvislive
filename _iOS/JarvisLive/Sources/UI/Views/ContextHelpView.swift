@@ -24,14 +24,14 @@ import Combine
 // MARK: - Context Help View
 
 struct ContextHelpView: View {
-    let suggestions: [ContextSuggestion]
+    let suggestions: [UIContextSuggestion]
     @Environment(\.dismiss) private var dismiss
 
     @State private var selectedHelpCategory: HelpCategory = .gettingStarted
     @State private var searchText: String = ""
     @State private var showingTutorial: Bool = false
-    @State private var selectedSuggestion: ContextSuggestion?
-    @State private var filteredSuggestions: [ContextSuggestion] = []
+    @State private var selectedSuggestion: UIContextSuggestion?
+    @State private var filteredSuggestions: [UIContextSuggestion] = []
 
     enum HelpCategory: String, CaseIterable {
         case gettingStarted = "Getting Started"
@@ -482,7 +482,7 @@ struct ContextHelpView: View {
 
     // MARK: - Helper Views
 
-    private func suggestionRow(_ suggestion: ContextSuggestion) -> some View {
+    private func suggestionRow(_ suggestion: UIContextSuggestion) -> some View {
         Button(action: { selectedSuggestion = suggestion }) {
             HStack(alignment: .top, spacing: 12) {
                 Image(systemName: suggestion.category.icon)
@@ -666,7 +666,7 @@ struct InteractiveTutorialView: View {
 }
 
 struct SuggestionDetailView: View {
-    let suggestion: ContextSuggestion
+    let suggestion: UIContextSuggestion
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {

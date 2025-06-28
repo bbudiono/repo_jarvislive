@@ -203,7 +203,11 @@ public final class CollaborativeVoiceTranscriptionManager: NSObject, ObservableO
 
     deinit {
         bufferUpdateTimer?.invalidate()
-        stopTranscription()
+        // Synchronous cleanup only - async cleanup happens through stopTranscription()
+        recognitionTask?.cancel()
+        recognitionTask = nil
+        recognitionRequest = nil
+        audioEngine?.stop()
     }
 
     // MARK: - Public API

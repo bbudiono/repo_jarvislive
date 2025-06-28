@@ -45,7 +45,7 @@ final class CollaborativeConversationManager: ObservableObject {
     // Conversation state management
     private var conversationStates: [UUID: ConversationState] = [:]
     private var messageQueue: [PendingMessage] = []
-    private var decisionWorkflows: [UUID: DecisionWorkflow] = []
+    private var decisionWorkflows: [UUID: DecisionWorkflow] = [:]
     
     // Threading and organization
     private var threadManager: ConversationThreadManager
@@ -778,7 +778,7 @@ final class CollaborativeConversationManager: ObservableObject {
 
 extension CollaborativeConversationManager: RealtimeSyncManagerDelegate {
     
-    func realtimeSyncManager(_ manager: RealtimeSyncManager, didReceiveMessage message: RealtimeSyncMessage) {
+    nonisolated func realtimeSyncManager(_ manager: RealtimeSyncManager, didReceiveMessage message: RealtimeSyncMessage) {
         Task { @MainActor in
             await handleRealtimeMessage(message)
         }

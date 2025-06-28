@@ -505,9 +505,8 @@ final class AdvancedVoiceControlViewModel: ObservableObject {
 
     private func updateAnalytics() {
         // Update voice quality metrics based on LiveKit data
-        if let audioLevel = liveKitManager.audioLevel {
-            voiceAnalytics.voiceQualityMetrics.averageVolumeLevel = audioLevel
-        }
+        let audioLevel = liveKitManager.audioLevel
+        voiceAnalytics.voiceQualityMetrics.averageVolumeLevel = Double(audioLevel)
 
         // Update session duration and other real-time metrics
         // This would integrate with actual voice processing data
@@ -724,10 +723,14 @@ struct AdvancedVoiceControlView: View {
             }
         }
         .sheet(isPresented: $viewModel.showingAnalyticsDashboard) {
-            AnalyticsDashboardView(analytics: viewModel.voiceAnalytics)
+            // AnalyticsDashboardView(analytics: viewModel.voiceAnalytics)
+            Text("Analytics Dashboard - Coming Soon")
+                .padding()
         }
         .sheet(isPresented: $viewModel.showingWorkflowBuilder) {
-            WorkflowBuilderView(workflows: $viewModel.availableWorkflows)
+            // WorkflowBuilderView(workflows: $viewModel.availableWorkflows)
+            Text("Workflow Builder - Coming Soon")
+                .padding()
         }
         .sheet(isPresented: $viewModel.showingContextHelp) {
             ContextHelpView(suggestions: viewModel.contextSuggestions)
@@ -1087,7 +1090,7 @@ struct AdvancedVoiceControlView: View {
                             .font(.caption)
                             .foregroundColor(.white.opacity(0.7))
 
-                        ProgressView(value: abs(liveKitManager.audioLevel ?? 0) / 60.0)
+                        ProgressView(value: abs(liveKitManager.audioLevel) / 60.0)
                             .progressViewStyle(LinearProgressViewStyle(tint: .green))
                             .frame(height: 6)
                     }

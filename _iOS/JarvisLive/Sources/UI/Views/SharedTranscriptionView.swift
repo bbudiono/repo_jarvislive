@@ -114,7 +114,7 @@ struct SharedTranscriptionView: View {
             }
         }
         .background(Color(UIColor.systemGroupedBackground))
-        .searchable(text: $searchText, isPresented: $isSearchActive, prompt: "Search transcriptions...")
+        .searchable(text: $searchText, prompt: "Search transcriptions...")
         .sheet(isPresented: $showingTranscriptionDetails) {
             if let transcription = selectedTranscription {
                 TranscriptionDetailSheet(transcription: transcription)

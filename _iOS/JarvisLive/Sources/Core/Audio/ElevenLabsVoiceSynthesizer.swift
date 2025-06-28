@@ -476,14 +476,18 @@ final class ElevenLabsVoiceSynthesizer: NSObject, ObservableObject {
 // MARK: - AVAudioPlayerDelegate
 
 extension ElevenLabsVoiceSynthesizer: AVAudioPlayerDelegate {
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        currentlyPlaying = false
+    nonisolated func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        Task { @MainActor in
+            currentlyPlaying = false
+        }
     }
 
-    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
-        currentlyPlaying = false
-        if let error = error {
-            lastError = .playbackFailed(error.localizedDescription)
+    nonisolated func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+        Task { @MainActor in
+            currentlyPlaying = false
+            if let error = error {
+                lastError = .playbackFailed(error.localizedDescription)
+            }
         }
     }
 }

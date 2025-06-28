@@ -280,7 +280,7 @@ public struct Insight: Codable, Identifiable {
     }
 }
 
-public struct AIAICollaborativeDecision: Codable, Identifiable {
+public struct AICollaborativeDecision: Codable, Identifiable {
     public let id: UUID
     public let title: String
     public let description: String

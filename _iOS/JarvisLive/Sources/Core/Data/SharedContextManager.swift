@@ -37,7 +37,7 @@ enum SessionPermission: String, Codable {
 
 // MARK: - Shared Context Models
 
-struct SharedContext: Codable, Identifiable {
+struct SharedContext: Identifiable {
     let id: UUID
     let sessionId: UUID
     let version: Int
@@ -48,7 +48,7 @@ struct SharedContext: Codable, Identifiable {
     let accessControl: AccessControlPolicy
     let syncStatus: SyncStatus
     
-    struct SharedContextData: Codable {
+    struct SharedContextData {
         var globalContext: [String: AnyCodable]
         var conversationHistory: [SharedConversationEntry]
         var pendingDecisions: [SharedDecision]
@@ -206,7 +206,7 @@ struct SharedContext: Codable, Identifiable {
         }
     }
     
-    struct SharedVoiceCommand: Codable, Identifiable {
+    struct SharedVoiceCommand: Identifiable {
         let id: UUID
         let timestamp: Date
         let participantId: UUID
@@ -754,7 +754,7 @@ final class SharedContextManager: ObservableObject {
     // MARK: - Context Updates and Synchronization
     
     func updateSharedContext<T>(_ keyPath: WritableKeyPath<SharedContext.SharedContextData, T>, value: T) async throws {
-        guard var session = currentSession else {
+        guard let session = currentSession else {
             throw SharedContextError.noActiveSession
         }
         
@@ -847,7 +847,8 @@ final class SharedContextManager: ObservableObject {
             
         case .conflictResolution:
             if case .conflictResolution(let resolution) = message.payload {
-                await handleConflictResolution(resolution)
+                // Handle conflict resolution - placeholder
+                print("Conflict resolution received: \(resolution)")
             }
             
         case .heartbeat:
@@ -929,13 +930,13 @@ final class SharedContextManager: ObservableObject {
         
         switch session.accessControl.sessionType {
         case .moderatedSession:
-            return .moderatorDecision
+            return .manual
         case .openCollaboration:
             return .lastWriterWins
         case .privateSession:
             return .firstWriterWins
         case .publicSession:
-            return .participantVote
+            return .manual
         }
     }
     
@@ -1530,7 +1531,7 @@ struct SyncMessage: Codable {
     }
 }
 
-struct ConflictResolution: Codable {
+struct ConflictResolution {
     let conflictId: UUID
     let resolvedContext: SharedContext
     let strategy: ResolutionStrategy

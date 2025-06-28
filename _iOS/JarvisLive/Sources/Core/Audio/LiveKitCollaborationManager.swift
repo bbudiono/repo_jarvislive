@@ -694,7 +694,7 @@ public final class LiveKitCollaborationManager: NSObject, ObservableObject {
 // MARK: - Room Delegate
 
 extension LiveKitCollaborationManager: RoomDelegate {
-    public func room(_ room: Room, didUpdateConnectionState connectionState: LiveKit.ConnectionState, from oldConnectionState: LiveKit.ConnectionState) {
+    nonisolated public func room(_ room: Room, didUpdateConnectionState connectionState: LiveKit.ConnectionState, from oldConnectionState: LiveKit.ConnectionState) {
         Task { @MainActor in
             switch connectionState {
             case .connected:

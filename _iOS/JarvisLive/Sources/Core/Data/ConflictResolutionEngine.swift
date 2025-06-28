@@ -81,7 +81,7 @@ final class ConflictResolutionEngine: ObservableObject {
             .concurrentEdit: [.automaticMerge, .lastWriterWins, .userChoice, .semanticMerge],
             .versionMismatch: [.versionReconciliation, .rollback, .forceSync],
             .permissionDenied: [.permissionEscalation, .requestApproval, .denyOperation],
-            .dataInconsistency: [.dataValidation, .rollback, .manualIntervention],
+            .dataInconsistency: [.dataValidation, .rollback, .manual],
             .networkPartition: [.delayedResolution, .optimisticMerge, .conservativeRollback],
             .semanticConflict: [.contextualAnalysis, .userMediation, .aiAssistedResolution],
         ]
@@ -167,7 +167,12 @@ final class ConflictResolutionEngine: ObservableObject {
         }
 
         do {
-            let chosenStrategy = strategy ?? await selectOptimalStrategy(for: conflict)
+            let chosenStrategy: ResolutionStrategy
+            if let providedStrategy = strategy {
+                chosenStrategy = providedStrategy
+            } else {
+                chosenStrategy = await selectOptimalStrategy(for: conflict)
+            }
             let result = await executeResolutionStrategy(conflict, strategy: chosenStrategy)
 
             // Record resolution
