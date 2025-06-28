@@ -137,7 +137,7 @@ class SimpleConversationManager: ObservableObject {
         }
 
         do {
-            conversations = try JSONDecoder().decode([Conversation].self, from: data)
+            conversations = try JSONDecoder().decode([ConversationDTO].self, from: data)
             filteredConversations = conversations.filter { !$0.isArchived }
             print("✅ Loaded \(conversations.count) conversations")
         } catch {
@@ -152,7 +152,7 @@ class SimpleConversationManager: ObservableObject {
     // MARK: - Conversation Management
 
     func createNewConversation(title: String? = nil) -> ConversationDTO {
-        let conversation = Conversation(title: title ?? "New Conversation")
+        let conversation = ConversationDTO(title: title ?? "New Conversation")
         conversations.insert(conversation, at: 0) // Add to beginning
         saveConversations()
         filterConversations(searchText: searchText)
@@ -203,13 +203,13 @@ class SimpleConversationManager: ObservableObject {
     // MARK: - Message Management
 
     func addMessage(
-        to conversation: Conversation,
+        to conversation: ConversationDTO,
         content: String,
         role: SimpleConversationManager.MessageRole,
         audioTranscription: String? = nil,
         aiProvider: String? = nil,
         processingTime: Double = 0.0
-    ) -> ConversationDTOMessageDTO {
+    ) -> ConversationMessageDTO {
         let message = ConversationMessageDTO(
             content: content,
             role: role,
@@ -242,13 +242,13 @@ class SimpleConversationManager: ObservableObject {
         return message
     }
 
-    func getMessages(for conversation: Conversation) -> [ConversationMessageDTO] {
+    func getMessages(for conversation: ConversationDTO) -> [ConversationMessageDTO] {
         return conversation.messages
     }
 
     // MARK: - Context Management
 
-    func buildAIContext(for conversation: Conversation) -> String {
+    func buildAIContext(for conversation: ConversationDTO) -> String {
         let recentMessages = Array(conversation.messages.suffix(10)) // Last 10 messages
 
         var contextString = "Previous conversation context:\n"
@@ -294,7 +294,7 @@ class SimpleConversationManager: ObservableObject {
 
     // MARK: - Statistics
 
-    func getConversationStats() -> ConversationDTOStats {
+    func getConversationStats() -> ConversationStats {
         let totalMessages = conversations.reduce(0) { $0 + $1.totalMessages }
         let totalConversations = conversations.count
         let archivedCount = conversations.filter { $0.isArchived }.count
@@ -322,10 +322,4 @@ class SimpleConversationManager: ObservableObject {
 }
 
 // MARK: - Supporting Types
-
-struct ConversationStats {
-    let totalConversations: Int
-    let totalMessages: Int
-    let archivedConversations: Int
-    let averageMessagesPerConversation: Double
-}
+// Note: ConversationStats is defined in ConversationManager.swift to avoid duplication

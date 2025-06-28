@@ -1497,7 +1497,7 @@ public struct DocumentPermissions: Codable {
 }
 
 public struct DocumentOperation: Identifiable, Codable {
-    let id: UUID
+    public let id: UUID
     let documentId: UUID
     let type: OperationType
     let performedBy: UUID
@@ -1564,7 +1564,7 @@ struct DocumentUpdateResult {
     let operationId: UUID
 }
 
-struct DocumentVersion: Identifiable, Codable {
+struct DocumentVersion: Identifiable, Codable, Hashable {
     let id: UUID
     let documentId: UUID
     let version: Int

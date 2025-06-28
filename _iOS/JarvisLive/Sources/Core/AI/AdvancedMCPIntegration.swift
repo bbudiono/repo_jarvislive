@@ -118,7 +118,7 @@ struct MCPTransaction: Identifiable {
     let initiatedBy: String // Voice command that started this transaction
     let services: [String] // Service IDs involved
     let operations: [MCPOperation]
-    let status: TransactionStatus
+    var status: TransactionStatus
     let startTime: Date
     var endTime: Date?
     let compensationActions: [CompensationAction]

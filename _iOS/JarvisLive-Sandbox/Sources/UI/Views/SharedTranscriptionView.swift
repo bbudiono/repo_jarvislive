@@ -664,10 +664,10 @@ struct TranscriptionDetailSheet: View {
                             .font(.headline)
 
                         VStack(alignment: .leading, spacing: 8) {
-                            DetailRow(label: "Confidence", value: "\(Int(transcription.confidence * 100))%")
-                            DetailRow(label: "Language", value: transcription.language.uppercased())
-                            DetailRow(label: "Status", value: transcription.isFinal ? "Final" : "Partial")
-                            DetailRow(label: "Participant ID", value: transcription.participantId)
+                            TranscriptionDetailRow(label: "Confidence", value: "\(Int(transcription.confidence * 100))%")
+                            TranscriptionDetailRow(label: "Language", value: transcription.language.uppercased())
+                            TranscriptionDetailRow(label: "Status", value: transcription.isFinal ? "Final" : "Partial")
+                            TranscriptionDetailRow(label: "Participant ID", value: transcription.participantId)
                         }
                         .padding()
                         .background(Color.gray.opacity(0.05))
@@ -711,7 +711,7 @@ struct TranscriptionDetailSheet: View {
     }
 }
 
-struct DetailRow: View {
+struct TranscriptionDetailRow: View {
     let label: String
     let value: String
 

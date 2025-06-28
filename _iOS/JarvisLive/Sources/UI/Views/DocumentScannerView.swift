@@ -668,15 +668,7 @@ struct DetailRow: View {
 }
 
 // MARK: - Extensions
-
-extension DateFormatter {
-    static let medium: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        return formatter
-    }()
-}
+// Note: DateFormatter.medium is defined in DocumentGenerationView.swift to avoid duplication
 
 // MARK: - Preview
 

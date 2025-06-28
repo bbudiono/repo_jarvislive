@@ -62,7 +62,7 @@ final class PythonBackendClient: NSObject, ObservableObject, URLSessionDelegate 
     // MARK: - Private Properties
 
     private let configuration: BackendConfiguration
-    private let urlSession: URLSession
+    private var urlSession: URLSession!
     private var webSocketTask: URLSessionWebSocketTask?
     private var reconnectionTask: Task<Void, Never>?
     private var heartbeatTask: Task<Void, Never>?

@@ -20,7 +20,8 @@
 
 import SwiftUI
 
-@main
+// NOTE: @main removed - this file should only be used in Sandbox builds, not Production builds
+// @main
 struct JarvisLiveSandboxApp: App {
     var body: some Scene {
         WindowGroup {
