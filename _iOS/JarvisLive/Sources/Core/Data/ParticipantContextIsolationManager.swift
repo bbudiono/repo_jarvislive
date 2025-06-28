@@ -1391,12 +1391,12 @@ class ContextEncryptor {
         
         return EncryptedContent(
             content: sealedBox.ciphertext,
-            nonce: sealedBox.nonce
+            nonce: Data(sealedBox.nonce)
         )
     }
     
     func decrypt(encryptedData: EncryptedContent, with key: SymmetricKey) throws -> ContextDataEntry {
-        let sealedBox = try AES.GCM.SealedBox(nonce: encryptedData.nonce, ciphertext: encryptedData.content, tag: Data())
+        let sealedBox = try AES.GCM.SealedBox(nonce: try AES.GCM.Nonce(data: encryptedData.nonce), ciphertext: encryptedData.content, tag: Data())
         let decryptedData = try AES.GCM.open(sealedBox, using: key)
         
         return try JSONDecoder().decode(ContextDataEntry.self, from: decryptedData)
