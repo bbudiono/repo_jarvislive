@@ -22,6 +22,7 @@ import Foundation
 
 // MARK: - Voice Command Classifier Demo
 
+@MainActor
 class VoiceCommandClassifierDemo {
     private let classifier = VoiceCommandClassifier()
 
