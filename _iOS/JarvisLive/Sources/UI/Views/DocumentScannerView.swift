@@ -21,6 +21,10 @@
 import SwiftUI
 import VisionKit
 import AVFoundation
+import Foundation
+
+// Import types from Core Camera module
+// DocumentCameraManager, DocumentScanResult, DocumentAnalysis are defined in Sources/Core/Camera/DocumentCameraManager.swift
 
 struct DocumentScannerView: View {
     @ObservedObject var documentCameraManager: DocumentCameraManager
