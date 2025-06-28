@@ -875,7 +875,9 @@ public final class LiveKitManager: NSObject, ObservableObject {
             websocketURL: "ws://localhost:8000/ws",
             apiKey: nil,
             timeout: 30.0,
-            heartbeatInterval: 30.0
+            heartbeatInterval: 30.0,
+            enableCertificatePinning: false,
+            pinnedCertificateName: nil
         )
 
         self.backendClient = PythonBackendClient(configuration: backendConfig)
@@ -944,8 +946,8 @@ public final class LiveKitManager: NSObject, ObservableObject {
 
             switch classification.intent {
             case .generateDocument:
+                let formatString = formattedParameters["format"] as? String ?? "pdf"
                 if let content = formattedParameters["content"] as? String,
-                   let formatString = formattedParameters["format"] as? String ?? "pdf",
                    let format = DocumentGenerationRequest.DocumentFormat(rawValue: formatString) {
                     let result = try await mcpServerManager.generateDocument(content: content, format: format)
                     mcpResponse = "Document generated successfully: \(result.documentURL)"
