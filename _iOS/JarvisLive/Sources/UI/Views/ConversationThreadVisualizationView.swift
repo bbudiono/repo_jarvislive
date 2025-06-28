@@ -24,7 +24,7 @@ import Combine
 
 // MARK: - Conversation Thread Models
 
-struct ConversationThread {
+struct UIConversationThread {
     let id = UUID()
     let title: String
     let startTime: Date
@@ -75,7 +75,7 @@ struct ConversationMessageUIUI {
     let speaker: MessageSpeaker
     let messageType: MessageType
     let confidence: Double
-    let intent: CommandIntent?
+    let intent: String?
     let relatedWorkflowStep: UUID?
     let contextReferences: [UUID]
     let metadata: MessageMetadata
@@ -160,8 +160,8 @@ struct ThreadContext {
 // MARK: - Conversation Thread Visualization View
 
 struct ConversationThreadVisualizationView: View {
-    @State private var conversationThreads: [ConversationThread] = []
-    @State private var selectedThread: ConversationThread?
+    @State private var conversationThreads: [UIConversationThread] = []
+    @State private var selectedThread: UIConversationThread?
     @State private var viewMode: ViewMode = .timeline
     @State private var searchText: String = ""
     @State private var selectedFilter: ThreadFilter = .all
@@ -485,7 +485,7 @@ struct ConversationThreadVisualizationView: View {
 
     // MARK: - Timeline Components
 
-    private func timelineThreadCard(_ thread: ConversationThread) -> some View {
+    private func timelineThreadCard(_ thread: UIConversationThread) -> some View {
         Button(action: { selectThread(thread) }) {
             threadVisualizationCard {
                 VStack(alignment: .leading, spacing: 12) {
@@ -729,7 +729,7 @@ struct ConversationThreadVisualizationView: View {
 
     // MARK: - Helper Views
 
-    private func threadStatusBadge(_ thread: ConversationThread) -> some View {
+    private func threadStatusBadge(_ thread: UIConversationThread) -> some View {
         HStack(spacing: 4) {
             Circle()
                 .fill(thread.isActive ? Color.green : Color.gray)
@@ -741,7 +741,7 @@ struct ConversationThreadVisualizationView: View {
         }
     }
 
-    private func priorityBadge(_ priority: ConversationThread.ThreadPriority) -> some View {
+    private func priorityBadge(_ priority: UIConversationThread.ThreadPriority) -> some View {
         Text(priority.rawValue)
             .font(.caption2)
             .foregroundColor(.white)
@@ -827,7 +827,7 @@ struct ConversationThreadVisualizationView: View {
 
     // MARK: - Computed Properties
 
-    private var filteredThreads: [ConversationThread] {
+    private var filteredThreads: [UIConversationThread] {
         var filtered = conversationThreads
 
         // Apply search filter
@@ -883,7 +883,7 @@ struct ConversationThreadVisualizationView: View {
 
     // MARK: - Methods
 
-    private func selectThread(_ thread: ConversationThread) {
+    private func selectThread(_ thread: UIConversationThread) {
         selectedThread = thread
         showingThreadDetails = true
     }
@@ -944,9 +944,9 @@ struct ConversationThreadVisualizationView: View {
         }.reversed()
     }
 
-    private func generateSampleThreads() -> [ConversationThread] {
+    private func generateSampleThreads() -> [UIConversationThread] {
         return [
-            ConversationThread(
+            UIConversationThread(
                 title: "Project Status Meeting Prep",
                 startTime: Date().addingTimeInterval(-3600),
                 endTime: Date().addingTimeInterval(-3000),
@@ -966,7 +966,7 @@ struct ConversationThreadVisualizationView: View {
                 isActive: false,
                 priority: .normal
             ),
-            ConversationThread(
+            UIConversationThread(
                 title: "Document Generation Workflow",
                 startTime: Date().addingTimeInterval(-1800),
                 endTime: nil,
@@ -993,7 +993,7 @@ struct ConversationThreadVisualizationView: View {
 // MARK: - Supporting Views
 
 struct ThreadDetailView: View {
-    let thread: ConversationThread
+    let thread: UIConversationThread
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -1021,7 +1021,7 @@ struct ThreadDetailView: View {
 }
 
 struct ContextAnalysisView: View {
-    let threads: [ConversationThread]
+    let threads: [UIConversationThread]
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {

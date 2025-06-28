@@ -284,7 +284,7 @@ public struct CollaborativeDecision: Codable, Identifiable {
     public let id: UUID
     public let title: String
     public let description: String
-    public let options: [DecisionOption]
+    public let options: [AIDecisionOption]
     public let selectedOption: UUID?
     public let decisionMethod: DecisionMethod
     public let participantVotes: [String: UUID]
@@ -299,7 +299,7 @@ public struct CollaborativeDecision: Codable, Identifiable {
         case aiRecommended = "ai_recommended"
     }
 
-    public init(title: String, description: String, options: [DecisionOption], decisionMethod: DecisionMethod) {
+    public init(title: String, description: String, options: [AIDecisionOption], decisionMethod: DecisionMethod) {
         self.id = UUID()
         self.title = title
         self.description = description
@@ -313,7 +313,7 @@ public struct CollaborativeDecision: Codable, Identifiable {
     }
 }
 
-public struct DecisionOption: Codable, Identifiable {
+public struct AIDecisionOption: Codable, Identifiable {
     public let id: UUID
     public let title: String
     public let description: String
@@ -592,7 +592,7 @@ public final class CollaborativeAISessionManager: ObservableObject {
         return response
     }
 
-    public func createCollaborativeDecision(title: String, description: String, options: [DecisionOption], method: CollaborativeDecision.DecisionMethod = .consensus) async -> CollaborativeDecision {
+    public func createCollaborativeDecision(title: String, description: String, options: [AIDecisionOption], method: CollaborativeDecision.DecisionMethod = .consensus) async -> CollaborativeDecision {
         let decision = CollaborativeDecision(
             title: title,
             description: description,
