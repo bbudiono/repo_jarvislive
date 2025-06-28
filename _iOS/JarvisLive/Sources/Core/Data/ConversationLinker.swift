@@ -224,7 +224,7 @@ enum ClusterInsightType: String, CaseIterable {
     case behavior = "behavior"
 }
 
-struct ConversationThread {
+struct ConversationLinkingThread {
     let id: UUID
     let conversations: [UUID]
     let threadType: ThreadType
@@ -280,7 +280,7 @@ class ConversationLinker: ObservableObject {
     @Published var isAnalyzing = false
     @Published var conversationLinks: [ConversationLink] = []
     @Published var conversationClusters: [ConversationCluster] = []
-    @Published var conversationThreads: [ConversationThread] = []
+    @Published var conversationThreads: [ConversationLinkingThread] = []
     @Published var linkingProgress: Double = 0.0
     @Published var currentOperation: String = ""
 
@@ -427,7 +427,7 @@ class ConversationLinker: ObservableObject {
         }
     }
 
-    func getConversationThread(containing conversationId: UUID) -> ConversationThread? {
+    func getConversationThread(containing conversationId: UUID) -> ConversationLinkingThread? {
         return conversationThreads.first { thread in
             thread.conversations.contains(conversationId)
         }
@@ -819,8 +819,8 @@ class ConversationLinker: ObservableObject {
         return Array(clusters.prefix(maxClusters))
     }
 
-    private func identifyConversationThreads(links: [ConversationLink], conversations: [Conversation]) async -> [ConversationThread] {
-        var threads: [ConversationThread] = []
+    private func identifyConversationThreads(links: [ConversationLink], conversations: [Conversation]) async -> [ConversationLinkingThread] {
+        var threads: [ConversationLinkingThread] = []
 
         // Find temporal sequences of linked conversations
         let temporalLinks = links.filter { $0.linkType == .directContinuation || $0.linkType == .actionFollowUp }
@@ -1020,12 +1020,12 @@ class ConversationLinker: ObservableObject {
         return thread
     }
 
-    private func createThread(conversationIds: [UUID], conversations: [Conversation]) async -> ConversationThread {
+    private func createThread(conversationIds: [UUID], conversations: [Conversation]) async -> ConversationLinkingThread {
         let relatedConversations = conversations.filter { conversationIds.contains($0.id) }
         let startDate = relatedConversations.map { $0.createdAt }.min() ?? Date()
         let endDate = relatedConversations.map { $0.updatedAt }.max()
 
-        return ConversationThread(
+        return ConversationLinkingThread(
             id: UUID(),
             conversations: conversationIds,
             threadType: .exploration,

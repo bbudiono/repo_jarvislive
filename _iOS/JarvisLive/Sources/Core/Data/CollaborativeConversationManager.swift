@@ -31,7 +31,7 @@ final class CollaborativeConversationManager: ObservableObject {
     
     @Published private(set) var collaborativeConversations: [CollaborativeConversation] = []
     @Published private(set) var activeDecisions: [SharedDecision] = []
-    @Published private(set) var conversationThreads: [ConversationThread] = []
+    @Published private(set) var conversationThreads: [ConversationThreadData] = []
     @Published private(set) var participantContributions: [UUID: ParticipantContribution] = [:]
     @Published private(set) var conversationAnalytics: ConversationAnalytics = ConversationAnalytics()
     @Published private(set) var isProcessingUpdate: Bool = false
@@ -761,7 +761,7 @@ final class CollaborativeConversationManager: ObservableObject {
         return activeDecisions
     }
     
-    func getConversationThreads() -> [ConversationThread] {
+    func getConversationThreads() -> [ConversationThreadData] {
         return conversationThreads
     }
     
@@ -869,7 +869,7 @@ struct CollaborativeConversation: Identifiable, Codable {
     let accessLevel: AccessLevel
     var status: ConversationStatus
     var messages: [CollaborativeMessage]
-    var threads: [ConversationThread]
+    var threads: [ConversationThreadData]
     var decisions: [SharedDecision]
     var metadata: ConversationMetadata
     
@@ -956,7 +956,7 @@ struct CollaborativeMessage: Identifiable, Codable {
     }
 }
 
-struct ConversationThread: Identifiable, Codable {
+struct ConversationThreadData: Identifiable, Codable {
     let id: UUID
     let conversationId: UUID
     let title: String
@@ -1195,13 +1195,13 @@ struct VoteUpdate: Codable {
 // MARK: - Supporting Classes
 
 class ConversationThreadManager {
-    func determineThread(for message: CollaborativeMessage, in conversation: CollaborativeConversation) async -> ConversationThread? {
+    func determineThread(for message: CollaborativeMessage, in conversation: CollaborativeConversation) async -> ConversationThreadData? {
         // Analyze message content and context to determine appropriate thread
         // This would implement sophisticated threading logic
         return nil
     }
     
-    func extractThreads(from conversation: CollaborativeConversation) async -> [ConversationThread] {
+    func extractThreads(from conversation: CollaborativeConversation) async -> [ConversationThreadData] {
         // Extract conversation threads from message history
         // This would implement thread detection and organization
         return []
