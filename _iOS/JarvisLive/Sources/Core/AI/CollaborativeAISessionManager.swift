@@ -89,7 +89,7 @@ public struct SharedAIContext: Codable {
     public var conversationHistory: [AIContextMessage]
     public var sharedDocuments: [ContextDocument]
     public var keyInsights: [Insight]
-    public var decisions: [CollaborativeDecision]
+    public var decisions: [AICollaborativeDecision]
     public var actionItems: [AISessionActionItem]
     public var knowledgeBase: [String: Any]
     public var metadata: ContextMetadata
@@ -113,7 +113,7 @@ public struct SharedAIContext: Codable {
         conversationHistory = try container.decode([AIContextMessage].self, forKey: .conversationHistory)
         sharedDocuments = try container.decode([ContextDocument].self, forKey: .sharedDocuments)
         keyInsights = try container.decode([Insight].self, forKey: .keyInsights)
-        decisions = try container.decode([CollaborativeDecision].self, forKey: .decisions)
+        decisions = try container.decode([AICollaborativeDecision].self, forKey: .decisions)
         actionItems = try container.decode([AISessionActionItem].self, forKey: .actionItems)
         metadata = try container.decode(ContextMetadata.self, forKey: .metadata)
         knowledgeBase = [:]
@@ -280,7 +280,7 @@ public struct Insight: Codable, Identifiable {
     }
 }
 
-public struct CollaborativeDecision: Codable, Identifiable {
+public struct AIAICollaborativeDecision: Codable, Identifiable {
     public let id: UUID
     public let title: String
     public let description: String
@@ -452,7 +452,7 @@ public final class CollaborativeAISessionManager: ObservableObject {
     @Published public private(set) var currentSession: CollaborativeAISession?
     @Published public private(set) var sharedContext: SharedAIContext = SharedAIContext()
     @Published public private(set) var activeAIProviders: [CollaborativeAISession.AIProvider] = []
-    @Published public private(set) var pendingDecisions: [CollaborativeDecision] = []
+    @Published public private(set) var pendingDecisions: [AICollaborativeDecision] = []
     @Published public private(set) var actionItems: [AISessionActionItem] = []
     @Published public private(set) var sessionMetrics: SessionMetrics = SessionMetrics()
     @Published public private(set) var isProcessing: Bool = false
@@ -592,8 +592,8 @@ public final class CollaborativeAISessionManager: ObservableObject {
         return response
     }
 
-    public func createCollaborativeDecision(title: String, description: String, options: [AIDecisionOption], method: CollaborativeDecision.DecisionMethod = .consensus) async -> CollaborativeDecision {
-        let decision = CollaborativeDecision(
+    public func createAICollaborativeDecision(title: String, description: String, options: [AIDecisionOption], method: AICollaborativeDecision.DecisionMethod = .consensus) async -> AICollaborativeDecision {
+        let decision = AICollaborativeDecision(
             title: title,
             description: description,
             options: options,
@@ -621,7 +621,7 @@ public final class CollaborativeAISessionManager: ObservableObject {
         votes[localParticipantID] = optionID
 
         // Update local decision
-        pendingDecisions[decisionIndex] = CollaborativeDecision(
+        pendingDecisions[decisionIndex] = AICollaborativeDecision(
             title: decision.title,
             description: decision.description,
             options: decision.options,
@@ -921,7 +921,7 @@ public final class CollaborativeAISessionManager: ObservableObject {
         )
     }
 
-    private func shareDecision(_ decision: CollaborativeDecision) async {
+    private func shareDecision(_ decision: AICollaborativeDecision) async {
         print("📤 Sharing decision: \(decision.title)")
     }
 
