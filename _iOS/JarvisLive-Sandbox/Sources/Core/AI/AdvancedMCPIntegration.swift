@@ -263,7 +263,9 @@ final class AdvancedMCPIntegrationManager: ObservableObject {
 
     deinit {
         networkMonitor.cancel()
-        await endBackgroundTask()
+        Task { @MainActor in
+            endBackgroundTask()
+        }
     }
 
     // MARK: - Setup Methods
