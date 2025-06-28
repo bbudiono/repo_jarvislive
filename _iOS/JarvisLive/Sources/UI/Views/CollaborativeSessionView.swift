@@ -338,7 +338,7 @@ class CollaborationManager: ObservableObject {
         case .string(let text):
             // Parse JSON message and update state
             if let data = text.data(using: .utf8),
-               let message = try? JSONDecoder().decode(CollaborationMessage.self, from: data) {
+               let message = try? JSONDecoder().decode(UICollaborationMessage.self, from: data) {
                 await handleCollaborationMessage(message)
             }
         case .data(let data):
@@ -349,7 +349,7 @@ class CollaborationManager: ObservableObject {
         }
     }
 
-    private func handleCollaborationMessage(_ message: CollaborationMessage) async {
+    private func handleCollaborationMessage(_ message: UICollaborationMessage) async {
         switch message.type {
         case .participantJoined:
             if let participant = message.participant {
@@ -434,7 +434,7 @@ enum SessionCommand: Codable {
     case voteOnDecision(String, CollaborativeVote)
 }
 
-struct CollaborationMessage: Codable {
+struct UICollaborationMessage: Codable {
     let type: MessageType
     let sessionId: String
     let timestamp: Date
