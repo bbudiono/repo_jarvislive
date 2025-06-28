@@ -23,6 +23,18 @@ import Combine
 import CoreData
 import LiveKit
 
+// MARK: - Session Permission (Top-Level Scope)
+
+enum SessionPermission: String, Codable {
+    case speak = "speak"
+    case listen = "listen"
+    case readContext = "read_context"
+    case writeContext = "write_context"
+    case moderateSession = "moderate_session"
+    case manageParticipants = "manage_participants"
+    case accessPrivateData = "access_private_data"
+}
+
 // MARK: - Shared Context Models
 
 struct SharedContext: Codable, Identifiable {
@@ -268,16 +280,6 @@ struct ParticipantInfo: Codable, Identifiable {
         case bot = "bot"
     }
     
-    enum SessionPermission: String, Codable {
-        case speak = "speak"
-        case listen = "listen"
-        case readContext = "read_context"
-        case writeContext = "write_context"
-        case moderateSession = "moderate_session"
-        case manageParticipants = "manage_participants"
-        case accessPrivateData = "access_private_data"
-    }
-    
     enum ParticipantStatus: String, Codable {
         case active = "active"
         case inactive = "inactive"
@@ -396,16 +398,6 @@ struct ConflictInfo: Identifiable {
         case dataInconsistency
         case networkPartition
     }
-}
-
-enum ResolutionStrategy {
-    case lastWriterWins
-    case firstWriterWins
-    case merge
-    case moderatorDecision
-    case participantVote
-    case rollback
-    case duplicate
 }
 
 // MARK: - Shared Context Manager
@@ -1609,17 +1601,6 @@ class ConflictResolver {
             accessControl: context1.accessControl,
             syncStatus: .synchronized
         )
-    }
-}
-
-struct ConflictResolutionResult {
-    let outcome: Outcome
-    let strategy: ResolutionStrategy
-    
-    enum Outcome {
-        case resolved(SharedContext)
-        case needsManualIntervention
-        case failed(String)
     }
 }
 
