@@ -654,7 +654,7 @@ final class VoiceParameterIntelligenceManager: ObservableObject {
             return context.command.lowercased().contains(keyword.lowercased())
 
         case .userHistory(let frequency):
-            return await getUserPreferenceFrequency(for: keyword) >= frequency
+            return await getUserPreferenceFrequency(for: context.command) >= frequency
 
         case .lastUsed(let timeAgo):
             return await getTimeSinceLastUsed() <= timeAgo
