@@ -233,7 +233,8 @@ public final class LiveKitCollaborationManager: NSObject, ObservableObject {
     private let room: Room
     private let keychainManager: KeychainManager
     private let liveKitManager: LiveKitManager
-    private var dataChannel: RTCDataChannel?
+    // TODO: RTCDataChannel requires WebRTC module access - investigate LiveKit WebRTC integration
+    // private var dataChannel: RTCDataChannel?
     private var cancellables = Set<AnyCancellable>()
     private var heartbeatTimer: Timer?
 
