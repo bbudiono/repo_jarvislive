@@ -26,6 +26,7 @@ struct RootContentView: View {
     @StateObject private var authStateManager = AuthenticationStateManager()
     @StateObject private var liveKitManager = LiveKitManager()
     @StateObject private var voiceClassificationManager = VoiceClassificationManager()
+    @StateObject private var keychainManager = KeychainManager(service: "JarvisLive")
 
     // Transition animation state
     @State private var showMainApp = false
@@ -199,9 +200,9 @@ struct RootContentView: View {
 
             await MainActor.run {
                 isTransitioning = false
-                // Return to authentication flow
-                authStateManager.resetAuthentication()
             }
+            // Return to authentication flow
+            await authStateManager.resetAuthentication()
         }
     }
 
@@ -243,7 +244,7 @@ struct MainAppContentView: View {
 
             // Collaboration Tab
             NavigationView {
-                CollaborativeSessionView(liveKitManager: liveKitManager)
+                CollaborativeSessionView(keychainManager: keychainManager)
                     .navigationBarHidden(true)
             }
             .tabItem {
