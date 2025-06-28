@@ -65,7 +65,7 @@ struct SharedTranscription: Identifiable, Codable {
     let aiResponse: String?
 }
 
-struct CollaborativeDecision: Identifiable, Codable {
+struct UIUICollaborativeDecision: Identifiable, Codable {
     let id: String
     let title: String
     let description: String
@@ -116,7 +116,7 @@ struct SessionSummary: Codable {
     let endTime: Date?
     let participants: [Collaborator]
     let transcriptionSummary: String
-    let decisions: [CollaborativeDecision]
+    let decisions: [UICollaborativeDecision]
     let documentsGenerated: [String]
     let keyDiscussionPoints: [String]
     let actionItems: [ActionItem]
@@ -137,7 +137,7 @@ class CollaborationManager: ObservableObject {
     @Published var currentSession: CollaborativeSession?
     @Published var participants: [Collaborator] = []
     @Published var sharedTranscriptions: [SharedTranscription] = []
-    @Published var activeDecisions: [CollaborativeDecision] = []
+    @Published var activeDecisions: [UICollaborativeDecision] = []
     @Published var isSessionActive: Bool = false
     @Published var connectionStatus: CollaborationConnectionStatus = .disconnected
     @Published var sessionSummary: SessionSummary?
@@ -268,7 +268,7 @@ class CollaborationManager: ObservableObject {
 
     // MARK: - Decision Management
 
-    func proposeDecision(_ decision: CollaborativeDecision) async throws {
+    func proposeDecision(_ decision: UICollaborativeDecision) async throws {
         activeDecisions.append(decision)
         try await sendSessionCommand(.proposeDecision(decision))
     }
@@ -288,7 +288,7 @@ class CollaborationManager: ObservableObject {
             let approvalRatio = Float(approvalCount) / Float(totalVotes)
 
             if approvalRatio >= decision.requiredConsensus {
-                decision = CollaborativeDecision(
+                decision = UICollaborativeDecision(
                     id: decision.id,
                     title: decision.title,
                     description: decision.description,
@@ -430,7 +430,7 @@ enum SessionCommand: Codable {
     case leaveSession(String)
     case muteParticipant(String)
     case promoteParticipant(String, Collaborator.CollaboratorRole)
-    case proposeDecision(CollaborativeDecision)
+    case proposeDecision(UICollaborativeDecision)
     case voteOnDecision(String, CollaborativeVote)
 }
 
@@ -441,7 +441,7 @@ struct CollaborationMessage: Codable {
     let participant: Collaborator?
     let participantId: String?
     let transcription: SharedTranscription?
-    let decision: CollaborativeDecision?
+    let decision: UICollaborativeDecision?
     let vote: CollaborativeVote?
 
     enum MessageType: String, Codable {
