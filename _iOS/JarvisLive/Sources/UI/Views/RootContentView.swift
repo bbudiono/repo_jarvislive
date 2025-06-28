@@ -26,7 +26,7 @@ struct RootContentView: View {
     @StateObject private var authStateManager = AuthenticationStateManager()
     @StateObject private var liveKitManager = LiveKitManager()
     @StateObject private var voiceClassificationManager = VoiceClassificationManager()
-    @StateObject private var keychainManager = KeychainManager(service: "JarvisLive")
+    private let keychainManager = KeychainManager(service: "JarvisLive")
 
     // Transition animation state
     @State private var showMainApp = false
@@ -40,7 +40,8 @@ struct RootContentView: View {
                 MainAppContentView(
                     liveKitManager: liveKitManager,
                     voiceClassificationManager: voiceClassificationManager,
-                    authStateManager: authStateManager
+                    authStateManager: authStateManager,
+                    keychainManager: keychainManager
                 )
                 .opacity(showMainApp ? 1.0 : 0.0)
                 .scaleEffect(showMainApp ? 1.0 : 0.95)
@@ -223,6 +224,7 @@ struct MainAppContentView: View {
     @ObservedObject var liveKitManager: LiveKitManager
     @ObservedObject var voiceClassificationManager: VoiceClassificationManager
     @ObservedObject var authStateManager: AuthenticationStateManager
+    let keychainManager: KeychainManager
 
     // Main app navigation state
     @State private var selectedTab = 0

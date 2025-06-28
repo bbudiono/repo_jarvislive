@@ -611,7 +611,7 @@ struct FilterButton: View {
                     .font(.subheadline)
                     .fontWeight(isSelected ? .semibold : .regular)
 
-                if !isEmpty {
+                if count > 0 {
                     Text("\(count)")
                         .font(.caption)
                         .padding(.horizontal, 6)

@@ -109,6 +109,9 @@ struct CollaborativeVote: Identifiable, Codable {
     }
 }
 
+// Type alias to resolve naming conflicts
+typealias CollaborativeDecision = UICollaborativeDecision
+
 struct SessionSummary: Codable {
     let sessionId: String
     let title: String
