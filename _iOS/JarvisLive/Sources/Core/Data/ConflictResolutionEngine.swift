@@ -884,7 +884,7 @@ enum ConflictType {
     case documentCollaborationConflict
 }
 
-enum ResolutionStrategy {
+enum ResolutionStrategy: String, Codable {
     case automaticMerge
     case lastWriterWins
     case firstWriterWins
@@ -904,4 +904,8 @@ enum ResolutionStrategy {
     case forceSync
     case contextualAnalysis
     case userMediation
+    case merge
+    case moderatorDecision
+    case participantVote
+    case duplicate
 }

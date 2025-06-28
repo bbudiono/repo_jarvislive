@@ -22,6 +22,7 @@ import Foundation
 import Combine
 import CoreData
 import LiveKit
+import UIKit
 
 // MARK: - Session Permission (Top-Level Scope)
 
@@ -37,7 +38,7 @@ enum SessionPermission: String, Codable {
 
 // MARK: - Shared Context Models
 
-struct SharedContext: Identifiable {
+struct SharedContext: Identifiable, Codable {
     let id: UUID
     let sessionId: UUID
     let version: Int
@@ -48,7 +49,7 @@ struct SharedContext: Identifiable {
     let accessControl: AccessControlPolicy
     let syncStatus: SyncStatus
     
-    struct SharedContextData {
+    struct SharedContextData: Codable {
         var globalContext: [String: AnyCodable]
         var conversationHistory: [SharedConversationEntry]
         var pendingDecisions: [SharedDecision]
@@ -96,7 +97,7 @@ struct SharedContext: Identifiable {
         let description: String
         let proposedBy: UUID
         let timestamp: Date
-        let status: DecisionStatus
+        var status: DecisionStatus
         var votes: [ParticipantVote]
         let requiredConsensus: ConsensusType
         let deadline: Date?
@@ -134,16 +135,16 @@ struct SharedContext: Identifiable {
     struct SharedDocument: Codable, Identifiable {
         let id: UUID
         let title: String
-        let content: String
+        var content: String
         let format: DocumentFormat
         let createdBy: UUID
         let createdAt: Date
         var lastModifiedBy: UUID
         var lastModifiedAt: Date
-        let version: Int
+        var version: Int
         var collaborators: [DocumentCollaborator]
         let accessLevel: AccessLevel
-        let changeHistory: [DocumentChange]
+        var changeHistory: [DocumentChange]
         
         enum DocumentFormat: String, Codable {
             case plainText = "plain_text"
@@ -206,12 +207,12 @@ struct SharedContext: Identifiable {
         }
     }
     
-    struct SharedVoiceCommand: Identifiable {
+    struct SharedVoiceCommand: Identifiable, Codable {
         let id: UUID
         let timestamp: Date
         let participantId: UUID
         let command: String
-        let classification: VoiceCommandClassification?
+        let classificationConfidence: Double?
         let processingStatus: ProcessingStatus
         let queuePosition: Int
         let priority: CommandPriority
@@ -1254,7 +1255,7 @@ final class SharedContextManager: ObservableObject {
             timestamp: Date(),
             participantId: localParticipantId,
             command: command,
-            classification: nil, // Will be populated by classification system
+            classificationConfidence: nil, // Will be populated by classification system
             processingStatus: .queued,
             queuePosition: voiceCommandQueue.count + 1,
             priority: priority,
@@ -1275,7 +1276,7 @@ final class SharedContextManager: ObservableObject {
                 timestamp: voiceCommandQueue[index].timestamp,
                 participantId: voiceCommandQueue[index].participantId,
                 command: voiceCommandQueue[index].command,
-                classification: voiceCommandQueue[index].classification,
+                classificationConfidence: voiceCommandQueue[index].classificationConfidence,
                 processingStatus: voiceCommandQueue[index].processingStatus,
                 queuePosition: index + 1,
                 priority: voiceCommandQueue[index].priority,
@@ -1364,7 +1365,7 @@ final class SharedContextManager: ObservableObject {
                 timestamp: message.timestamp,
                 participantId: localParticipantId,
                 content: message.content,
-                role: SharedContext.SharedConversationEntry.ConversationRole(rawValue: message.role.rawValue) ?? .user,
+                role: SharedContext.SharedConversationEntry.ConversationRole(rawValue: message.role) ?? .user,
                 contextSnapshot: [:],
                 processingMetadata: SharedContext.SharedConversationEntry.ProcessingMetadata(
                     aiProvider: message.aiProvider,
@@ -1531,7 +1532,7 @@ struct SyncMessage: Codable {
     }
 }
 
-struct ConflictResolution {
+struct ConflictResolution: Codable {
     let conflictId: UUID
     let resolvedContext: SharedContext
     let strategy: ResolutionStrategy
